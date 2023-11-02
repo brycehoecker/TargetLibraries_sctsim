@@ -1,0 +1,143 @@
+global:
+  # output folder base path
+  outdir : './'
+  # pulse offset for the function generator. Leave to zero to get the maximum voltage swing -5 (baseline) to +5 (peak). 
+  # Note that the output of the fanout board is AC coupled so the final baseline will be 0 V anyway
+  pulse_offset : 0
+  # pulse repetition frequency
+  pulse_freq : 1113
+  # local IP
+  my_ip : "192.168.12.3"
+  # module IP
+  module_ip : "192.168.12.173"
+  # TC def file
+  tc_def : "/home/target5/Software/TargetDriver/trunk/config/TC_ASIC.def"
+  # T5TEA def file
+  t5tea_def : "/home/target5/Software/TargetDriver/trunk/config/T5TEA_ASIC.def"
+  # FPGA def file
+  fpga_def : "/home/target5/Software/TargetIO/trunk/script/SCT_TM/INFN_test_system/firmware/SCT_MSA_FPGA_Firmware0xC000000C.def"
+# fpga_def : "/home/target5/SCT_MSA_FPGA_Firmware0xC0000004.def"
+# fpga_def : "/home/target5/SCT_MSA_FPGA_Firmware0xC000000B_new.def"
+# fpga_def : "/home/target5/SCT_MSA_FPGA_Firmware0xC0000005.def"
+daq:
+  # acquired waveform length, unit: blocks of 32 samples
+  nblocks : 8
+  # split ethernet data in this number of packets
+  packets : 8
+  # stepsize for PMTREF4 scan in trigger rate scan
+  trig_PMTREF4_stepsize : 10
+  # stepsize for THRESH scan in trigger rate scan
+  trig_THRESH_stepsize : 20
+  # trigger delay to get the pulse in the acquisition window
+  trig_del : 450
+
+pedestal:
+  # default vped to use
+  default_vped : 1200
+  # length is the duration of the acquisition in seconds
+  length : 5.0 
+  # outname is the output files/folder name
+  outname : 'pedestal'
+  # triggertype 1 means external trigger, triggertype 2 means hardsync
+  triggertype : 2
+  # flag to enable a "fast mode" acquisition (default: false, not tested)
+  fast_mode : False
+  # min_badchannels_threshold_for_checkpoint: if the number of bad channels is higher than this, ask for confirmation to proceed (checkpoint)
+  min_badchannels_threshold_for_checkpoint : 1 
+
+signal:
+  # length is the duration of the acquisition in seconds
+  length : 3.0
+  # outname is the output files/folder name
+  outname : 'signal'
+  # pedname is the pedestal file to use
+  pedname : 'pedestal'
+  # pulse amplitude is the amplitude of the pulse for the signal in Volts, _at the function generator_
+  # Note that the actual amplitude of the signal reaching the FEEM is about one order of magnitude smaller because the signal gets attenuated.
+  pulse_amp : 1.0
+  # triggertype 1 means external trigger, triggertype 2 means hardsync
+  triggertype : 1
+  # checkpoint: asks yes/no to continue with other steps if enough bad channels are found (the threshold is defined as "min_badchannels_threshold_for_checkpoint")
+  checkpoint_enabled : 0
+  # threshold for checkpoint
+  min_badchannels_threshold_for_checkpoint : 1 
+
+
+linearity:
+  # triggertype 1 means external trigger, triggertype 2 means hardsync
+  triggertype : 1
+  # length is the duration of the acquisition in seconds
+  length : 3.0
+  # outname is the output files/folder name
+  outname : 'linearity'
+  # pedname is the pedestal file to use
+  pedname : 'pedestal'
+  # signalvals meaning: starting amplitude, stopping amplitude, step, in Volts,  _at the function generator_
+  # Note that the actual amplitude of the signal reaching the FEEM is about one order of magnitude smaller because the signal gets attenuated.
+  signalvals : [0.5, 10.0, 0.5]
+  # checkpoint: asks yes/no to continue with other steps if enough bad channels are found (the threshold is defined as "min_badchannels_threshold_for_checkpoint")
+  checkpoint_enabled : 0
+  # threshold for checkpoint
+  min_badchannels_threshold_for_checkpoint : 1 
+
+
+vpedscan:
+  # length is the duration of the acquisition in seconds
+  length : 5.0
+  # outname is the output files/folder name
+  outname : 'vpedscan'
+  # triggertype 1 means external trigger, triggertype 2 means hardsync
+  triggertype : 2
+  # signalvals meaning: starting amplitude, stopping amplitude, step
+  vpedvals : [1000, 4100, 500]
+  # checkpoint: asks yes/no to continue with other steps if enough bad channels are found (the threshold is defined as "min_badchannels_threshold_for_checkpoint")
+  checkpoint_enabled : 0
+  # threshold for checkpoint
+  min_badchannels_threshold_for_checkpoint : 1 
+
+trigscan_pmtref4:
+  # gain settings for the trigger circuit
+  gain : 21
+  # output file name
+  outname : 'triggerscan'
+  # pulse amplitude for pmtref4 in Volts, at the function generator
+  pulse_amp_t_PMTREF4 : 0.3
+  # default value for pmtref4 (not used for pmtref4 scan, actually it is a dummy value)
+  pmtref4 : 1500
+  # initial value for the PMTRef4 scan
+  pmtref4v_start : 0
+  # initial value for the PMTRef4 scan
+  pmtref4v_end : 4096
+  # thresh value (constant) for the PMTRef4 scan
+  thresh : 2000
+  # wbias parameter for the trigger circuit
+  wbias : 985
+  # use external trigger (set False if TBOB is not present and R148-R163 are mounted)
+  exttrig : True
+  # checkpoint: asks yes/no to continue with other steps if enough bad channels are found (the threshold is defined as "min_badchannels_threshold_for_checkpoint")
+  checkpoint_enabled : 0
+  # threshold for checkpoint
+  min_badchannels_threshold_for_checkpoint : 1 
+
+trigscan_thr:
+  # gain settings for the trigger circuit
+  gain : 21
+  # output file name
+  outname : 'triggerscan'
+  # pulse amplitude for thresh scan
+  pulse_amp_t_THRESH : 0.05
+  # default value for pmtref4 (may be overridden by a previous pmtref4 scan)
+  pmtref4 : 1500
+  # initial value for the thresh scan
+  threshv_start : 0
+  # final value for the thresh scan
+  threshv_end : 4096
+  # wbias parameter for the trigger circuit
+  wbias : 985
+  # use external trigger (set False if TBOB is not present and R148-R163 are mounted)
+  exttrig : True
+  # checkpoint: asks yes/no to continue with other steps if enough bad channels are found (the threshold is defined as "min_badchannels_threshold_for_checkpoint")
+  checkpoint_enabled : 0
+  # threshold for checkpoint
+  min_badchannels_threshold_for_checkpoint : 1 
+

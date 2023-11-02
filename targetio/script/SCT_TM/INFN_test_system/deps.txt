@@ -1,0 +1,11 @@
+conda install astropy scipy pyyaml 
+pip install colorlog
+pip install pyserial
+pip install enlighten
+
+## pip install fpdf ## obsolete
+git clone https://github.com/reingart/pyfpdf.git 
+cd pyfpdf
+python setup.py install
+
+# target libs

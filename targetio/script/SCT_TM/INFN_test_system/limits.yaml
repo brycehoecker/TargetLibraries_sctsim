@@ -1,0 +1,169 @@
+ch: [0, 63] 
+Channel: [0,63]
+## pedestal
+Ped_avg_0_30: [0, 9999]
+Ped_sigma_0_30: [0, 9999]
+Ped_avg_31: [0, 9999]
+Ped_sigma_31: [0,9999]
+Sigma_noise: [0.5,3.0] #upper limit increased to 3 
+Outliers: [0,163]
+Ped0: [0,9999]
+
+## signal  
+max_ampl: [110,220]
+sigma_max_ampl: [4,12]
+tmaximum: [0,9999]
+sigma_tmax: [0,9999] 
+tmaximum_wf: [0,9999]
+sigma_tmax_wf: [0,9999]
+ampl_fix_t: [0,9999]
+sigma_ampl_fix_t: [0,9999]
+
+## signal pulse analysis
+pulse_tau: [0,70]
+pulse_tau_sigma: [0,9999]
+mean_ampl_sipm: [0,750]
+mean_ampl_sipm_sigma: [0,9999]
+fwhm_mean_ampl_sipm: [5,15]
+fwhm_mean_ampl_sipm_sigma: [0,9999]
+max_ampl_mean_wf: [0,9999]
+max_ampl_mean_wf_err: [0,9999]
+
+## linearity
+ADC_Gain_m: [150., 350.]
+ADC_Gain_1_m: [200., 300.]
+ADC_Gain_2_m: [400., 600.]
+
+## vped scan
+Pedestal_m: [1.,1.6]
+Pedestal_fit_m: [1.,1.6]
+#Pedestal_q: [-1.e+99,1.e+99]
+#Pedestal_fit_q: [-1e99,1e99]
+
+## trigger rate scan - preliminary
+group: [0,15]
+plateau_start: [0,4096]
+plateau_width: [0,4096]
+##around 1113
+plateau_height: [1087., 1139] 
+plateau_height_std: [0., 30.]
+peak_pos: [1450, 2400]
+peak_width: [0.,500.]
+peak_height: [1.e+4,1.e+99]
+peak_plateau_dist: [0., 500.]
+
+## global limits for QC acceptance 
+## here we accept that a certain number of channels can be bad and the QC status will be "PASS" anyway
+pedestal_bad_channels_limit: [0, 4]
+linearity_bad_channels_limit: [0, 4]
+vped_bad_channels_limit: [0, 4]
+triggerscan_bad_groups_limit: [0, 1]
+
+# power supply limits
+power_5V0: [4.9, 5.1]
+power_3V3: [3.2, 3.4]
+hv: [29.0, 32.0]
+
+# Power limits
+3V3: [3.2, 3.4]
+5V0: [4.9, 5.1]
+HVOFF: [-0.1,0.1]
+HVON: [30,32]
+# Digital limits
+ONE: [1,1]
+ZERO_AFTER: [0,0]
+ZERO_BEFORE: [0,0]
+
+## peltier limits
+sensor_temperature: [20.,40.]
+peltier_current: [500.,600.]
+
+### HV KEYS ###
+HV_CURRENT_OFF_AMPERES: [0.000, 0.005] #0 to 5 mA
+# HV_CURRENT_ON_AMPERES: [0.160, 0.190] #160 to 190 mA, this is for the current power supply (max 32 V) and current resistive load mounted. This may change if we choose a different PSU.
+HV_CURRENT_ON_AMPERES: [0.160, 0.9] 
+HV_VOLTAGE_OFF_VOLTS: [31.0, 33.0] #with the current power supply, max 32 V  
+HV_VOLTAGE_ON_VOLTS: [31.0, 33.0] #with the current power supply, max 32 V
+
+### CLK KEYS ###
+N_DIV10 : [90,110]
+MEAN_DIV10 : [7000,9000]
+N_DIV16 : [60,90]
+MEAN_DIV16 : [520000,530000]
+
+### TEMP KEYS ###
+TEMP: [10, 40]
+
+### SMART ADC ###
+Smart_Max_ADC : [950,1100]
+Smart_Min_ADC : [0,50]
+Smart_Sigma_ADC_worse : [0,50]
+Smart_ADC_slope : [10,30]
+Smart_Calib : [0,200]
+
+
+
+
+#we are measuring half periods! (length of square wave high part, length of square wave low part)
+#divider 0: --> 62500000 Hz, 8 ns halfperiod
+#divider 1: --> 31250000 Hz, 16 ns halfperiod
+#divider 2: --> 15625000 Hz, 32 ns halfperiod
+#divider 3: --> 7812500 Hz, 64 ns halfperiod
+#divider 4: --> 3906250 Hz, 128 ns halfperiod
+#divider 5: --> 1953125 Hz, 256 ns halfperiod
+#divider 6: --> 976562 Hz, 512 ns halfperiod
+#divider 7: --> 488281 Hz, 1024 ns halfperiod
+#divider 8: --> 244141 Hz, 2048 ns halfperiod
+#divider 9: --> 122070 Hz, 4096 ns halfperiod
+#divider 10: --> 61035 Hz, 8192 ns halfperiod -----used
+#divider 11: --> 30518 Hz, 16384 ns halfperiod
+#divider 12: --> 15259 Hz, 32768 ns halfperiod
+#divider 13: --> 7629 Hz, 65536 ns halfperiod
+#divider 14: --> 3815 Hz, 131072 halfperiod
+#divider 15: --> 1907 Hz, 262144 ns halfperiod
+#divider 16: --> 954 Hz, 524288 ns halfperiod  ----used
+#divider 17: --> 477 Hz, 1048576 ns halfperiod 
+#divider 18: --> 238 Hz, 2097152 ns halfperiod
+#divider 19: --> 119 Hz, 4194304 ns halfperiod
+#divider above 19 not working! (wrong in FW)
+    
+
+
+#div 10 --> expected half period 8192 ns
+#div 16 --> expected half period 524288 ns
+
+#CLOCK_AUX_DIV10_MISO_MUSIC_CALIBRATED_NANOSECONDS:
+#- 100                 --> n samples 
+#- 7304.090850000001   --> max measured half period
+#- 8679.62585          --> min measured half period
+#- 8198.188600000001   --> average half period
+#- 660.2568            --> stddev
+
+#CLOCK_AUX_DIV16_SCLK_MUSIC_CALIBRATED_NANOSECONDS:
+#- 77
+#- 523129.71585000004
+#- 525880.78585
+#- 524312.6759500001
+#- 536.45865
+
+#for dataout0 and dataout1, it is done with software (PC, not arduino) polling only with div16.
+#for the other bits it is done with arduino and with div10 and div16.
+#note: if dbg mode is enabled, it seems that delays introduced by text output lead to large spikes (and wrong average)
+#conclusion: dataout0 and dataout1 clock measurments may not be very reliable
+
+#CLOCK_AUX_DIV16_SMART_DATAOUT0_NANOSECONDS: ---> made with dbg flag on, spikes
+#- 141
+#- 178000.0
+#- 24995000.0 --> this is very large
+#- 694971.6312056737 --> average is too large
+#- 2061539.0469371679
+
+#CLOCK_AUX_DIV16_SMART_DATAOUT1_NANOSECONDS:
+#- 140
+#- 371000.0
+#- 694000.0
+#- 524642.8571428572
+#- 41833.70150615488
+
+
+

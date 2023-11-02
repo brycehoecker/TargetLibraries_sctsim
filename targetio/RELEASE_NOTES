@@ -1,0 +1,21 @@
+Release Notes
+=============
+
+
+January 21, 2018
+------------------------------------------------------------------
+Release V01-00-00
+- New cmake configuration which enables bundled builds and more robust configuration of the
+  compilation of the python module. For more information about this 
+  refer to: https://forge.in2p3.fr/projects/gct/wiki/CHEC_SW_cmake_fix
+- Removed content not associated with the TargetIO source code
+- Update of WaveformArrayReader to obtain the stale flag for the waveforms
+- Added SetWriteRatio to EventFileWriter
+- Commited changes on the FITS format of unknown origin
+- Added CHECDataListener.cc EventFileWriter_v2.h EventFileWriter_v2.cc which 
+  are compatible with the new event builder in TargetDriver
+
+October 22, 2018
+------------------------------------------------------------------
+Release V00-01-00 
+- As is with the old cmake build configuration
