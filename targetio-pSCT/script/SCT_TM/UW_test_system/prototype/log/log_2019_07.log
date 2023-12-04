@@ -1,3 +1,0 @@
-Date,Time,Signal_Type,Period(ns),High(mV),Low(mv),Module,Requirement
-19_07_09,14_46_14,noise,0.0,0.0,0.0,3,None
-19_07_09,14_47_18,noise,0,0,0,3,None
