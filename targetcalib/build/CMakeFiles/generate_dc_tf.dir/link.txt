@@ -1,1 +1,0 @@
-/usr/bin/c++  -D__STDC_FORMAT_MACROS  -std=c++11 -O2 -rdynamic CMakeFiles/generate_dc_tf.dir/src_exe/generate_dc_tf.cc.o -o bin/generate_dc_tf  -Wl,-rpath,/usr/lib libTargetCalib.so.1.0 -lcfitsio /usr/lib/libTargetIO.so.1.0 -lcfitsio /usr/lib/libTargetDriver.so.1.0 -lrt 

@@ -1,1 +1,0 @@
-/usr/bin/c++  -D__STDC_FORMAT_MACROS  -std=c++11 -O2 -Wall -rdynamic CMakeFiles/CHECDataListener.dir/examples/CHECDataListener.cc.o -o bin/CHECDataListener  -Wl,-rpath,/usr/lib libTargetIO.so.1.0 -lcfitsio -lpthread /usr/lib/libTargetDriver.so.1.0 -lrt 

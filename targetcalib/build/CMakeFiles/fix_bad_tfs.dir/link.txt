@@ -1,1 +1,0 @@
-/usr/bin/c++  -D__STDC_FORMAT_MACROS  -std=c++11 -O2 -rdynamic CMakeFiles/fix_bad_tfs.dir/src_exe/fix_bad_tfs.cc.o -o bin/fix_bad_tfs  -Wl,-rpath,/usr/lib libTargetCalib.so.1.0 -lcfitsio /usr/lib/libTargetIO.so.1.0 -lcfitsio /usr/lib/libTargetDriver.so.1.0 -lrt 

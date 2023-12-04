@@ -1,1 +1,0 @@
-/usr/bin/c++  -D__STDC_FORMAT_MACROS  -std=c++11 -O2 -Wall -rdynamic CMakeFiles/testerT7.dir/src_exe/testerT7.cc.o -o bin/testerT7  -Wl,-rpath,/usr/lib libTargetDriver.so.1.0 -lrt -lpthread 
