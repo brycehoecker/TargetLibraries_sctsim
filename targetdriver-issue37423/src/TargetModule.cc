@@ -273,141 +273,141 @@ namespace CTA {
 		}
 
 		int TargetModule::Connect() {
-		fState = TM_STATE_UNRESPONSIVE;
+			fState = TM_STATE_UNRESPONSIVE;
 
-		if (fClientIP.size() < 7 || (fModuleIP.size() < 7)) {
-		std::cout << "TargetModule::Connect() - ERROR - bad IPs: client "
-			  << fClientIP << " module " << fModuleIP << std::endl;
-		return TC_ERR_USER_ERROR;
-		}
+			if (fClientIP.size() < 7 || (fModuleIP.size() < 7)) {
+			std::cout << "TargetModule::Connect() - ERROR - bad IPs: client "
+				  << fClientIP << " module " << fModuleIP << std::endl;
+			return TC_ERR_USER_ERROR;
+			}
 
-		CloseSockets();
+			CloseSockets();
 
-		int stat;
-		if (fModuleType == kT5Module) {
-		stat = ConnectToServer(fClientIP, TM_SOURCE_PORT + fModuleId, fModuleIP,
-						   TM_DEST_PORT, TM_SOCK_BUF_SIZE_SC);
-		} else if (fModuleType == kT7Module || fModuleType == kT7ModuleBP ||
-			 fModuleType == kTCEval || fModuleType == kTCT5TEAEval ||
-			 fModuleType == kTCModule || fModuleType == kTCModuleBP ||
-			 fModuleType == kSCTModuleBP || fModuleType == kSCTModule) {
-		uint16_t slowPort = TM_SOURCE_PORT + fModuleId;  // default option
-		if (fTargetSettings.fSettingMapFPGA.find("SetSlowControlPort") !=
-		fTargetSettings.fSettingMapFPGA.end()) {
-		if (fTargetSettings.fSettingMapFPGA["SetSlowControlPort"].value != 0) {
-		slowPort = uint16_t(
-			fTargetSettings.fSettingMapFPGA["SetSlowControlPort"].value);
-		}
-		}
-		stat = ConnectToServer(fClientIP, slowPort, fModuleIP, TM_DEST_PORT,
-						   TM_SOCK_BUF_SIZE_SC);
-		} else {
-		stat = TC_ERR_CONF_FAILURE;
-		}
+			int stat;
+			if (fModuleType == kT5Module) {
+			stat = ConnectToServer(fClientIP, TM_SOURCE_PORT + fModuleId, fModuleIP,
+							   TM_DEST_PORT, TM_SOCK_BUF_SIZE_SC);
+			} else if (fModuleType == kT7Module || fModuleType == kT7ModuleBP ||
+				 fModuleType == kTCEval || fModuleType == kTCT5TEAEval ||
+				 fModuleType == kTCModule || fModuleType == kTCModuleBP ||
+				 fModuleType == kSCTModuleBP || fModuleType == kSCTModule) {
+			uint16_t slowPort = TM_SOURCE_PORT + fModuleId;  // default option
+			if (fTargetSettings.fSettingMapFPGA.find("SetSlowControlPort") !=
+			fTargetSettings.fSettingMapFPGA.end()) {
+			if (fTargetSettings.fSettingMapFPGA["SetSlowControlPort"].value != 0) {
+			slowPort = uint16_t(
+				fTargetSettings.fSettingMapFPGA["SetSlowControlPort"].value);
+			}
+			}
+			stat = ConnectToServer(fClientIP, slowPort, fModuleIP, TM_DEST_PORT,
+							   TM_SOCK_BUF_SIZE_SC);
+			} else {
+			stat = TC_ERR_CONF_FAILURE;
+			}
 
-		if (stat != TC_OK) return stat;
+			if (stat != TC_OK) return stat;
 
-		DataPortPing();
+			DataPortPing();
 
-		if (fVerbose) {
-		std::cout
-		<< "TargetModule::Connect - connected to server - now set comms phase: "
-		<< std::endl;
-		}
-		fClockPhase = -1;
-		if (fModuleType == kT5Module || fModuleType == kT7ModuleBP ||
-		fModuleType == kTCModuleBP || fModuleType == kSCTModuleBP) {
-		if (fVerbose) {
-		std::cout << "Trying first comm's phase, ignore send attempts errors"
-				<< std::endl;
-		}
-		// WriteSetting("PhaseOfCommsClock", 0);
-		if ((stat = WriteSetting("PhaseOfCommsClock", 0)) == TC_OK) {
-		fClockPhase = 0;
-		} else {
-		// WriteSetting("PhaseOfCommsClock", 1);
-		if (fVerbose) std::cout << "Trying second comms phase..." << std::endl;
-		if ((stat = WriteSetting("PhaseOfCommsClock", 1)) == TC_OK) {
-		fClockPhase = 1;
-		}
-		}
-		if (fClockPhase < 0) {
-		std::cout
-		  << "TargetModule -- Both comms phases failed - abandoning Connect()"
-		  << std::endl;
-		return stat;
-		}
-		if (fVerbose)
-		std::cout << "TargetModule::Connect -- comms phase set successfully to "
-				<< fClockPhase << std::endl;
-		} else {
-		if (fVerbose)
-		std::cout << "TargetModule::Connect successfully." << std::endl;
-		}
-
-		if (fClockPhase)
-		if (fVerbose)
-		std::cout << "Clock phase is OK - Ignore the previous attemps errors"
-				<< std::endl;
-
-		uint32_t fw_version = 0;
-		if ((stat = GetFirmwareVersion(fw_version)) != TC_OK) return stat;
-
-		if (fw_version != fTargetSettings.fFPGAFirmwareVersion) {
-		std::cout << "ERROR: Firmware read: " << std::hex << fw_version
-			  << "\t but in *def file: " << fTargetSettings.fFPGAFirmwareVersion
+			if (fVerbose) {
+			std::cout
+			<< "TargetModule::Connect - connected to server - now set comms phase: "
+			<< std::endl;
+			}
+			fClockPhase = -1;
+			if (fModuleType == kT5Module || fModuleType == kT7ModuleBP ||
+			fModuleType == kTCModuleBP || fModuleType == kSCTModuleBP) {
+			if (fVerbose) {
+			std::cout << "Trying first comm's phase, ignore send attempts errors"
+					<< std::endl;
+			}
+			// WriteSetting("PhaseOfCommsClock", 0);
+			if ((stat = WriteSetting("PhaseOfCommsClock", 0)) == TC_OK) {
+			fClockPhase = 0;
+			} else {
+			// WriteSetting("PhaseOfCommsClock", 1);
+			if (fVerbose) std::cout << "Trying second comms phase..." << std::endl;
+			if ((stat = WriteSetting("PhaseOfCommsClock", 1)) == TC_OK) {
+			fClockPhase = 1;
+			}
+			}
+			if (fClockPhase < 0) {
+			std::cout
+			  << "TargetModule -- Both comms phases failed - abandoning Connect()"
 			  << std::endl;
-		return TC_UNEXPECTED_RESPONSE;
-		}
+			return stat;
+			}
+			if (fVerbose)
+			std::cout << "TargetModule::Connect -- comms phase set successfully to "
+					<< fClockPhase << std::endl;
+			} else {
+			if (fVerbose)
+			std::cout << "TargetModule::Connect successfully." << std::endl;
+			}
 
-		fState = TM_STATE_UNDEFINED;
+			if (fClockPhase)
+			if (fVerbose)
+			std::cout << "Clock phase is OK - Ignore the previous attemps errors"
+					<< std::endl;
 
-		return GoToSafe();
-		}
+			uint32_t fw_version = 0;
+			if ((stat = GetFirmwareVersion(fw_version)) != TC_OK) return stat;
+
+			if (fw_version != fTargetSettings.fFPGAFirmwareVersion) {
+			std::cout << "ERROR: Firmware read: " << std::hex << fw_version
+				  << "\t but in *def file: " << fTargetSettings.fFPGAFirmwareVersion
+				  << std::endl;
+			return TC_UNEXPECTED_RESPONSE;
+			}
+
+			fState = TM_STATE_UNDEFINED;
+
+			return GoToSafe();
+		}//int TargetModule::Connect
 
 		bool TargetModule::Exists(std::string ipaddress, std::string myip) {
-		CloseSockets();
+			CloseSockets();
 
-		int stat = ConnectToServer(myip, TM_SPECIAL_PORT, ipaddress, TM_DEST_PORT,
-							 TM_SOCK_BUF_SIZE_SC);
+			int stat = ConnectToServer(myip, TM_SPECIAL_PORT, ipaddress, TM_DEST_PORT,
+								 TM_SOCK_BUF_SIZE_SC);
 
-		if (stat != TC_OK) {
-		std::cout << "TM:Exists() - problem with ConnectToServer" << std::endl;
-		return false;
-		}
+			if (stat != TC_OK) {
+			std::cout << "TM:Exists() - problem with ConnectToServer" << std::endl;
+			return false;
+			}
 
-		int ClockPhase = -1;
-		if ((stat = WriteSetting("PhaseOfCommsClock", 0)) == TC_OK) {
-		ClockPhase = 0;
-		} else {
-		if ((stat = WriteSetting("PhaseOfCommsClock", 1)) == TC_OK) {
-		ClockPhase = 1;
-		}
-		}
+			int ClockPhase = -1;
+			if ((stat = WriteSetting("PhaseOfCommsClock", 0)) == TC_OK) {
+			ClockPhase = 0;
+			} else {
+			if ((stat = WriteSetting("PhaseOfCommsClock", 1)) == TC_OK) {
+			ClockPhase = 1;
+			}
+			}
 
-		CloseSockets();
+			CloseSockets();
 
-		return (ClockPhase > -1);
+			return (ClockPhase > -1);
 		}
 
 		void TargetModule::PackControlPacket(uint8_t* bytes, uint32_t address,
 									 uint32_t data, bool iswrite) {
-		memset(bytes, 0, TM_CONTROLPACKET_SIZE);
+			memset(bytes, 0, TM_CONTROLPACKET_SIZE);
 
-		bytes[6] = TM_CONTROLPACKET_SIZE;
+			bytes[6] = TM_CONTROLPACKET_SIZE;
 
-		if (iswrite) {
-		bytes[4] |= 0x40;
-		} else {
-		bytes[4] &= 0x3F;
-		}
-		bytes[5] = (address >> 16) & 0xFF;
-		bytes[6] = (address >> 8) & 0xFF;
-		bytes[7] = (address >> 0) & 0xFF;
-		bytes[8] = (data >> 24) & 0xFF;
-		bytes[9] = (data >> 16) & 0xFF;
-		bytes[10] = (data >> 8) & 0xFF;
-		bytes[11] = (data >> 0) & 0xFF;
+			if (iswrite) {
+			bytes[4] |= 0x40;
+			} else {
+			bytes[4] &= 0x3F;
+			}
+			bytes[5] = (address >> 16) & 0xFF;
+			bytes[6] = (address >> 8) & 0xFF;
+			bytes[7] = (address >> 0) & 0xFF;
+			bytes[8] = (data >> 24) & 0xFF;
+			bytes[9] = (data >> 16) & 0xFF;
+			bytes[10] = (data >> 8) & 0xFF;
+			bytes[11] = (data >> 0) & 0xFF;
 		}
 
 		int TargetModule::UnpackControlPacket(const uint8_t* bytes, uint32_t& addr,
@@ -452,134 +452,132 @@ namespace CTA {
 
 		int TargetModule::RegisterOperation(uint32_t address, uint32_t& data,
 									bool iswrite, bool onlySend) {
-		PackControlPacket(fBuffer, address, data, iswrite);
-		ssize_t len;
-		int stat;
+			PackControlPacket(fBuffer, address, data, iswrite);
+			ssize_t len;
+			int stat;
 
-		// std::cout << "RegisterOperation " << address << " " << data << " " <<
-		// iswrite << std::endl;
-		// in the case we don't expect a response
-		if (onlySend) {
-		DiscardPacketsInTheSocketBuffer();  // flush in case message/response has
-										// got out of sync
-		if ((stat = Send(fBuffer, TM_CONTROLPACKET_SIZE)) != TC_OK) {
-		std::cerr << "Send failed in: UDPClient::SendAndReceive, error code: "
-				<< stat << ": " << ReturnCodeToString(stat) << std::endl;
-		}
-		return stat;
-		}
+			// std::cout << "RegisterOperation " << address << " " << data << " " <<
+			// iswrite << std::endl;
+			// in the case we don't expect a response
+			if (onlySend) {
+			DiscardPacketsInTheSocketBuffer();  // flush in case message/response has
+											// got out of sync
+			if ((stat = Send(fBuffer, TM_CONTROLPACKET_SIZE)) != TC_OK) {
+			std::cerr << "Send failed in: UDPClient::SendAndReceive, error code: "
+					<< stat << ": " << ReturnCodeToString(stat) << std::endl;
+			}
+			return stat;
+			}
 
-		if ((stat = SendAndReceive(fBuffer, TM_CONTROLPACKET_SIZE, fBuffer, len,
-							 TM_CONTROLPACKET_SIZE + 1)) != TC_OK) {
-		fState = TM_STATE_UNRESPONSIVE;
-		return stat;
-		}
-		uint32_t resp_addr;
-		bool resp_write;
-		UnpackControlPacket(fBuffer, resp_addr, data, resp_write);
+			if ((stat = SendAndReceive(fBuffer, TM_CONTROLPACKET_SIZE, fBuffer, len, TM_CONTROLPACKET_SIZE + 1)) != TC_OK) {
+			fState = TM_STATE_UNRESPONSIVE;
+			return stat;
+			}
+			uint32_t resp_addr;
+			bool resp_write;
+			UnpackControlPacket(fBuffer, resp_addr, data, resp_write);
 
-		//  std::cout << " GOT: (data)" << std::hex <<data << "from address "  <<
-		//  std::hex << address << std::endl;
+			//  std::cout << " GOT: (data)" << std::hex <<data << "from address "  <<
+			//  std::hex << address << std::endl;
 
-		if (resp_addr != address) {
-		std::cerr << "ERROR TargetModule::RegisterOperation(): Receiving data from "
-				 "address: 0x"
-			  << std::hex << resp_addr << ", while writing to address: 0x"
-			  << address << std::endl;
-		data = 0;
-		return TC_ERR_BAD_PACKET;
-		}
-		return TC_OK;
+			if (resp_addr != address) {
+			std::cerr << "ERROR TargetModule::RegisterOperation(): Receiving data from "
+					 "address: 0x"
+				  << std::hex << resp_addr << ", while writing to address: 0x"
+				  << address << std::endl;
+			data = 0;
+			return TC_ERR_BAD_PACKET;
+			}
+			return TC_OK;
 		}
 
 		int TargetModule::WriteRegisterAndCheck(uint32_t address, uint32_t data) {
-		int stat;
-		if ((stat = WriteRegister(address, data)) != TC_OK) return stat;
+			int stat;
+			if ((stat = WriteRegister(address, data)) != TC_OK) return stat;
 
-		uint32_t data_read;
-		if ((stat = ReadRegister(address, data_read)) != TC_OK) return stat;
-		if (data_read != data) {
-		std::cout << "WriteRegisterAndCheck: Wrote: " << data
-			  << "\t But read back: " << data_read << std::endl;
-		return TC_UNEXPECTED_RESPONSE;
-		}
+			uint32_t data_read;
+			if ((stat = ReadRegister(address, data_read)) != TC_OK) return stat;
+			if (data_read != data) {
+			std::cout << "WriteRegisterAndCheck: Wrote: " << data
+				  << "\t But read back: " << data_read << std::endl;
+			return TC_UNEXPECTED_RESPONSE;
+			}
 
-		return TC_OK;
+			return TC_OK;
 		}
 
 		// HARM  MOVE TO GOTOPRESYNC
 		void TargetModule::StopSampling() {
-		int state = fState;
-		WriteSetting("SoftwareReset", 0xBECEDACE);
-		state = fState;  // to avoid that this puts us in undefined state
+			int state = fState;
+			WriteSetting("SoftwareReset", 0xBECEDACE);
+			state = fState;  // to avoid that this puts us in undefined state
 		}
 
 		int TargetModule::WriteSetting(const std::string& name, uint32_t val) {
-		int stat;
-		if ((stat = fTargetSettings.ModifyFPGASetting(name, val)) != TC_OK)
-		return stat;
-		uint32_t address;
-		fTargetSettings.GetFPGASettingRegisterAddress(name, address);
-		uint32_t fullReg;
-		fTargetSettings.GetFPGARegisterValue(address, fullReg);
+			int stat;
+			if ((stat = fTargetSettings.ModifyFPGASetting(name, val)) != TC_OK)
+			return stat;
+			uint32_t address;
+			fTargetSettings.GetFPGASettingRegisterAddress(name, address);
+			uint32_t fullReg;
+			fTargetSettings.GetFPGARegisterValue(address, fullReg);
 
-		// exception for software reset, since no answer is expected
-		if (name == "SoftwareReset") {
-		stat = RegisterOperation(address, fullReg, true, true);
-		//    WriteRegister(address, fullReg);
-		fTargetSettings.ModifyFPGASetting(name, 0);
-		return stat;
-		}
+			// exception for software reset, since no answer is expected
+			if (name == "SoftwareReset") {
+			stat = RegisterOperation(address, fullReg, true, true);
+			//    WriteRegister(address, fullReg);
+			fTargetSettings.ModifyFPGASetting(name, 0);
+			return stat;
+			}
 
-		//  if (!fTargetSettings.fSettingMapFPGA[name].isReadOnly) {
-		if (fTargetSettings.fSettingMapFPGA[name].access == eRW ||
-		fTargetSettings.fSettingMapFPGA[name].access == eRW_NS) {
-		stat = WriteRegister(address, fullReg);
+			//  if (!fTargetSettings.fSettingMapFPGA[name].isReadOnly) {
+			if (fTargetSettings.fSettingMapFPGA[name].access == eRW ||
+			fTargetSettings.fSettingMapFPGA[name].access == eRW_NS) {
+			stat = WriteRegister(address, fullReg);
 
-		// std::cout << "called WriteRegister for setting " << name << " val: " <<
-		// fullReg << std::endl;
+			// std::cout << "called WriteRegister for setting " << name << " val: " <<
+			// fullReg << std::endl;
 
-		} else if (fTargetSettings.fSettingMapFPGA[name].access == eR) {
-		std::cerr << "Cannot write setting <" << name << ">, it is read-only"
+			} else if (fTargetSettings.fSettingMapFPGA[name].access == eR) {
+			std::cerr << "Cannot write setting <" << name << ">, it is read-only"
+				  << std::endl;
+			std::cerr << "Fix your code! (or check that FPGA-def is correct)"
+				  << std::endl;
+			stat = TC_ERR_USER_ERROR;
+			} else if (fTargetSettings.fSettingMapFPGA[name].access == eW) {
+			WriteRegister(address, fullReg);
+			fTargetSettings.ModifyFPGASetting(name, 0);
+			return TC_OK;
+			}
+
+			if (stat != TC_OK) return stat;
+
+			if (fTargetSettings.fSettingMapFPGA[name].access == eRW) {
+			uint32_t readBack;
+			stat = ReadSetting(name, readBack);
+			if (fVerbose) std::cout << "read back setting - stat: " << stat << "\n";
+			if (readBack != val) {
+			std::cerr
+			  << "ERROR: WriteRegister, while ReadSetting (for check) in setting "
+			  << name << "\t" << val << ", but received back: " << readBack
 			  << std::endl;
-		std::cerr << "Fix your code! (or check that FPGA-def is correct)"
-			  << std::endl;
-		stat = TC_ERR_USER_ERROR;
-		} else if (fTargetSettings.fSettingMapFPGA[name].access == eW) {
-		WriteRegister(address, fullReg);
-		fTargetSettings.ModifyFPGASetting(name, 0);
-		return TC_OK;
-		}
-
-		if (stat != TC_OK) return stat;
-
-		if (fTargetSettings.fSettingMapFPGA[name].access == eRW) {
-		uint32_t readBack;
-		stat = ReadSetting(name, readBack);
-		if (fVerbose) std::cout << "read back setting - stat: " << stat << "\n";
-		if (readBack != val) {
-		std::cerr
-		  << "ERROR: WriteRegister, while ReadSetting (for check) in setting "
-		  << name << "\t" << val << ", but received back: " << readBack
-		  << std::endl;
-		return TC_UNEXPECTED_RESPONSE;  // debug
-		}
-		}
-		return stat;
+			return TC_UNEXPECTED_RESPONSE;  // debug
+			}
+			}
+			return stat;
 		}
 
 		int TargetModule::ReadSetting(const std::string& name, uint32_t& val) {
-		uint32_t address;
-		fTargetSettings.GetFPGASettingRegisterAddress(name, address);
-		uint32_t valFullBuffer;
-		int stat;
-		if ((stat = ReadRegister(address, valFullBuffer)) != TC_OK) return stat;
-		fTargetSettings.GetRegisterPartially(
-		valFullBuffer, fTargetSettings.fSettingMapFPGA[name], val);
+			uint32_t address;
+			fTargetSettings.GetFPGASettingRegisterAddress(name, address);
+			uint32_t valFullBuffer;
+			int stat;
+			if ((stat = ReadRegister(address, valFullBuffer)) != TC_OK) return stat;
+			fTargetSettings.GetRegisterPartially(valFullBuffer, fTargetSettings.fSettingMapFPGA[name], val);
 
-		// std::cout << "ReadSetting " << name << " val: " << val << std::endl;
+			// std::cout << "ReadSetting " << name << " val: " << val << std::endl;
 
-		return stat;
+			return stat;
 		}
 
 		int TargetModule::WriteSettingFromConfig(const std::string& name) {
@@ -1547,35 +1545,39 @@ namespace CTA {
 		}
 
 		int TargetModule::ReadPowerBoardID(uint64_t& val) {
-		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
-		std::cout << "TargetModule ERROR: This function is only implemented for "
-				 "kTCModule and kTCModuleBP ";
-		return TC_ERR_USER_ERROR;
-		}
+			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
+				std::cout << "TargetModule ERROR: This function is only implemented for " << "kTCModule and kTCModuleBP " << std::endl;
+				return TC_ERR_USER_ERROR;
+			}//if
+			
+			int ret;
+			if ((ret = WriteSetting("I2CAddr_Power", 0b1010000)) != TC_OK) return ret;
 
-		int ret;
+			// 0 write, 1 read
+			if ((ret = WriteSetting("I2CRW_Power", 1)) != TC_OK) return ret;
 
-		if ((ret = WriteSetting("I2CAddr_Power", 0b1010000)) != TC_OK) return ret;
+			uint32_t answer[4];
+			for (int i = 0; i < 4; i++) {
+				if ((ret = WriteSetting("I2CRegAddr_Power", 2 * i)) != TC_OK) return ret;
+				// Starts the operation, non sticky
+				//      std::cout << "expected error, non sticky bit" << std::endl;
+				if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+				if ((ret = ReadSetting("I2CReadData_Power", answer[i])) != TC_OK)
+				return ret;
+			}//for (int i
+			//val = ((answer[0]) & 0xFF00) + ((answer[0] & 0xFF));
+			//val += (((answer[1]) & 0xFF00) + ((answer[1] & 0xFF))) << 16;
+			//val += (((answer[2]) & 0xFF00) + ((answer[2] & 0xFF))) << 32;
+			//val += (((answer[3]) & 0xFF00) + ((answer[3] & 0xFF))) << 48;
+			
+			// Combine the lower 16 bits of each element in the answer array into a 64-bit value?
+			val = static_cast<uint64_t>(answer[0] & 0xFFFF);         // Lower 16 bits of answer[0]
+			val |= static_cast<uint64_t>(answer[1] & 0xFFFF) << 16;  // Lower 16 bits of answer[1], shifted left by 16 bits
+			val |= static_cast<uint64_t>(answer[2] & 0xFFFF) << 32;  // Lower 16 bits of answer[2], shifted left by 32 bits
+			val |= static_cast<uint64_t>(answer[3] & 0xFFFF) << 48;  // Lower 16 bits of answer[3], shifted left by 48 bits
 
-		// 0 write, 1 read
-		if ((ret = WriteSetting("I2CRW_Power", 1)) != TC_OK) return ret;
-
-		uint32_t answer[4];
-		for (int i = 0; i < 4; i++) {
-		if ((ret = WriteSetting("I2CRegAddr_Power", 2 * i)) != TC_OK) return ret;
-		// Starts the operation, non sticky
-		//      std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
-		if ((ret = ReadSetting("I2CReadData_Power", answer[i])) != TC_OK)
-		return ret;
-		}
-		val = ((answer[0]) & 0xFF00) + ((answer[0] & 0xFF));
-		val += (((answer[1]) & 0xFF00) + ((answer[1] & 0xFF))) << 16;
-		val += (((answer[2]) & 0xFF00) + ((answer[2] & 0xFF))) << 32;
-		val += (((answer[3]) & 0xFF00) + ((answer[3] & 0xFF))) << 48;
-
-		return TC_OK;
-		}
+			return TC_OK;
+		}//int TargetModule::ReadPowerBoardID
 
 		//
 		// two bytes for 16 super pixel channels
@@ -1583,8 +1585,7 @@ namespace CTA {
 		// private?
 		int TargetModule::ReadHVEnableBytes(uint8_t& byte0, uint8_t& byte1) {
 		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
-		std::cout << "TargetModule ERROR: This function is only implemented for "
-				 "kTCModule and kTCModuleBP ";
+		std::cout << "TargetModule ERROR: This function is only implemented for " << "kTCModule and kTCModuleBP " << std::endl;
 		return TC_ERR_USER_ERROR;
 		}
 
