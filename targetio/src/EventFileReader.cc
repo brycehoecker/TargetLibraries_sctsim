@@ -333,7 +333,8 @@ int16_t EventFileReader::GetSN(uint16_t slot) {
   }
 
   int16_t temp_val;
-  char text[11];
+  //char text[11];	
+  char text[15];		//Bryces Change
   sprintf(text, "SLOT-%02d-SN", slot);
   char comment[50] = "module serial number";
   if (fits_read_key(fFitsPointer, TINT, text, &temp_val, comment, &status)) {
@@ -417,7 +418,8 @@ int16_t EventFileReader::GetSPDAC(uint16_t slot, uint16_t sp) {
   }
 
   int16_t temp_val;
-  char text[20];
+  //char text[20];
+  char text[25];		//Bryces Change
   sprintf(text, "SLOT-%02d-SP-%02d-DAC", slot, sp);
   char comment[50] = "DAC Setting";
   if (fits_read_key(fFitsPointer, TINT, text, &temp_val, comment, &status)) {
@@ -445,7 +447,8 @@ int16_t EventFileReader::GetSPHVON(uint16_t slot, uint16_t sp) {
   }
 
   int16_t temp_val;
-  char text[20];
+  //char text[20];
+  char text[26];		//Bryces Change
   sprintf(text, "SLOT-%02d-SP-%02d-HVON", slot, sp);
   char comment[50] = "HV On/Off";
   if (fits_read_key(fFitsPointer, TINT, text, &temp_val, comment, &status)) {

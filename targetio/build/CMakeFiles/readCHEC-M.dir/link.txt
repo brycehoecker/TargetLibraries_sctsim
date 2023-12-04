@@ -1,0 +1,1 @@
+/usr/bin/c++  -D__STDC_FORMAT_MACROS  -std=c++11 -O2 -Wall -rdynamic CMakeFiles/readCHEC-M.dir/examples/readCHEC-M.cc.o -o bin/readCHEC-M  -Wl,-rpath,/usr/lib libTargetIO.so.1.0 -lcfitsio -lpthread /usr/lib/libTargetDriver.so.1.0 -lrt 

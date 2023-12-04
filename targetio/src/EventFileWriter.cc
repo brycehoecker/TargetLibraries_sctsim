@@ -21,14 +21,23 @@ namespace TargetIO {
 EventFileWriter::EventFileWriter(const std::string& pFileName,
                                  uint16_t pNPacketsPerEvent,
                                  uint16_t pPacketSizeInByte) :
+  //EventFile(),
+  //fWatching(false),
+  //fWriting(true),
+  //fWatcherSleep(100000 /* us */),
+  //fEventsWritten(0),
+  //fPacketsWritten(0),
+  //fEventBuffer(0) {
+  
   EventFile(),
+  fThread(),  // Default initialization, thread not started
+  fEventBuffer(nullptr),  // Assuming no event buffer initially
   fWatching(false),
   fWriting(true),
-  fWatcherSleep(100000 /* us */),
   fEventsWritten(0),
   fPacketsWritten(0),
-  fEventBuffer(0)
-{
+  fWatcherSleep(100000 /* us */) {  
+	  
   int status = 0;
   if (fits_create_file(&fFitsPointer, pFileName.c_str(), &status)) {
     std::cerr << "Cannot open " << pFileName.c_str() << " "
@@ -64,17 +73,26 @@ EventFileWriter::EventFileWriter(const std::string& pFileName,
                "Start date and time of the observation (UTC)");
 
   InitBinaryTable(pNPacketsPerEvent, pPacketSizeInByte);
-}
+}//EventFileWriter
 
 EventFileWriter::EventFileWriter(const std::string& pR1FileName,
                                  CTA::TargetIO::EventFileReader* pR0Reader) :
+          //EventFile(),
+          //fWatching(false),
+          //fWriting(true),
+          //fWatcherSleep(100000 /* us */),
+          //fEventsWritten(0),
+          //fPacketsWritten(0),
+          //fEventBuffer(0)
+          
           EventFile(),
+          fThread(),  // Default initialization, thread not started
+          fEventBuffer(nullptr),  // Assuming no event buffer initially
           fWatching(false),
           fWriting(true),
-          fWatcherSleep(100000 /* us */),
           fEventsWritten(0),
           fPacketsWritten(0),
-          fEventBuffer(0)
+          fWatcherSleep(100000 /* us */)
 {
   int status = 0;
   if (fits_create_file(&fFitsPointer, pR1FileName.c_str(), &status)) {
@@ -169,7 +187,8 @@ void EventFileWriter::AddCardImage(const std::string& pKeyword, bool pValue,
                         pComment.c_str(), &status)) {
 #else
     if (fits_update_key(fFitsPointer, TLOGICAL, pKeyword.c_str(), &pValue,
-                        static_cast<char*>(pComment.c_str()), &status)) {
+                        //static_cast<char*>(pComment.c_str()), &status)) {
+						pComment.c_str(), &status)) {	//Bryces Change
 #endif
       std::cerr << "Cannot update the keyword "
                 << Util::FitsErrorMessage(status) << "\n";
@@ -207,7 +226,8 @@ void EventFileWriter::AddCardImage(const std::string& pKeyword, double pValue,
                         pComment.c_str(), &status)) {
 #else
     if (fits_update_key(fFitsPointer, TDOUBLE, pKeyword.c_str(), &pValue,
-                        static_cast<char*>(pComment.c_str()), &status)) {
+                        //static_cast<char*>(pComment.c_str()), &status)) {
+						pComment.c_str(), &status)) {
 #endif
       std::cerr << "Cannot update the keyword "
                 << Util::FitsErrorMessage(status) << "\n";
@@ -245,7 +265,8 @@ void EventFileWriter::AddCardImage(const std::string& pKeyword, float pValue,
                         pComment.c_str(), &status)) {
 #else
     if (fits_update_key(fFitsPointer, TFLOAT, pKeyword.c_str(), &pValue,
-                        static_cast<char*>(pComment.c_str()), &status)) {
+                        //static_cast<char*>(pComment.c_str()), &status)) {
+						pComment.c_str(), &status)) {	//Bryces change
 #endif
       std::cerr << "Cannot update the keyword "
                 << Util::FitsErrorMessage(status) << "\n";
@@ -283,7 +304,8 @@ void EventFileWriter::AddCardImage(const std::string& pKeyword, int32_t pValue,
                         pComment.c_str(), &status)) {
 #else
     if (fits_update_key(fFitsPointer, TINT, pKeyword.c_str(), &pValue,
-                        static_cast<char*>(pComment.c_str()), &status)) {
+                        //static_cast<char*>(pComment.c_str()), &status)) {
+						pComment.c_str(), &status)) {	//Bryces change
 #endif
       std::cerr << "Cannot update the keyword "
                 << Util::FitsErrorMessage(status) << "\n";
@@ -321,7 +343,8 @@ void EventFileWriter::AddCardImage(const std::string& pKeyword, int64_t pValue,
                         pComment.c_str(), &status)) {
 #else
     if (fits_update_key(fFitsPointer, TLONGLONG, pKeyword.c_str(), &pValue,
-                        static_cast<char*>(pComment.c_str()), &status)) {
+                        //static_cast<char*>(pComment.c_str()), &status)) {
+						pComment.c_str(), &status)) {		//Bryces change
 #endif
       std::cerr << "Cannot update the keyword "
                 << Util::FitsErrorMessage(status) << "\n";
@@ -363,7 +386,8 @@ void EventFileWriter::AddCardImage(const std::string& pKeyword,
                         pComment.c_str(), &status)) {
 #else
     if (fits_update_key(fFitsPointer, TSTRING, pKeyword.c_str(), str,
-                        static_cast<char*>(pComment.c_str()), &status)) {
+                        //static_cast<char*>(pComment.c_str()), &status)) {
+						pComment.c_str(), &status)) {		//Bryces Change
 #endif
       std::cerr << "Cannot update the keyword "
                 << Util::FitsErrorMessage(status) << "\n";

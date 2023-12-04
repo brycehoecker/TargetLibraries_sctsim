@@ -5,6 +5,16 @@ project(TargetDriver)
 set(TargetDriver_VERSION_MAJOR 1)
 set(TargetDriver_VERSION_MINOR 0)
 
+if(POLICY CMP0078)
+  cmake_policy(SET CMP0078 NEW)
+endif()
+if(POLICY CMP0086)
+  cmake_policy(SET CMP0086 NEW)
+endif()
+if(POLICY CMP0054)
+  cmake_policy(SET CMP0054 NEW)
+endif()
+
 option(PYTHON "Build the Python wrapper" ON)
 option(UNITTEST "Enable unit test" OFF)
 option(COMPILER_WARNINGS "Turn compiler warnings on" OFF)
@@ -209,12 +219,15 @@ if(PYTHON)
     string (REPLACE ";" " " TargetDriver_COMPILE_OPTIONS_STR "${TargetDriver_COMPILE_OPTIONS}")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__STDC_FORMAT_MACROS  ${TargetDriver_COMPILE_OPTIONS_STR}" )
     set_source_files_properties(target_driver.i PROPERTIES CPLUSPLUS ON)
-    swig_add_module(target_driver python target_driver.i ${SOURCES})
+    #swig_add_module(target_driver python target_driver.i ${SOURCES})
+    swig_add_library(target_driver LANGUAGE python SOURCES target_driver.i ${SOURCES})
+    get_directory_property(OutputTargets DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} BUILDSYSTEM_TARGETS)
+	message(STATUS "Targets in directory: ${OutputTargets}")
     #On OSX we need to tell the linker to not bother with undefined symbols
     if(APPLE)
       SET_TARGET_PROPERTIES(_target_driver PROPERTIES LINK_FLAGS "-undefined dynamic_lookup")
     endif(APPLE)
-    target_compile_definitions (_target_driver
+    target_compile_definitions (target_driver
       PUBLIC
       TARGETDRIVER_VERSION="${TargetDriver_VERSION_MAJOR}.${TargetDriver_VERSION_MINOR}"
       TARGET_BUILD_PATH="${CMAKE_BINARY_DIR}"
@@ -225,7 +238,7 @@ if(PYTHON)
     
     set(PYTHON_SITE_PACKAGES "")
     execute_process(COMMAND python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())" OUTPUT_VARIABLE PYTHON_SITE_PACKAGES OUTPUT_STRIP_TRAILING_WHITESPACE)
-    install(TARGETS _target_driver DESTINATION ${PYTHON_SITE_PACKAGES})
+    install(TARGETS target_driver DESTINATION ${PYTHON_SITE_PACKAGES})
     install(FILES ${PROJECT_BINARY_DIR}/target_driver.py DESTINATION ${PYTHON_SITE_PACKAGES} COMPONENT pylibrary)
     message(STATUS "Python support is added")
   endif(PYTHON_EXECUTABLE)

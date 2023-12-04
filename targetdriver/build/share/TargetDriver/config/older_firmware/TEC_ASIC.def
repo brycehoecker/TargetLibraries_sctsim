@@ -1,0 +1,142 @@
+####################################################################
+# NEVER CHANGE THIS FILE
+#
+# Definitions of register values and partial register values.
+#
+####################################################################
+HEADER
+DESCRIPTION This is the ASIC register definition for the TargetC ASIC. Source is Adrian Zink. Default values are taken from default SLAC configuration (python scripts / configfiles in libTARGET) for TARGET7 ASIC. Luigi Tibaldo updated the digitizer configuration to optimize for counting speed of 500 MHz on 05/07/2016. The optimized value are valid for a ramp capacitor value of 220 pF (C60 on the evaluation board, was 100 pF for original eval board.) 
+RESPONSIBLE_AUTHOR Manuel Kraus
+NUM_REGISTERS 0x5d
+##############################################################################################
+# Setting layout: All fields must be filled, use 0 for default value.
+# The uint*_t fields are  given in hexidecimal notation
+#
+# Field and Type:
+# Name       			RegAddr nBits   startBit value    isReadOnly lowerBound upperBound multiplier offset description
+# string     			uint8_t uint8_t uint8_t  uint32_t bool       uint32_t   uint32_t   float      float  strings
+##############################################################################################
+SETTINGS
+TrimDAC1_0  			0x00    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 0 of the first sampling buffer
+TrimDAC1_1  			0x01    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 1 of the first sampling buffer
+TrimDAC1_2  			0x02    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 2 of the first sampling buffer
+TrimDAC1_3  			0x03    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 3 of the first sampling buffer
+TrimDAC1_4  			0x04    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 4 of the first sampling buffer
+TrimDAC1_5  			0x05    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 5 of the first sampling buffer
+TrimDAC1_6  			0x06    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 6 of the first sampling buffer
+TrimDAC1_7  			0x07    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 7 of the first sampling buffer
+TrimDAC1_8  			0x08    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 8 of the first sampling buffer
+TrimDAC1_9  			0x09    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 9 of the first sampling buffer
+TrimDAC1_10  			0x0a    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 10 of the first sampling buffer
+TrimDAC1_11  			0x0b    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 11 of the first sampling buffer
+TrimDAC1_12  			0x0c    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 12 of the first sampling buffer
+TrimDAC1_13  			0x0d    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 13 of the first sampling buffer
+TrimDAC1_14 			0x0e    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 14 of the first sampling buffer
+TrimDAC1_15 			0x0f    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 15 of the first sampling buffer
+TrimDAC1_16 			0x10    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 16 of the first sampling buffer
+TrimDAC1_17 			0x11    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 17 of the first sampling buffer
+TrimDAC1_18 			0x12    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 18 of the first sampling buffer
+TrimDAC1_19 			0x13    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 19 of the first sampling buffer
+TrimDAC1_20 			0x14    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 20 of the first sampling buffer
+TrimDAC1_21 			0x15    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 21 of the first sampling buffer
+TrimDAC1_22 			0x16    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 22 of the first sampling buffer
+TrimDAC1_23 			0x17    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 23 of the first sampling buffer
+TrimDAC1_24 			0x18    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 24 of the first sampling buffer
+TrimDAC1_25 			0x19    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 25 of the first sampling buffer
+TrimDAC1_26 			0x1a    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 26 of the first sampling buffer
+TrimDAC1_27 			0x1b    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 27 of the first sampling buffer
+TrimDAC1_28 			0x1c    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 28 of the first sampling buffer
+TrimDAC1_29 			0x1d    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 29 of the first sampling buffer
+TrimDAC1_30 			0x1e    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 30 of the first sampling buffer
+TrimDAC1_31 			0x1f    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 31 of the first sampling buffer
+TrimDAC2_0 				0x20    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 0 of the second sampling buffer
+TrimDAC2_1 				0x21    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 1 of the second sampling buffer
+TrimDAC2_2 				0x22    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 2 of the second sampling buffer
+TrimDAC2_3 				0x23    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 3 of the second sampling buffer
+TrimDAC2_4 				0x24    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 4 of the second sampling buffer
+TrimDAC2_5 				0x25    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 5 of the second sampling buffer
+TrimDAC2_6 				0x26    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 6 of the second sampling buffer
+TrimDAC2_7 				0x27    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 7 of the second sampling buffer
+TrimDAC2_8 				0x28    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 8 of the second sampling buffer
+TrimDAC2_9 				0x29    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 9 of the second sampling buffer
+TrimDAC2_10 			0x2a    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 10 of the second sampling buffer
+TrimDAC2_11 			0x2b    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 11 of the second sampling buffer
+TrimDAC2_12 			0x2c    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 12 of the second sampling buffer
+TrimDAC2_13 			0x2d    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 13 of the second sampling buffer
+TrimDAC2_14 			0x2e    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 14 of the second sampling buffer
+TrimDAC2_15 			0x2f    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 15 of the second sampling buffer
+TrimDAC2_16 			0x30    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 16 of the second sampling buffer
+TrimDAC2_17 			0x31    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 17 of the second sampling buffer
+TrimDAC2_18 			0x32    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 18 of the second sampling buffer
+TrimDAC2_19 			0x33    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 19 of the second sampling buffer
+TrimDAC2_20 			0x34    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 20 of the second sampling buffer
+TrimDAC2_21 			0x35    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 21 of the second sampling buffer
+TrimDAC2_22				0x36    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 22 of the second sampling buffer
+TrimDAC2_23				0x37    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 23 of the second sampling buffer
+TrimDAC2_24				0x38    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 24 of the second sampling buffer
+TrimDAC2_25				0x39    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 25 of the second sampling buffer
+TrimDAC2_26				0x3a    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 26 of the second sampling buffer
+TrimDAC2_27				0x3b    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 27 of the second sampling buffer
+TrimDAC2_28				0x3c    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 28 of the second sampling buffer
+TrimDAC2_29				0x3d    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 29 of the second sampling buffer
+TrimDAC2_30				0x3e    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 30 of the second sampling buffer
+TrimDAC2_31				0x3f    12      0        0x0    	0          0x0        0xFF      1.0	 	   0.0   # DAC value, Trim width of sample 31 of the second sampling buffer
+SSToutFB_Delay			0x40	7		0		 0x0		0          0x0        0x7F		1.0		   0.0	 # Bit pattern, control delay of SST_FB, 000000 corresponds to minimum delay - 111111 to maximum delay,    
+SSToutFB_SGN			0x40	1		7		 0x0		0          0x0        0x1		1.0		   0.0	 # Sign of SSToutFB delay
+SSToutFB_Unused1		0x40	4		8		 0x0		0          0x0        0x0		1.0	   	   0.0	 # Unused bits
+SSPinLE_Delay			0x41	7		0		 0x0		0          0x0        0x7F		1.0		   0.0	 # Bit pattern, control delay of SSP leading edge, 000000 corresponds to minimum delay - 111111 to maximum delay
+SSPinLE_SGN				0x41	1		7		 0x0	0          	   0x0        0x1		1.0	   	   0.0   # Bit, select rising(0) or falling(1) edge for leading edge of SSP
+Unused_SSPinLE			0x41	4		8		 0x0	0              0x0        0xF		1.0		   0.0	 # Unused bits
+SSPinTE_Delay			0x42	7		0		 0x0	0              0x0        0xFFF		1.0		   0.0	 # Bit pattern, control delay of SSP trailing edge, 000000 corresponds to minimum delay - 111111 to maximum delay   
+SSPinTE_SGN				0x42	1		7		 0x0	0              0x0        0xFFF		1.0		   0.0   # Bit, select rising(0) or falling(1) edge for trailing edge of SSP
+Unused_SSPinTE			0x42	4		8        0x0	0              0x0        0xFFF		1.0		   0.0	 # Unused bits
+WR_STRB2LE_Delay		0x43	7		0		 0x0	0              0x0        0xFFF		1.0		   0.0	 # Bit pattern, control delay of leading edge of second write strobe, 000000 corresponds to minimum delay - 111111 to maximum delay   
+WR_STRB2LE_SGN			0x43	1		7		 0x0	0          	   0x0        0xFFF		 1.0	   0.0   # Bit, select rising(0) or falling(0) edge for leading edge of second write strobe
+Unused_STRB2LE			0x43	4		8		 0x0	0          	   0x0        0xFFF		 1.0	   0.0	 # Unused bits
+WR_STRB2TE_Delay		0x44	7		0		 0x0	0         	   0x0        0xFFF		 1.0	   0.0	 # Unused bits, control delay of trailing edge of second write strobe, 000000 corresponds to minimum delay - 111111 to maximum delay   
+WR_STRB2TE_SGN			0x44	1		7		 0x0	0          	   0x0        0xFFF		 1.0	   0.0   # Bit, select rising(0) or falling(0) edge for trailingedge of second write strobe
+Unused_STRB2TE			0x44	4		8		 0x0	0              0x0        0xFFF		 1.0	   0.0	 # Unused bits
+WR_ADDR_Incr2LE_Delay	0x45	7		0		 0x0	0              0x0        0xFFF		 1.0	   0.0	 # Bit pattern, control delay of leading edge of second address selection strobe, 000000 corresponds to minimum delay - 111111 to maximum delay   
+WR_ADDR_Incr2LE_SGN		0x45	1		7		 0x0	0              0x0        0xFFF		 1.0	   0.0   # Bit, select rising(0) or falling(0) edge for leading edge of second adress selection strobe
+Unused_Incr2LE			0x45	4		8		 0x0	0              0x0        0xFFF		 1.0	   0.0	 # Unused bits
+WR_ADDR_Incr2TE_Delay	0x46	7		0		 0x0	0              0x0        0xFFF		 1.0	   0.0	 # Bit pattern, control delay of trailing edge of second address selection strobe, 000000 corresponds to minimum delay - 111111 to maximum delay   
+WR_ADDR_Incr2TE_SGN		0x46	1		7		 0x0	0              0x0        0xFFF		 1.0	   0.0   # Bit, select rising(0) or falling(0) edge for trailing edge of second adress selection strobe
+Unused_Incr2TE			0x46	4		8		 0x0	0          	   0x0        0xFFF		 1.0       0.0	 # Unused bits
+WR_STRB1LE_Delay		0x47	7		0		 0x0	0              0x0        0xFFF		 1.0	   0.0	 # Bit pattern, control delay of leading edge of first write strobe, 000000 corresponds to minimum delay - 111111 to maximum delay   
+WR_STRB1LE_SGN			0x47	1		7		 0x0	0              0x0        0xFFF		 1.0	   0.0	 # Bit, select rising(0) or falling(0) edge for leading edge of first write strobe
+Unused_STRB1LE				0x47	4		8        0x0	0          0x0        0xFFF		 1.0	   0.0	 # Unused bits
+WR_STRB1TE_Delay		0x48	7		0		 0x0	0              0x0        0xFFF		 1.0	   0.0	 # Bit pattern, control delay of trailing edge of first write strobe, 000000 corresponds to minimum delay - 111111 to maximum delay   
+WR_STRB1TE_SGN			0x48	1		7		 0x0	0              0x0        0xFFF		 1.0	   0.0   # Bit, select rising(0) or falling(0) edge for trailing edge of first write strobe
+Unused_STRB1TE			0x48	4		8		 0x0	0              0x0        0xFFF		 1.0	   0.0	 # Unused bits
+WR_ADDR_Incr1LE_Delay	0x49	7		0		 0x0	0              0x0        0xFFF		 1.0	   0.0	 # Bit pattern, control delay of leading edge of first adress selection strobe, 000000 corresponds to minimum delay - 111111 to maximum delay   
+WR_ADDR_Incr1LE_SGN		0x49	1		7		 0x0	0              0x0        0xFFF		 1.0	   0.0	 # Bit, select rising(0) or falling(0) edge for leading edge of first address selection strobe
+Unused_Incr1LE			0x49	4		8		 0x0	0              0x0        0xFFF      1.0	   0.0	 # Unused bits
+WR_ADDR_Incr1TE_Delay	0x4a	7		0		 0x0	0              0x0        0xFFF		 1.0	   0.0	 # Bit pattern, control delay of trailing edge of first adress selection strobe, 000000 corresponds to minimum delay - 111111 to maximum delay   
+WR_ADDR_Incr1TE_SGN		0x4a	1		7		 0x0	0              0x0        0xFFF		 1.0       0.0	 # Bit, select rising(0) or falling(0) edge for trailing edge of first address selection strobe
+Unused_Incr1TE				0x4a	4		8		 0x0	0          0x0        0xFFF		 1.0	   0.0	 # Unused bits
+Unused_0				0x4b	2		0		 0x0	0              0x0        0xFFF		 1.0	   0.0	 # Unused bits
+Cload					0x4b	1		2		 0x0	0              0x0        0xFFF		 1.0	   0.0	 # Bit, select additional load capacitor for sampling logic, 0 - 1GHz sampling, 1 - 500MHz sampling
+RCO_Gen					0x4b	1		3		 0x0	0              0x0        0xFFF		 1.0	   0.0   # Bit, Disable(0) or Enable(1) RCO (Reconfigurable Concurrent Oscillator) signal generation
+MonTimingSEL			0x4b	4		4		 0x0	0              0x0        0xFFF		 1.0       0.0	 # Bit pattern, select output signal, choose between SSPout, SSTout, SSToutFB, SSTPin, RCO and Write Adress strobes
+Unused_1				0x4b	4		8		 0x0	0              0x0        0xFFF		 1.0	   0.0	 # Unused bits
+Vqbuff					0x4c	12      0		 0x0	0              0x0        0xFFF 	 6.104e-4  0.0	 # DAC value, control supply for Qbias and VtrimT. If external source of VadjN or external FB for VadjN source selected -> disable Vqbuff supply by setting to 0
+Qbias					0x4d    12      0 		 0x0  0                0x0        0xFFF		 6.104e-4  0.0	 # DAC value, control supply for charge pump of DLL, supplied by Vqbuff, generates VadjN
+VtrimT					0x4e	12      0		 0x0 	0              0x0        0xFFF		 6.104e-4  0.0	 # DAC value, control N-side of buffer in SST_FB pass, supplied by Vqbuff
+Vbias					0x4f	12      0		 0x4B0	0              0x0        0xFFF		 6.104e-4  0.0	 # DAC value, control supply bias for the first preamp of the data input
+VAPbuff					0x50	12      0        0x3D9	0              0x0        0xFFF		 6.104e-4  0.0   # DAC value, control supply bias for VadjP, if external source of VadjP selected -> disable VAPbuff supply by setting to 0
+VadjP					0x51	12      0		 0x480	0              0x0        0xFFF	 	 6.104e-4  0.0	 # DAC value, control delay on high to low transition of sampling delay circuit comparator logic and as a result control relative voltage switch point, supplied by VAPbuff
+VANbuff					0x52	12      0		 0x426	0              0x0        0xFFF	 	 6.104e-4  0.0   # DAC value, control supply bias for VadjN, if external source of VadjN or internal DLL source selected  > disable VANbuff by setting to 0
+VadjN					0x53	12      0		 0x8BB	0          0x0        0xFFF		 6.104e-4	0.0   # DAC value, control delay on low to high transition of sampling delay circuit, supplied by VANbuff. Value is hardcoded on EnableDLLFeeback function in TargerModule.cc. When this function is called this setting it here does not influence the behavior  
+SBias					0x54    12      0        0x78E  0              0x0        0xFFF      6.104e-4  0.0   # DAC value, control supply bias for ramp buffer and all compactor biases CMPbias, CMPbias2 and PUbias, supplied by DBbias
+Vdischarge				0x55    12      0 		 0x0 	0              0x0        0xFFF		 6.104e-4  0.0	 # DAC value, control starting voltage of ramp, supplied by DBbias	 
+Isel					0x56    12      0		 0x8fc  0              0x0        0xFFF		 0.0	   0.0	 # DAC value, control current to ramp slope circuit, supplied by DBbias
+DBbias					0x57    12      0 		 0x690	0              0x0        0xFFF		 6.104e-4  0.0	 # DAC value, control supply bias for SBbias, Isel and Vdischarge
+CMPbias2				0x58	12		0		 0x2D6	0              0x0        0xFFF		 0.0	   0.0   # DAC value, control current through ramp comparator logic, supplied by SBias
+PUbias					0x59	12		0		 0xBCA	0              0x0        0xFFF		 0.0	   0.0   # DAC value, control load of pull-up of ramp comparator logic and as a result control relative voltage switch point, supplied by SBbias
+CMPbias					0x5a	12		0		 0x654	0              0x0        0xFFF		 0.0	   0.0	 # DAC value, control current through ramp comparator logic, supplied by SBbias
+ReadDisable				0x5b 	1		0		 0x0	0		       0x0		  0x1		 0.0	   0.0   # Bit, 1 - Disable Reading, 0 - Normal Operation
+Write1Disable			0x5b 	1		1		 0x0	0		       0x0		  0x1		 0.0	   0.0   # Bit, 1 - Disable Writing 1st buffer, 0 - Normal Operation
+Write2Disable			0x5b 	1		2		 0x0	0		       0x0		  0x1		 0.0	   0.0   # Bit, 1 - Disable Writing 2nd buffer, 0 - Normal Operation
+ShiftRegisterOut		0x5b 	2		3		 0x0	0		       0x0		  0x3		 0.0	   0.0   # Bit pattern, 00 or 10 - Programming Register, 01 - Read Address Shift Out, 11 - Sample Select Shift Out
+ShiftOut_Unused			0x5b 	7		5		 0x0	0		       0x0		  0x0		 0.0	   0.0   # Unused 
+Test_Output				0x5c	12		0		 0x555	0              0x0        0xFFF		 1.0	   0.0	  # Test output value, sent instead of data if select_any signal is 0
