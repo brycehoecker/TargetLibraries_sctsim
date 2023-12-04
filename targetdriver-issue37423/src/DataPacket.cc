@@ -76,37 +76,35 @@ namespace CTA {
 				return false;
 			}//if
 
-		uint16_t wavewords = GetWaveformSamples() + T_WAVEFORM_HEADER_WORDS;
-		uint16_t packetLength = 2 * (T_PACKET_HEADER_WORDS + T_PACKET_FOOTER_WORDS +
-						   GetNumberOfWaveforms() * wavewords);
-		if (packetLength != fPacketSize) {
-			std::ostringstream str;
-			str << "IsValid() Data length is inconsistent with the header. Calculated: "
-			<< packetLength << " Actual: " << fPacketSize
-			<< " WaveformBytes: " << GetWaveformBytes()
-			<< " Waveforms: " << GetNumberOfWaveforms();
-			fStatusString = str.str();
-			fStatusFlag = T_PACKET_ERROR_BADLENGTH;
-			// std::cout << GetWaveformSamples() << " " << GetBuffers() << " "
-			//           << GetNumberOfWaveforms() << std::endl;
-			return false;
-		}//if
+			uint16_t wavewords = GetWaveformSamples() + T_WAVEFORM_HEADER_WORDS;
+			uint16_t packetLength = 2 * (T_PACKET_HEADER_WORDS + T_PACKET_FOOTER_WORDS + GetNumberOfWaveforms() * wavewords);
+			if (packetLength != fPacketSize) {
+				std::ostringstream str;
+				str << "IsValid() Data length is inconsistent with the header. Calculated: "
+				<< packetLength << " Actual: " << fPacketSize
+				<< " WaveformBytes: " << GetWaveformBytes()
+				<< " Waveforms: " << GetNumberOfWaveforms();
+				fStatusString = str.str();
+				fStatusFlag = T_PACKET_ERROR_BADLENGTH;
+				// std::cout << GetWaveformSamples() << " " << GetBuffers() << " " << GetNumberOfWaveforms() << std::endl;
+				return false;
+			}//if
 
-		#ifdef PERFORM_CRC_CHECK
-		uint16_t crc = (uint16_t(fData[fPacketSize - 4]) << 8) | fData[fPacketSize - 3];
-		if (crc != Util::CRC(fPacketSize - 4, fData)) {
-			fStatusString = "IsValid() CRC is inconsistent with the data.";
-			fStatusFlag = T_PACKET_ERROR_BADCRC;
-			return false;
-		}//if
-		#endif
+			#ifdef PERFORM_CRC_CHECK
+			uint16_t crc = (uint16_t(fData[fPacketSize - 4]) << 8) | fData[fPacketSize - 3];
+			if (crc != Util::CRC(fPacketSize - 4, fData)) {
+				fStatusString = "IsValid() CRC is inconsistent with the data.";
+				fStatusFlag = T_PACKET_ERROR_BADCRC;
+				return false;
+			}//if
+			#endif
 
-		if ((uint16_t(fData[fPacketSize - 2]) << 6) || ((fData[fPacketSize - 1] >> 2) != 0)) {
-			fStatusString = "IsValid() Problem - 14 bits of the last two bytes must be zero.";
-			fStatusFlag = T_PACKET_ERROR_LASTBYTES;
-			return false;
-		}//if
-		return true;
+			if ((uint16_t(fData[fPacketSize - 2]) << 6) || ((fData[fPacketSize - 1] >> 2) != 0)) {
+				fStatusString = "IsValid() Problem - 14 bits of the last two bytes must be zero.";
+				fStatusFlag = T_PACKET_ERROR_LASTBYTES;
+				return false;
+			}//if
+			return true;
 		}//bool DataPacket::IsValid
 
 		Waveform* DataPacket::GetWaveform(uint16_t waveformindex) {
