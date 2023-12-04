@@ -1,0 +1,20 @@
+Release Notes
+=============
+
+
+January 21, 2018
+------------------------------------------------------------------
+Release V01-00-00
+- New cmake configuration which enables bundled builds and more robust configuration of the
+  compilation of the python module. For more information about this 
+  refer to: https://forge.in2p3.fr/projects/gct/wiki/CHEC_SW_cmake_fix
+- The mappings in the dev directory are now installed under /share
+- The camera config now checks whether the CONDA_PREFIX is set and then tries to 
+  find the mapping files installed in the conda enviroment.
+- Correctly account for overflow for ADC values of 0.
+- Improve range calculation in calibration file compression
+
+October 22, 2018
+------------------------------------------------------------------
+Release V00-01-00 
+- As is with the old cmake build configuration
