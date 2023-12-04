@@ -1,0 +1,78 @@
+####################################################################
+# NEVER CHANGE THIS FILE
+#
+# Definitions of register values and partial register values.
+#
+####################################################################
+HEADER
+DESCRIPTION This is the ASIC register definition for the T5TEA ASIC. Default values are taken from values used in Erlangen for testing by Adrian Zink and David Jankowski
+RESPONSIBLE_AUTHOR Luigi Tibaldo
+NUM_REGISTERS 0x38
+##############################################################################################
+# Setting layout: All fields must be filled, use 0 for default value.
+# The uint*_t fields are  given in hexidecimal notation
+#
+# Field and Type:
+# Name       			RegAddr nBits   startBit value		isReadOnly	lowerBound	upperBound	multiplier	offset description
+# string     			uint8_t uint8_t uint8_t  uint32_t 	bool       	uint32_t   	uint32_t   	float      	float  strings
+##############################################################################################
+SETTINGS
+Vped_0				0x00	12	0	0x3E8		0		0x00		0xFFF		1.0		0.0	# DAC value, Offset for Signal Chan 0 
+GainBypass_0			0x01	12	0	0x154		0		0x00		0xFFF		1.0		0.0	# DAC value, Shape reference for Chan 0
+Vped_1				0x02	12	0	0x3E8		0		0x00		0xFFF		1.0		0.0	# DAC value, Offset for Signal Chan 1 
+GainBypass_1			0x03	12	0	0x154		0		0x00		0xFFF		1.0		0.0	# DAC value, Shape reference for Chan 1
+Vped_2				0x04	12	0	0x3E8		0		0x00		0xFFF		1.0		0.0	# DAC value, Offset for Signal Chan 2 
+GainBypass_2			0x05	12	0	0x154		0		0x00		0xFFF		1.0		0.0	# DAC value, Shape reference for Chan 2
+Vped_3				0x06	12	0	0x3E8		0		0x00		0xFFF		1.0		0.0	# DAC value, Offset for Signal Chan 3 
+GainBypass_3			0x07	12	0	0x154		0		0x00		0xFFF		1.0		0.0	# DAC value, Shape reference for Chan 3
+Vped_4				0x08	12	0	0x3E8		0		0x00		0xFFF		1.0		0.0	# DAC value, Offset for Signal Chan 4 
+GainBypass_4			0x09	12	0	0x154		0		0x00		0xFFF		1.0		0.0	# DAC value, Shape reference for Chan 4
+Vped_5				0x0a	12	0	0x3E8		0		0x00		0xFFF		1.0		0.0	# DAC value, Offset for Signal Chan 5 
+GainBypass_5			0x0b	12	0	0x154		0		0x00		0xFFF		1.0		0.0	# DAC value, Shape reference for Chan 5
+Vped_6				0x0c	12	0	0x3E8		0		0x00		0xFFF		1.0		0.0	# DAC value, Offset for Signal Chan 6 
+GainBypass_6			0x0d	12	0	0x154		0		0x00		0xFFF		1.0		0.0	# DAC value, Shape reference for Chan 6
+Vped_7				0x0e	12	0	0x3E8		0		0x00		0xFFF		1.0		0.0	# DAC value, Offset for Signal Chan 7 
+GainBypass_7			0x0f	12	0	0x154		0		0x00		0xFFF		1.0		0.0	# DAC value, Shape reference for Chan 7
+Vped_8				0x10	12	0	0x3E8		0		0x00		0xFFF		1.0		0.0	# DAC value, Offset for Signal Chan 8 
+GainBypass_8			0x11	12	0	0x154		0		0x00		0xFFF		1.0		0.0	# DAC value, Shape reference for Chan 8
+Vped_9				0x12	12	0	0x3E8		0		0x00		0xFFF		1.0		0.0	# DAC value, Offset for Signal Chan 9 
+GainBypass_9			0x13	12	0	0x154		0		0x00		0xFFF		1.0		0.0	# DAC value, Shape reference for Chan 9
+Vped_10				0x14	12	0	0x3E8		0		0x00		0xFFF		1.0		0.0	# DAC value, Offset for Signal Chan 10 
+GainBypass_10			0x15	12	0	0x154		0		0x00		0xFFF		1.0		0.0	# DAC value, Shape reference for Chan 10
+Vped_11				0x16	12	0	0x3E8		0		0x00		0xFFF		1.0		0.0	# DAC value, Offset for Signal Chan 11 
+GainBypass_11			0x17	12	0	0x154		0		0x00		0xFFF		1.0		0.0	# DAC value, Shape reference for Chan 11
+Vped_12				0x18	12	0	0x3E8		0		0x00		0xFFF		1.0		0.0	# DAC value, Offset for Signal Chan 12 
+GainBypass_12			0x19	12	0	0x154		0		0x00		0xFFF		1.0		0.0	# DAC value, Shape reference for Chan 12
+Vped_13				0x1a	12	0	0x3E8		0		0x00		0xFFF		1.0		0.0	# DAC value, Offset for Signal Chan 13 
+GainBypass_13			0x1b	12	0	0x154		0		0x00		0xFFF		1.0		0.0	# DAC value, Shape reference for Chan 13
+Vped_14				0x1c	12	0	0x3E8		0		0x00		0xFFF		1.0		0.0	# DAC value, Offset for Signal Chan 14 
+GainBypass_14			0x1d	12	0	0x154		0		0x00		0xFFF		1.0		0.0	# DAC value, Shape reference for Chan 14
+Vped_15				0x1e	12	0	0x3E8		0		0x00		0xFFF		1.0		0.0	# DAC value, Offset for Signal Chan 15 
+GainBypass_15			0x1f	12	0	0x154		0		0x00		0xFFF		1.0		0.0	# DAC value, Shape reference for Chan 15
+Wbias_0				0x20	12	0	0x3D9		0		0x00		0xFFF		1.0		0.0	# DAC value, controls the width of the digital trigger output pulses for the 0th group of channels (0-3), default value corresponds to XX ns, user should set appropriate value for trigger operations
+Thresh_0			0x21	12	0	0x000		0		0x00		0xFFF		1.0		0.0	# DAC value, controls reference voltage for digitial trigger output (i.e. sets the trigger threshold) in the 0th group of channels (0-3), 0x000 corresponds to the highest possible threshold, user should set appropriate value for trigger operations	
+PMTref4_0			0x22	12	0	0xFFF		0		0x00		0XFFF		1.0		0.0	# DAC value, controls reference voltage for summing amplifier in the 0th group of channels (0-3), default of 0xFFF corresponds to the highest possible threshold, user should set appropriate value for trigger operations
+TTbias_0			0x23	12	0	0x44C		0		0X00		0xFFF		6.104e-4	0.0	# DAC value, controls supply bias for the two voltages PMTref4 and Thresh for the 0th group of channels (0-3)
+Wbias_1				0x24	12	0	0x3D9		0		0x00		0xFFF		1.0		0.0	# DAC value, controls the width of the digital trigger output pulses for the 1st group of channels (4-7), default value corresponds to XX ns, user should set appropriate value for trigger operations
+Thresh_1			0x25	12	0	0x000		0		0x00		0xFFF		1.0		0.0	# DAC value, controls reference voltage for digitial trigger output (i.e. sets the trigger threshold) in the 1st group of channels (4-7), 0x000 corresponds to the highest possible threshold, user should set appropriate value for trigger operations	
+PMTref4_1			0x26	12	0	0xFFF		0		0x00		0XFFF		1.0		0.0	# DAC value, controls reference voltage for summing amplifier in the 1st group of channels (4-7), default of 0xFFF corresponds to the highest possible threshold, user should set appropriate value for trigger operations
+TTbias_1			0x27	12	0	0x44C		0		0X00		0xFFF		6.104e-4	0.0	# DAC value, controls supply bias for the two voltages PMTref4 and Thresh for the 1st group of channels (4-7)
+Wbias_2				0x28	12	0	0x3D9		0		0x00		0xFFF		1.0		0.0	# DAC value, controls the width of the digital trigger output pulses for the 2nd group of channels (8-11), default value corresponds to XX ns, user should set appropriate value for trigger operations
+Thresh_2			0x29	12	0	0x000		0		0x00		0xFFF		1.0		0.0	# DAC value, controls reference voltage for digitial trigger output (i.e. sets the trigger threshold) in the 2nd group of channels (8-11), 0x000 corresponds to the highest possible threshold, user should set appropriate value for trigger operations	
+PMTref4_2			0x2a	12	0	0xFFF		0		0x00		0XFFF		1.0		0.0	# DAC value, controls reference voltage for summing amplifier in the 2nd group of channels (8-11), default of 0xFFF corresponds to the highest possible threshold, user should set appropriate value for trigger operations
+TTbias_2			0x2b	12	0	0x44C		0		0X00		0xFFF		6.104e-4	0.0	# DAC value, controls supply bias for the two voltages PMTref4 and Thresh for the 2nd group of channels (8-11)
+Wbias_3				0x2c	12	0	0x3D9		0		0x00		0xFFF		1.0		0.0	# DAC value, controls the width of the digital trigger output pulses for the 3rd group of channels (12-15), default value corresponds to XX ns, user should set appropriate value for trigger operations
+Thresh_3			0x2d	12	0	0x000		0		0x00		0xFFF		1.0		0.0	# DAC value, controls reference voltage for digitial trigger output (i.e. sets the trigger threshold) in the 3rd group of channels (12-15), 0x000 corresponds to the highest possible threshold, user should set appropriate value for trigger operations	
+PMTref4_3			0x2e	12	0	0xFFF		0		0x00		0XFFF		1.0		0.0	# DAC value, controls reference voltage for summing amplifier in the 3rd group of channels (12-15), default of 0xFFF corresponds to the highest possible threshold, user should set appropriate value for trigger operations
+TTbias_3			0x2f	12	0	0x44C		0		0X00		0xFFF		6.104e-4	0.0	# DAC value, controls supply bias for the two voltages PMTref4 and Thresh for the 3rd group of channels (12-15)
+TTbias_C			0x30	12	0	0x3E8		0		0X00		0xFFF		6.104e-4	0.0	# DAC value, controls supply bias for VpedBias, TRGBias,TRGSumBias, TRGGBias
+VpedBias			0x31	12	0	0x0		0		0x00		0xFFF		1.0		0.0	# DAC value, controls supply bias for internal VPED (Offset) generation
+TRGsumbias			0x32	12	0	0x960		0		0x00		0xFFF		1.0		0.0	# DAC value, controls supply bias for trigger summing amplifiers
+TRGGbias			0x33	12	0	0x76C		0		0x00		0xFFF		1.0		0.0	# DAC value, controls supply bias for the first pre-amplifier of the trigger input
+TRGbias				0x34	12	0	0x3E8		0		0x00		0xFFF		1.0		0.0	# DAC value, controls supply bias for the trigger comparators
+CMPThresh			0x35	12	0	0xFA0		0		0x00		0xFFF		1.0		0.0	# DAC value, voltage to compare with Analog monitoring output
+SGN				0x36	1	0	0x0		0		0x00		0x1		1.0		0.0	# selects the sign of the trigger edge, 0 - rising edge, 1 - falling edge
+Unused36_1			0x36	1	1	0x0		0		0x00		0x1		1.0		0.0	# Unused bit
+AmonSelect			0x36	2	2	0x0		0		0x00		0x2		1.0		0.0	# Select which of the trigger groups summing amplifier output is sent to the ASIC Analog monitoring output: 0 - group 0, 1 - group 1, 2 -group 2, 3 - group 3 
+Unused36			0x36	8	4	0x0		0		0x00		0xFF		1.0		0.0	# Unused bits		
+TTbias_A			0x37	12	0	0x0		0		0x00		0xFFF		6.104e-4	0.0	# DAC value, controls supply bias for Analog monitoring output

@@ -1,0 +1,353 @@
+####################################################################
+# NEVER CHANGE THIS FILE (unless you know what you are doing)
+#
+# Definitions of register values and partial register values.
+#
+# If Firmware changes generate a new definition file specifying
+# the firmware version in the name.
+# To load user specific settings change the T*Module_UserXXX.config
+# file instead
+####################################################################
+HEADER
+TM_TYPE TM_5
+TM_FIRMWARE_VERSION 0xFEDA003D
+DESCRIPTION This is firmware version 0xFEDA003D, which is the up-to-date version for CHEC-M camera modules as of Aug 21, 2015. Added one register Aug 3, 2016 (0x54) responsible for setting the PacketDelay (new firmware).
+RESPONSIBLE_AUTHOR Akira Okumura (refined by Justus Zorn, Aug3 2016)
+NUM_REGISTERS 0x54
+##############################################################################################
+# Setting layout: All fields must be filled, use 0 for default value.
+#
+# Field: Name           RegAddr nBits   startBit value    isReadOnly lowerBound upperBound multiplier offset description
+# Type:  string         uint8_t uint8_t uint8_t  uint32_t bool       uint32_t   uint32_t   float      float  strings
+# Base:  SingleWord     hex     dec     dec      hex      0/1        hex        hex        dec        dec    a single line sentence will do.
+##############################################################################################
+SETTINGS
+FPGAVersion             0x00    32      0        0xFEDA003D      1          0x0        0xFFFFFFFF        0.         0.     Assigned value of 0xFED00003D, assigned in Firmware to highlight and track incremental changes in firmware. Incremented with every firmware revision
+AnyValue                0x01    16      16       0x0      0          0x0        0xFFFF     0.         0.     Any value for control software, does not have effect on any FPGA logic
+ModuleIndex             0x01    8       8        0x0      0          0x0        0xFF       0.         0.    Sequential number for this module - used in event building (was Detector ID), written in to the raw data
+ModuleSlot              0x01    8       0        0x0      0          0x0        0xFF       0.         0.     Slot number for this module - used in data analysis (was CTAID), written in to the raw data
+SerialNumLSW            0x02    32      0        0x0      1          0x0        0xFFFFFFF  0.         0.     Serial number the least significant word
+SerialNumMSW            0x03    32      0        0x0      1          0x0        0xFFFFFFF  0.         0.     Serial number the most significant word
+# Status register
+UnusedStatus0           0x04    16      16       0x0      1          0x0        0x0        0.         0.     Unused bits
+BackPlaneStatus         0x04    4       12       0x0      1          0x0        0x0        0.         0.     Status of backplane lines from bp4 to bp7 (also, bp5 is reset and will not be available due to board reset)
+UnusedStatus1           0x04    1       11       0x0      1          0x0        0x0        0.         0.     Unused bits
+mgt_AVCC_OK             0x04    1       10       0x0      1          0x0        0x0        0.         0.     mgt_AVCC_OK is OK, 1- OK, 0 - is not
++1.8V_OK                0x04    1       9        0x0      1          0x0        0x0        0.         0.     +1.8 V is OK, 1-OK, 0-is not
+UnusedStatus2           0x04    7       2        0x0      1          0x0        0x0        0.         0.     Unused bit
+FIFOUnderflow           0x04    1       1        0x0      1          0x0        0x0        0.         0.     Underflow on summary FIFO of event data
+FIFOOverflow            0x04    1       0        0x0      1          0x0        0x0        0.         0.     Overflow on summary FIFO of event data
+# Latched status register
+UnusedLatchedStatus0    0x05    16      16       0x0      1          0x0        0x0        0.         0.     Unused bits
+LatchedBackPlaneStatus  0x05    4       12       0x9      0          0x0        0xF        0.         0.     Status of backplane lines from bp4 to bp7 (also, bp5 is reset and will not be available due to board reset) (Writing one will reset corresponding bit). It is not clear how reset works; with initial value 0x9 it works (it seems that it always has 0x9 as status?!). Before initial value was 0x0.
+UnusedLatchedStatus1    0x05    1       11       0x0      1          0x0        0x0        0.         0.     Unused bits
+Latchedmgt_AVCC_OK      0x05    1       10       0x1      0          0x0        0x1        0.         0.     mgt_AVCC_OK is OK, 1- OK, 0 - is not (Writing one will reset corresponding bit)
+Latched+1.8V_OK         0x05    1       9        0x1      0          0x0        0x1        0.         0.     +1.8 V is OK, 1-OK, 0-is not (Writing one will reset corresponding bit)
+UnusedLatchedStatus2    0x05    7       2        0x0      1          0x0        0x0        0.         0.     Unused bit
+LatchedFIFOUnderflow    0x05    1       1        0x0      0          0x0        0x1        0.         0.     Underflow on summary FIFO of event data (Writing one will reset corresponding bit)
+LatchedFIFOOverflow     0x05    1       0        0x0      0          0x0        0x1        0.         0.     Overflow on summary FIFO of event data (Writing one will reset corresponding bit)
+FIFOStatus_0            0x06    32      0        0x0      1          0x0        0x0        0.         0.     Data Storage FIFO underflow(bits 1,3,5,7,..) and overflow (0,2,4,..) errors. Two bits per acquisition channel. Channel 0 errors reported in bits 0(underflow) and 1(overflow), channel 1 in bits 2 and 3,....
+LatchedFIFOStatus_0     0x07    32      0        0x0      0          0x0        0x1        0.         0.     Data Storage FIFO underflow(bits 1,3,5,7,..) and overflow (0,2,4,..) errors. Two bits per acquisition channel. Channel 0 errors reported in bits 0(underflow) and 1(overflow), channel 1 in bits 2 and 3,.... (Writing one will reset corresponding bit)
+FIFOStatus_1            0x08    32      0        0x0      1          0x0        0x0        0.         0.     Data Storage FIFO underflow(bits 1,3,5,7,..) and overflow (0,2,4,..) errors. Two bits per acquisition channel. Channel 0 errors reported in bits 0(underflow) and 1(overflow), channel 1 in bits 2 and 3,....
+LatchedFIFOStatus_1     0x09    32      0        0x0      0          0x0        0x1        0.         0.     Data Storage FIFO underflow(bits 1,3,5,7,..) and overflow (0,2,4,..) errors. Two bits per acquisition channel. Channel 0 errors reported in bits 0(underflow) and 1(overflow), channel 1 in bits 2 and 3,.... (Writing one will reset corresponding bit)
+FIFOStatus_2            0x0A    32      0        0x0      1          0x0        0x0        0.         0.     Data Storage FIFO underflow(bits 1,3,5,7,..) and overflow (0,2,4,..) errors. Two bits per acquisition channel. Channel 0 errors reported in bits 0(underflow) and 1(overflow), channel 1 in bits 2 and 3,....
+LatchedFIFOStatus_2     0x0B    32      0        0x0      0          0x0        0x1        0.         0.     Data Storage FIFO underflow(bits 1,3,5,7,..) and overflow (0,2,4,..) errors. Two bits per acquisition channel. Channel 0 errors reported in bits 0(underflow) and 1(overflow), channel 1 in bits 2 and 3,.... (Writing one will reset corresponding bit)
+FIFOStatus_3            0x0C    32      0        0x0      1          0x0        0x0        0.         0.     Data Storage FIFO underflow(bits 1,3,5,7,..) and overflow (0,2,4,..) errors. Two bits per acquisition channel. Channel 0 errors reported in bits 0(underflow) and 1(overflow), channel 1 in bits 2 and 3,....
+LatchedFIFOStatus_3     0x0D    32      0        0x0      0          0x0        0x1        0.         0.     Data Storage FIFO underflow(bits 1,3,5,7,..) and overflow (0,2,4,..) errors. Two bits per acquisition channel. Channel 0 errors reported in bits 0(underflow) and 1(overflow), channel 1 in bits 2 and 3,.... (Writing one will reset corresponding bit)
+TriggerFIFOStatus       0x0E    32      0        0x0      1          0x0        0x0        0.         0.     Free running time counter value set by sync over TACK pass 32 MSB
+# Trigger statistics
+CountGoodSyncTACKs      0x0F    16      16       0x0      0          0x0        0x1        0.         0.     Count number of good Sync verification TACKs. (Writing any value into this register will reset all counters in registers 0xF, 0x10, 0x11, 0x12 and some on 0x13)
+CountTACKsReceived      0x0F    16      0        0x0      0          0x0        0x1        0.         0.     Count number of good Sync verification TACKs. (Writing any value into this register will reset all counters in registers 0xF, 0x10, 0x11, 0x12 and some on 0x13)
+# TACK statistics
+CountSyncErrors         0x10    8       24       0x0      1          0x0        0x1        0.         0.     Count sync errors. Time sync verification failed. Counter is reset by writing any value into register 0xF
+CountTACKRangeErrors    0x10    8       16       0x0      1          0x0        0x1        0.         0.     Count of range error over Tack. Counter is reset by writing any value into register 0xF
+CountTACKParityErrors_  0x10    8       8        0x0      1          0x0        0x1        0.         0.     Same as count in bits 7-0. Count Tack Parity errors
+CountTACKParityErrors   0x10    8       0        0x0      1          0x0        0x1        0.         0.     Count Tack Parity errors. Counter is reset by writing any value into register 0xF
+# FIFO statistics
+CountDataPacketsEnabled 0x11    16      16       0x0      1          0x0        0x1        0.         0.     Count all enabled for counting (bits 31 of register 0x17) built packets on all incoming channels. Counter is reset by writing any value into register 0xF
+CountDataPackets        0x11    16      0        0x0      1          0x0        0x1        0.         0.     Count all built packets on all incoming channels. Counter is reset by writing any value into register 0xF
+# Packet statistics
+CountForwardedPackets   0x12    16      16       0x0      1          0x0        0x1        0.         0.     Internal Arbiter Counter, count all packet forwarded from internal storage to MAC. Counter is reset by writing any value into register 0xF
+CountTransmittedPackets 0x12    16      0        0x0      1          0x0        0x1        0.         0.     MAC Counter, count all transmitted packet by MAC. Counter is reset by writing any value into register 0xF
+# Ramp count statistics
+CountCommandPackets     0x13    16      16       0x0      1          0x0        0x1        0.         0.     Count command issued to Camera module. Counter is reset by writing any value into register 0xF
+CountProcessedEvents    0x13    16      0        0x0      1          0x0        0x1        0.         0.     Count number of event processed. Counter is reset by writing any value into register 0xF
+# ADC mode
+UnusedADCMode           0x14    30      2        0x0      0          0x0        0x0        0.         0.     Unused bits
+ADC1Mode                0x14    1       1        0x0      0          0x0        0x1        0.         0.     Select ADC mode for T5 module ADC 1( 0 - acquire data continuously after start in reg 0x15, 1 - acquire just once after start in reg 0x15)
+ADC0Mode                0x14    1       0        0x0      0          0x0        0x1        0.         0.     Select ADC mode for T5 module ADC 0( 0 - acquire data continuously after start in reg 0x15, 1 - acquire just once after start in reg 0x15)
+# ADC configuration
+ADC1Start               0x15    1       31       0x1      0          0x0        0x1        0.         0.     ADC 1 logic, Writing one into this bit will start ADC acquisition immediately.
+UnusedADCLogic0         0x15    5       26       0x0      1          0x0        0x0        0.         0.     Unused bits
+ADC1Averaging           0x15    3       23       0x0      0          0x0        0x7        0.         0.     ADC 1 logic, Select averaging and number of averages<br>http://datasheets.maxim-ic.com/en/ds/MAX1227-MAX1231.pdf<br>0xx - perform one conversion for each result<br>100 - perform four conversions and return average for each result<br>101 - perform eight conversions and return average for each result<br>110 - perform 16 conversions and return average for each result<br>111 - perform 32 conversions and return average for each result
+ADC1ChannelSelect       0x15    4       19       0xB      0          0xB        0xB        0.         0.     ADC 1 logic, Channel select bits, Set to b1011 to read all 12 channels<br>http://datasheets.maxim-ic.com/en/ds/MAX1227-MAX1231.pdf<br>Must be set to b1011
+UnusedADCLogic1         0x15    1       18       0x0      1          0x0        0x0        0.         0.     Unused
+ADC1SelectScanMode      0x15    1       17       0x0      1          0x0        0x0        0.         0.     ADC 1 logic, Select scan mode, bit 0 of scan bits<br>http://datasheets.maxim-ic.com/en/ds/MAX1227-MAX1231.pdf<br>0- Select readout of channels from 0 through N, 1- from N to highest numbered channel. Must be set to 0
+UnusedADCLogic2         0x15    1       16       0x0      1          0x0        0x0        0.         0.     Unused
+ADC0Start               0x15    1       15       0x1      0          0x0        0x1        0.         0.     ADC 0 logic, Writing one into this bit will start ADC acquisition immediately.
+UnusedADCLogic3          0x15    5       10       0x0      1          0x0        0x0        0.         0.     Unused bits
+ADC0Averaging           0x15    3       7        0x0      0          0x0        0x7        0.         0.     ADC 0 logic, Select averaging and number of averages<br>http://datasheets.maxim-ic.com/en/ds/MAX1227-MAX1231.pdf<br>0xx - perform one conversion for each result<br>100 - perform four conversions and return average for each result<br>101 - perform eight conversions and return average for each result<br>110 - perform 16 conversions and return average for each result<br>111 - perform 32 conversions and return average for each result
+ADC0ChannelSelect       0x15    4       3        0xB      0          0xB        0xB        0.         0.     ADC 0 logic, Channel select bits, Set to b1011 to read all 12 channels<br>http://datasheets.maxim-ic.com/en/ds/MAX1227-MAX1231.pdf<br>Must be set to b1011
+UnusedADCLogic4         0x15    1       2        0x0      1          0x0        0x0        0.         0.     Unused
+ADC0SelectScanMode      0x15    1       1        0x0      1          0x0        0x0        0.         0.     ADC 0 logic, Select scan mode, bit 0 of scan bits<br>http://datasheets.maxim-ic.com/en/ds/MAX1227-MAX1231.pdf<br>0- Select readout of channels from 0 through N, 1- from N to highest numbered channel. Must be set to 0
+UnusedADCLogic5         0x15    1       0        0x0      1          0x0        0x0        0.         0.     Unused
+# Time register
+TimeCounter             0x16    32      0        0x0      1          0x0        0x0        0.         0.     Free running time counter value set by sync over TACK pass 32 LSB
+# Control register 0
+EnablePacketCount       0x17    1       31       0x0      0          0x0        0x1        0.         0.     Enable packet count in register 0x10, bits 31-16
+MaxChannelsInPacket     0x17    7       24       0x04     0          0x0        0x40       0.         0.     Maximum Ethernet packet size parameter. Indicate how many channels out of available 64 can be shipped in one packet. Either 0 or 1 indicates one channel per network packet. 2, 3, ...  indicate 2, 3 ... channels per packet.<br>Careful attention need to be taken to set this parameter. First of all user need to know type of network card host system will have and if it support Jumbo packets. In any case maximum size of acceptable network packet need to be compared with expected event size and properly divided into packets. Default value of 0 (or 1) always process just one channel per packet and works in all cases but will generate maximum number of packets (64). This parameter help to reduce number of packets and related overhead for packet header and trailer to optimize system performance.
+ASICTestOutputType      0x17    4       20       0x0      0          0x0        0xF        0.         0.     Select output type for ASIC Test output.<br>0x0 - 62.5MHz<br>0x1... - TBD
+ASICTestOutputEnable    0x17    1       19       0x0      0          0x0        0x1        0.         0.     Enable Test Output to ASICs channel 15
+RampSignalDuration      0x17    11      8        0x37F    0          0x0        0x8FF      0.         0.     Specify ramp signal duration to Target
+RampStartDelay          0x17    5       3        0x0      0          0x0        0x1F       0.         0.     Ramp start delay after trigger, in system clocks (8 ns)
+WaveformOffsetEnable    0x17    1       2        0x0      0          0x0        0x1        0.         0.     Offset usage enable (1). In order to optimize 48 samples readout relatively to trigger position, logic implement option to sync readout to 8 sample bins (4 bins per buffer). Setting bit to one will enable this feature. Otherwise buffer readout always start from beginning. Should be noted that that setting number of readout buffer to more then 2( Bits 23-20) will disable offset usage. And for software buffer this feature disabled as well (bit 9 of 0x1b)
+UnusedControlRegister0  0x17    1       1        0x1      0          0x0        0x0        0.         0.     Unused
+EnableBit               0x17    1       0        0x1      1          0x0        0x1        0.         0.     Enable bit, 1- enable analog sampling, after proper Sync command issued***
+# Control register 1
+UnusedControlRegister1  0x18    2       30       0x0      0          0x0        0x0        0.         0.     Unused
+VdlyNFeedback3          0x18    1       29       0x1      0          0x0        0x1        0.         0.     VdlyN feedback on (1)/off(0) control ASIC 3
+VdlyFeedback3           0x18    1       28       0x0      0          0x0        0x1        0.         0.     Vdly feedback on (1)/off(0) control ASIC 3
+TST_START3              0x18    1       27       0x0      0          0x0        0x1        0.         0.     Directly control tst_start input to Target ASIC 3, set to 1
+TST_BOICLR3             0x18    1       26       0x0      0          0x0        0x1        0.         0.     Directly control tst_boiclr input to Target ASIC 3, set to 0
+CLR_REG3                0x18    1       25       0x0      0          0x0        0x1        0.         0.     Directly control clr_reg input to Target ASIC 3
+PowerUpASIC3            0x18    1       24       0x0      0          0x0        0x1        0.         0.     Power up ASIC 3 bit. (0 -turn off 2.5V to ASIC, 1 - turn on 2.5V to ASIC)
+UnusedControlRegister2  0x18    2       22       0x0      0          0x0        0x0        0.         0.     Unused
+VdlyNFeedback2          0x18    1       21       0x1      0          0x0        0x1        0.         0.     VdlyN feedback on (1)/off(0) control ASIC 2
+VdlyFeedback2           0x18    1       20       0x0      0          0x0        0x1        0.         0.     Vdly feedback on (1)/off(0) control ASIC 2
+TST_START2              0x18    1       19       0x0      0          0x0        0x1        0.         0.     Directly control tst_start input to Target ASIC 2, set to 1
+TST_BOICLR2             0x18    1       18       0x0      0          0x0        0x1        0.         0.     Directly control tst_boiclr input to Target ASIC 2, set to 0
+CLR_REG2                0x18    1       17       0x0      0          0x0        0x1        0.         0.     Directly control clr_reg input to Target ASIC 2
+PowerUpASIC2            0x18    1       16       0x0      0          0x0        0x1        0.         0.     Power up ASIC 1 bit. (0 -turn off 2.5V to ASIC, 1 - turn on 2.5V to ASIC)
+UnusedControlRegister3  0x18    2       14       0x0      0          0x0        0x0        0.         0.     Unused
+VdlyNFeedback1          0x18    1       13       0x1      0          0x0        0x1        0.         0.     VdlyN feedback on (1)/off(0) control ASIC 1
+VdlyFeedback1           0x18    1       12       0x0      0          0x0        0x1        0.         0.     Vdly feedback on (1)/off(0) control ASIC 1
+TST_START1              0x18    1       11       0x0      0          0x0        0x1        0.         0.     Directly control tst_start input to Target ASIC 1, set to 1
+TST_BOICLR1             0x18    1       10       0x0      0          0x0        0x1        0.         0.     Directly control tst_boiclr input to Target ASIC 1, set to 0
+CLR_REG1                0x18    1       9        0x0      0          0x0        0x1        0.         0.     Directly control clr_reg input to Target ASIC 1
+PowerUpASIC1            0x18    1       8        0x0      0          0x0        0x1        0.         0.     Power up ASIC 1 bit. (0 -turn off 2.5V to ASIC, 1 - turn on 2.5V to ASIC)
+UnusedControlRegister4  0x18    2       6        0x0      0          0x0        0x0        0.         0.     Unused
+VdlyNFeedback0          0x18    1       5        0x1      0          0x0        0x1        0.         0.     VdlyN feedback on (1)/off(0) control ASIC 0
+VdlyFeedback0           0x18    1       4        0x0      0          0x0        0x1        0.         0.     Vdly feedback on (1)/off(0) control ASIC 0
+TST_START0              0x18    1       3        0x0      0          0x0        0x1        0.         0.     Directly control tst_start input to Target ASIC 0, set to 1
+TST_BOICLR0             0x18    1       2        0x0      0          0x0        0x1        0.         0.     Directly control tst_boiclr input to Target ASIC 0, set to 0
+CLR_REG0                0x18    1       1        0x0      0          0x0        0x1        0.         0.     Directly control clr_reg input to Target ASIC 0
+PowerUpASIC0            0x18    1       0        0x0      0          0x0        0x1        0.         0.     Power up ASIC 0 bit. (0 -turn off 2.5V to ASIC, 1 - turn on 2.5V to ASIC)
+# Trigger control register 0
+TriggerDelay            0x19    14      18       0x0      0          0x0        0x3FFF     0.         0.     Trigger delay, to compensate for time between trigger arrival and trigger decision making, need to be found experimentally. Count in 1ns steps
+UnusedTriggerControl0   0x19    4       14       0x0      0          0x0        0x0        0.         0.     Unused
+TriggerDelayAlternative 0x19    14      0        0x0      0          0x0        0x3FFF     0.         0.     Trigger delay alternative, to compensate for time between trigger arrival and trigger decision making, need to be found experimentally. Count in 1ns steps
+# Trigger control register 1
+DataSendingDelay        0x1A    13      1        0x0      0          0x0        0x1FFF     0.         0.128  Set the delay in sending a data packet after a TACK is received (calibrated value is in microseconds)
+UnusedTriggerControl1   0x1A    1       14       0x0     0           0x0        0x0        0.         0.     Unused (although alleged to be something to do with ARP)
+EventPortNumber         0x1A    16      16       0xFF      0         0x0        0x7FFF     0.         0.     Set the port number for event data to be sent to (implemented for CHEC by LS early 2014)
+PhaseOfTACKClock        0x1A    1       0        0x1      0          0x0        0x1        0.         0.     Select phase of clock to sample TACK from BP (0 - rising edge, 1 - falling edge)
+PhaseOfCommsClock	      0x1A	  1	      15	       0x0	  0	     0x0	0x1	   0.	      0.     Select the phase of the clock which determines the 8 ns / 16 ns edge for the ethernet responses
+# Row/column control/status
+LatestRow               0x1B    3       29       0x0      1          0x0        0x0        0.         0.     Latched by latest trigger value of row counter
+LatestColumn            0x1B    6       23       0x0      1          0x0        0x0        0.         0.     Latched by latest trigger value of column counter
+LatestSample            0x1B    4       19       0x0      1          0x0        0x0        0.         0.     Latched by latest trigger value of sample value (only 4 MSB)
+CurrentRow              0x1B    3       16       0x0      1          0x0        0x0        0.         0.     Free running current row value to simulate sampling buffer write row pointer
+CurrentColumn           0x1B    6       10       0x0      1          0x0        0x0        0.         0.     Free running current column value to simulate sampling buffer write column pointer
+UnusedRowColumn         0x1B    1       9        0x0      0          0x0        0x0        0.         0.     Unused
+Column                  0x1B    6       3        0x0      0          0x0        0x3F       0.         0.     Specify column for readout when Software trigger mode selected by TACK command.
+Row                     0x1B    3       0        0x0      0          0x0        0x7        0.         0.     Specify row for readout when Software trigger mode selected by TACK command.
+# Number of samples to read
+UnusedNumberOfSamples0  0x1C    12      20       0x0      0          0x0        0x0        0.         0.     Unused
+AltBufferReadout        0x1C    4       16       0x0      0          0x0        0xF        0.         0.     Specify number of alternative buffer for readout, with 0 corresponding to 1 buffers, with 1 - 2 buffers, with 15 - 16 buffers (maximum)
+UnusedNumberOfSamples1  0x1C    7       9        0x0      0          0x0        0x0        0.         0.     Unused
+NumSampOnPartBuf        0x1C    5       4        0x0      0          0x0        0x20       0.         0.     Number of samples on partial buffer, from 0 to 31, to enable flexible readout of any number of desirable samples. At the moment value of 1 -> 16 samples, 0 ��� 0 samples. Optimized for 48 sample event
+NumberOfSegments        0x1C    4       0        0x2      0          0x0        0xF        0.         0.     Specify number of buffers (aka segments, 32 samples each) for readout, with 0 corresponding to 1 buffers, with 1 - two buffers, with 15 - 16 buffers (maximum)
+# Serial data idelay control register
+Unused_SerialDataIdelay 0x1D    32      0        0x0      0          0x0        0x0        0.         0.     Unused
+# Configuration waveform register
+PCLK_SINhigh            0x1E    8       24       0x6      0          0x0        0xFF       0.         0.     PCLK width plus 1 when SIN high, need to be set to 0x3
+SIN_afterPCLK           0x1E    8       16       0x3      0          0x0        0xFF       0.         0.     SIN settling time after PCLK plus 1, need to set to 1
+SIN_beforePCLK          0x1E    8       8        0x3      0          0x0        0xFF       0.         0.     SIN settling time before PCLK plus 1, need to set to 1
+PCLK_SINlow             0x1E    8       0        0x10      0         0x0        0xFF       0.         0.     PCLK width plus 1 when SIN low, need to be set to 0x7
+# Misc test register
+UnusedMisc0             0x1F    10      22       0x0      0          0x0        0x0        0.         0.     Unused
+SpecialMode             0x1F    2       20       0x0      0          0x0        0x0        0.         0.     Special mode, must be 0
+UnusedMisc1             0x1F    4       16       0x0      0          0x0        0x0        0.         0.     Unused
+UnusedMisc0x1F_1        0x1F    4       12       0x0      0          0x0        0x0        0.         0.     Unused and missing from documentation
+ClockPhase              0x1F    4       8        0x0      0          0x0        0x0        0.         0.     Select clock phase for input data (0- sampled on falling edge, 1 - sampled on rising edge), 0 ��� looks like right selection. One bit per ASIC. Bit 8 ��� ASIC 0, Bit 9 ��� ASIC 1, ....
+UnusedMisc2             0x1F    6       2        0x0      0          0x0        0x0        0.         0.     Unused
+SR_SEL                  0x1F    1       1        0x0      0          0x0        0x0        0.         0.     Select if SR_SEL pulse signal asserted all time (1) or only actual event readout process
+UnusedMisc3             0x1F    1       0        0x0      0          0x0        0x0        0.         0.     Unused
+# SST FB PLL alignments register
+RCOEdge3         0x20    1       31        0x0     1          0x0        0x0        0.         0.     RCO sampled with PLL clock and re-sampled with system clock to find proper edge (low to high), ignore of high to low. ASIC 3
+RCOEdge2         0x20    1       30        0x0     1          0x0        0x0        0.         0.     RCO sampled with PLL clock and re-sampled with system clock to find proper edge (low to high), ignore of high to low. ASIC 2
+RCOEdge1         0x20    1       29        0x0     1          0x0        0x0        0.         0.     RCO sampled with PLL clock and re-sampled with system clock to find proper edge (low to high), ignore of high to low. ASIC 1
+RCOEdge0         0x20    1       28        0x0     1          0x0        0x0        0.         0.     RCO sampled with PLL clock and re-sampled with system clock to find proper edge (low to high), ignore of high to low. ASIC 0
+UnusedMisc4      0x20    3       25        0x0     1          0x0        0x0        0.         0.     Spare
+RecPLLDelay      0x20    9       16        0x0     1          0x0        0x0        0.         0.     Value recorded into PLL delay (previous value)
+UnusedMisc5      0x20    5       11        0x0     1          0x0        0x0        0.         0.     Spare
+SSTsetup         0x20    2        9        0x0     0          0x0        0x4        0.         0.     Select ASIC to address SST setup : 00 - ASIC0, 01 ��� ASIC1, 10 ��� ASIC2, 11 ��� ASIC3
+ShiftSampClk     0x20    9        0        0x0     0          0x0        0xFF       0.         0.    PLL setup value to shift sampling clock timing to align with SST input (from Target) for proper SST type feedback control. Actual value range is from 0 to 0xFF. Each step is about 125ps (estimate)
+# SST FB idelay alignments register control 0x21, unused
+UnusedRegister2         0x21    32       0        0x0      0          0x0        0x0        0.         0.     Unused
+# SST FB idelay alignments register status: Address 0x22
+UnusedRegister3         0x22    32       0        0x0      1          0x0        0x0        0.         0.     Unused
+# 0x23, Spare unused
+UnusedRegister4         0x23    32       0        0x0      0          0x0        0x0        0.         0.     Unused
+# ROVDD feedback control ASIC 0
+VdlyN_VDD0              0x24    12      20       0x8C6      0          0x0        0xFFF      0.         0.     Set VDD value for ROVDD feedback loop, this value should be as close as possible to final desired sampling frequency. But from practical point only VdlyN control sampling frequency, so we should use only VdlyN to control RCO frequency to adjust sampling. Default value for 1GHz sampling is 0x910, therefore to control VdlyN we need to invert this value to 0x911(TBD) as starting RCO feedback value. Similarly for 400MHz sampling we have 0xBC0, so we have to set feedback initial value to 0xBC1(TBD). VdlyN Feedback enabled by bit 5 of the register 0x18.
+VdlyN_Compare0          0x24    20      0        0xA7D0      0          0x0        0xFFFFF    0.         0.     Bit in this field are interpreted on base of the ASIC configuration bit which are stored in reg. 0x2c bit 30. If bit set to 1:Compare value for ROVDD feedback loop. This is actual value which effect RCO final frequency. To find rough value we need to multiply desired RCO period in ns by 256. It is a little tricky task, because RCO runs faster than desired sampling frequency, so we need to target slower value of RCO frequency to get desired frequency. To have 1GHz sampling we need to set RCO roughly to 1GHz/128 = 7.8MHz(or period of 128ns), however in practice real 1GHz sampling achieved at 5.95MHZ (or 168ns) given that VdlyP set to value of 0x680 (to make RCO closer to 50% duty cycle). In this case value of this register need to be set 168*256=43008 (or 0xa800). Similarly for 400MHz sampling we need to set this value to about 1.88MHz(531ns) or value of 256*531= ~0x212f0 (need to be verified for 400MHz sampling) If bit set to 0:Then this field divided into 2: - bits 19-10 specify computational compare value for feedback control, nominally should be 0x200 - bits 9-0 specify computational compare hysteresis value for feedback control. Value from libchec: 0x1000 - 0x73A
+# ROVDD feedback control ASIC 1
+VdlyN_VDD1              0x25    12      20       0x8C6      0          0x0        0xFFF      0.         0.     ditto
+VdlyN_Compare1          0x25    20      0        0xA7D0      0          0x0        0xFFFFF    0.         0.     ditto
+# ROVDD feedback control ASIC 2
+VdlyN_VDD2              0x26    12      20       0x8C6      0          0x0        0xFFF      0.         0.     ditto
+VdlyN_Compare2          0x26    20      0        0xA7D0      0          0x0        0xFFFFF    0.         0.     ditto
+# ROVDD feedback control ASIC 3
+VdlyN_VDD3              0x27    12      20       0x8C6      0          0x0        0xFFF      0.         0.     ditto
+VdlyN_Compare3          0x27    20      0        0xA7D0      0          0x0        0xFFFFF    0.         0.     ditto
+# Vdly feedback control ASIC 0
+Vdly_VDD0               0x28    12      20       0x850      0          0x0        0xFFF      0.         0.     Set VDD value for Vdly feedback loop. Need to be set as close as possible to desired Wilkinson sampling control voltage DAC value. It is roughly 0x900. Vdly Feedback enabled by bit 4 of the register 0x18.
+Vdly_Compare0           0x28    20      0        0x16db6      0          0x0        0xFFFFF    0.         0.     Compare value for Vdly feedback loop. This is value which effect final Vdly and related Wilkinson sampling frequency. It is computed by multiplying Wilkinson sampling period by 65536 (2^16). So, for example, for 700Mhz sampling we have period of 1.42ns. 1.42*65536 = 93623(16DB6). Also in practical sense we can measure frequency of Vdly*4096 on output pin. So to set this value we need just multiply desired observed period by 16.
+# Vdly feedback control ASIC 1
+Vdly_VDD1               0x29    12      20       0x850      0          0x0        0xFFF      0.         0.     ditto
+Vdly_Compare1           0x29    20      0        0x16db6    0          0x0        0xFFFFF    0.         0.     ditto
+# Vdly feedback control ASIC 2
+Vdly_VDD2               0x2A    12      20       0x850      0          0x0        0xFFF      0.         0.     ditto
+Vdly_Compare2           0x2A    20      0        0x16db6    0          0x0        0xFFFFF    0.         0.     ditto
+# Vdly feedback control ASIC 3
+Vdly_VDD3               0x2B    12      20       0x850      0          0x0        0xFFF      0.         0.     ditto
+Vdly_Compare3           0x2B    20      0        0x16db6    0          0x0        0xFFFFF    0.         0.     ditto
+VDEL_ROVDDCalcValues0   0x2C    32      0        0x0      1          0x0        0x0        0.         0.     For ASIC 0 - TBD: Individual bits need to be defined
+VDEL_ROVDDCalcValues1   0x2D    32      0        0x0      1          0x0        0x0        0.         0.     For ASIC 1 - TBD: Individual bits need to be defined
+VDEL_ROVDDCalcValues2   0x2E    32      0        0x0      1          0x0        0x0        0.         0.     For ASIC 2 - TBD: Individual bits need to be defined
+VDEL_ROVDDCalcValues3   0x2F    32      0        0x0      1          0x0        0x0        0.         0.     For ASIC 3 - TBD: Individual bits need to be defined
+Unused_Vped0            0x30    20      12       0x0      0          0x0        0x0        0.         0.     Unused
+ASIC0_Vped              0x30    12      0        0x41A    0          0x0        0xB6C      0.         0.     Vped value from 0 to 2.5V (Max value enforced in hardware is 0xB6C ~2.5V)
+Unused_Vped1            0x31    20      12       0x0      0          0x0        0xFFFFF    0.         0.     Unused
+ASIC1_Vped              0x31    12      0        0x41A    0          0x0        0xB6C      0.         0.     Vped value from 0 to 2.5V (Max value enforced in hardware is 0xB6C ~2.5V)
+Unused_Vped2            0x32    20      12       0x0      0          0x0        0xFFFFF    0.         0.     Unused
+ASIC2_Vped              0x32    12      0        0x41A    0          0x0        0xB6C      0.         0.     Vped value from 0 to 2.5V (Max value enforced in hardware is 0xB6C ~2.5V)
+Unused_Vped3            0x33    20      12       0x0      0          0x0        0xFFFFF    0.         0.     Unused
+ASIC3_Vped              0x33    12      0        0x41A    0          0x0        0xB6C      0.         0.     Vped value from 0 to 2.5V (Max value enforced in hardware is 0xB6C ~2.5V)
+UnusedRegister5         0x34    32      0        0x0      0          0x0        0x0        0.         0.     Unused
+UnusedRegister6         0x35    32      0        0x0      0          0x0        0x0        0.         0.     Unused
+UnusedRegister7         0x36    32      0        0x0      0          0x0        0x0        0.         0.     Unused
+UnusedRegister8         0x37    32      0        0x0      0          0x0        0x0        0.         0.     Unused
+Unused_DC_IN            0x38    20      12       0x0      0          0x0        0x0        0.         0.     Unused
+DC_IN                   0x38    12      0        0xBB8    0          0x0        0x0        0.         0.     DC_IN to bias input voltage value from 0 to 2.047V - Unused    BG: should be 0xBB8 from init_FPGA in T5CameraModule.cc 'SetDCIN(0xBB8);'
+Unused_HV               0x39    20      12       0x0      0          0x0        0x0        0.         0.     Unused
+HV                      0x39    12      0        0x0      0          0x0        0xFFF      0.2936     2.6    HV setup voltage value from 0 to 2.047V , correspond to specific selected HV supply. The calibrated values will make you set the Voltage in V
+ZeroSuppressionControl  0x3A   32       0        0x0      0          0x0        0x0        0.         0.     Register for zero suppression control. TBD: definition of individual bits
+# ADC 0
+Temperature1_Valid      0x3B    1       31       0x0      1          0x0        0x0        0.         0.     ADC 1, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x3B_1           0x3B    3       28       0x0      0          0x0        0x0        0.         0.     Unused
+Temperature1            0x3B    12      16       0x0      1          0x0        0x0        0.125      0.     ADC 1, Temperature measured by ADC 1, conversion is T,C = value*0.125, C
+Temperature0_Valid      0x3B    1       15       0x0      1          0x0        0x0        0.         0.     ADC 0, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x3B_0           0x3B    3       12       0x0      0          0x0        0x0        0.         0.     Unused
+Temperature0            0x3B    12      0        0x0      1          0x0        0x0        0.125      0.     ADC 0, Temperature measured by ADC 0, conversion is T,C = value*0.125, C
+# ADC 1
+ASIC2_Current_Valid     0x3C    1       31       0x0      1          0x0        0x0        0.         0.     ADC 1 ASIC2, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x3C_1           0x3C    3       28       0x0      0          0x0        0x0        0.         0.     Unused
+ASIC2_Current           0x3C    12      16       0x0      1          0x0        0x0        0.00012207 0.    Measured current on ASIC 2, T5CameraModule::GetMeasuredASICCurrent for multiplier (  5. / 4096. / 20. / .5)
+ASIC3_Current_Valid     0x3C    1       15       0x0      1          0x0        0x0        0.         0.     ADC 1 ASIC3, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x3C_0           0x3C    3       12       0x0      0          0x0        0x0        0.         0.     Unused
+ASIC3_Current           0x3C    12      0        0x0      1          0x0        0x0        0.00012207 0.     Measured current on ASIC 3, T5CameraModule::GetMeasuredASICCurrent for multiplier (  5. / 4096. / 20. / .5)
+# ADC 2
+ASIC2_Voltage_Valid     0x3D    1       31       0x0      1          0x0        0x0        0.         0.     ADC 2 ASIC2, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x3D_1           0x3D    3       28       0x0      0          0x0        0x0        0.         0.     Unused
+ASIC2_Voltage           0x3D    12      16       0x0      1          0x0        0x0        0.0012207  0.     Measured voltage on ASIC 2, T5CameraModule::GetMeasuredASICVoltage for multiplier (5./4096)
+ASIC3_Voltage_Valid     0x3D    1       15       0x0      1          0x0        0x0        0.         0.     ADC 2 ASIC3, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x3D_0           0x3D    3       12       0x0      0          0x0        0x0        0.         0.     Unused
+ASIC3_Voltage           0x3D    12      0        0x0      1          0x0        0x0        0.0012207  0.     Measured voltage on ASIC 3, T5CameraModule::GetMeasuredASICVoltage for multiplier (5./4096)
+# ADC 3
+ASIC2_Vped_Meas_Valid   0x3E    1       31       0x0      1          0x0        0x0        0.         0.     ADC 3, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x3E_1           0x3E    3       28       0x0      0          0x0        0x0        0.         0.     Unused
+ASIC2_Vped_Meas         0x3E    12      16       0x0      1          0x0        0xFFF      0.0012207  0.     ADC 3, ASIC 2 VPED Voltage, conversion is V = value*5/4096,V
+ASIC3_Vped_Meas_Valid   0x3E    1       15       0x0      1          0x0        0x0        0.         0.     ADC 3, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x3E_0           0x3E    3       12       0x0      0          0x0        0x0        0.         0.     Unused
+ASIC3_Vped_Meas         0x3E    12      0        0x0      1          0x0        0xFFF      0.0012207  0.     ADC 3, ASIC 3 VPED Voltage, conversion is V = value*5/4096,V
+# ADC 4
+ASIC2_Vdly_Meas_Valid   0x3F    1       31       0x0      1          0x0        0x0        0.         0.     ADC 4, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x3F_1           0x3F    3       28       0x0      0          0x0        0x0        0.         0.     Unused
+ASIC2_Vdly_Meas         0x3F    12      16       0x0      1          0x0        0xFFF      0.0012207  0.     ADC 4, ASIC 2 Vdly, conversion is V = value*5/4096,V T5CameraModule::GetMeasuredVdly
+ASIC3_Vdly_Meas_Valid   0x3F    1       15       0x0      1          0x0        0x0        0.         0.     ADC 4, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x3F_0           0x3F    3       12       0x0      0          0x0        0x0        0.         0.     Unused
+ASIC3_Vdly_Meas         0x3F    12      0        0x0      1          0x0        0xFFF      0.0012207  0.     ADC 4, ASIC 3  Vdly, conversion is V = value*5/4096,V T5CameraModule::GetMeasuredVdly
+# ADC 5
+ADC5_Valid1             0x40    1       31       0x0      1          0x0        0x0        0.         0.     ADC 1, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x40_1           0x40    3       28       0x0      0          0x0        0x0        0.         0.     Unused
+ASIC2_SumDischargeIsel  0x40    12      16       0x0      1          0x0        0x0        0.00183105 0.     ADC 1, ASIC 2 SUM of DISCHARGE and ISEL Voltage, conversion is V = value*7.5/4096,V
+ADC5_Valid0             0x40    1       15       0x0      1          0x0        0x0        0.         0.     ADC 0, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x40_0           0x40    3       12       0x0      0          0x0        0x0        0.         0.     Unused
+ASIC3_SumDischargeIsel  0x40    12      0        0x0      1          0x0        0x0        0.00183105 0.     ADC 0, ASIC 3 SUM of DISCHARGE and ISEL Voltage, conversion is V = value*7.5/4096,V
+# ADC 6
+ASIC0_Current_Valid     0x41    1       31       0x0      1          0x0        0x0        0.         0.     ADC 6 ASIC0, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x41_1           0x41    3       28       0x0      0          0x0        0x0        0.         0.     Unused
+ASIC0_Current           0x41    12      16       0x0      1          0x0        0x0        0.00012207 0.     Measured current on ASIC 0, T5CameraModule::GetMeasuredASICCurrent for multiplier (  5. / 4096. / 20. / .5)
+ASIC1_Current_Valid     0x41    1       15       0x0      1          0x0        0x0        0.         0.     ADC 6 ASIC1, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x41_0           0x41    3       12       0x0      0          0x0        0x0        0.         0.     Unused
+ASIC1_Current           0x41    12      0        0x0      1          0x0        0x0        0.00012207 0.     Measured current on ASIC 1, T5CameraModule::GetMeasuredASICCurrent for multiplier (  5. / 4096. / 20. / .5)
+# ADC 7
+ASIC0_Voltage_Valid     0x42    1       31       0x0      1          0x0        0x0        0.         0.     ADC 7 ASIC0, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x42_1           0x42    3       28       0x0      0          0x0        0x0        0.         0.     Unused
+ASIC0_Voltage           0x42    12      16       0x0      1          0x0        0x0        0.0012207  0.     Measured voltage on ASIC 0, T5CameraModule::GetMeasuredASICVoltage for multiplier (5./4096)
+ASIC1_Voltage_Valid     0x42    1       15       0x0      1          0x0        0x0        0.         0.     ADC 7 ASIC1, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x42_0           0x42    3       12       0x0      0          0x0        0x0        0.         0.     Unused
+ASIC1_Voltage           0x42    12      0        0x0      1          0x0        0x0        0.0012207  0.     Measured voltage on ASIC 1, T5CameraModule::GetMeasuredASICVoltage for multiplier (5./4096)
+# ADC 8
+ASIC0_Vped_Meas_Valid   0x43    1       31       0x0      1          0x0        0x0        0.         0.     ADC 1, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x43_1           0x43    3       28       0x0      0          0x0        0x0        0.         0.     Unused
+ASIC0_Vped_Meas         0x43    12      16       0x0      1          0x0        0xFFF      0.0012207  0.     ADC 1, ASIC 0 VPED Voltage, conversion is V = value*5/4096,V
+ASIC1_Vped_Meas_Valid   0x43    1       15       0x0      1          0x0        0x0        0.         0.     ADC 0, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x43_0            0x43    3       12       0x0      0          0x0        0x0       0.         0.     Unused
+ASIC1_Vped_Meas         0x43    12      0        0x0      1          0x0        0xFFF      0.0012207  0.     ADC 0, ASIC 1 VPED Voltage, conversion is V = value*5/4096,V
+# ADC 9
+ASIC0_Vdly_Meas_Valid   0x44    1       31       0x0      1          0x0        0x0        0.         0.     ADC 9, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x44_1           0x44    3       28       0x0      0          0x0        0x0        0.         0.     Unused
+ASIC0_Vdly_Meas         0x44    12      16       0x0      1          0x0        0xFFF      0.0012207  0.     ADC 9, ASIC 0 Vdly, conversion is V = value*5/4096,V T5CameraModule::GetMeasuredVdly
+ASIC1_Vdly_Meas_Valid   0x44    1       15       0x0      1          0x0        0x0        0.         0.     ADC 9, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x44_0           0x44    3       12       0x0      0          0x0        0x0        0.         0.     Unused
+ASIC1_Vdly_Meas         0x44    12      0        0x0      1          0x0        0xFFF      0.0012207  0.     ADC 9, ASIC 1 Vdly, conversion is V = value*5/4096,V T5CameraModule::GetMeasuredVdly
+# ADC 10
+ASIC0_SumDischargeIsel_Valid  0x45    1       31       0x0      1          0x0        0x0        0.         0.     ADC 1, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x45_1           0x45    3       28       0x0      0          0x0        0x0        0.         0.     Unused
+ASIC0_SumDischargeIsel  0x45    12      16       0x0      1          0x0        0x0        0.00183105 0.     ADC 1, ASIC 0 SUM of DISCHARGE and ISEL Voltage, conversion is V = value*7.5/4096,V
+ASIC1_SumDischargeIsel_Valid  0x45    1       15       0x0      1          0x0        0x0        0.         0.     ADC 0, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x45_0           0x45    3       12       0x0      0          0x0        0x0        0.         0.     Unused
+ASIC1_SumDischargeIsel  0x45    12      0        0x0      1          0x0        0x0        0.00183105 0.     ADC 0, ASIC 1 SUM of DISCHARGE and ISEL Voltage, conversion is V = value*7.5/4096,V
+# ADC 11
+MGTSupplyVoltage_Valid  0x46    1       31       0x0      1          0x0        0x0        0.         0.     ADC 1, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x46_1           0x46    3       28       0x0      0          0x0        0x0        0.         0.     Unused
+MGTSupplyVoltage        0x46    12      16       0x0      1          0x0        0x0        0.0012207  0.     ADC 1, MGT Supply Voltage, conversion is V = value*5/4096,V
++1.2V_FPGA_Valid        0x46    1       15       0x0      1          0x0        0x0        0.         0.     ADC 0, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x46_0           0x46    3       12       0x0      0          0x0        0x0        0.         0.     Unused
++1.2V_FPGA              0x46    12      0        0x0      1          0x0        0x0        0.0012207  0.     ADC 0, 1.2V FPGA Voltage (2.5V), conversion is V = value*5/4096,V
+# ADC 12
++1.8V_FPGA_Valid        0x47    1       31       0x0      1          0x0        0x0        0.         0.     ADC 1, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x47_1           0x47    3       28       0x0      0          0x0        0x0        0.         0.     Unused
++1.8V_FPGA              0x47    12      16       0x0      1          0x0        0x0        0.0012207  0.     ADC 1, 1.8V FPGA Voltage , conversion is V = value*5/4096,V
++2.5V_FPGA_Valid        0x47    1       15       0x0      1          0x0        0x0        0.         0.     ADC 0, Valid data bit, if bit 0 of register 14 set 0, 1 indicate data valid, 0 - is in conversion.
+Unused_0x47_0           0x47    3       12       0x0      0          0x0        0x0        0.         0.     Unused
++2.5V_FPGA              0x47    12      0        0x0      1          0x0        0x0        0.0012207  0.     ADC 0, 2.5V FPGA Voltage , conversion is V = value*5/4096,V
+# Trigger efficiency control 0: 0x48
+Unused_0x48             0x48   32       0        0x0      0          0x0        0x0        0.         0.     Unused
+# Trigger efficiency control 1: 0x49
+Unused_0x49             0x49   32       0        0x0      0          0x0        0x0        0.         0.     Unused
+# Trigger input counter: 0x4A
+Unused_0x4A             0x4A   32       0        0x0      0          0x0        0x0        0.         0.     Unused
+# Trigger efficiency counter: 0x4B
+Unused_0x4B             0x4B   32       0        0x0      0          0x0        0x0        0.         0.     Unused
+# Software reset register: 0x4C
+SoftwareReset           0x4C    32      0        0x0      0          0x0        0xFFFFFFFF        0.         0.     Writing value of 0xBECEDACE will start reset of FPGA logic, but keep values programmed into register. Also, write to this register does not generate command response due to transmitter logic reset as well
+# Channel enable register 0: 0x4D
+EnableChannel0          0x4D    32      0        0x0      0          0x0        0xFFFFFFFF        0.         0.     Channel enable register bits 31-0. Channel 15-0 on ASIC 0, Channel 31-16 on ASIC 1. One bit per channel. 0 ��� disable, 1 - enable
+# Channel enable register 0: 0x4E
+EnableChannel1          0x4E    32      0        0x0      0          0x0        0xFFFFFFFF        0.         0.     Channel enable register bits 31-0. Channel 15-0 on ASIC 0,Channel 31-16 on ASIC 1. One bit per channel. 0 ��� disable, 1 - enable
+Unused_0x4F_1           0x4F    20     12        0x0      1          0x0        0xFFFFFFFF        0.         0.   Unused
+SpecialModeSRClk        0x4F     1     11        0x1      0          0x0        0x1               0.         0.   Special mode for sr_clk. 0 ��� sr_clk run continuously, 1 ��� sr_clk run when only needed
+SpecialTrigMode         0x4F     1     10        0x0      0          0x0        0x1               0.         0.   Special trigger mode. When set to 1 enable J5 output generate pulse on every sampling buffer turn for 10 event and stop. To reactivate need to bring it back to 0, if 0 - trigger sync command generated ~ at 1kHz
+ExternalTrigIO          0x4F     1      9        0x0      0          0x0        0x1               0.         0.   To control direction of External Trigger IO, 0 ��� input, 1 - output
+Unused_0x4F_2           0x4F     9      0        0x0      1          0x0        0x1               0.         0.   Unused
+# Write TARGET register: 0x50
+WriteTargetRegister     0x50    32      0        0x0      1          0x0        0x0        0.         0.     Do not use, special function is implemented
+# Read 0 TARGET register: 0x51
+ReadTargetRegisterASIC01 0x51   32      0        0x0      1          0x0        0x0        0.         0.     Do not use, special function is implemented
+# Read 0 TARGET register: 0x52
+ReadTargetRegisterASIC23 0x52   32      0        0x0      1          0x0        0x0        0.         0.     Do not use, special function is implemented
+PacketDelay              0x53   32      0        0x0      0          0x0        0xFFFFFFFF 8.         0.     Delay between packets sent from TM, 32 bits in 8 ns steps

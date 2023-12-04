@@ -1,0 +1,25 @@
+Release Notes
+=============
+
+
+January 21, 2018
+------------------------------------------------------------------
+Release V01-00-00
+- New cmake configuration which enables bundled builds and more robust configuration of the
+  compilation of the python module. For more information about this 
+  refer to: https://forge.in2p3.fr/projects/gct/wiki/CHEC_SW_cmake_fix
+- Added SWIG definition for the GetFirmwareVersion call so the method is usable in python
+- The definition files in the configuration folder are now installed in /shared (useful 
+  for conda installations)
+- A utility function, get_default_config_dir(), has been added that returns the
+  path to where definition files are installed. 
+- Added GenericPacket and TriggerPacket
+- New standalone event builder with adding: DataPacket_v2, EventBuffer_v2, DataListener_v2, RingBuffer, RawEvent_v2 
+- New FW def file version (0xC000000D)
+- TACK writing - will only be written out if DropPackets is on
+- Added GetStaleBit() method to DataPacket
+
+October 22, 2018
+------------------------------------------------------------------
+Release V00-01-00 
+- As is with the old cmake build configuration
