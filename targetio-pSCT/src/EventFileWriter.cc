@@ -169,7 +169,7 @@ void EventFileWriter::AddCardImage(const std::string& pKeyword, bool pValue,
                         pComment.c_str(), &status)) {
 #else
     if (fits_update_key(fFitsPointer, TLOGICAL, pKeyword.c_str(), &pValue,
-                        static_cast<char*>(pComment.c_str()), &status)) {
+                        pComment.c_str(), &status)) {
 #endif
       std::cerr << "Cannot update the keyword "
                 << Util::FitsErrorMessage(status) << "\n";
@@ -207,7 +207,7 @@ void EventFileWriter::AddCardImage(const std::string& pKeyword, double pValue,
                         pComment.c_str(), &status)) {
 #else
     if (fits_update_key(fFitsPointer, TDOUBLE, pKeyword.c_str(), &pValue,
-                        static_cast<char*>(pComment.c_str()), &status)) {
+                        pComment.c_str(), &status)) {
 #endif
       std::cerr << "Cannot update the keyword "
                 << Util::FitsErrorMessage(status) << "\n";
@@ -245,7 +245,7 @@ void EventFileWriter::AddCardImage(const std::string& pKeyword, float pValue,
                         pComment.c_str(), &status)) {
 #else
     if (fits_update_key(fFitsPointer, TFLOAT, pKeyword.c_str(), &pValue,
-                        static_cast<char*>(pComment.c_str()), &status)) {
+                        pComment.c_str(), &status)) {
 #endif
       std::cerr << "Cannot update the keyword "
                 << Util::FitsErrorMessage(status) << "\n";
@@ -283,7 +283,7 @@ void EventFileWriter::AddCardImage(const std::string& pKeyword, int32_t pValue,
                         pComment.c_str(), &status)) {
 #else
     if (fits_update_key(fFitsPointer, TINT, pKeyword.c_str(), &pValue,
-                        static_cast<char*>(pComment.c_str()), &status)) {
+                        pComment.c_str(), &status)) {
 #endif
       std::cerr << "Cannot update the keyword "
                 << Util::FitsErrorMessage(status) << "\n";
@@ -321,7 +321,7 @@ void EventFileWriter::AddCardImage(const std::string& pKeyword, int64_t pValue,
                         pComment.c_str(), &status)) {
 #else
     if (fits_update_key(fFitsPointer, TLONGLONG, pKeyword.c_str(), &pValue,
-                        static_cast<char*>(pComment.c_str()), &status)) {
+                        pComment.c_str(), &status)) {
 #endif
       std::cerr << "Cannot update the keyword "
                 << Util::FitsErrorMessage(status) << "\n";
@@ -363,7 +363,7 @@ void EventFileWriter::AddCardImage(const std::string& pKeyword,
                         pComment.c_str(), &status)) {
 #else
     if (fits_update_key(fFitsPointer, TSTRING, pKeyword.c_str(), str,
-                        static_cast<char*>(pComment.c_str()), &status)) {
+                       pComment.c_str(), &status)) {
 #endif
       std::cerr << "Cannot update the keyword "
                 << Util::FitsErrorMessage(status) << "\n";

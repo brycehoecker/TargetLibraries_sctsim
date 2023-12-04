@@ -99,8 +99,8 @@ namespace CTA {
 			}//if
 			#endif
 
-			//if ((uint16_t(fData[fPacketSize - 2]) << 6) || ((fData[fPacketSize - 1] >> 2) != 0)) {
-			if ((uint16_t(fData[fPacketSize - 2]) << 6)||(fData[fPacketSize - 1] >> 2)) != 0)) {
+			if ((uint16_t(fData[fPacketSize - 2]) << 6) || ((fData[fPacketSize - 1] >> 2) != 0)) {
+			//if ((uint16_t(fData[fPacketSize - 2]) << 6)||(fData[fPacketSize - 1] >> 2)) != 0)) {
 				fStatusString = "IsValid() Problem - 14 bits of the last two bytes must be zero.";
 				fStatusFlag = T_PACKET_ERROR_LASTBYTES;
 				return false;
