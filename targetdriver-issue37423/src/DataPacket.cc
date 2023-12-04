@@ -110,106 +110,94 @@ namespace CTA {
 		}//bool DataPacket::IsValid
 
 		Waveform* DataPacket::GetWaveform(uint16_t waveformindex) {
-		Waveform* waveform = new Waveform();
-		AssociateWaveform(waveformindex, *waveform);
-		return waveform;
-		}
+			Waveform* waveform = new Waveform();
+			AssociateWaveform(waveformindex, *waveform);
+			return waveform;
+		}//Waveform* DataPacket::GetWaveform
 
-		void DataPacket::AssociateWaveform(uint16_t waveformindex,
-							   Waveform& pWaveform) {
-		uint16_t len = GetWaveformBytes();  // just the samples
-		uint16_t index = 2 * T_PACKET_HEADER_WORDS +
-			   waveformindex * (len + 2 * T_WAVEFORM_HEADER_WORDS);
-		pWaveform.AssociateData(&fData[index]);
-		}
+		void DataPacket::AssociateWaveform(uint16_t waveformindex, Waveform& pWaveform) {
+			uint16_t len = GetWaveformBytes();  // just the samples
+			uint16_t index = 2 * T_PACKET_HEADER_WORDS + waveformindex * (len + 2 * T_WAVEFORM_HEADER_WORDS);
+			pWaveform.AssociateData(&fData[index]);
+		}//void DataPacket::AssociateWaveform
 
 		bool DataPacket::GetPacketID(uint16_t& packet_id) {
-		if (!IsValid()) return false;
-
-		uint16_t nwaveforms = GetNumberOfWaveforms();
-		if (nwaveforms == 0) {
-		fStatusFlag = T_PACKET_ERROR_NOWAVEFORMS;
-		return false;
-		}
-		Waveform* w = GetWaveform(0);
-		uint8_t asic = w->GetASIC();
-		uint8_t chan = w->GetChannel();
-		uint8_t module = GetDetectorID();
-
-		packet_id = (module * 64 + asic * 16 + chan) / nwaveforms;
-
-		delete w;
-
-		return true;
-		}
+			if (!IsValid()) return false;
+			uint16_t nwaveforms = GetNumberOfWaveforms();
+			if (nwaveforms == 0) {
+				fStatusFlag = T_PACKET_ERROR_NOWAVEFORMS;
+				return false;
+			}
+			Waveform* w = GetWaveform(0);
+			uint8_t asic = w->GetASIC();
+			uint8_t chan = w->GetChannel();
+			uint8_t module = GetDetectorID();
+			packet_id = (module * 64 + asic * 16 + chan) / nwaveforms;
+			delete w;
+			return true;
+		}//bool DataPacket::GetPacketID
 
 		void DataPacket::SummarisePacket(std::ostream& os) {
-		Waveform* w = GetWaveform(0);
-		uint16_t pid;
-		GetPacketID(pid);
-		os << "DataPacket id: " << pid << " det/slot "
-		<< static_cast<int>(GetDetectorID()) << "/"
-		<< static_cast<int>(GetSlotID()) << " tack: " << GetTACKTime()
-		<< " val: " << IsValid() << " waves: " << GetNumberOfWaveforms()
-		<< " samp: " << GetWaveformSamples()
-		<< " row/col: " << static_cast<int>(GetRow()) << "/"
-		<< static_cast<int>(GetColumn()) << " ADC vals: " << w->GetADC(2) << " "
-		<< w->GetADC(3) << " " << w->GetADC(4) << " " << w->GetADC(5) << std::endl;
+			Waveform* w = GetWaveform(0);
+			uint16_t pid;
+			GetPacketID(pid);
+			os << "DataPacket id: " << pid << " det/slot " << static_cast<int>(GetDetectorID()) << "/" << static_cast<int>(GetSlotID()) 
+			<< " tack: " << GetTACKTime() << " val: " << IsValid() << " waves: " << GetNumberOfWaveforms() << " samp: " << GetWaveformSamples()
+			<< " row/col: " << static_cast<int>(GetRow()) << "/" << static_cast<int>(GetColumn()) 
+			<< " ADC vals: " << w->GetADC(2) << " "	<< w->GetADC(3) << " " << w->GetADC(4) << " " << w->GetADC(5) << std::endl;
 
-		delete w;
-		}
+			delete w;
+		}//void DataPacket::SummarisePacket
 
 		//// More general functions moved from old DataPacket base class
 
 		void DataPacket::Allocate(uint16_t packetsize) {
-		Deallocate();
-		fData = new uint8_t[packetsize];
-		fPacketSize = packetsize;
-		}
+			Deallocate();
+			fData = new uint8_t[packetsize];			//HERE IS A NEW COMMAND CHECK HERE IF THERE ARE MEMORY LEAKS
+			fPacketSize = packetsize;
+		}//void DataPacket::Allocate
 
 		void DataPacket::Deallocate() {
-		if (fData && !fAssigned) {
-		delete[] fData;
-		}
-		fData = 0;
-		fPacketSize = 0;
-		}
+			if (fData && !fAssigned) {
+				delete[] fData;
+			}//if
+			fData = 0;
+			fPacketSize = 0;
+		}//void DataPacket::Deallocate
 
 		bool DataPacket::Fill(const uint8_t* data, uint16_t packetsize) {
-		if (packetsize != fPacketSize) {
-		std::cout << "DataPacket::Fill  - Unexpected packet size " << std::endl;
-		memset(fData, 0,
-		fPacketSize);  // needed to avoid confusion with previous packets
-		return false;
-		}
-		if (fFilled) {
-		std::cout << "DataPacket::Fill Packet already filled " << std::endl;
-		return false;
-		}
-
-		// std::cout << "DPF> " << (long)fData << " " << (long)data << std::endl;
-
-		memcpy(fData, data, packetsize);
-
-		fFilled = true;
-		time(&fWhenFilled);
-
-		return true;
-		}
+			if (packetsize != fPacketSize) {
+				std::cout << "DataPacket::Fill  - Unexpected packet size " << std::endl;
+				memset(fData, 0,
+				fPacketSize);  // needed to avoid confusion with previous packets
+				return false;
+			}//if (packetsize != fPacketSize)
+			if (fFilled) {
+				std::cout << "DataPacket::Fill Packet already filled " << std::endl;
+				return false;
+			}//if (fFilled) 
+			
+			// std::cout << "DPF> " << (long)fData << " " << (long)data << std::endl;
+			
+			memcpy(fData, data, packetsize);
+			fFilled = true;
+			time(&fWhenFilled);
+			return true;
+		}//bool DataPacket::Fill
 
 		void DataPacket::Print() const {
-		for (uint16_t i = 0; i < fPacketSize / 2; ++i) {
-		printf("%4d: 0x%02X%02X ", i, fData[i * 2], fData[i * 2 + 1]);
-		for (int j = 7; j >= 0; j--) {
-		printf("%d", (fData[i * 2] >> j) & 0x1);
-		}  // j
-		printf("|");
-		for (int j = 7; j >= 0; j--) {
-		printf("%d", (fData[i * 2 + 1] >> j) & 0x1);
-		}  // j
-		printf("\n");
-		}  // i
-		}
+			for (uint16_t i = 0; i < fPacketSize / 2; ++i) {
+				printf("%4d: 0x%02X%02X ", i, fData[i * 2], fData[i * 2 + 1]);
+				for (int j = 7; j >= 0; j--) {
+					printf("%d", (fData[i * 2] >> j) & 0x1);
+				}//for (int j = 7...
+				printf("|");
+				for (int j = 7; j >= 0; j--) {
+					printf("%d", (fData[i * 2 + 1] >> j) & 0x1);
+				}//for (int j = 7...
+				printf("\n");
+			}//for (uint16_t i = 0
+		}//void DataPacket::Print
 
 		void DataPacket::FillZero() { memset(fData, 0, fPacketSize); }
 
