@@ -1,0 +1,484 @@
+####################################################################
+# NEVER CHANGE THIS FILE
+#
+# Definitions of register values and partial register values.
+#
+# If Firmware changes generate a new definition file specifying
+# the firmware version in the name.
+#
+# Setting AccesMode can take 3 values 0 = Read/Write, 1 = Read Only ,2 = Write Only (no response), 3 = Read/Non sticky write;
+####################################################################
+HEADER
+TM_TYPE TM_C
+TM_FIRMWARE_VERSION 0xC000000C
+DESCRIPTION This is firmware version 0xC000000C, which is the version of the TARGET C module firmware as of October 24 2018.
+RESPONSIBLE_AUTHOR Adrian Zink
+NUM_REGISTERS 0x9C
+##############################################################################################
+# Setting layout: All fields must be filled, use 0 for default value.
+#
+# Field: Name           RegAddr nBits   startBit value    AccessMode    lowerBound upperBound multiplier offset description
+# Type:  string         uint8_t uint8_t uint8_t  uint32_t enum(0,1,2,3) uint32_t   uint32_t   float      float  strings
+##############################################################################################
+SETTINGS
+FirmwareVersion         0x00    32      0       0xC0000008	1          0x0        0x0        0.         0.     Assigned value of 0xFED00001, assigned in Firmware to highlight and track incremental changes in firmware. Incremented with every firmware revision
+ModuleSlot              0x01    8       0       0x0       	0          0x0        0xFF       0.         0.     Slot of module in Backplane, field ModuleSlot of reported event
+ModuleIndex             0x01    8       8       0x0       	0          0x0        0xFF       0.         0.     Index, starting from 0, fill ModuleIndex field of reported event
+AnyValue                0x01    16      16      0x0       	0          0x0        0xFFFF     0.         0.     Any value for control software, does not have effect on any FPGA logic
+SerialNumLSW            0x02    32      0       0x0       	1          0x0        0x0        0.         0.     Serial number the least significant word
+SerialNumMSW            0x03    32      0       0x0       	1          0x0        0x0        0.         0.     Serial number the most significant word
+# Status register
+Unused_0x04		0x04	9	0	0x0		1	0x0	0x0	0.	0.	 Unused
++3.5V_OK		0x04	1	9	0x0		1	0x0	0x0	0.	0.	 +3_5V for ASIC LDOs, 1 - OK, 0 - is not
++3.3V_OK		0x04	1	10	0x1		1	0x0	0x0	0.	0.	 +3_3V for Logic and FPGA, 1 - OK, 0 - is not
++2.5V_OK		0x04	1	11	0x1		1	0x0	0x0	0.	0.	 +2_5V for Logic and FPGA, 1 - OK, 0 - is not
+mgt_AVCC_OK		0x04	1	12	0x1		1	0x0	0x0	0.	0.	 mgt_AVCC_OK is OK, 1 - OK, 0 - is not
+mgt_AVTT_OK		0x04	1	13	0x0		1	0x0	0x0	0.	0.	 mgt_AVTT_OK is OK, 1 - OK, 0 - is not
++1.8V_OK		0x04	1	14	0x0		1	0x0	0x0	0.	0.	 +1_8V for FPGA VCCAux, 1 - OK, 0 - is not
++1.0V_OK		0x04	1	15	0x0		1	0x0	0x0	0.	0.	 +1_0V for FGPA VCCMain and VCCBram, 1 - OK, 0 - is not
++2.5V_ASIC0_OK		0x04	1	16	0x0		1	0x0	0x0	0.	0.	 +2_5V for TC0 and T5TEA0, 1 - OK, 0 - is not
++2.5V_ASIC1_OK		0x04	1	17	0x0		1	0x0	0x0	0.	0.	 +2_5V for TC1 and T5TEA1, 1 - OK, 0 - is not
++2.5V_ASIC2_OK		0x04	1	18	0x0		1	0x0	0x0	0.	0.	 +2_5V for TC2 and T5TEA2, 1 - OK, 0 - is not
++2.5V_ASIC3_OK		0x04	1	19	0x0		1	0x0	0x0	0.	0.	 +2_5V for TC3 and T5TEA3, 1 - OK, 0 - is not
+EventDone_ASIC0		0x04	1	20	0x0		1	0x0	0x0	0.	0.	 State of event Done bit ASIC 0
+EventDone_ASIC1		0x04	1	21	0x0		1	0x0	0x0	0.	0.	 State of event Done bit ASIC 1
+EventDone_ASIC2		0x04	1	22	0x0		1	0x0	0x0	0.	0.	 State of event Done bit ASIC 2
+EventDone_ASIC3		0x04	1	23	0x0		1	0x0	0x0	0.	0.	 State of event Done bit ASIC 3
+FIFO_Overflow		0x04	1	24	0x0		1	0x0	0x0	0.	0.	 Overflow on summary FIFO of event data
+FIFO_Underflow		0x04	1	25	0x0		1	0x0	0x0	0.	0.	 Underflow on summary FIFO of event data
+TempAlert		0x04	1	26	0x0		1	0x0	0x0	0.	0.	 Temperature of primary board or auxiliary board temp sensors above threshold
+BackPlaneStatus		0x04	5	27	0x13		1	0x0	0x0	0.	0.	 Status of backplane lines from bp4 to bp7 (also bp5 is reset and will not be available due to board reset)
+# Latched status register
+LatchedVCCAUX_ALRM	0x05	1	0	0x0		1	0x0	0x0	0.	0.	 VCCAUX_ALARM_OUT from FPGA monitoring, see FPGA monitoring section (temperature)
+LatchedVCCINT_ALRM	0x05	1	1	0x0		1	0x0	0x0	0.	0.	 VCCINT_ALARM_OUT from FPGA monitoring, see FPGA monitoring section (Vccint)
+LatchedUSR_VCCAUX_ALRM	0x05	1	2	0x0		1	0x0	0x0	0.	0.	 USER_TEMP_ALARM_OUT from FPGA monitoring, see FPGA monitoring section (Vccaux)
+LatchedUSR_VCCBRAM_ALRM	0x05	1	3	0x0		1	0x0	0x0	0.	0.	 USER_TEMP_ALARM_OUT from FPGA monitoring, see FPGA monitoring section (Vccbram)
+LatchedBUSY_FPGA_MON	0x05	1	4	0x1		1	0x0	0x0	0.	0.	 BUSY from FPGA monitoring, ADC busy signal. This signal transitions High during an ADC conversion. This signal also transitions High for an extended period during an ADC or sensor calibration, see FPGA monitoring section
+LatchedDRDY_FPGA_MON	0x05	1	5	0x0		1	0x0	0x0	0.	0.	 DRDY from FPGA monitoring, see FPGA monitoring section
+LatchedEOC_FPGA_MON	0x05	1	6	0x1		1	0x0	0x0	0.	0.	 EOC from FPGA monitoring. This signals transitions to an active High at the end of an ADC conversion when the measurement is written to the status register, see FPGA monitoring section
+LatchedEOS_FPGA_MON	0x05	1	7	0x1		1	0x0	0x0	0.	0.	 EOS from FPGA monitoring. This signal transitions to active High when the measurement data from the last channel in an automatic channel sequence is written to the status registers, see FPGA monitoring section
+LatchedOVER_TMP_FPG_MON	0x05	1	8	0x0		1	0x0	0x0	0.	0.	 OT (Over-Temperature alarm) from FPGA monitoring, see FPGA monitoring section
+Unused_0x05_0		0x05	6	9	0x0		1	0x0	0x0	0.	0.	 Unused
+LatchedEventDone_ASIC0	0x05	1	15	0x0		1	0x0	0x0	0.	0.	 State of event Done bit ASIC 0
+LatchedEventDone_ASIC1	0x05	1	16	0x0		1	0x0	0x0	0.	0.	 State of event Done bit ASIC 1
+LatchedEventDone_ASIC2	0x05	1	17	0x0		1	0x0	0x0	0.	0.	 State of event Done bit ASIC 2
+LatchedEventDone_ASIC3	0x05	1	18	0x0		1	0x0	0x0	0.	0.	 State of event Done bit ASIC 3
+LatchedFIFOOverflow	0x05	1	19	0x0		1	0x0	0x0	0.	0.	 Overflow on summary FIFO of event data
+LatchedFIFOUnderflow	0x05	1	20	0x0		1	0x0	0x0	0.	0.	 Underflow on summary FIFO of event data
+Unused_0x05_1		0x05	6	21	0x0		1	0x0	0x0	0.	0.	 Unused, always 0
+LatchedBackPlaneStatus	0x05	5	27	0x13	  	1      	0x0	0x0	0.	0.	 Status of backplane lines from bp4 to bp7 (also bp5 is reset and will not be available due to board reset)
+FIFOStatus_0		0x06	32	0	0x0		1	0x0	0x0	0.	0.	Data Storage FIFO underflow(bits 1,3,5,7,..) and overflow (0,2,4,..) errors. Two bits per acquisition channel. Channel 0 errors reported in bits 0(underflow) and 1(overflow), channel 1 in bits 2 and 3,….
+LatchedFIFOStatus_0	0x07	32	0	0x0		0	0x0	0x1	0.	0.	 Data Storage FIFO underflow(bits 1,3,5,7,..) and overflow (0,2,4,..) errors. Two bits per acquisition channel. Channel 0 errors reported in bits 0(underflow)  and 1(overflow),  channel  1  in  bits  2  and  3,….
+FIFOStatus_1		0x08	32	0	0x0		1	0x0	0x0	0.	0.	 Data Storage FIFO underflow(bits 1,3,5,7,..) and overflow (0,2,4,..) errors. Two bits per acquisition channel. Channel 0 errors reported in bits 0(underflow)  and 1(overflow),  channel  1  in  bits  2  and  3,….
+LatchedFIFOStatus_1	0x09	32	0	0x0		0	0x0	0x1	0.	0.	 Data Storage FIFO underflow(bits 1,3,5,7,..) and overflow (0,2,4,..) errors. Two bits per acquisition channel. Channel 0 errors reported in bits 0(underflow)  and 1(overflow),  channel  1  in  bits  2  and  3,….
+FIFOStatus_2		0x0a	32	0	0x0		1	0x0	0x0	0.	0.	 Data Storage FIFO underflow(bits 1,3,5,7,..) and overflow (0,2,4,..) errors. Two bits per acquisition channel. Channel 0 errors reported in bits 0(underflow)  and 1(overflow),  channel  1  in  bits  2  and  3,….
+LatchedFIFOStatus_2	0x0b	32	0	0x0		0	0x0	0x1	0.	0.	 Data Storage FIFO underflow(bits 1,3,5,7,..) and overflow (0,2,4,..) errors. Two bits per acquisition channel. Channel 0 errors reported in bits 0(underflow)  and 1(overflow),  channel  1  in  bits  2  and  3,….
+FIFOStatus_3		0x0c	32	0	0x0		1	0x0	0x0	0.	0.	Data Storage FIFO underflow(bits 1,3,5,7,..) and overflow (0,2,4,..) errors. Two bits per acquisition channel. Channel 0 errors reported in bits 0(underflow)  and 1(overflow),  channel  1  in  bits  2  and  3,….
+LatchedFIFOStatus_3	0x0d	32	0	0x0		0	0x0	0x1	0.	0.	Data Storage FIFO underflow(bits 1,3,5,7,..) and overflow (0,2,4,..) errors. Two bits per acquisition channel. Channel 0 errors reported in bits 0(underflow)  and 1(overflow),  channel  1  in  bits  2  and  3,….
+TriggerFIFOStatus 	0x0e	32	0	0x0		1	0x0	0x0	0.	0.
+# Trigger Statistics
+CountTACKsReceived	0x0f	16	0	0x0		3	0x0	0x1	0.	0.	 Count number of TACKs received
+CountGoodSyncTACKs	0x0f	16	16	0x0		3	0x0	0x1	0.	0.	 Count number of good Sync verification TACKs.
+# TACK statistics
+CountTACKParityErrors	0x10	8	0	0x0		1	0x0	0x1	0.	0.	 Count Tack Parity errors. Counter is reset by writing any value into register 0xF
+CountTACKParityErrors2	0x10	8	8	0x0		1	0x0	0x1	0.	0.	 Same as count in bits 7-0.   Count Tack Parity errors
+CountTACKRangeErrors	0x10	8	16	0x0		1	0x0	0x1	0.	0.	 Count of range error over Tack. Counter is reset by writing any value into register 0xF
+CountSyncErrors 	0x10	8	24	0x0		1	0x0	0x1	0.	0.	 Count of range error over Tack. Counter is reset by writing any value into register 0xF
+# FIFO statistics
+CountDataPackets 	0x11	16	0	0x0		1	0x0	0x1	0.	0.	 Count all built packets on all incoming channels. Counter is reset by writing any value into register 0xF
+CountDataPacketsEnabled	0x11	16	16	0x0		1	0x0	0x1	0.	0.	 Count all enabled for counting (bits 0 of register 0x30) built packets on all incoming channels. Counter is reset by writing any value into register 0xF
+# Packet statistics
+CountTransmittedPackets	0x12	16	0	0x0		1	0x0	0x1	0.	0.	 MAC Counter, count all transmitted packet by MAC. Counter is reset by writing any value into register 0xF
+CountTransmittedPackets2 0x12	16	16	0x0		1	0x0	0x1	0.	0.	 Copy of bits 15-0,  Counter is reset by writing any value into register 0xF
+# Ramp count statistics
+CountProcessedEvents	0x13	16	0	0x0		1	0x0	0x1	0.	0.	 Count number of event processed. Counter is reset by writing value of 1 into bit 30 of register 0x1a
+CountCommandPackets	0x13	16	16	0x0		1	0x0	0x1	0.	0.	 Count command issued to Camera module. Counter is reset by writing any value into register 0xF
+# Time Adjust Register
+Time_Offset		0x14	8	0	0x60	  	0	0x0	0xFF	8.	0.	 Time offset register, specify amount of clock cycles to adjust timebase between tester and camera module to start simultaneously (8 ns steps)
+Unused_0x14		0x14	8	8	0x0		1	0x0	0x0	0.	0.	 Unused
+Correct_TACK		0x14	15	16	0x0		0	0x0	0x7FFF	1.	0.	 To correct TACK for proper time by taking in to account propagation and decision making (1 ns steps)
+Start_TimeBase		0x14	1	31	0x0		0	0x0	0x1	0.	0.	 Start time base writing 1 to this bit will start and restart time base. Time base always start from 0
+Unused_0x15		0x15	32	0	0x0		1	0x0	0x0	0.	0.	 Unused
+TimeCounter		0x16	32	0	0x0		1	0x0	0x0	0.	0.	 Free running time counter value set by sync over TACK pass 32 LSB
+# Control register 0
+EnableBit		0x17	1	0	0x1		1	0x0	0x1	0.	0.	 Enable bit, 1- enable analog sampling, after proper Sync command issued
+Unused_0x17		0x17	1	1	0x0		1	0x0	0x0	0.	0.	 Unused
+OffsetUsageEnable	0x17	1	2	0x0		0	0x0	0x1	0.	0.	 Offset usage enable (1).  In order to optimize 48 samples readout relatively to trigger position, logic implement option to sync readout to 8 sample bins (4 bins per buffer). Setting bit to one will enable this feature. Otherwise buffer readout always start from beginning. Should be noted that that setting number of readout buffer to more then 2( Bits 23-20) will disable offset usage. And for software buffer this feature disabled as well (bit 9 of 0x1b)
+RampStartDelay		0x17	5	3	0x0		0	0x0	0x1F	8.	0.	 Ramp start delay after trigger, in system clocks (8 ns)
+RampSignalDuration	0x17	13	8	0x7D0	  	0	0x0	0x1FFF	0.	0.	 Specify ramp signal duration to Target
+SR_SEL_Mode		0x17	1	21	0x0		0	0x0	0x1	0.	0.	 Select if SR_SEL pulse signal asserted all time (1)  or only actual event readout process
+SR_CLK_Mode		0x17	1	22	0x1		0	0x0	0x1	0.	0.	 Special mode for sr_clk. 0  sr_clk run continuously, 1  sr_clk run when only needed
+Options_BufferNotIncr	0x17	1	23	0x0		0	0x0	0x1	0.	0.	 Select options when buffer never incremented, stay same as start one
+MaxChannelsInPacket	0x17	7	24	0x0		0	0x0	0x7F	0.	0.	 Maximum Ethernet packet size parameter. Indicate how many channels out of available 64 can be shipped in one packet. Value of 0 and 1 indicate one channel per network packet, 2  channels  per  packet,  and  … Careful attention need to be taken to set this parameter. First of all user need to know type of network card host system will have and if it support Jumbo packets. In any case maximum size of acceptable network packet need to be compared with expected event size and properly divided into packets. Default value of 0 (or 1) always process just one channel per packet and works in all cases but will generate maximum number of packets (64). This parameter help to reduce number of packets and related overhead for packet header and trailer to optimize system performance.
+EnablePacketCount	0x17	1	31	0x0		0	0x0	0x1	0.	0.	 Enable packet count in register 0x10, bits 31-16
+# Control register 1
+PowerUpASIC0  		0x18	1	0	0x0		0	0x0	0x1	0.	0.	 Power up ASIC 0 bit. (0 turn off 2.5V to ASIC, 1 -  turn on 2.5V to ASIC)
+CLR_REG0  		0x18	1	1	0x0		0	0x0	0x1	0.	0.	 Directly control clr_reg input to Target ASIC 0
+Unused_0x18_0		0x18	2	2	0x0		1	0x0	0x0	0.	0.	 Unused
+PowerUpASIC1  		0x18	1	4	0x0		0	0x0	0x1	0.	0.	 Power up ASIC 1 bit. (0 turn off 2.5V to ASIC, 1 -  turn on 2.5V to ASIC)
+CLR_REG1  		0x18	1	5	0x0		0	0x0	0x1	0.	0.	 Directly control clr_reg input to Target ASIC 1
+Unused_0x18_1  		0x18	2	6	0x0		1	0x0	0x0	0.	0.	 Unused
+PowerUpASIC2  		0x18	1	8	0x0		0	0x0	0x1	0.	0.	 Power up ASIC 2 bit. (0 turn off 2.5V to ASIC, 1 -  turn on 2.5V to ASIC)
+CLR_REG2  		0x18	1	9	0x0		0	0x0	0x1	0.	0.	 Directly control clr_reg input to Target ASIC 2
+Unused_0x18_2  		0x18	2	10	0x0		1	0x0	0x0	0.	0.	 Unused
+PowerUpASIC3  		0x18	1	12	0x0		0	0x0	0x1	0.	0.	 Power up ASIC 3 bit. (0 turn off 2.5V to ASIC, 1 -  turn on 2.5V to ASIC)
+CLR_REG3  		0x18	1	13	0x0		0	0x0	0x1	0.	0.	 Directly control clr_reg input to Target ASIC 3
+Unused_0x18_3		0x18	6	14	0x0		1	0x0	0x0	0.	0.	 Unused
+DoneSignalSpeedUp	0x18	1	20	0x0		0	0x0	0x1	0.	0.	 Select if done signal is used to speed up conversion (1  done is enabled)
+BufferEnableLogic	0x18	1	21	0x1	  	0	0x0	0x1	0.	0.	 Select buffer enable logic. With current sampling timing this bit need to be set to 1. All odd buffers will get incremented earlier and as result special counting as increment by 3 and decrement by 1 need to be used (Set to 1)
+WilkinsonClockFreq	0x18	2	22	0x1		0	0x0	0x3	0.	0.	 Select Wilkinson clock frequency divided by 2: 00 - 104MHz, 01 - 250MHZ, 10 - unused (will result in 104MHz), 11 - unused (will result in 250MHz)
+SelectSampleClockPhase	0x18	4	24	0xF		0	0x0	0xF	0.	0.	 Select phase of clock to sample event data from ASICs, 1 per ASIC (0  rising edge, 1 - falling edge) ASIC0  bit 24, ASIC1  bit  25,  …,  ASIC3   bit 27)
+Unused_0x18_4		0x18	4	28	0x0		1	0x0	0x0	0.	0.	 Unused
+# Trigger control register 0
+TriggerDelayAlternative	0x19	14	0	0x0		0	0x0	0xF	1.	0.	 Trigger delay alternative, to compensate for time between trigger arrival and trigger decision making, need to be found experimentally. Count in 1ns steps
+Unused_0x19		0x19	4	14	0x0		1	0x0	0x0	0.	0.	 Unused
+TriggerDelay		0x19	14	18	0x70	  	0	0x0	0x3FFFF	1.	0.	 Trigger delay, to compensate for time between trigger arrival and trigger decision making, need to be found experimentally. Count in 1ns steps
+# Trigger control register 1
+PhaseOfTACKClock	0x1a	1	0	0x0		0	0x0	0x1	0.	0.	 Select phase of clock to sample TACK from BP (0  rising edge, 1 - falling edge)
+Unused_0x1a_0		0x1a	7	1	0x0		1	0x0	0x0	0.	0.	 Unused
+EnableTriggerInput	0x1a	18	8	0x0		0	0x0	0x3FFF	0.	0.	 Enable trigger input contribution to trigger counter(register 0xF bits 31-16). Bits assigned as followed: 3-0 : Target ASIC 0 trigger bits, 7-4 : Target ASIC 1 trigger bits, 11-8 : Target ASIC 3 trigger bits, 15-12 : Target ASIC 3 trigger bits,16 : external hardware trigger, 17 : software trigger
+Unused_0x1a_1		0x1a	4	26	0x0		1	0x0	0x0	0.	0.	 Unused
+TriggerCounterReset	0x1a	1	30	0x0		0	0x0	0x1	0.	0.	 Trigger counter reset
+InitiateSoftwareTrig	0x1a	1	31	0x0		1	0x0	0x1	0.	0.	 Unused -Software trigger, non sticky bit, need to be set to one to initiate software trigger, does not require to set to 0 to generate next trigger
+# Row/column control/status
+Row			0x1b	3	0	0x0		0	0x0	0x7	0.	0.	 Specify row for readout when trigger received and activated by TACK Mode = "10" OR  "11"
+Column			0x1b	6	3	0x0		0	0x0	0x3F	0.	0.	 Specify column for readout when trigger received and activated by TACK Mode = "10" OR  "11"
+Unused_0x1b		0x1b	1	9	0x0		1	0x0	0x0	0.	0. 	 Unused
+CurrentColumn		0x1b	6	10	0x0		1	0x0	0x0	0.	0.	 Free running current column value to simulate sampling buffer write column pointer
+CurrentRow		0x1b	3	16	0x0		1	0x0	0x0	0.	0.	 Free running current row value to simulate sampling buffer write row pointer
+LatestSample		0x1b	4	19	0x0		1	0x0	0x0	0.	0.	 Latched by latest trigger value of sample value  (only 4 MSB)
+LatestColumn		0x1b	6	23	0x0		1	0x0	0x0	0.	0.	 Latched by latest trigger value of column counter
+LatestRow		0x1b	3	29	0x0		1	0x0	0x0	0.	0.	 Latched by latest trigger value of row counter
+# Number of samples to read
+NumberOfBlocks		0x1c	4	0	0x1		0	0x0	0xF	0.	0.	 Specify number of buffer for readout, with 0 corresponding to 1 buffers
+NumSampOnPartBlock	0x1c	5	4	0x0		0	0x0	0x1F	0.	0.	 Number of samples on partial buffer, from 0 to 31, to enable flexible readout of any number of desirable samples. At the moment value of 1 -> 16 samples, 0  0 samples. Optimized for 48 sample event
+UnusedNumberOfSamples0	0x1c	7	9	0x0		1	0x0	0x0	0.	0.	 Unused
+AltNumberOfBlocks	0x1c	4	16	0x0		0	0x0	0xF	0.	0.	 Specify number of alternative buffer for readout, with 0 corresponding to 1 buffers
+Unused_0x1c		0x1c	12	20	0x0		1	0x0	0x0	0.	0.	 Unused
+Unused_0x1d		0x1d	32	0	0x0		1	0x0	0x0	0.	0.	 Unused
+# Configuration waveform register
+PCLK_SINlow 		0x1e	8	0	0x12	 	0	0x0	0xFF	0.	0. 	 PCLK width plus 1 when SIN low, need to be set to 0x7
+SIN_beforePCLK		0x1e	8	8	0x5		0	0x0	0xFF	0.	0.	 SIN settling time before PCLK plus 1, need to set to 1
+SIN_afterPCLK		0x1e	8	16	0x5		0	0x0	0xFF	0.	0.	 SIN settling time after PCLK plus 1, need to set to 1
+PCLK_SINhigh		0x1e	8	24	0x12	      	0	0x0	0xFF	0.	0.	 PCLK width plus 1 when SIN high, need to be set to 0x3
+Unused_0x1f		0x1f	32	0	0x0		1	0x0	0x0	0.	0.	 Unused
+Unused_0x20		0x20	32	0	0x0		1	0x0	0x0	0.	0.	 Unused
+Unused_0x21		0x21	32	0	0x0		1	0x0	0x0	0.	0.	 Unused
+Unused_0x22		0x22	32	0	0x0		1	0x0	0x0	0.	0.	 Unused
+Unused_0x23		0x23	32	0	0x0		1	0x0	0x0	0.	0.	 Unused
+# Flash memory write
+Flash_ValueToWrite	0x24	16	0	0x0		1	0x0	0x0	0.	0.	 Value to be written to flash intermediate storage at location specified in bits 25-16
+Flash_WriteAddress	0x24	10	16	0x0		0	0x0	0x3FF	0.	0.	 Address of flash intermediate command data storage for write.
+Flash_WriteMSBAddress	0x24	1	26	0x0		0	0x0	0x1	0.	0.	 MSB Address , select flash 0(0), or 1(1)
+Unused_0x24		0x24	4	27	0x0		1	0x0	0x0	0.	0.	 Unused
+Flash_StartWrite	0x24	1	31	0x0		0	0x0	0x1	0.	0.	 Write to this bit (1) start operation of writing to flash command intermediate storage
+# Flash memory control
+Flash_CommandSize	0x25	9	0	0x0		0	0x0	0x1FF	0.	0.	 Size of command in bytes to be played from intermediate command store
+Flash_NotAsserted	0x25	1	9	0x0		1	0x0	0x0	0.	0.	 If set to 1, flash chip select will not be asserted16
+Unused_0x25_0		0x25	6	10	0x0		1	0x0	0x0	0.	0.
+Flash_ReadSize		0x25	9	16	0x0		0	0x0	0x1FF	0.	0.	 Size of read operation in bytes to be to be stored into intermediate read store, 0x0  no read required
+Unused_0x25_1		0x25	5	25	0x0		1	0x0	0x0	0.	0.
+Flash_Start0		0x25	1	30	0x0		0	0x0	0x1	0.	0.	 Write to this bit (1) start flash 0 command pre-stored in flash intermediate storage programmable in register 0x24. If command involve read operation data will be stored in intermediate storage accessible from register 0x26
+Flash_Start1		0x25	1	31	0x0		0	0x0	0x1	0.	0.	 Write to this bit (1) start flash 1 command pre-stored in flash intermediate storage programmable in register 0x24. If command involve read operation data will be stored in intermediate storage accessible from register 0x26 -- to be evaluated, AZ
+# Flash memory read
+Flash_ReadValue		0x26	16	0	0x0		1	0x0	0x0	0.	0.	 Value read from flash intermediate storge at location specified in bits 25-16.
+Flash_ReadAddress	0x26	10	16	0x0		0	0x0	0x3FF	0.	0.	 Address of flash intermediate data storage to read.
+Flash_ReadMSBAddress	0x26	1	26	0x0		0	0x0	0x1	0.	0.	 MSB Address , select flash 0(0), or 1(1)
+Unused_0x26		0x26	3	27	0x0		1	0x0	0x0	0.	0.	 Unused
+Flash_DoneBit		0x26	1	30	0x1		0	0x0	0x1	0.	0.	 Done bit, indicate that flash command is completed
+Flash_Start		0x26	1	31	0x0		0	0x0	0x1	0.	0.	 Write to this bit (1) start operation of reading which can be completed on follow up read
+# Zero-suppression control register
+Zero_Threshold		0x27	12	0	0x0		0	0x0	0xFF	0.	0.	 Set threshold value to compare. Discard if all values under threshold.
+Zero_OverflowValue	0x27	12	12	0x0		0	0x0	0xFF	0.	0.	 Set overflow value to properly handle overflow
+Unused_0x27		0x27	6	24	0x0		1	0x0	0x3F	0.	0.	 Unused
+Zero_Test		0x27	1	30	0x0		0	0x0	0x1	0.	0.	 Test zero-suppression reporting. Configure system return only enabled channels regarding zero-suppression logic
+Zero_Enable		0x27	1	31	0x0		0	0x0	0x1	0.	0.	 Enable zero suppression algorithm. This algorithm discard all suppressed channels
+Unused_0x28		0x28	32	0	0x0		1	0x0	0x0	0.	0.	 Unused
+# I2C registers
+I2CRW_Primary		0x29	1	0	0x0		0	0x0	0x1	0.	0.	0 - write operation, 1 - read operation
+I2CSetup_Primary	0x29	7		1		0x0		  0			 0x0		0x7F		   0.		  0.	 Setup primary board I2C bus, expert use only!
+I2CRegAddr_Primary	0x29	8	8	0x0		0	0x0	0xFF	0.	0.	Set 8 bit register address for read and write
+I2CRW_Aux		0x29	1	16	0x0		0	0x0	0x1	0.	0.	0 - write operation, 1 - read operation
+I2CSetup_Aux		0x29	7	17	0x0		0	0x0	0x7F	0.	0.	 Setup auxiliary board I2C bus, expert use only!
+I2CRegAddr_Aux		0x29	8	24	0x0		0	0x0	0xFF	0.	0.	Set 8 bit register address for read and write
+I2CSetup_Power		0x2a	8	0	0x0		0	0x0	0xFF	0.	0.	 Setup power board I2C bus, expert use only!
+I2CRW_Power		0x2a	1	8	0x0		0	0x0	0x1	0.	0.	0 - write operation, 1 - read operation
+I2CAddr_Power		0x2a	7	9	0x0		0	0x0	0x7F	0.	0.	I2C device address, see schematic
+I2CRegAddr_Power	0x2a	8	16	0x0		0	0x0	0xFF	0.	0.	Set 8 bit register address for read and write
+Unused_0x2a_0		0x2a	4	24	0x0		1	0x0	0x0	0.	0.	Unused
+I2CDataValid_Primary	0x2a	1	28	0x0		1	0x0	0x1	0.	0.	Data in I2CReadData_Primary is valid, 1 - valid, 0 - wait for completion
+I2CDataValid_Aux	0x2a	1	29	0x0		1	0x0	0x1	0.	0.	Data in I2CReadData_Aux is valid, 1 - valid, 0 - wait for completion
+I2CDataValid_Power	0x2a	1	30	0x0		1	0x0	0x1	0.	0.	Data in I2CReadData_Power is valid, 1 - valid, 0 - wait for completion
+Unused_0x2a_1		0x2a	2	31	0x0		1	0x0	0x0	0.	0.	Unused
+I2CReadData_Primary	0x2b	16	0	0x0		1	0x0	0x0	0.	0.	Data read from primary board I2C bus.
+I2CReadData_Aux		0x2b	16	16	0x0		1	0x0	0x0	0.	0.	Data read from auxiliary board I2C bus.
+I2CReadData_Power	0x2c	16	0	0x0		1	0x0	0x0	0.	0.	Data read from power board I2C bus.
+Unused_0x2c		0x2c 	15	16	0x0		1	0x0	0x0	0.	0. 	Unused
+I2CStart_Power          0x2c    1       31      0x0             3       0x0     0x1     0.      0.      Start power board I2C operation
+Unused_0x2d		0x2d 	32	0	0x0 		1	0x0 	0x0	0.	0.  	Unused
+I2CWriteData_Primary	0x2e	8	0	0x0		3	0x0	0xFF	0.	0.	Write this data to primary board I2C bus
+Unused_0x2e		0x2e 	23	8	0x0 		1	0x0 	0x0 	0.	0.  	Unused
+I2CStart_Primary        0x2e    1       31      0x0             3       0x0     0x1     0.      0.      Start primary board I2C operation
+I2CWriteData_Aux	0x2f	8	0	0x0		3	0x0	0xFF	0.	0.	Write this data to aux board I2C bus
+Unused_0x2f		0x2f 	23	8	0x0 		1	0x0 	0x0 	0.	0.  	Unused
+I2CStart_Aux            0x2f    1       31      0x0             3       0x0     0x1     0.      0.      Start primary board I2C operation
+Unused_0x30		0x30	32	0	0x0		1	0x0	0x0	0.	0.	Unused
+# TACK simulator LSW
+TACK_Command0		0x31	32	0	0x0		0	0x0	0xFFFFFFFF	0.	0.	 Bits 0 to 31 of TACK command (see section 8), Write to register 0x33 initiate this command application
+# TACK simulator MSW
+TACK_Command1		0x32	32	0	0x0		0	0x0	0xFFFFFFFF 	0.	0.	 Bits 32 to 63 of TACK command (see section 8), Write to register 0x33 initiate this command application
+# TACK simulator Special word
+TACK_EnableTrigger	0x33	18	0	0x0		0	0x0	0xFFFFFFFF 	0.	0.	 Enable trigger input. Bits assigned as followed: 0 –trigger bit 0, 1 –trigger bit 1,  ...,  15  – trigger bit 15 ,16 – external hardware trigger, 17 – software trigger
+TACK_TriggerType	0x33	2	18	0x0		0	0x0	0x3 	0.	0.	 Trigger type: for trigger mode 00: 00 – TACK with number of buffers and trigger delay for set 0,01 - TACK with number of buffers and trigger delay for set 1, 10 – software trigger, 11 - unused	; for trigger mode 01: 00 – Initial sync command, can be done only once for proper, operation, can be reassured after stop sync command (trigger type 10), 01 – Re-sync command, passive command, checked on cameramodule do detect if any difference between time base on camera module and tester board, 10 – stop sync command, after stop sync command, to operate triggering on camera module sync command need to be reissued, 11 - unused
+TACK_TriggerMode	0x33	2	20	0x0		0	0x0	0x3 	0.     	0.	 Trigger mode: 00 – regular trigger, 01 – sync related operation, 10 - unused, 11 - unused
+TACK_TriggerDead	0x33	7	22	0x0		0	0x0	0x7F 	2048			rigger dead time, after trigger detected and processed module will ignore the next trigger for number of ns specified in these bits. Asserted deadtime = Value * 256*8ns.
+TACK_Resync		0x33	1	29	0x0		0	0x0	0x1 	0.	0.	 RE-sync trigger, take current time on tester board and send to camera module. Correct Trigger mode need to be used
+TACK_Parity		0x33	1	30	0x0		0	0x0	0x1 	0.	0.	 Parity of TACK, 0- even parity, 1 – odd parity, TBD
+TACK_Set		0x33	1	31	0x0		0	0x0	0x1 	0.	0.	 Software trigger, if software trigger enable, it is treated as random trigger, otherwise, it sent command specified in TACK register and TACK mode registers
+# Result from slow signal monitoring via ADC161S626, 16 bit, reference voltage is +2.5V
+SlowResult0_Primary	0x34	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 0 from primary board, 16 bit, reference is 2.5V, Range 0-5V --> count * 2 * 0.03815 = voltage in mV, all larger than 0x7FFF 0-2.5V, smaller than 0x07FFF 2.5-5V
+SlowResult1_Primary	0x34	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 1 from primary board
+SlowResult2_Primary	0x35	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 2 from primary board
+SlowResult3_Primary	0x35	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 3 from primary board
+SlowResult4_Primary	0x36	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 4 from primary board
+SlowResult5_Primary	0x36	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 5 from primary board
+SlowResult6_Primary	0x37	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 6 from primary board
+SlowResult7_Primary	0x37	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 7 from primary board
+SlowResult8_Primary	0x38	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 8 from primary board
+SlowResult9_Primary	0x38	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 9 from primary board
+SlowResult10_Primary	0x39	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 10 from primary board
+SlowResult11_Primary	0x39	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 11 from primary board
+SlowResult12_Primary	0x3a	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 12 from primary board
+SlowResult13_Primary	0x3a	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 13 from primary board
+SlowResult14_Primary	0x3b	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 14 from primary board
+SlowResult15_Primary	0x3b	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 15 from primary board
+SlowResult16_Primary	0x3c	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 16 from primary board
+SlowResult17_Primary	0x3c	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 17 from primary board
+SlowResult18_Primary	0x3d	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 18 from primary board
+SlowResult19_Primary	0x3d	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 19 from primary board
+SlowResult20_Primary	0x3e	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 20 from primary board
+SlowResult21_Primary	0x3e	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 21 from primary board
+SlowResult22_Primary	0x3f	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 22 from primary board
+SlowResult23_Primary	0x3f	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 23 from primary board
+SlowResult24_Primary	0x40	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 24 from primary board
+SlowResult25_Primary	0x40	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 25 from primary board
+SlowResult26_Primary	0x41	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 26 from primary board
+SlowResult27_Primary	0x41	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 27 from primary board
+SlowResult28_Primary	0x42	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 28 from primary board
+SlowResult29_Primary	0x42	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 29 from primary board
+SlowResult30_Primary	0x43	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 30 from primary board
+SlowResult31_Primary	0x43	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 31 from primary board
+SlowResult0_Aux		0x44	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 0 from Aux board, 16 bit, reference is 2.5V, Range 0-5V --> count * 2 * 0.03815 = voltage in mV, all larger than 0x7FFF 0-2.5V, smaller than 0x07FFF 2.5-5V
+SlowResult1_Aux		0x44	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 1 from Aux board
+SlowResult2_Aux		0x45	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 2 from Aux board
+SlowResult3_Aux		0x45	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 3 from Aux board
+SlowResult4_Aux		0x46	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 4 from Aux board
+SlowResult5_Aux		0x46	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 5 from Aux board
+SlowResult6_Aux		0x47	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 6 from Aux board
+SlowResult7_Aux		0x47	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 7 from Aux board
+SlowResult8_Aux		0x48	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 8 from Aux board
+SlowResult9_Aux		0x48	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 9 from Aux board
+SlowResult10_Aux	0x49	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 10 from Aux board
+SlowResult11_Aux	0x49	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 11 from Aux board
+SlowResult12_Aux	0x4a	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 12 from Aux board
+SlowResult13_Aux	0x4a	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 13 from Aux board
+SlowResult14_Aux	0x4b	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 14 from Aux board
+SlowResult15_Aux	0x4b	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 15 from Aux board
+SlowResult16_Aux	0x4c	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 16 from Aux board
+SlowResult17_Aux	0x4c	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 17 from Aux board
+SlowResult18_Aux	0x4d	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 18 from Aux board
+SlowResult19_Aux	0x4d	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 19 from Aux board
+SlowResult20_Aux	0x4e	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 20 from Aux board
+SlowResult21_Aux	0x4e	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 21 from Aux board
+SlowResult22_Aux	0x4f	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 22 from Aux board
+SlowResult23_Aux	0x4f	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 23 from Aux board
+SlowResult24_Aux	0x50	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 24 from Aux board
+SlowResult25_Aux	0x50	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 25 from Aux board
+SlowResult26_Aux	0x51	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 26 from Aux board
+SlowResult27_Aux	0x51	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 27 from Aux board
+SlowResult28_Aux	0x52	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 28 from Aux board
+SlowResult29_Aux	0x52	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 29 from Aux board
+SlowResult30_Aux	0x53	16	0	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 30 from Aux board
+SlowResult31_Aux	0x53	16	16	0x0	1	0x0	0x0	0.      0.	Slow ADC result channel 31 from Aux board
+Unused_0x54		0x54	32	0	0x0	1	0x0	0x0	0.	0.	Unused
+Unused_0x55		0x55	32	0	0x0	1	0x0	0x0	0.	0.	Unused
+# Trigger efficiency control 0
+TriggerEff_Duration	0x56	31	0	0x0	0	0x0	0x7FFFFFFF 8.	0.	Specify duration of trigger statistic collection in 8ns. So, full value is ~8.5 seconds
+TriggerEff_DoneBit	0x56	1	31	0x1	0	0x0	0x1 	0.	0.	Indicate completion of counting
+# Trigger efficiency control 1
+TriggerEff_Enable	0x57	16	0	0x0	0	0x0	0xFFFF	0.	0.     	Enable for trigger inputs into efficiency counters in register 0x4b. One bit per trigger input
+Unused_0x57		0x57	16	16	0x0	1	0x0	0x0	0.	0.     	Unused
+# Trigger input counter
+TriggInputCounter	0x58	31	0	0x0	0	0x0	0x7FFFFFFF 8.	0.	Number of trigger low to high transitions counted
+TriggInputCounterDone	0x58	1	31	0x1	0	0x0	0x1	8.	0.	 Indicate completion of counting
+# Trigger efficiency counter
+TriggEffCounter		0x59	31	0	0x0	0	0x0	0x7FFFFFFF 8.	0.	 Number of trigger low to high transitions counted
+TriggEffCounterDone	0x59	1	31	0x1	0	0x0	0x1	8.	0.	 Indicate completion of counting
+# Software reset
+SoftwareReset		0x5a	32	0	0x0	2	0x0	0xFFFFFFFF 0.	0.	 Writing value of 0xBECEDACE will start reset of FPGA logic, but keep values programmed into register. Also, write to this register does not generate command response due to transmitter logic reset as well
+# Channel enable 0
+EnableChannelsASIC0	0x5b	16	0	0x0 	0	0x0	0xFFFF	   0.	0.	Enable channels for readout on ASIC 0, bit-mask
+EnableChannelsASIC1	0x5b	16	16	0x0 	0	0x0	0xFFFF	   0.	0.	Enable channels for readout on ASIC 1, bit-mask
+# Channel enable 1
+EnableChannelsASIC2	0x5c	16	0	0x0 	0	0x0	0xFFFF	   0.	0.	Enable channels for readout on ASIC 2, bit-mask
+EnableChannelsASIC3	0x5c	16	16	0x0 	0	0x0	0xFFFF	   0.	0.	Enable channels for readout on ASIC 3, bit-mask
+# Trigger statistic 1
+TriggStatCount_All	0x5d	16	0	0x0	1	0x0	0xFFFF	   0.	0.     Count trigger low to high transitions on all incoming triggers (16 from fourTarget ASICs, 1 software trigger(bit 31 of register 0x1a), and 1 external hardware trigger). Trigger transition observed on same clock transition counted as one trigger. Counter is reset by writing value of 1 into bit 30 of register 0x1a
+TriggStatCount_Enabled	0x5d	16	16	0x0	1	0x0	0xFFFF	   0.	0. 	 Count trigger low to high transitions on all enabled for counting (bits 17-0 of register 0x1a) incoming triggers (16 from four Target ASICs, 1 software trigger(bit 31 of register 0x1a), and 1 external hardware trigger). Trigger transition observed on same clock transition counted as one trigger. Counter is reset by writing value of 1 into bit 30 of register 0x1a
+# Special feature (expert usage only)
+Unused_0x5e_0		0x5e	6	0	0x0	1	0x0	0x0	   0.	0.	 Unused , TBD
+ExtTriggerDirection	0x5e	1	6	0x1	0	0x0	0x1	   0.	0. 	 To control direction of External Trigger IO, 0 – output (sync with sampling), 1 - input
+SpecialTriggerMode	0x5e	1	7	0x0	0	0x0	0x1	   0.	0.	 Special trigger mode. When set to 1 enable J5 output generate pulse on every sampling buffer turn for 10 event and stop. To reactivate need to bring it back to 0, if 0 - trigger sync command generated ~ at 1kHz
+SerialDataDelay		0x5e	7	8	0x0	0	0x0	0x7F       0.	0.	 Adjust event serial data input delay to make sure all channels properly clock input data
+ReadSamplesDirection	0x5e	1	15	0x0	0	0x0	0x1	   0.	0.	 To study drooping effect of sample 31(32nd) we can read samples in increasing (0) or decreasing (1) order.
+Unused_0x5e_1		0x5e	16	16	0x0	1	0x0	0x0	   0.	0.  	 Unused
+Unused_0x5f		0x5f	16	0	0x0	1	0x0	0x0	   0.	0.  	 Unused
+# Dead-time control
+DurationofDeadtime	0x5f	16	16	0x0	0	0x0	0xFFFF     8.e-3 0. 	 Duration of trigger deadtime, in microseconds
+# Write Sampling Target ASICs
+WriteTargetValue		0x60	12		0		0x0		  1			 0x0		0xFFF      0.		  0.	 Target register value to write. See Target 7 documentation for specific registers and bit allocation. Set to read only so it is skipped in initialisation, interface is through WriteASICSetting
+WriteTargetAddress		0x60	7		12		0x0		  1			 0x0		0x7F       0.		  0.	 Target register address to write. See Target 7 documentation for specific register address map. Set to read only so it is skipped in initialisation, interface is through WriteASICSetting
+EnableLatching			0x60	1		19		0x0		  1			 0x0		0x1        0.		  0.	 Define if data latching on Target is required. 0 – latching is required, 1 – no latching. Set to read only so it is skipped in initialisation, interface is through WriteASICSetting
+ReadBackImmediately		0x60	1		20		0x0		  1			 0x0		0x1        0.		  0.	 If bit 19 is set (1) read back followed immediately after write. Otherwise, read of previously written register. Set to read only so it is skipped in initialisation, interface is through WriteASICSetting
+EnableWriteASIC0		0x60	1		21		0x0		  1			 0x0		0x1        0.		  0.	 Enable (1) write/read operation to ASIC 0. Set to read only so it is skipped in initialisation, interface is through WriteASICSetting
+EnableWriteASIC1			0x60	1		22		0x1		 1			 0x0		0x1        0.		  0.	 Enable (1) write/read operation to ASIC 1. Set to read only so it is skipped in initialisation, interface is through WriteASICSetting
+EnableWriteASIC2		0x60	1		23		0x1		  1			 0x0		0x0        0.		  0. 	 Not used for TargetC Eval Board. Set to read only so it is skipped in initialisation, interface is through WriteASICSetting
+EnableWriteASIC3		0x60	1		24		0x1		  1			 0x0		0x0        0.		  0.	 Not used for TargetC Eval Board. Set to read only so it is skipped in initialisation, interface is through WriteASICSetting
+Unused_0x60			0x60	7		25		0x1		  1			 0x0		0x0        0.		  0.     Unused
+# Read Target 0,1
+ReadTargetASIC0			0x61	12		0		0x0		  1			 0x0		0x0        0.		  0.	 Read back value from TARGET C. Updated after Target ASIC operation enabled in register 0x40(bit 20). If bit 19 is set (1) read back followed immediately after write. Otherwise, read of previously written register
+Unused_0x61_0			0x61	4		12		0x0		  0			 0x0		0x0        0.		  0. 	 Unused
+ReadTargetASIC1                 0x61    12              16               0x0               1                      0x0            0x0        0.             0.     Read back value from TARGET C
+Unused_0x61_1                   0x61    4              28              0x0               0                      0x0            0x0        0.             0.     Unused
+# Read Target 2,3
+ReadTargetASIC2                 0x62    12              0               0x0               1                      0x0            0x0        0.             0.     Read back value from TARGET C
+Unused_0x62_0                   0x62    4               12              0x0               0                      0x0            0x0        0.             0.     Unused
+ReadTargetASIC3                 0x62    12              16               0x0               1                      0x0            0x0        0.             0.     Read back value from TARGET C
+Unused_0x62_1                   0x62    4              28              0x0               0                      0x0            0x0        0.             0.     Unused
+# Write Trigger Target
+WriteTriggerTargetValue		0x63	12		0		0x0		  1			 0x0		0xFFF      0.		  0.	 Target register value to write. See Target 7 documentation for specific registers and bit allocation. Set to read only so it is skipped in initialisation, interface is through WriteASICSetting
+WriteTriggerTargetAddress	0x63	7		12		0x0		  1			 0x0		0x7F       0.		  0.	 Target register address to write. See Target 7 documentation for specific register address map. Set to read only so it is skipped in initialisation, interface is through WriteASICSetting
+EnableLatchingTrigger		0x63	1		19		0x0		  1			 0x0		0x1        0.		  0.	 Define if data latching on Target is required. 0 – latching is required, 1 – no latching. Set to read only so it is skipped in initialisation, interface is through WriteASICSetting
+ReadBackImmediatelyTriggerTarget		0x63	1		20		0x0		  0			 0x0		0x1        0.		  0.	 If bit 19 is set (1) read back followed immediately after write. Otherwise, read of previously written register. Set to read only so it is skipped in initialisation, interface is through WriteASICSetting
+EnableWriteTriggerTargetASIC0	0x63	1		21		0x0		  1			 0x0		0x1        0.		  0.	 Enable (1) write/read operation to ASIC 0. Set to read only so it is skipped in initialisation, interface is through WriteASICSetting
+Unused_0x63			0x63	10		22		0x1		  1			 0x0		0x1        0.		  0.	 Enable (1) write/read operation to ASIC 1. Set to read only so it is skipped in initialisation, interface is through WriteASICSetting
+# Read Trigger Target 0,1
+ReadTriggerTargetASIC0		0x64	12		0		0x0		  1			 0x0		0x0        0.		  0.	 Read back value from TARGET C. Updated after Target ASIC operation enabled in register 0x40(bit 20). If bit 19 is set (1) read back followed immediately after write. Otherwise, read of previously written register
+Unused_0x64_0		0x64	4	12	0x0	1	0x0	0x0     0.	0. 	 Unused
+ReadTriggerTargetASIC1	0x64	12	16	0x0	1	0x0	0x0     0.	0.	 Read back value from T5TEA
+Unused_0x64_1		0x64	4	28	0x0	1	0x0	0x0     0.	0. 	 Unused
+# Read  Trigger Target 2,3
+ReadTriggerTargetASIC2	0x65	12	0	0x0	1	0x0	0x0     0.	0.	 Read back value from T5TEA
+Unused_0x65_0		0x65	4	12	0x0	1	0x0	0x0     0.	0. 	 Unused
+ReadTriggerTargetASIC3	0x65	12	16	0x0	1	0x0	0x0     0.	0.	 Read back value from T5TEA
+Unused_0x65_1		0x65	4	28	0x0	1	0x0	0x0     0.	0. 	 Unused
+# addition I2C register
+I2CWriteData_Power	0x66	8	0	0x0	3	0x0	0xFF	0.	0.	Write this data to power board I2C bus
+Unused_0x66		0x66 	24	8	0x0 	1	0x0 	0x0 	0.	0.  	Unused
+Unused_0x67		0x67	32	0	0x0	1	0x0	0x0	0.	0. 	Unused
+Unused_0x68		0x68	32	0	0x0	1	0x0	0x0	0.	0.	Unused
+Unused_0x69		0x69	32	0	0x0	1	0x0	0x0	0.	0.	Unused
+Unused_0x6a		0x6a	32	0	0x0	1	0x0	0x0	0.	0.	Unused
+Unused_0x6b		0x6b	32	0	0x0	1	0x0	0x0	0.	0.	Unused
+Unused_0x6c		0x6c	32	0	0x0	1	0x0	0x0	0.	0.	Unused
+Unused_0x6d		0x6d	32	0	0x0	1	0x0	0x0	0.	0.	Unused
+Unused_0x6e		0x6e	32	0	0x0	1	0x0	0x0	0.	0.	Unused
+Unused_0x6f		0x6f	32	0	0x0	1	0x0	0x0	0.	0.	Unused
+DataSendingDelay	0x70	13	0	0x0	0	0x0	0x1FFF	0.	0.	Event Delay in 128 ns steps
+EnableCommsClockFromARP 0x70    1       13      0x0     0       0x0     0x1     0.   	0.     	If set to 0: recover phase of comms clock from ARP messages; if set to 1: manually set phase in bit 14 (although 0 is selected, manually setting phase might be required due to buggy implementation)
+PhaseOfCommsClock	0x70	1	14	0x0	0	0x0	0x1	0.	0.     	Select the phase of the clock which determines the 8 ns / 16 ns edge for the ethernet responses
+Unused_0x70		0x70	17	15	0x0	1	0x0	0x0	0.	0.	Spare bits of register 0x70
+PacketDelay             0x71   	32      0       0x0     0      	0x0    	0xFFFFFFFF 8.   0.	Delay between packets sent from TM, 32 bits in 8 ns steps
+#Configuration Flash
+ConfigFlashData		0x72	32	0	0x0	0	0x0	0x0	0.	0. 	32 bit of firmware bin-file to be written into update part of flash
+ConfigFlashReset	0x73	1	0	0x0	0	0x0	0x0	0.	0.	Reset Config Flash, set strobe before updating
+ConfigFlashCheckID     	0x73    1       1       0x0     0       0x0     0x0     0.      0.     	Only Check ID of Flash
+ConfigFlashVerify       0x73    1       2       0x0     0       0x0     0x0     0.      0.     	Only Verify
+ConfigFlashClkEnable    0x73    1       3      	0x0     0       0x0     0x0     0.      0.     	Enable Config Flash clock
+Unused_0x73             0x73    28      4       0x0     1       0x0     0x0     0.      0.     	Unused
+ConfigFlashStatus	0x74	16	0	0x0	1	0x0	0x0	0.	0.S	Status of Config Flash,  0 & Ready_BusyB & Done & Error & ErrorIdcode & ErrorErase & ErrorProgram & ErrorTimeOut & ErrorCrc & Started & InitializeOK & CheckIdOK & intSFPEraseSwitchWordOK & EraseOK & ProgramOK & VerifyOK, all OK should be 1, all Error 0 after sending the whole file.
+Unused_0x74             0x74    16     	16      0x0     1       0x0     0x0     0.      0.     	Unused
+# Eprom communication
+EepromReadByte_Primary  0x75    8      	0       0x0     1       0x0     0x0     0.      0.  	Answer byte from Eeprom
+EepromWriteByte_Primary 0x75    8       8       0x0     0       0x0     0xFF    0.      0.    	Data byte to eeprom
+EepromRegAddr_Primary   0x75    8       16      0x0     0       0x0     0xFF    0.      0.    	Address of register to R/W
+EepromOpCode_Primary   	0x75    4       24      0x0     0       0x0     0xF     0.      0.    	Command to be performed, check AT21CS01 data sheet. 1010 is eeprom operation (R/W) i.e.
+EepromReadValid_Primary 0x75   1        28      0x0     1       0x0     0x0     0.      0.    	Data in EepromReadByte is valid
+EepromStart_Primary     0x75    3       29      0x0     3       0x0     0x6     0.      0.    	If 0b101 , write will be performed, if 0b110 read
+EepromReadByte_Aux      0x76    8       0       0x0     1       0x0     0x0     0.      0.    	Answer byte from Eeprom
+EepromWriteByte_Aux     0x76    8       8       0x0     0       0x0     0xFF    0.      0.    	Data byte to eeprom
+EepromRegAddr_Aux       0x76    8       16      0x0     0       0x0     0xFF    0.      0.    	Address of register to R/W
+EepromOpCode_Aux       	0x76   	4       24      0x0     0       0x0     0xF     0.      0.    	Command to be performed, check AT21CS01 data sheet. 1010 is eeprom operation (R/W) i.e.
+EepromReadValid_Aux     0x76   	1       28      0x0     1       0x0     0x0     0.      0.    	Data in EepromReadByte is valid
+EepromStart_Aux         0x76    3       29      0x0     0       0x0     0x6     0.      0.    	If 0b101 , write will be performed, if 0b110 read
+Unused_0x77		0x77	32	0	0x0	1	0x0	0x0	0.	0.	Unused
+Unused_0x78		0x78	32	0	0x0	1	0x0	0x0	0.	0.	Unused
+SerialNumLSW_Aux       	0x79    32      0       0x0     1       0x0     0x0     0.      0.     Serial number the least significant word of auxiliary board
+SerialNumMSW_Aux        0x7a    32      0       0x0     1       0x0     0x0     0.      0.     Serial number the most significant word of auxiliary board
+SlowADCEnable_Primary	0x7b	1	0	0x0	0	0x0	0x1	0.	0.	Enable slow signal ADC on primary board, 1 - enable, 0 - disable
+SlowADCEnable_Aux	0x7b	1	1	0x0	0	0x0	0x1	0.	0.	Enable slow signal ADC on auxiliary board, 1 - enable, 0 - disable
+SlowADCEnable_Power	0x7b	1	2	0x0	0	0x0	0x1	0.	0.	Enable slow signal ADC on power board, 1 - enable, 0 - disable
+SlowADCChannel_Power	0x7b	5	3	0x0	0	0x0	0x1F	0.	0.	Select channel to be digitised, expert use only!
+SlowADCCommon		0x7b	24	8	0x0	0	0x0	0xFFFFFF	0.	0.	Expert use only!
+SlowADCSettle_Primary   0x7c    16      0       0x10    0       0x0     0xFFFF  0.2     0.      Wait for MUX to settle after switch, in us, should not be smaller than 3.2us, expert use only!
+SlowADCClockWait_Primary        0x7c    1       16      0x0     0       0x0     0x1     0.      0.      Keep SPI clock running during wait for MUX to settle, expert use only!
+SlowADCConfig_Primary   0x7c    15      17      0x0     0       0x0     0x7FFFF 0.      0.      Unused up to now, expert use only!
+SlowADCSettle_Aux       0x7d    16      0       0x10    0       0x0     0xFFFF  0.2     0.      Wait for MUX to settle after switch, in us, should not be smaller than 3.2us, expert use only!
+SlowADCClockWait_Aux    0x7d    1       16      0x0     0       0x0     0x1     0.      0.      Keep SPI clock running during wait for MUX to settle, expert use only!
+SlowADCConfig_Aux       0x7d    15      17      0x0     0       0x0     0x7FFFF 0.      0.      Unused up to now, expert use only!
+SlowADCSettle_Power     0x7e    16      0       0x4000  0       0x0     0xFFFF  0.2     0.      Wait for MUX to settle after switch, in us, should not be smaller than 400us, expert use only!
+SlowADCClockWait_Power  0x7e    1       16      0x0     0       0x0     0x1     0.      0.      Keep SPI clock running during wait for MUX to settle, expert use only!
+SlowADCConfig_Power     0x7e    15      17      0x0     0       0x0     0x7FFFF 0.      0.      Unused up to now, expert use only!
+Unused_0x7f		0x7f	32		0		0x0		  1			 0x0		0x0		   0.		  0.	 Spare Register
+# Set Data and SlowControl Ports
+SetDataPort		0x80	16 	0	0x0	0	0x0	0xFFFF	0.	0.	Specify Data Port, if 0 --> behaviour like for firmware version 0xFEDA0003, only change from 0 when you really want to setup an specific data port for this module. When 0, TargetDriver will set data port
+SetSlowControlPort	0x80	16 	16	0x0	0	0x0	0xFFFF	0.	0. 	Specify Slow Control Port, if 0 --> behaviour like for firmware version 0xFEDA0003, only change from 0 when you really want to setup an specific slow port for this module. When 0, TargetDriver will set slow port
+Unused_0x81		0x81	32	0	0x0	1	0x0	0x0	0.	0. 	Spare Register
+# Advanced Trigger Settings
+SR_DisableTrigger	0x82	1	0	0x0	0	0x0	0x1  	0.	0.	If 1 disable trigger during serial read-out of TC, total dead time is then 128 ns * 32 * (NumberOfBlocks+1)
+CoincidenceEnable	0x82	1	1	0x0	0	0x0	0x1	0.	0.  Enable coincidence logic for internal trigger
+CoincidenceLevel	0x82	4	2	0x0	0	0x0	0xF	0.	0.	Number of channels that have to fire if coincidence enabled, 0 = one triggergroup, 0xF = all triggergroups
+TACK_Source		0x82	1	6	0x1	0	0x0	0x1	0.	0.  If 0 --> uses BP_TACK (for BP operation), if 1 --> Uses Local TACK simulator (for standalone operation)
+Unused_0x82		0x82	25	7	0x0	1	0x0	0x0	0.	0.	Unused
+Unused_0x83		0x83	32	0	0x0	1	0x0	0x0	0.	0.	Unused
+HV15_Voltage    0x84    16      0       0x0     1       0x0     0x0     0.      0.      HV superpixel 15 in V (16 bit, reference is 2.5V (0-5V range) --> count * 2 * 0.03815 = voltage in mV, and voltage divider 4.98:100, plus crazy math (see methode in TargetModule.cc))
+HV14_Voltage    0x84    16      16      0x0     1       0x0     0x0     0.      0.      HV superpixel 14 in V
+HV13_Voltage    0x85    16      0       0x0     1       0x0     0x0     0.      0.      HV superpixel 13 in V
+HV12_Voltage    0x85    16      16      0x0     1       0x0     0x0     0.      0.      HV superpixel 12 in V
+HV5_Voltage     0x86    16      0       0x0     1       0x0     0x0     0.      0.      HV superpixel 5 in V
+HV8_Voltage     0x86    16      16      0x0     1       0x0     0x0     0.      0.      HV superpixel 8 in V
+HV7_Voltage     0x87    16      0       0x0     1       0x0     0x0     0.      0.      HV superpixel 7 in V
+HV11_Voltage    0x87    16      16      0x0     1       0x0     0x0     0.      0.      HV superpixel 11 in V
+HV9_Voltage     0x88    16      0       0x0     1       0x0     0x0     0.      0.      HV superpixel 9 in V
+HV10_Voltage    0x88    16      16      0x0     1       0x0     0x0     0.      0.      HV superpixel 10 in V
+HV6_Voltage     0x89    16      0       0x0     1       0x0     0x0     0.      0.      HV superpixel 6 in V
+HV4_Voltage     0x89    16      16      0x0     1       0x0     0x0     0.      0.      HV superpixel 4 in V
+HV0_Voltage     0x8a    16      0       0x0     1       0x0     0x0     0.      0.      HV superpixel 0 in V
+HV3_Voltage     0x8a    16      16      0x0     1       0x0     0x0     0.      0.      HV superpixel 3 in V
+HV2_Voltage     0x8b    16      0       0x0     1       0x0     0x0     0.      0.      HV superpixel 2 in V
+HV1_Voltage     0x8b    16      16      0x0     1       0x0     0x0     0.      0.      HV superpixel 1 in V
+SlowResult16_Power      0x8c    16      0       0x0     1       0x0     0x0     0.      0.      Slow ADC result channel 16 from Power board, connected to GND
+SlowResult17_Power      0x8c    16      16      0x0     1       0x0     0x0     0.      0.      Slow ADC result channel 17 from Power board, connected to GND
+SlowResult18_Power      0x8d    16      0       0x0     1       0x0     0x0     0.      0.      Slow ADC result channel 18 from Power board, connected to GND
+SlowResult19_Power      0x8d    16      16      0x0     1       0x0     0x0     0.      0.      Slow ADC result channel 19 from Power board, connected to GND
+SlowResult20_Power      0x8e    16      0       0x0     1       0x0     0x0     0.      0.      Slow ADC result channel 20 from Power board in mV, -5V
+SlowResult21_Power      0x8e    16      16      0x0     1       0x0     0x0     0.      0.      Slow ADC result channel 21 from Power board in mV, -5V Buffer
+SlowResult22_Power      0x8f    16      0       0x0     1       0x0     0x0     0.      0.      Slow ADC result channel 22 from Power board in mV, -5,2V
+SlowResult23_Power      0x8f    16      16      0x0     1       0x0     0x0     0.      0.      Slow ADC result channel 23 from Power board in mV, VCC
+SlowResult24_Power      0x90    16      0       0x0     1       0x0     0x0     0.      0.      Slow ADC result channel 24 from Power board in mV, +5V
+SlowResult25_Power      0x90    16      16      0x0     1       0x0     0x0     0.      0.      Slow ADC result channel 25 from Power board in mV, + 5V Buffer
+SlowResult26_Power      0x91    16      0       0x0     1       0x0     0x0     0.      0.      Slow ADC result channel 26 from Power board in mV, +5.2V
+SlowResult27_Power      0x91    16      16      0x0     1       0x0     0x0     0.      0.      Slow ADC result channel 27 from Power board, SiPM Temperature sensor AD590
+SlowResult28_Power      0x92    16      0       0x0     1       0x0     0x0     0.      0.      Slow ADC result channel 28 from Power board in mV, +12V
+SlowResult29_Power      0x92    16      16      0x0     1       0x0     0x0     0.      0.      Slow ADC result channel 29 from Power board, connected to GND
+SlowResult30_Power      0x93    16      0       0x0     1       0x0     0x0     0.      0.      Slow ADC result channel 30 from Power board, connected to GND
+SlowResult31_Power      0x93    16      16      0x0     1       0x0     0x0     0.      0.      Slow ADC result channel 31 from Power board, connected to GND
+Address_low             0x94    32      0       0x400000     2       0x0     0x0     0.      0.      Debug remote upgrade
+Address_high            0x95    32      0       0x7B0000     2       0x0     0x0     0.      0.      Debug remote upgrade
+CRC32                   0x96    32      0       0x0     1       0x0     0x0     0.      0.      Debug remote upgrade
+SetPushPort             0x97    16      0       0x4001  0       0x0     0xFFFF  0.2     0.      Destination port for pushed slow signal monitoring packets
+Unused_0x97		0x97	16	16	0x0	1	0x0	0x0	0.	0.	Unused
+SlowResultTimestamp_LSW_Primary 0x98    32      0       0x0     1       0x0     0x0     0.      0.      Timestamp of last Slow Measurement on Primary, LSW
+SlowResultTimestamp_MSW_Primary 0x99    32      0       0x0     1       0x0     0x0     0.      0.      Timestamp of last Slow Measurement on Primary, MSW
+SlowResultTimestamp_LSW_Aux     0x9a    32      0       0x0     1       0x0     0x0     0.      0.      Timestamp of last Slow Measurement on Aux, LSW
+SlowResultTimestamp_MSW_Aux     0x9b    32      0       0x0     1       0x0     0x0     0.      0.      Timestamp of last Slow Measurement on Aux, MSW
