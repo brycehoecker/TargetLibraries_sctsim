@@ -1,0 +1,2 @@
+Software trigger
+/data/local_outputDir/run322573.fits
