@@ -15,9 +15,7 @@ import scipy
 #from reportlab.lib.units import cm
 #from reportlab.lib.pagesizes import landscape
 #from reportlab.lib.utils import ImageReader
-
 #import plotly.plotly as py
-
 
 def butter_lowpass(cutoff, fs, order=5):
     nyq = 0.5 * fs
@@ -29,7 +27,6 @@ def butter_lowpass_filter(data, cutoff, fs, order=5):
     b, a = butter_lowpass(cutoff, fs, order=order)
     y = lfilter(b, a, data)
     return y
-
 
 #filename_raw = "/DATA/Messungen_Stefan/Raw/file_0_r0.tio"
 filename_cal = "file_r1.tio"
@@ -55,14 +52,11 @@ ampl_cal = np.zeros([64,nevt,Nsamples])
 firstsample = np.zeros(nevt)
 
 
-
-
 timestamp=0
 timestamp_prev=0
 
 if nevt==0:
     nevt=NEvents
-
 
 
 for ievt in range(0,nevt,1):
