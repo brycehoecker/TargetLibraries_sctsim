@@ -34,8 +34,8 @@ kPacketSize = (kNChannelsPerPacket*(kNBlocksPerEvent*kNSamplesPerBlock+kNWordsFo
 kEventSize = kPacketSize*kNPacketsPerEvent
 sizeNeeded = kEventSize*numEvents
 
-print "There are %d packets per event." % kNPacketsPerEvent
-print "Total file size will be %.2f MB." % (sizeNeeded/bytesPerMB)
+print ("There are %d packets per event." % kNPacketsPerEvent)
+print ("Total file size will be %.2f MB." % (sizeNeeded/bytesPerMB))
 
 def SendDataPacket(simulator, packet, eventID, packetID):
     tack = eventID
@@ -77,7 +77,7 @@ if __name__ == "__main__":
     def2 = "/Users/justin/Dropbox/TargetDriver/config/TM5_ASIC.def"
     module = target_driver.TargetModule(def1, def2, 0)
     module.EstablishSlowControlLink("0.0.0.0", "0.0.0.0")
-    print "Established slow control link."
+    print ("Established slow control link.")
 
     listener = target_io.DataListener(kBufferDepth, kNPacketsPerEvent, kPacketSize)
     listener.AddDAQListener("0.0.0.0")
@@ -86,27 +86,29 @@ if __name__ == "__main__":
     # Remove the output file if it already exists
     filename = "tester.fits"
     if os.path.exists(filename):
-	os.remove(filename)
+        os.remove(filename)
+
     writer = target_io.EventFileWriter(filename, kNPacketsPerEvent, kPacketSize)
 
     buf = listener.GetEventBuffer()
     writer.StartWatchingBuffer(buf)
 #    buf.Flush()
 
-    print "Finished setting up.  Will now record events."
+    print ("Finished setting up.  Will now record events.")
 
     startTime = time.time()
     for eventID in range(numEvents):
         for packetID in range(kNPacketsPerEvent):
+            
             packetSize = SendDataPacket(simulator, packet, eventID, packetID)
-	if not ((eventID+1)%100):
-        	print "Finished %d events." % (eventID + 1)
-	#time.sleep(0.01)
+            if not ((eventID+1)%100):
+                print ("Finished %d events." % (eventID + 1))
+    #time.sleep(0.01)
 
     stopTime = time.time()
     elapsedTime = stopTime - startTime
     eventRate = numEvents/elapsedTime
-    print "%.2f MB written in %.2f sec (%.2f kHz = %.2f MB/sec = %.2f Mbps)." % (sizeNeeded/bytesPerMB, eventRate/1e3,elapsedTime,sizeNeeded/elapsedTime/bytesPerMB,8*sizeNeeded/elapsedTime/bytesPerMB)
+    print ("%.2f MB written in %.2f sec (%.2f kHz = %.2f MB/sec = %.2f Mbps)." % (sizeNeeded/bytesPerMB, eventRate/1e3,elapsedTime,sizeNeeded/elapsedTime/bytesPerMB,8*sizeNeeded/elapsedTime/bytesPerMB))
     buf.Flush()
 
     # Check if output file is valid fits file or not
@@ -115,7 +117,7 @@ if __name__ == "__main__":
         try:
             hdulist = fits.open(filename)
         except IOError:
-            print 'FITS file is invalid.'
+            print ('FITS file is invalid.')
         else:
-            print 'FITS file is valid.'
-	    hdulist.close()
+            print ('FITS file is valid.')
+        hdulist.close()

@@ -47,7 +47,7 @@ if __name__ == "__main__":
     if os.path.exists(def1):
         module = target_driver.TargetModule(def1, def2, 0)
     else:
-	module = target_driver.TargetModule(
+        module = target_driver.TargetModule(
             "/Users/oxon/Documents/workspace/TargetDriver/config/TM5_FPGA_Firmware0xFEDA003C.def",
             "/Users/oxon/Documents/workspace/TargetDriver/config/TM5_ASIC.def", 0)
     module.EstablishSlowControlLink("0.0.0.0", "0.0.0.0")
@@ -65,7 +65,7 @@ if __name__ == "__main__":
     # Remove the output file if it already exists
     filename = "testEventFile.fits"
     if os.path.exists(filename):
-	os.remove(filename)
+        os.remove(filename)
     writer = target_io.EventFileWriter(filename, kNPacketsPerEvent, kPacketSize)
 
     buf = listener.GetEventBuffer()
@@ -75,7 +75,7 @@ if __name__ == "__main__":
         for packetID in range(kNPacketsPerEvent):
             SendDataPacket(simulator, packet, eventID, packetID)
     	time.sleep(sleepTime)
-        print "Finished %d events." % (eventID + 1)
+        print ("Finished %d events." % (eventID + 1))
 
     buf.Flush()
 
