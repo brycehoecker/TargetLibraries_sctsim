@@ -5,10 +5,10 @@ from tkinter import Canvas, Frame, Scrollbar
 # Set the directory here
 directory = "/home/sctsim/copied_from_wipac/copy_folder/already_extracted_files/Module12345/Run_Wireshark_Capture"
 
-def find_packet_files(directory, limit=100):
-    """Finds packet files in the specified directory, up to the specified limit."""
+def find_packet_files(directory, start=5000, end=5750):
+    """Finds packet files in the specified directory, from start to end numbers."""
     files = []
-    for i in range(1, limit + 1):
+    for i in range(start, end + 1):
         filename = os.path.join(directory, f"packet_{i}.txt")
         if os.path.exists(filename):
             files.append(filename)
@@ -41,7 +41,7 @@ def display_data_in_gui(data):
     canvas.configure(yscrollcommand=scrollbar.set)
 
     for i, row in enumerate(data):
-        label = tk.Label(scrollable_frame, text=f"File {i+1}: {row}", anchor="w")
+        label = tk.Label(scrollable_frame, text=f"File {i+100}: {row}", anchor="w")
         label.pack(fill='x', padx=10, pady=5)
 
     canvas.pack(side="left", fill="both", expand=True)
