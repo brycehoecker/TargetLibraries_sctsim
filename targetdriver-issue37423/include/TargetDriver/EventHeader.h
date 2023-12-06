@@ -28,10 +28,10 @@ namespace CTA {
 				EventHeader() : fEventID(0), fTACK(0), fNPacketsFilled(0), fTimeStampSec(0), fTimeStampNonoSec(0) {}
 				virtual ~EventHeader() {}
 				inline void Init() {
-				SetEventID(0);
-				SetTACK(0);
-				SetNPacketsFilled(0);
-				SetTimeStamp(0, 0);
+					SetEventID(0);
+					SetTACK(0);
+					SetNPacketsFilled(0);
+					SetTimeStamp(0, 0);
 				}
 
 				inline void SetEventID(uint32_t pEventID) { fEventID = pEventID; }
