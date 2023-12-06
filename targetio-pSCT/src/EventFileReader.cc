@@ -3,11 +3,9 @@
 #define __STDC_FORMAT_MACROS 1
 #endif
 #include <inttypes.h>
-
 #include <iostream>
 #include <sstream>
 #include <set>
-
 #include "TargetIO/FitsKeyValue.h"
 #include "TargetIO/EventFileReader.h"
 #include "TargetIO/Util.h"

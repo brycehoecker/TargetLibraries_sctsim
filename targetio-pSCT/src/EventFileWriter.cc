@@ -3,15 +3,12 @@
 #define __STDC_FORMAT_MACROS
 #endif
 #include <inttypes.h>
-
 #include <fitsio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
 #include <ctime>
 #include <iostream>
-
 #include "TargetIO/EventFileWriter.h"
 #include "TargetIO/Util.h"
 
