@@ -80,11 +80,11 @@ namespace CTA {
 			std::string org = AsString();
 
 			for (uint32_t i = 0; i < org.length(); ++i) {
-			if (org[i] == '\'') {
-			ret += "''";
-			} else {
-			ret += org[i];
-			}
+				if (org[i] == '\'') {
+					ret += "''";
+				} else {
+					ret += org[i];
+				}
 			}
 
 			ret = "'" + ret + "'";

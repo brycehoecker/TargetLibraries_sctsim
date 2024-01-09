@@ -8,13 +8,15 @@ import random
 
 outfile = "file_r0.tio"
 
-my_ip = "192.168.12.1"
-module_ip = "192.168.12.173"
+#my_ip = "192.168.12.1"
+#module_ip = "192.168.12.173"
+my_ip = "192.168.1.61"
+module_ip = "127.0.0.1"
 initialize = True
 
-module_def = "/home/target5/Software/TargetDriver/trunk/config/SCT_MSA_FPGA_Firmware0xC0000001.def"
-asic_def = "/home/target5/Software/TargetDriver/trunk/config/TC_ASIC.def"
-trigger_asic_def = "/home/target5/Software/TargetDriver/trunk/config/T5TEA_ASIC.def"
+module_def = "/home/sctsim/Documents/CCC/TargetDriver/branches/issue37423/config/SCT_MSA_FPGA_Firmware0xC0000001.def"
+asic_def = "/home/sctsim/Documents/CCC/TargetDriver/trunk/config/TC_ASIC.def"
+trigger_asic_def = "/home/sctsim/Documents/CCC/TargetDriver/trunk/config/T5TEA_ASIC.def"
 
 module = target_driver.TargetModule(module_def, asic_def, trigger_asic_def, 0)
 if initialize:

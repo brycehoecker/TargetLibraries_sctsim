@@ -1,22 +1,22 @@
 import socket
 import time
 
-def udp_client(server_ip, port, message):
+def udp_client(server_ip, port, data):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
     try:
         while True:
-            sock.sendto(message.encode(), (server_ip, port))
+            sock.sendto(data.encode(), (server_ip, port))
             print(f"Message sent to {server_ip}:{port}")
-            time.sleep(1)  # Sends a message every second
+            time.sleep(1)  # Sends a message(data) every second
     except Exception as e:
         print(f"An error occurred: {e}")
     finally:
         sock.close()
 
 # Server IP and port to send data to
-server_ip = "192.168.1.61"
+server_ip = "192.168.1.63"
 port = 8200
-message = "Hello from the module!"
+data = "Hello from the module!"
 
-udp_client(server_ip, port, message)
+udp_client(server_ip, port, data)
