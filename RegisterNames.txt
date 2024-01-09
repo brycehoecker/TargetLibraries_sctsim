@@ -1,0 +1,5 @@
+0. FpgaVersion
+1. Detector ID
+2. Serial ID LSW
+3. Serial ID MSW
+4. Status register
