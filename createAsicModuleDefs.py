@@ -62,30 +62,25 @@ def get_predefined_bit_info(reg_num):
     }
     return predefined_info[reg_num]
 
-def generate_cpp_code(registers):
+def generate_cpp_structs(registers):
     cpp_code = ""
     for reg_num, reg_label in sorted(registers.items()):
         if reg_num in [0, 1, 2, 3, 4]:  # Predefined registers
+            cpp_code += f"struct {reg_label} {{\n"
             predefined_info = get_predefined_bit_info(reg_num)
             for bit in range(31, -1, -1):
                 if bit in predefined_info:
                     label, access_type, default_value = predefined_info[bit]
-                    cpp_code += f"// {label}\n"
-                    cpp_code += f"inline void set{reg_label}Bit{bit}(bool value) {{ /* Code to set bit {bit} of {reg_label} */ }}\n"
+                    cpp_code += f"    // {label}\n"
                     if access_type == "RW":
-                        cpp_code += f"inline bool get{reg_label}Bit{bit}() const {{ /* Code to get bit {bit} of {reg_label} */ }}\n"
+                        cpp_code += f"    bool getBit{bit}() const {{ /* Implement getter for bit {bit} */ }}\n"
+                        cpp_code += f"    void setBit{bit}(bool value) {{ /* Implement setter for bit {bit} */ }}\n"
+                    elif access_type == "RO":
+                        cpp_code += f"    bool getBit{bit}() const {{ /* Implement getter for bit {bit} */ }}\n"
+            cpp_code += "};\n\n"
         else:
-            covered_bits = set()
-            while len(covered_bits) < 32:
-                start_bit, end_bit = get_bit_range(reg_label, reg_num, covered_bits)
-                label, access_type, default_value = get_bit_info()
-                for bit in range(start_bit, end_bit - 1, -1):
-                    if bit not in covered_bits:
-                        cpp_code += f"// {label}\n"
-                        cpp_code += f"inline void set{reg_label}Bit{bit}(bool value) {{ /* Code to set bit {bit} of {reg_label} */ }}\n"
-                        if access_type == "RW":
-                            cpp_code += f"inline bool get{reg_label}Bit{bit}() const {{ /* Code to get bit {bit} of {reg_label} */ }}\n"
-                        covered_bits.add(bit)
+            # Handle other registers if necessary
+            pass
     return cpp_code
 
 def write_to_files(cpp_code, cpp_file, txt_file):
@@ -96,8 +91,8 @@ def write_to_files(cpp_code, cpp_file, txt_file):
 
 def main():
     registers = read_registers("RegisterNames.txt")
-    cpp_code = generate_cpp_code(registers)
-    write_to_files(cpp_code, "Registers.cpp", "Registers.txt")
+    cpp_structs = generate_cpp_structs(registers)
+    write_to_files(cpp_structs, "Registers.cpp", "Registers.txt")
 
 if __name__ == "__main__":
     main()
