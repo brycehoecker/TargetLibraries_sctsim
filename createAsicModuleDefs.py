@@ -1,7 +1,7 @@
 def read_registers(file_name):
     with open(file_name, 'r') as file:
         registers = [line.strip().split('. ') for line in file.readlines()]
-    return {f'0x{int(num):x}': label for num, label in registers}
+    return {int(num): label for num, label in registers}
 
 def color_text(text, color):
     colors = {
@@ -28,7 +28,7 @@ def parse_bit_range(range_input):
     return start_bit, end_bit
 
 def get_bit_range(reg_label, reg_num, covered_bits):
-    print(color_text(f"You're entering information for Register {int(reg_num, 16)}, {reg_label}: Address {reg_num}", "blue"))
+    print(color_text(f"You're entering information for Register {reg_num}, {reg_label}: Address 0x{reg_num:x}", "blue"))
     display_bit_info(covered_bits)
     range_input = input(color_text("Enter the range of bits to define (e.g., 31-16, or a single bit like 11). : ", "white"))
     return parse_bit_range(range_input)
@@ -39,19 +39,53 @@ def get_bit_info():
     default_value = input("Enter the default value of the bit(s) (0 or 1): ")
     return label, access_type, default_value
 
+def get_predefined_bit_info(reg_num):
+    predefined_info = {
+        0: {31: ("Assigned value of 0xFED000030, assigned in Firmware to highlight and track incremental changes in firmware. Incremented with every firmware revision", "RO", "0")},
+        1: {
+            31: ("Any value for control software, does not have effect on any FPGA logic", "RW", "0"),
+            15: ("Detector ID, fill Detector ID field of reported event", "RW", "0"),
+            7: ("CTA ID, fill CTA ID field of reported event", "RW", "0"),
+        },
+        2: {31: ("Serial number the least significant word", "RO", "0")},
+        3: {31: ("Serial number the most significant word", "RO", "0")},
+        4: {
+            31: ("Unused, always 0", "R", "0"),
+            15: ("Status of backplane lines from bp4 to bp7 (also, bp5 is reset and will not be available due to board reset)", "R", "0"),
+            11: ("Unused, always 0", "R", "0"),
+            10: ("mgt_AVCC_OK is OK, 1- OK, 0 – is not", "R", "0"),
+            9: ("+1_8V is OK, 1- OK, 0 – is not", "R", "0"),
+            8: ("Unused, always 0", "R", "0"),
+            1: ("Underflow on summary FIFO of event data", "R", "0"),
+            0: ("overflow on summary FIFO of event data", "R", "0"),
+        }
+    }
+    return predefined_info[reg_num]
+
 def generate_cpp_code(registers):
     cpp_code = ""
-    for reg_num, reg_label in sorted(registers.items(), key=lambda x: int(x[0], 16)):
-        covered_bits = set()
-        while len(covered_bits) < 32:
-            start_bit, end_bit = get_bit_range(reg_label, reg_num, covered_bits)
-            label, access_type, default_value = get_bit_info()
-            for bit in range(start_bit, end_bit - 1, -1):
-                if bit not in covered_bits:
-                    cpp_code += f"inline void set{label}{bit}(bool value) {{ /* Code to set bit {bit} of {reg_label} */ }}\n"
+    for reg_num, reg_label in sorted(registers.items()):
+        if reg_num in [0, 1, 2, 3, 4]:  # Predefined registers
+            predefined_info = get_predefined_bit_info(reg_num)
+            for bit in range(31, -1, -1):
+                if bit in predefined_info:
+                    label, access_type, default_value = predefined_info[bit]
+                    cpp_code += f"// {label}\n"
+                    cpp_code += f"inline void set{reg_label}Bit{bit}(bool value) {{ /* Code to set bit {bit} of {reg_label} */ }}\n"
                     if access_type == "RW":
-                        cpp_code += f"inline bool get{label}{bit}() const {{ /* Code to get bit {bit} of {reg_label} */ }}\n"
-                    covered_bits.add(bit)
+                        cpp_code += f"inline bool get{reg_label}Bit{bit}() const {{ /* Code to get bit {bit} of {reg_label} */ }}\n"
+        else:
+            covered_bits = set()
+            while len(covered_bits) < 32:
+                start_bit, end_bit = get_bit_range(reg_label, reg_num, covered_bits)
+                label, access_type, default_value = get_bit_info()
+                for bit in range(start_bit, end_bit - 1, -1):
+                    if bit not in covered_bits:
+                        cpp_code += f"// {label}\n"
+                        cpp_code += f"inline void set{reg_label}Bit{bit}(bool value) {{ /* Code to set bit {bit} of {reg_label} */ }}\n"
+                        if access_type == "RW":
+                            cpp_code += f"inline bool get{reg_label}Bit{bit}() const {{ /* Code to get bit {bit} of {reg_label} */ }}\n"
+                        covered_bits.add(bit)
     return cpp_code
 
 def write_to_files(cpp_code, cpp_file, txt_file):
