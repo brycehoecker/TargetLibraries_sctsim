@@ -12,7 +12,7 @@ def read_binary_file_as_string(file_path):
 def pattern_to_regex(pattern):
     return pattern.replace('x', '.')
 
-def highlight_matches(data, pattern):
+def highlight_matches(data, pattern, line_length=80):
     regex_pattern = pattern_to_regex(pattern)
     highlighted_data = ''
     last_index = 0
@@ -27,60 +27,54 @@ def highlight_matches(data, pattern):
                 highlighted_data += data[i]
         last_index = end
     highlighted_data += data[last_index:]  # After last match
-    return highlighted_data
 
-def find_specific_patterns(binary_data, patterns):
+    # Function to calculate the visible length of the string (excluding ANSI codes)
+    def visible_length(s):
+        return len(re.sub(r'\x1B\[[0-?]*[ -/]*[@-~]', '', s))
+
+    # Split the highlighted data into lines of specified length
+    split_data = []
+    line = ''
+    for char in highlighted_data:
+        line += char
+        if visible_length(line) == line_length:
+            split_data.append(line)
+            line = ''
+    # Add any remaining bits in the last line
+    if line:
+        split_data.append(line)
+
+    return '\n'.join(split_data)
+
+def find_specific_patterns(binary_data, patterns, line_length):
     found_patterns = {}
     for pattern in patterns:
-        highlighted_data = highlight_matches(binary_data, pattern)
+        highlighted_data = highlight_matches(binary_data, pattern, line_length)
         if highlighted_data != binary_data:  # There was a match
             found_patterns[pattern] = highlighted_data
-    return found_patterns
-
-def find_repeating_patterns(binary_data):
-    found_patterns = {}
-    for length in range(1, len(binary_data) // 2 + 1):
-        for i in range(len(binary_data) - length):
-            pattern = binary_data[i:i + length]
-            if binary_data[i + length:i + 2 * length] == pattern:
-                found_patterns[pattern] = found_patterns.get(pattern, 0) + 1
     return found_patterns
 
 def main():
     file_path = "/home/sctsim/copied_from_wipac/copy_folder/already_extracted_files/Module12345/wiresharkToBinaryOutputDir/packet_5640.bin"
     binary_data = read_binary_file_as_string(file_path)
 
-    print("Binary Data from File:", binary_data)
+    # User can specify the number of bits per line here
+    bits_per_line = int(input("Enter the number of bits to display per line: "))
+
+    print("Binary Data from File:")
+    print('\n'.join([binary_data[i:i + bits_per_line] for i in range(0, len(binary_data), bits_per_line)]))
 
     specific_patterns = [
+        "x000xxxxxxxxxxxxx001xxxxxxxxxxxxx010xxxxxxxxxxxxx011xxxxxxxxxxxx",
         "x000xxxxxxxxxxxxx001xxxxxxxxxxxxx010xxxxxxxxxxxxx011xxxxxxxxxxxxx100xxxxxxxxxxxxx101xxxxxxxxxxxxx110xxxxxxxxxxxxx111xxxxxxxxxxxx",
-        "x000xxxxxxxxxxxxx001xxxxxxxxxxxxx010xxxxxxxxxxxxx011xxxxxxxxxxxx"
         # Add more patterns as needed
     ]
 
-    found_specific_patterns = find_specific_patterns(binary_data, specific_patterns)
-    found_repeating_patterns = find_repeating_patterns(binary_data)
+    found_specific_patterns = find_specific_patterns(binary_data, specific_patterns, bits_per_line)
 
     print("\nHighlighted Specific Patterns:")
     for pattern, highlighted in found_specific_patterns.items():
         print(f"Pattern: {pattern}\n{highlighted}\n")
-    
-    print("Found Repeating Patterns:", found_repeating_patterns)
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-#file_path = "/home/sctsim/copied_from_wipac/copy_folder/already_extracted_files/Module12345/wiresharkToBinaryOutputDir/packet_5640.bin"
-#        "0000xxxxxxxxxxxx0001xxxxxxxxxxxx0010xxxxxxxxxxxx0011xxxxxxxxxxxx0100xxxxxxxxxxxx0101xxxxxxxxxxxx0110xxxxxxxxxxxx0111xxxxxxxxxxxx1000xxxxxxxxxxxx1001xxxxxxxxxxxx1010xxxxxxxxxxxx1011xxxxxxxxxxxx1100xxxxxxxxxxxx1101xxxxxxxxxxxx1110xxxxxxxxxxxx1111xxxxxxxxxxxx"
-
