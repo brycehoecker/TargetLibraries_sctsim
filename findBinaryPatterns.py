@@ -1,4 +1,5 @@
 import re
+import os
 
 # ANSI color codes
 GREEN = '\033[92m'
@@ -65,7 +66,6 @@ def main():
     print('\n'.join([binary_data[i:i + bits_per_line] for i in range(0, len(binary_data), bits_per_line)]))
 
     specific_patterns = [
-        "x000xxxxxxxxxxxxx001xxxxxxxxxxxxx010xxxxxxxxxxxxx011xxxxxxxxxxxx",
         "x000xxxxxxxxxxxxx001xxxxxxxxxxxxx010xxxxxxxxxxxxx011xxxxxxxxxxxxx100xxxxxxxxxxxxx101xxxxxxxxxxxxx110xxxxxxxxxxxxx111xxxxxxxxxxxx",
         # Add more patterns as needed
     ]
@@ -76,5 +76,29 @@ def main():
     for pattern, highlighted in found_specific_patterns.items():
         print(f"Pattern: {pattern}\n{highlighted}\n")
 
+    # Ask if the user wants to save the output to a file
+    save_output = input("Do you want to save the highlighted binary data to a file? (yes/no): ").strip().lower()
+    if save_output == 'yes':
+        while True:
+            output_file_path = input("Enter the full output file path including the filename: ").strip()
+            if os.path.isdir(output_file_path):
+                print("The path you entered is a directory. Please enter the full file path including the filename.")
+                continue
+            try:
+                with open(output_file_path, "w") as file:
+                    for pattern, highlighted in found_specific_patterns.items():
+                        file.write(f"Pattern: {pattern}\n{highlighted}\n\n")
+                print(f"Data has been saved to {output_file_path}")
+                break
+            except IsADirectoryError:
+                print("The specified path is a directory, not a file. Please try again.")
+            except Exception as e:
+                print(f"An error occurred: {e}")
+                break
+
 if __name__ == "__main__":
     main()
+
+
+
+
