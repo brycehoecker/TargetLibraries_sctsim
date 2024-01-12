@@ -3,6 +3,7 @@ import os
 
 # ANSI color codes
 GREEN = '\033[92m'
+BLUE = '\033[94m'
 ENDC = '\033[0m'
 
 def read_binary_file_as_string(file_path):
@@ -17,35 +18,49 @@ def highlight_matches(data, pattern, line_length=80):
     regex_pattern = pattern_to_regex(pattern)
     highlighted_data = ''
     last_index = 0
+    current_line_length = 0  # Current length of the line in terms of visible characters
+
     for match in re.finditer(regex_pattern, data):
         start, end = match.start(), match.end()
-        highlighted_data += data[last_index:start]  # Before match
-        # Highlight non-'x' parts of the pattern
+        before_match = data[last_index:start]
+        
+        # Process the segment before the match
+        for char in before_match:
+            highlighted_data += char
+            current_line_length += 1
+            if current_line_length == line_length:
+                highlighted_data += '\n'
+                current_line_length = 0
+
+        # Highlight the matched segment
         for i in range(start, end):
             if pattern[i - start] != 'x':
-                highlighted_data += GREEN + data[i] + ENDC
+                to_add = GREEN + data[i] + ENDC
             else:
-                highlighted_data += data[i]
+                to_add = BLUE + data[i] + ENDC
+
+            highlighted_data += to_add
+            current_line_length += 1
+            if current_line_length == line_length:
+                highlighted_data += '\n'
+                current_line_length = 0
+
         last_index = end
-    highlighted_data += data[last_index:]  # After last match
 
-    # Function to calculate the visible length of the string (excluding ANSI codes)
-    def visible_length(s):
-        return len(re.sub(r'\x1B\[[0-?]*[ -/]*[@-~]', '', s))
+    # Process any remaining data after the last match
+    remaining_data = data[last_index:]
+    for char in remaining_data:
+        highlighted_data += char
+        current_line_length += 1
+        if current_line_length == line_length:
+            highlighted_data += '\n'
+            current_line_length = 0
 
-    # Split the highlighted data into lines of specified length
-    split_data = []
-    line = ''
-    for char in highlighted_data:
-        line += char
-        if visible_length(line) == line_length:
-            split_data.append(line)
-            line = ''
-    # Add any remaining bits in the last line
-    if line:
-        split_data.append(line)
+    # Add a newline if the last line is not empty and does not end with a newline
+    if current_line_length > 0 and not highlighted_data.endswith('\n'):
+        highlighted_data += '\n'
 
-    return '\n'.join(split_data)
+    return highlighted_data
 
 def find_specific_patterns(binary_data, patterns, line_length):
     found_patterns = {}
@@ -55,11 +70,13 @@ def find_specific_patterns(binary_data, patterns, line_length):
             found_patterns[pattern] = highlighted_data
     return found_patterns
 
+def remove_ansi_codes(text):
+    return re.sub(r'\x1B\[[0-?]*[ -/]*[@-~]', '', text)
+
 def main():
     file_path = "/home/sctsim/copied_from_wipac/copy_folder/already_extracted_files/Module12345/wiresharkToBinaryOutputDir/packet_5640.bin"
     binary_data = read_binary_file_as_string(file_path)
 
-    # User can specify the number of bits per line here
     bits_per_line = int(input("Enter the number of bits to display per line: "))
 
     print("Binary Data from File:")
@@ -79,26 +96,29 @@ def main():
     # Ask if the user wants to save the output to a file
     save_output = input("Do you want to save the highlighted binary data to a file? (yes/no): ").strip().lower()
     if save_output == 'yes':
-        while True:
-            output_file_path = input("Enter the full output file path including the filename: ").strip()
-            if os.path.isdir(output_file_path):
-                print("The path you entered is a directory. Please enter the full file path including the filename.")
-                continue
-            try:
-                with open(output_file_path, "w") as file:
-                    for pattern, highlighted in found_specific_patterns.items():
-                        file.write(f"Pattern: {pattern}\n{highlighted}\n\n")
-                print(f"Data has been saved to {output_file_path}")
-                break
-            except IsADirectoryError:
-                print("The specified path is a directory, not a file. Please try again.")
-            except Exception as e:
-                print(f"An error occurred: {e}")
-                break
+        base_file_path = input("Enter the base output file path (without extension): ").strip()
+        
+        # Saving with ANSI colors
+        color_file_path = f"{base_file_path}_color.txt"
+        try:
+            with open(color_file_path, "w") as file:
+                for pattern, highlighted in found_specific_patterns.items():
+                    file.write(f"Pattern: {pattern}\n{highlighted}\n\n")
+            print(f"Data with colors has been saved to {color_file_path}")
+        except Exception as e:
+            print(f"An error occurred while saving the color file: {e}")
+
+        # Saving without ANSI colors
+        no_color_file_path = f"{base_file_path}_nocolor.txt"
+        try:
+            with open(no_color_file_path, "w") as file:
+                for pattern, highlighted in found_specific_patterns.items():
+                    no_color_text = remove_ansi_codes(highlighted)
+                    file.write(f"Pattern: {pattern}\n{no_color_text}\n\n")
+            print(f"Data without colors has been saved to {no_color_file_path}")
+        except Exception as e:
+            print(f"An error occurred while saving the no-color file: {e}")
+            
 
 if __name__ == "__main__":
     main()
-
-
-
-
