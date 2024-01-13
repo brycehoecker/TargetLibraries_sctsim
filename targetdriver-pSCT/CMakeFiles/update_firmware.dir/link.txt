@@ -1,0 +1,1 @@
+/bin/c++  -D__STDC_FORMAT_MACROS  -std=c++11 -O2 -Wall -rdynamic CMakeFiles/update_firmware.dir/src_exe/update_firmware.cc.o -o bin/update_firmware  -Wl,-rpath,/home/sctsim/.conda/envs/targetTest/lib libTargetDriver.so.1.0 -lrt -lpthread 

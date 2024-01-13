@@ -1,1 +1,0 @@
-/usr/bin/c++  -D__STDC_FORMAT_MACROS  -std=c++11 -O2 -Wall -rdynamic CMakeFiles/generate_markdown_files.dir/src_exe/generate_markdown_files.cc.o -o bin/generate_markdown_files  -Wl,-rpath,/usr/lib libTargetDriver.so.1.0 -lrt -lpthread 
