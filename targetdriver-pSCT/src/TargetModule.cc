@@ -178,99 +178,97 @@ namespace CTA {
 		}//int TargetModule::GoToSafe
 
 		int TargetModule::GoToPreSync() {
-		int stat = TC_OK;
-		if (fState <= TM_STATE_UNDEFINED) {
-		std::cout << "TargetModule::GoToPreSync() called with TM in "
-				 "undefined/uncontactable state "
-			  << fState << std::endl;
-		if ((stat = GoToSafe()) != TC_OK) return stat;
-		}
+			int stat = TC_OK;
+			if (fState <= TM_STATE_UNDEFINED) {
+			std::cout << "TargetModule::GoToPreSync() called with TM in "
+					 "undefined/uncontactable state "
+				  << fState << std::endl;
+			if ((stat = GoToSafe()) != TC_OK) return stat;
+			}
 
-		// Slight change of logic - do not call initialise if we are already in the
-		// presync or ready state
-		if (fState < TM_STATE_PRESYNC) {
-		if (fVerbose) {
-		std::cout << "TargetModule::GoToPreSync() called with TM in state "
-				<< fState << " - initialising " << std::endl;
-		}
-		stat = Initialise();
-		if (stat != TC_OK) {
-		std::cout << "TargetModule::GoToPreSync() - Initialise failed "
-				<< std::endl;
-		fState = TM_STATE_UNRESPONSIVE;
-		return stat;
-		}
-		}
+			// Slight change of logic - do not call initialise if we are already in the
+			// presync or ready state
+			if (fState < TM_STATE_PRESYNC) {
+			if (fVerbose) {
+			std::cout << "TargetModule::GoToPreSync() called with TM in state "
+					<< fState << " - initialising " << std::endl;
+			}
+			stat = Initialise();
+			if (stat != TC_OK) {
+			std::cout << "TargetModule::GoToPreSync() - Initialise failed "
+					<< std::endl;
+			fState = TM_STATE_UNRESPONSIVE;
+			return stat;
+			}
+			}
 
-		stat = DisableDLLFeedBack();
-		if (stat != TC_OK) {
-		std::cout << "Failed to disable DLL feed back" << std::endl;
-		fState = TM_STATE_UNRESPONSIVE;
-		return stat;
-		}
+			stat = DisableDLLFeedBack();
+			if (stat != TC_OK) {
+			std::cout << "Failed to disable DLL feed back" << std::endl;
+			fState = TM_STATE_UNRESPONSIVE;
+			return stat;
+			}
 
-		StopSampling();
+			StopSampling();
 
-		fState = TM_STATE_PRESYNC;
+			fState = TM_STATE_PRESYNC;
 
-		return TC_OK;
-		}
+			return TC_OK;
+		}//int TargetModule::GoToPreSync
 
 		int TargetModule::GoToReady() {
-		if (fVerbose) {
-		std::cout << "TM:GoToReady" << std::endl;
-		}
-		if (fState != TM_STATE_PRESYNC)
-		return TC_ERR_USER_ERROR;  // only for BP modules
+			if (fVerbose) {
+			std::cout << "TM:GoToReady" << std::endl;
+			}
+			if (fState != TM_STATE_PRESYNC)
+			return TC_ERR_USER_ERROR;  // only for BP modules
 
-		int stat;
-		// clang-format off
-		if (fModuleType == kT7Module   || fModuleType == kT7ModuleBP ||
-		fModuleType == kTCModuleBP || fModuleType == kTCModule ||
-		fModuleType == kSCTModuleBP || fModuleType == kSCTModule) {
-		// clang-format on
-		stat = EnableDLLFeedback();  // LT: needs to enabled after Sync
-		if (stat != TC_OK) {
-		fState = TM_STATE_UNRESPONSIVE;
-		return stat;
-		}
-		}
+			int stat;
+			// clang-format off
+			if (fModuleType == kT7Module   || fModuleType == kT7ModuleBP ||
+			fModuleType == kTCModuleBP || fModuleType == kTCModule ||
+			fModuleType == kSCTModuleBP || fModuleType == kSCTModule) {
+			// clang-format on
+			stat = EnableDLLFeedback();  // LT: needs to enabled after Sync
+			if (stat != TC_OK) {
+			fState = TM_STATE_UNRESPONSIVE;
+			return stat;
+			}
+			}
 
-		// check enable bit
-		uint32_t ebit = 99;
-		if ((stat = ReadSetting("EnableBit", ebit)) != TC_OK) {
-		std::cout << "Failed to read enablebit - setting TM state to UNRESPONSIVE"
-			  << std::endl;
-		fState = TM_STATE_UNRESPONSIVE;
-		return stat;
-		}
+			// check enable bit
+			uint32_t ebit = 99;
+			if ((stat = ReadSetting("EnableBit", ebit)) != TC_OK) {
+			std::cout << "Failed to read enablebit - setting TM state to UNRESPONSIVE"
+				  << std::endl;
+			fState = TM_STATE_UNRESPONSIVE;
+			return stat;
+			}
 
-		if (ebit == 0) {
-		fState = TM_STATE_PRESYNC;
-		return TC_UNEXPECTED_RESPONSE;
-		}
+			if (ebit == 0) {
+			fState = TM_STATE_PRESYNC;
+			return TC_UNEXPECTED_RESPONSE;
+			}
 
-		if (ebit == 1) {
-		fState = TM_STATE_READY;
+			if (ebit == 1) {
+			fState = TM_STATE_READY;
 
-		if (fVerbose) {
-		std::cout << "TM:GoToReady - TM is in READY state" << std::endl;
-		std::cout << "-----------------------------------" << std::endl;
-		}
-		return TC_OK;
-		}
+			if (fVerbose) {
+			std::cout << "TM:GoToReady - TM is in READY state" << std::endl;
+			std::cout << "-----------------------------------" << std::endl;
+			}
+			return TC_OK;
+			}
 
-		return TC_UNEXPECTED_RESPONSE;
-		}
+			return TC_UNEXPECTED_RESPONSE;
+		}//int TargetModule::GoToReady
 
 		// For backward compatibility
-		int TargetModule::EstablishSlowControlLink(const std::string& pClientIP,
-										   const std::string& pModuleIP) {
-		fClientIP = pClientIP;
-		fModuleIP = pModuleIP;
-
-		return Connect();
-		}
+		int TargetModule::EstablishSlowControlLink(const std::string& pClientIP, const std::string& pModuleIP) {
+			fClientIP = pClientIP;
+			fModuleIP = pModuleIP;
+			return Connect();
+		}//int TargetModule::EstablishSlowControlLink
 
 		int TargetModule::Connect() {
 			fState = TM_STATE_UNRESPONSIVE;
@@ -1081,468 +1079,441 @@ namespace CTA {
 		}
 
 		int TargetModule::Initialise() {
-		// Definitions file is read in already. User could have called read config
-		// before
+			// Definitions file is read in already. User could have called read config
+			// before
 
-		int stat = CheckRegisters();
+			int stat = CheckRegisters();
 
-		if (fVerbose) {
-		std::cout << "TargetModule - Initialise " << stat << std::endl;
-		}
-		if (stat != TC_OK) {
-		return stat;
-		}
+			if (fVerbose) {
+				std::cout << "TargetModule - Initialise " << stat << std::endl;
+			}
+			if (stat != TC_OK) {
+				return stat;
+			}
 
-		// Mock syncing with Backplane for evaluation boards and stand-alone modules l
-		if (fModuleType == kT7Module || fModuleType == kTCEval ||
-		fModuleType == kTCT5TEAEval || fModuleType == kTCModule ||
-		fModuleType == kSCTModule) {
-		// This whole block is a sync, therefore order of register writing is
-		// needed.
-		if ((stat = WriteRegister(0x33, 0x00100000)) != TC_OK) {  // Mocking the
-															  // sync
-		return stat;
-		}
-		if ((stat = WriteRegister(0x33, 0x80100000)) != TC_OK) {
-		return stat;
-		}
-		}
+			// Mock syncing with Backplane for evaluation boards and stand-alone modules l
+			if (fModuleType == kT7Module || fModuleType == kTCEval ||
+			fModuleType == kTCT5TEAEval || fModuleType == kTCModule ||
+			fModuleType == kSCTModule) {
+				// This whole block is a sync, therefore order of register writing is
+				// needed.
+				if ((stat = WriteRegister(0x33, 0x00100000)) != TC_OK) {  // Mocking the
+																	  // sync
+					return stat;
+				}
+				if ((stat = WriteRegister(0x33, 0x80100000)) != TC_OK) {
+					return stat;
+				}
+			}
 
-		if ((stat = PowerUpASIC()) != TC_OK) {
-		return stat;
-		}
+			if ((stat = PowerUpASIC()) != TC_OK) {
+				return stat;
+			}
 
-		// Write the ASIC registers
-		for (auto citA = fTargetSettings.fRegisterMapASIC.begin();
-		citA != fTargetSettings.fRegisterMapASIC.end(); ++citA) {
-		int stat = WriteASICRegisterFromConfig(citA->first);
-		if (stat != TC_OK) {
-		return stat;
-		}
-		}
+			// Write the ASIC registers
+			for (auto citA = fTargetSettings.fRegisterMapASIC.begin();
+			citA != fTargetSettings.fRegisterMapASIC.end(); ++citA) {
+				int stat = WriteASICRegisterFromConfig(citA->first);
+				if (stat != TC_OK) {
+					return stat;
+				}
+			}
 
-		// write trigger asic registers
-		if (fModuleType == kTCT5TEAEval || fModuleType == kTCModule ||
-		fModuleType == kTCModuleBP || fModuleType == kSCTModuleBP ||
-		fModuleType == kSCTModule) {
-		for (auto citA = fTargetSettings.fRegisterMapTriggerASIC.begin();
-		 citA != fTargetSettings.fRegisterMapTriggerASIC.end(); ++citA) {
-		int stat = WriteTriggerASICRegisterFromConfig(citA->first);
-		if (stat != TC_OK) {
-		return stat;
-		}
-		}
-		}
+			// write trigger asic registers
+			if (fModuleType == kTCT5TEAEval || fModuleType == kTCModule ||
+			fModuleType == kTCModuleBP || fModuleType == kSCTModuleBP ||
+			fModuleType == kSCTModule) {
+				for (auto citA = fTargetSettings.fRegisterMapTriggerASIC.begin();
+				 citA != fTargetSettings.fRegisterMapTriggerASIC.end(); ++citA) {
+					int stat = WriteTriggerASICRegisterFromConfig(citA->first);
+					if (stat != TC_OK) {
+						return stat;
+					}
+				}
+			}
 
-		// TODO: Why are we doing this only for Target 5??
-		if (fModuleType == kT5Module) {
-		// clang-format off
-		if ((stat = WriteSetting("EnableChannelsASIC0", 0xFFFF)) != TC_OK) return stat;
-		if ((stat = WriteSetting("EnableChannelsASIC1", 0xFFFF)) != TC_OK) return stat;
-		if ((stat = WriteSetting("EnableChannelsASIC2", 0xFFFF)) != TC_OK) return stat;
-		if ((stat = WriteSetting("EnableChannelsASIC3", 0xFFFF)) != TC_OK) return stat;
-		// clang-format on
-		}
+			// TODO: Why are we doing this only for Target 5??
+			if (fModuleType == kT5Module) {
+				// clang-format off
+				if ((stat = WriteSetting("EnableChannelsASIC0", 0xFFFF)) != TC_OK) return stat;
+				if ((stat = WriteSetting("EnableChannelsASIC1", 0xFFFF)) != TC_OK) return stat;
+				if ((stat = WriteSetting("EnableChannelsASIC2", 0xFFFF)) != TC_OK) return stat;
+				if ((stat = WriteSetting("EnableChannelsASIC3", 0xFFFF)) != TC_OK) return stat;
+				// clang-format on
+			}
 
-		// enable some Target 7, and later, specific stuff (needs documentation)
-		// clang-format off
-		if (fModuleType == kT7Module || fModuleType == kT7ModuleBP  ||
-		fModuleType == kTCEval   || fModuleType == kTCT5TEAEval ||
-		fModuleType == kTCModule || fModuleType == kTCModuleBP ||
-		fModuleType == kSCTModuleBP || fModuleType == kSCTModule) {
-		// usleep(100000);
-		// LT: this sleep does not seem necessary, remove as part of issue 14135?
-		if ((stat = WriteASICSetting("SSPinLE_Delay", 0, 0x2e)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("SSPinTE_Delay", 0, 0x3d)) != TC_OK) return stat;
+			// enable some Target 7, and later, specific stuff (needs documentation)
+			// clang-format off
+			if (fModuleType == kT7Module || fModuleType == kT7ModuleBP  ||
+			fModuleType == kTCEval   || fModuleType == kTCT5TEAEval ||
+			fModuleType == kTCModule || fModuleType == kTCModuleBP ||
+			fModuleType == kSCTModuleBP || fModuleType == kSCTModule) {
+				// usleep(100000);
+				// LT: this sleep does not seem necessary, remove as part of issue 14135?
+				if ((stat = WriteASICSetting("SSPinLE_Delay", 0, 0x2e)) != TC_OK) return stat;
+				if ((stat = WriteASICSetting("SSPinTE_Delay", 0, 0x3d)) != TC_OK) return stat;
 
-		// New Timing Parameters for TC (Get rid of Prepulses) (by Manuel and David)
-		if (fModuleType == kTCT5TEAEval || fModuleType == kTCEval ||
-		fModuleType == kTCModule    || fModuleType == kTCModuleBP ||
-		fModuleType == kSCTModuleBP || fModuleType == kSCTModule) {
-		if ((stat = WriteASICSetting("WR_ADDR_Incr1LE_Delay", 0, 55)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("WR_ADDR_Incr1TE_Delay", 0,  6)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("WR_STRB1LE_Delay",      0, 25)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("WR_STRB1TE_Delay", 0, 25 + 10)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("WR_ADDR_Incr2LE_Delay", 0, 55)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("WR_ADDR_Incr2TE_Delay", 0,  6)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("WR_STRB2LE_Delay",      0, 61)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("WR_STRB2TE_Delay",      0,  7)) != TC_OK) return stat;
-		} else {  // Timing Parameters for T7
-		if ((stat = WriteASICSetting("WR_ADDR_Incr1LE_Delay", 0, 0x3f)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("WR_ADDR_Incr1TE_Delay", 0,   14)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("WR_STRB1LE_Delay",      0, 0x23)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("WR_STRB1TE_Delay",      0, 0x2d)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("WR_ADDR_Incr2LE_Delay", 0, 0x25)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("WR_ADDR_Incr2TE_Delay", 0, 0x34)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("WR_STRB2LE_Delay",      0,    2)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("WR_STRB2TE_Delay",      0,   12)) != TC_OK) return stat;
-		}
+				// New Timing Parameters for TC (Get rid of Prepulses) (by Manuel and David)
+				if (fModuleType == kTCT5TEAEval || fModuleType == kTCEval ||
+				fModuleType == kTCModule    || fModuleType == kTCModuleBP ||
+				fModuleType == kSCTModuleBP || fModuleType == kSCTModule) {
+					if ((stat = WriteASICSetting("WR_ADDR_Incr1LE_Delay", 0, 55)) != TC_OK) return stat;
+					if ((stat = WriteASICSetting("WR_ADDR_Incr1TE_Delay", 0,  6)) != TC_OK) return stat;
+					if ((stat = WriteASICSetting("WR_STRB1LE_Delay",      0, 25)) != TC_OK) return stat;
+					if ((stat = WriteASICSetting("WR_STRB1TE_Delay", 0, 25 + 10)) != TC_OK) return stat;
+					if ((stat = WriteASICSetting("WR_ADDR_Incr2LE_Delay", 0, 55)) != TC_OK) return stat;
+					if ((stat = WriteASICSetting("WR_ADDR_Incr2TE_Delay", 0,  6)) != TC_OK) return stat;
+					if ((stat = WriteASICSetting("WR_STRB2LE_Delay",      0, 61)) != TC_OK) return stat;
+					if ((stat = WriteASICSetting("WR_STRB2TE_Delay",      0,  7)) != TC_OK) return stat;
+				} else {  // Timing Parameters for T7
+					if ((stat = WriteASICSetting("WR_ADDR_Incr1LE_Delay", 0, 0x3f)) != TC_OK) return stat;
+					if ((stat = WriteASICSetting("WR_ADDR_Incr1TE_Delay", 0,   14)) != TC_OK) return stat;
+					if ((stat = WriteASICSetting("WR_STRB1LE_Delay",      0, 0x23)) != TC_OK) return stat;
+					if ((stat = WriteASICSetting("WR_STRB1TE_Delay",      0, 0x2d)) != TC_OK) return stat;
+					if ((stat = WriteASICSetting("WR_ADDR_Incr2LE_Delay", 0, 0x25)) != TC_OK) return stat;
+					if ((stat = WriteASICSetting("WR_ADDR_Incr2TE_Delay", 0, 0x34)) != TC_OK) return stat;
+					if ((stat = WriteASICSetting("WR_STRB2LE_Delay",      0,    2)) != TC_OK) return stat;
+					if ((stat = WriteASICSetting("WR_STRB2TE_Delay",      0,   12)) != TC_OK) return stat;
+				}
 
-		if ((stat = WriteASICSetting("VtrimT",         0, 0x4d8)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("SSToutFB_Delay", 0, 0x03a)) != TC_OK) return stat;
-		// clang-format on
-		// Need to warm up to avoid bimodal noise distribution
-		// issue 14135, reduce from 5 second to 10 ms, at 1 ms observed timebase
-		// instabilities (LT)
-		usleep(50000); // Someone seems to have increased to 50 ms after LT comment - would be good to know why
-		}
-		return TC_OK;
-		}
+				if ((stat = WriteASICSetting("VtrimT",         0, 0x4d8)) != TC_OK) return stat;
+				if ((stat = WriteASICSetting("SSToutFB_Delay", 0, 0x03a)) != TC_OK) return stat;
+				// clang-format on
+				// Need to warm up to avoid bimodal noise distribution
+				// issue 14135, reduce from 5 second to 10 ms, at 1 ms observed timebase
+				// instabilities (LT)
+				usleep(50000); // Someone seems to have increased to 50 ms after LT comment - would be good to know why
+			}
+			return TC_OK;
+		}//int TargetModule::Initialise
 
 		// HARM Add disable DLL feedback loop...
 		int TargetModule::EnableDLLFeedback() {
-		int stat;
-		// clang-format off
-		if (fModuleType == kT7Module || fModuleType == kT7ModuleBP  ||
-		fModuleType == kTCEval   || fModuleType == kTCT5TEAEval ||
-		fModuleType == kTCModule || fModuleType == kTCModuleBP ||
-		fModuleType == kSCTModuleBP || fModuleType == kSCTModule) {
-		// start time base for standalone modules and eval boards
-		if (fModuleType == kT7Module    || fModuleType == kTCEval ||
-		fModuleType == kTCT5TEAEval || fModuleType == kTCModule ||
-		fModuleType == kSCTModuleBP || fModuleType == kSCTModule) {
-		if ((stat = WriteRegister(0x33,     0x00180000)) != TC_OK) return stat;
-		if ((stat = WriteRegister(0x33,     0x80180000)) != TC_OK) return stat;
-		if ((stat = WriteRegister(0x33,     0x00100000)) != TC_OK) return stat;
-		if ((stat = WriteSetting("Start_TimeBase", 0x1)) != TC_OK) return stat;
-		}
-		// clang-format on
-		// issue 14135, reduce from 5 second to 1 ms, seems to be sufficient for
-		// proper timebase init, don't care to reduce more (LT)
-		usleep(1000);
-		// Enable DLL feedback, sequence is very important, this is needed to set
-		// the sampling frequency
-		// clang-format off
-		if ((stat = WriteASICSetting("Vqbuff",  0, 0x426)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("Qbias",   0, 0x5DC)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("VadjN",   0, 0x834)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("VadjN",   0, 0x8bb)) != TC_OK) return stat;  // VadjN hardcoded,
-		if ((stat = WriteASICSetting("VANbuff", 0, 0x000)) != TC_OK) return stat;
-		// clang-format on
-		// go back to normal trigger mode for standalone modules and eval boards
-		if (fModuleType == kT7Module || fModuleType == kTCEval ||
-		fModuleType == kTCT5TEAEval || fModuleType == kTCModule ||
-		fModuleType == kSCTModule) {
-		if ((stat = WriteRegister(0x33, 0x0)) != TC_OK) return stat;
-		}
-		} else {
-		return TC_ERR_USER_ERROR;
-		}
-		return stat;
-		}
+			int stat;
+			// clang-format off
+			if (fModuleType == kT7Module || fModuleType == kT7ModuleBP  ||
+			fModuleType == kTCEval   || fModuleType == kTCT5TEAEval ||
+			fModuleType == kTCModule || fModuleType == kTCModuleBP ||
+			fModuleType == kSCTModuleBP || fModuleType == kSCTModule) {
+				// start time base for standalone modules and eval boards
+				if (fModuleType == kT7Module    || fModuleType == kTCEval ||
+				fModuleType == kTCT5TEAEval || fModuleType == kTCModule ||
+				fModuleType == kSCTModuleBP || fModuleType == kSCTModule) {
+					if ((stat = WriteRegister(0x33,     0x00180000)) != TC_OK) return stat;
+					if ((stat = WriteRegister(0x33,     0x80180000)) != TC_OK) return stat;
+					if ((stat = WriteRegister(0x33,     0x00100000)) != TC_OK) return stat;
+					if ((stat = WriteSetting("Start_TimeBase", 0x1)) != TC_OK) return stat;
+				}
+				// clang-format on
+				// issue 14135, reduce from 5 second to 1 ms, seems to be sufficient for
+				// proper timebase init, don't care to reduce more (LT)
+				usleep(1000);
+				// Enable DLL feedback, sequence is very important, this is needed to set
+				// the sampling frequency
+				// clang-format off
+				if ((stat = WriteASICSetting("Vqbuff",  0, 0x426)) != TC_OK) return stat;
+				if ((stat = WriteASICSetting("Qbias",   0, 0x5DC)) != TC_OK) return stat;
+				if ((stat = WriteASICSetting("VadjN",   0, 0x834)) != TC_OK) return stat;
+				if ((stat = WriteASICSetting("VadjN",   0, 0x8bb)) != TC_OK) return stat;  // VadjN hardcoded,
+				if ((stat = WriteASICSetting("VANbuff", 0, 0x000)) != TC_OK) return stat;
+				// clang-format on
+				// go back to normal trigger mode for standalone modules and eval boards
+				if (fModuleType == kT7Module || fModuleType == kTCEval ||
+				fModuleType == kTCT5TEAEval || fModuleType == kTCModule ||
+				fModuleType == kSCTModule) {
+					if ((stat = WriteRegister(0x33, 0x0)) != TC_OK) return stat;
+				}
+			} else {
+				return TC_ERR_USER_ERROR;
+			}
+			return stat;
+		}//int TargetModule::EnableDLLFeedback
 
 		int TargetModule::DisableDLLFeedBack() {
-		int stat;
-		// clang-format off
-		if (fModuleType == kT7Module || fModuleType == kT7ModuleBP  ||
-		fModuleType == kTCEval   || fModuleType == kTCT5TEAEval ||
-		fModuleType == kTCModule || fModuleType == kTCModuleBP ||
-		fModuleType == kSCTModuleBP || fModuleType == kSCTModule) {
-		if ((stat = WriteASICSetting("VANbuff", 0, 0x426)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("Qbias",   0, 0x000)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("Vqbuff",  0, 0x000)) != TC_OK) return stat;
-		if ((stat = WriteASICSetting("VadjN",   0, 0x8BB)) != TC_OK) return stat;
-		// clang-format on
-		// start time base for standalone modules and eval boards
-		usleep(1000);
-		} else {
-		return TC_ERR_USER_ERROR;
-		}
-		return stat;
-		}
+			int stat;
+			// clang-format off
+			if (fModuleType == kT7Module || fModuleType == kT7ModuleBP  ||
+			fModuleType == kTCEval   || fModuleType == kTCT5TEAEval ||
+			fModuleType == kTCModule || fModuleType == kTCModuleBP ||
+			fModuleType == kSCTModuleBP || fModuleType == kSCTModule) {
+			if ((stat = WriteASICSetting("VANbuff", 0, 0x426)) != TC_OK) return stat;
+			if ((stat = WriteASICSetting("Qbias",   0, 0x000)) != TC_OK) return stat;
+			if ((stat = WriteASICSetting("Vqbuff",  0, 0x000)) != TC_OK) return stat;
+			if ((stat = WriteASICSetting("VadjN",   0, 0x8BB)) != TC_OK) return stat;
+			// clang-format on
+			// start time base for standalone modules and eval boards
+			usleep(1000);
+			} else {
+			return TC_ERR_USER_ERROR;
+			}
+			return stat;
+		}//int TargetModule::DisableDLLFeedBack
 
 		int TargetModule::FillRegisterMapFromFPGA() {
-		for (auto cit = fTargetSettings.fRegisterMapFPGA.begin();
-		cit != fTargetSettings.fRegisterMapFPGA.end(); ++cit) {
-		uint32_t value;
-		int stat = ReadRegister(cit->first, value);
-		if (stat != TC_OK) {
-		std::cerr << "Error while reading register 0x" << std::hex << cit->first
-				<< " in function TargetModule::FillRegisterMapFromFPGA()"
-				<< std::endl;
-		}
+			for (auto cit = fTargetSettings.fRegisterMapFPGA.begin();
+			cit != fTargetSettings.fRegisterMapFPGA.end(); ++cit) {
+				uint32_t value;
+				int stat = ReadRegister(cit->first, value);
+				if (stat != TC_OK) {
+				std::cerr << "Error while reading register 0x" << std::hex << cit->first
+						<< " in function TargetModule::FillRegisterMapFromFPGA()"
+						<< std::endl;
+				}
 
-		fTargetSettings.fRegisterMapFPGA[cit->first].val = value;
-		}
-		return TC_OK;
-		}
+				fTargetSettings.fRegisterMapFPGA[cit->first].val = value;
+			}
+			return TC_OK;
+		}//int TargetModule::FillRegisterMapFromFPGA
 
-		void TargetModule::QueryAndPrintAllRegisters(
-		std::ostream& stream) {  // NOLINT(runtime/references)
-
-		for (auto cit = fTargetSettings.fRegisterMapFPGA.begin();
-		cit != fTargetSettings.fRegisterMapFPGA.end(); ++cit) {
-		uint32_t value;
-		int stat = ReadRegister(cit->first, value);
-		stream << cit->first << "\t" << value << "\t" << stat;
-		}
-		}
+		void TargetModule::QueryAndPrintAllRegisters(std::ostream& stream) {  // NOLINT(runtime/references)
+			for (auto cit = fTargetSettings.fRegisterMapFPGA.begin();
+			cit != fTargetSettings.fRegisterMapFPGA.end(); ++cit) {
+				uint32_t value;
+				int stat = ReadRegister(cit->first, value);
+				stream << cit->first << "\t" << value << "\t" << stat;
+			}
+		}//void TargetModule::QueryAndPrintAllRegisters
 
 		void TargetModule::DataPortPing() { DataPortPing(fClientIP, fModuleIP); }
 
-		void TargetModule::DataPortPing(const std::string& pClientIP,
-								const std::string& pModuleIP) {
-		// Avoid firewall problem by contacting TM on data port prior to any data
-		// sending
-		UDPClient dummy(2, 5, 5);
-		dummy.ConnectToServer(pClientIP, TM_DAQ_PORT, pModuleIP, TM_DEST_PORT);
-		char resp[100];
-		char message = '1';
-		ssize_t resplen = 0;
-		dummy.SendAndReceive(&message, 1, resp, resplen, 100);
-		}
+		void TargetModule::DataPortPing(const std::string& pClientIP, const std::string& pModuleIP) {
+			// Avoid firewall problem by contacting TM on data port prior to any data
+			// sending
+			UDPClient dummy(2, 5, 5);
+			dummy.ConnectToServer(pClientIP, TM_DAQ_PORT, pModuleIP, TM_DEST_PORT);
+			char resp[100];
+			char message = '1';
+			ssize_t resplen = 0;
+			dummy.SendAndReceive(&message, 1, resp, resplen, 100);
+		}//void TargetModule::DataPortPing
 
 		void TargetModule::DeleteDAQListeners() {
-		for (unsigned int i = 0; i < fDAQPollList.size(); ++i) {
-		close(fDAQPollList[i].fd);
-		}
-
-		fDAQPollList.clear();
-		}
+			for (unsigned int i = 0; i < fDAQPollList.size(); ++i) {
+				close(fDAQPollList[i].fd);
+			}
+			fDAQPollList.clear();
+		}//void TargetModule::DeleteDAQListeners
 
 		//
 		// Read the HV input to the module
 		int TargetModule::ReadHVCurrentInput(float& val /*A*/) {
-		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP ||
-		fModuleType == kSCTModuleBP || fModuleType == kSCTModule)) {
-		std::cout << "TargetModule ERROR: This function is only implemented for "
-				 "kTCModule, kTCModuleBP, kSCTModule and kSCTModuleBP ";
-		return TC_ERR_USER_ERROR;
-		}
+			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP || fModuleType == kSCTModuleBP || fModuleType == kSCTModule)) {
+				std::cout << "TargetModule ERROR: This function is only implemented for kTCModule, kTCModuleBP, kSCTModule and kSCTModuleBP ";
+				return TC_ERR_USER_ERROR;
+			}
 
-		int ret;
-		uint32_t answer;
-		if (fModuleType == kTCModule || fModuleType == kTCModuleBP){
-		if ((ret = WriteSetting("I2CAddr_Power", 0b1101111)) != TC_OK) return ret;
+			int ret;
+			uint32_t answer;
+			if (fModuleType == kTCModule || fModuleType == kTCModuleBP){
+				if ((ret = WriteSetting("I2CAddr_Power", 0b1101111)) != TC_OK) return ret;
 
-		// 0 write, 1 read
-		if ((ret = WriteSetting("I2CRW_Power", 1)) != TC_OK) return ret;
+				// 0 write, 1 read
+				if ((ret = WriteSetting("I2CRW_Power", 1)) != TC_OK) return ret;
 
-		if ((ret = WriteSetting("I2CRegAddr_Power", 0)) != TC_OK) return ret;
+				if ((ret = WriteSetting("I2CRegAddr_Power", 0)) != TC_OK) return ret;
 
-		// Starts the operation, non sticky
-		//    std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+				// Starts the operation, non sticky
+				//    std::cout << "expected error, non sticky bit" << std::endl;
+				if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
 
 
-		if ((ret = ReadSetting("I2CReadData_Power", answer)) != TC_OK) return ret;
-		}
-		else {
-		if ((ret = WriteSetting("I2CAddr_Aux", 0b1101111)) != TC_OK) return ret;
+				if ((ret = ReadSetting("I2CReadData_Power", answer)) != TC_OK) return ret;
+			}//if
+			else {
+				if ((ret = WriteSetting("I2CAddr_Aux", 0b1101111)) != TC_OK) return ret;
 
-		// 0 write, 1 read
-		if ((ret = WriteSetting("I2CRW_Aux", 1)) != TC_OK) return ret;
+				// 0 write, 1 read
+				if ((ret = WriteSetting("I2CRW_Aux", 1)) != TC_OK) return ret;
 
-		if ((ret = WriteSetting("I2CRegAddr_Aux", 0)) != TC_OK) return ret;
+				if ((ret = WriteSetting("I2CRegAddr_Aux", 0)) != TC_OK) return ret;
 
-		// Starts the operation, non sticky
-		//    std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Aux", 1)) != TC_OK) return ret;
+				// Starts the operation, non sticky
+				//    std::cout << "expected error, non sticky bit" << std::endl;
+				if ((ret = WriteSetting("I2CStart_Aux", 1)) != TC_OK) return ret;
 
-		uint32_t valid = 0;
-		while (valid == 0){
-		if ((ret = ReadSetting("I2CDataValid_Aux", valid)) != TC_OK) return ret;
-		usleep(2000);
-		}
-		if ((ret = ReadSetting("I2CReadData_Aux", answer)) != TC_OK) return ret;
-		}
+				uint32_t valid = 0;
+				while (valid == 0){
+					if ((ret = ReadSetting("I2CDataValid_Aux", valid)) != TC_OK) return ret;
+					usleep(2000);
+				}
+				if ((ret = ReadSetting("I2CReadData_Aux", answer)) != TC_OK) return ret;
+			}//else
 
-		uint16_t tempVal = ((answer & 0xFF) << 4) + ((answer >> 12) & 0xF);
-		val = tempVal * 20e-6;
+			uint16_t tempVal = ((answer & 0xFF) << 4) + ((answer >> 12) & 0xF);
+			val = tempVal * 20e-6;
 
-		return TC_OK;
-		}
+			return TC_OK;
+		}//int TargetModule::ReadHVCurrentInput
 
 		int TargetModule::ReadHVVoltageInput(float& val /*V*/) {
-		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP ||
-		fModuleType == kSCTModuleBP || fModuleType == kSCTModule)) {
-		std::cout << "TargetModule ERROR: This function is only implemented for "
-				 "kTCModule, kTCModuleBP, kSCTModule and kSCTModuleBP ";
-		return TC_ERR_USER_ERROR;
-		}
+			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP ||
+			fModuleType == kSCTModuleBP || fModuleType == kSCTModule)) {
+				std::cout << "TargetModule ERROR: This function is only implemented for kTCModule, kTCModuleBP, kSCTModule and kSCTModuleBP ";
+				return TC_ERR_USER_ERROR;
+			}
+			
+			int ret;
+			uint32_t answer;
+			if (fModuleType == kTCModule || fModuleType == kTCModuleBP){
+				if ((ret = WriteSetting("I2CAddr_Power", 0b1101111)) != TC_OK) return ret;
 
-		int ret;
-		uint32_t answer;
-		if (fModuleType == kTCModule || fModuleType == kTCModuleBP){
-		if ((ret = WriteSetting("I2CAddr_Power", 0b1101111)) != TC_OK) return ret;
+				// 0 write, 1 read
+				if ((ret = WriteSetting("I2CRW_Power", 1)) != TC_OK) return ret;
 
-		// 0 write, 1 read
-		if ((ret = WriteSetting("I2CRW_Power", 1)) != TC_OK) return ret;
+				if ((ret = WriteSetting("I2CRegAddr_Power", 2)) != TC_OK) return ret;
 
-		if ((ret = WriteSetting("I2CRegAddr_Power", 2)) != TC_OK) return ret;
-
-		// Starts the operation, non sticky
-		//    std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
-
-
-		if ((ret = ReadSetting("I2CReadData_Power", answer)) != TC_OK) return ret;
-		}
-		else {
-		if ((ret = WriteSetting("I2CAddr_Aux", 0b1101111)) != TC_OK) return ret;
-
-		// 0 write, 1 read
-		if ((ret = WriteSetting("I2CRW_Aux", 1)) != TC_OK) return ret;
-
-		if ((ret = WriteSetting("I2CRegAddr_Aux", 2)) != TC_OK) return ret;
-
-		// Starts the operation, non sticky
-		//    std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Aux", 1)) != TC_OK) return ret;
-
-		//need to wait until I2C operation finished
-		uint32_t valid = 0;
-		while (valid == 0){
-		if ((ret = ReadSetting("I2CDataValid_Aux", valid)) != TC_OK) return ret;
-		usleep(2000);
-		}
-
-		if ((ret = ReadSetting("I2CReadData_Aux", answer)) != TC_OK) return ret;
+				// Starts the operation, non sticky
+				//    std::cout << "expected error, non sticky bit" << std::endl;
+				if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
 
 
-		}
+				if ((ret = ReadSetting("I2CReadData_Power", answer)) != TC_OK) return ret;
+			}//if
+			else {
+				if ((ret = WriteSetting("I2CAddr_Aux", 0b1101111)) != TC_OK) return ret;
 
-		uint16_t tempVal = ((answer & 0xFF) << 4) + ((answer >> 12) & 0xF);
+				// 0 write, 1 read
+				if ((ret = WriteSetting("I2CRW_Aux", 1)) != TC_OK) return ret;
+				if ((ret = WriteSetting("I2CRegAddr_Aux", 2)) != TC_OK) return ret;
 
-		val = tempVal * 0.025;
+				// Starts the operation, non sticky
+				//    std::cout << "expected error, non sticky bit" << std::endl;
+				if ((ret = WriteSetting("I2CStart_Aux", 1)) != TC_OK) return ret;
 
-		return TC_OK;
-		}
+				//need to wait until I2C operation finished
+				uint32_t valid = 0;
+				while (valid == 0){
+					if ((ret = ReadSetting("I2CDataValid_Aux", valid)) != TC_OK) return ret;
+					usleep(2000);
+				}
+				if ((ret = ReadSetting("I2CReadData_Aux", answer)) != TC_OK) return ret;
+			}//else
+			uint16_t tempVal = ((answer & 0xFF) << 4) + ((answer >> 12) & 0xF);
+			val = tempVal * 0.025;
+			return TC_OK;
+		}//int TargetModule::ReadHVVoltageInput
 
 		int TargetModule::GetTempI2CPower(float& val /*Celsius*/) {
-		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
-		std::cout << "TargetModule ERROR: This function is only implemented for "
-				 "kTCModule and kTCModuleBP ";
-		return TC_ERR_USER_ERROR;
-		}
+			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
+				std::cout << "TargetModule ERROR: This function is only implemented for kTCModule and kTCModuleBP ";
+				return TC_ERR_USER_ERROR;
+			}
+			int ret;
 
-		int ret;
+			if ((ret = WriteSetting("I2CAddr_Power", 0b1001000)) != TC_OK) return ret;
 
-		if ((ret = WriteSetting("I2CAddr_Power", 0b1001000)) != TC_OK) return ret;
+			// 0 write, 1 read
+			if ((ret = WriteSetting("I2CRW_Power", 1)) != TC_OK) return ret;
 
-		// 0 write, 1 read
-		if ((ret = WriteSetting("I2CRW_Power", 1)) != TC_OK) return ret;
+			if ((ret = WriteSetting("I2CRegAddr_Power", 0)) != TC_OK) return ret;
 
-		if ((ret = WriteSetting("I2CRegAddr_Power", 0)) != TC_OK) return ret;
+			// Starts the operation, non sticky
+			//    std::cout << "expected error, non sticky bit" << std::endl;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
 
-		// Starts the operation, non sticky
-		//    std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			uint32_t answer;
+			if ((ret = ReadSetting("I2CReadData_Power", answer)) != TC_OK) return ret;
 
-		uint32_t answer;
-		if ((ret = ReadSetting("I2CReadData_Power", answer)) != TC_OK) return ret;
-
-		//need to wait until I2C operation finished
-		uint16_t tempVal = ((answer & 0x7F) << 1) + ((answer >> 15) & 0x1);
-		val = tempVal * 0.5;
-		int sign = (answer >> 7) & 1;
-		if (sign) val *= -1;
-		return TC_OK;
-		}
+			//need to wait until I2C operation finished
+			uint16_t tempVal = ((answer & 0x7F) << 1) + ((answer >> 15) & 0x1);
+			val = tempVal * 0.5;
+			int sign = (answer >> 7) & 1;
+			if (sign) val *= -1;
+			return TC_OK;
+		}//int TargetModule::GetTempI2CPower
 
 		int TargetModule::GetTempI2CAux(float& val /*Celsius*/) {
-		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP ||
-		fModuleType == kSCTModuleBP || fModuleType == kSCTModule)) {
-		std::cout << "TargetModule ERROR: This function is only implemented for "
-				 "kTCModule, kTCModuleBP, kSCTModule and kSCTModuleBP ";
-		return TC_ERR_USER_ERROR;
-		}
+			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP || fModuleType == kSCTModuleBP || fModuleType == kSCTModule)) {
+				std::cout << "TargetModule ERROR: This function is only implemented for kTCModule, kTCModuleBP, kSCTModule and kSCTModuleBP ";
+				return TC_ERR_USER_ERROR;
+			}
+			int ret;
 
-		int ret;
+			// only need to set address for SCT module
+			if(fModuleType == kSCTModuleBP || fModuleType == kSCTModule){
+			if ((ret = WriteSetting("I2CAddr_Aux", 0b1001000)) != TC_OK) return ret;
+			}
+			// 0 write, 1 read
+			if ((ret = WriteSetting("I2CRW_Aux", 1)) != TC_OK) return ret;
 
-		// only need to set address for SCT module
-		if(fModuleType == kSCTModuleBP || fModuleType == kSCTModule){
-		if ((ret = WriteSetting("I2CAddr_Aux", 0b1001000)) != TC_OK) return ret;
-		}
-		// 0 write, 1 read
-		if ((ret = WriteSetting("I2CRW_Aux", 1)) != TC_OK) return ret;
+			if ((ret = WriteSetting("I2CRegAddr_Aux", 0)) != TC_OK) return ret;
 
-		if ((ret = WriteSetting("I2CRegAddr_Aux", 0)) != TC_OK) return ret;
+			// Starts the operation, non sticky
+			//    std::cout << "expected error, non sticky bit" << std::endl;
+			if ((ret = WriteSetting("I2CStart_Aux", 1)) != TC_OK) return ret;
 
-		// Starts the operation, non sticky
-		//    std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Aux", 1)) != TC_OK) return ret;
+			//need to wait until I2C operation finished
+			uint32_t valid = 0;
+			while (valid == 0){
+				if ((ret = ReadSetting("I2CDataValid_Aux", valid)) != TC_OK) return ret;
+				usleep(2000);
+			}
+			uint32_t answer;
+			if ((ret = ReadSetting("I2CReadData_Aux", answer)) != TC_OK) return ret;
 
-		//need to wait until I2C operation finished
-		uint32_t valid = 0;
-		while (valid == 0){
-		if ((ret = ReadSetting("I2CDataValid_Aux", valid)) != TC_OK) return ret;
-		usleep(2000);
-		}
-		uint32_t answer;
-		if ((ret = ReadSetting("I2CReadData_Aux", answer)) != TC_OK) return ret;
-
-
-
-		uint16_t tempVal = (answer >> 8) + ((answer & 0xFF) << 8);
-		val = (tempVal >> 3) * 0.03125;
-		if ((tempVal >> 15) & 0x1) val *= -1;
-		return TC_OK;
-		}
+			uint16_t tempVal = (answer >> 8) + ((answer & 0xFF) << 8);
+			val = (tempVal >> 3) * 0.03125;
+			if ((tempVal >> 15) & 0x1) val *= -1;
+			return TC_OK;
+		}//int TargetModule::GetTempI2CAux
 
 		int TargetModule::GetTempI2CPrimary(float& val /*Celsius*/) {
-		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP ||
-		fModuleType == kSCTModuleBP || fModuleType == kSCTModule)) {
-		std::cout << "TargetModule ERROR: This function is only implemented for "
-				 "kTCModule, kTCModuleBP, kSCTModule and kSCTModuleBP ";
-		return TC_ERR_USER_ERROR;
-		}
+			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP || fModuleType == kSCTModuleBP || fModuleType == kSCTModule)) {
+				std::cout << "TargetModule ERROR: This function is only implemented for kTCModule, kTCModuleBP, kSCTModule and kSCTModuleBP ";
+				return TC_ERR_USER_ERROR;
+			}
+			int ret;
+			
+			// no need to set device address, it is set in firmware
+			// 0 write, 1 read
+			if ((ret = WriteSetting("I2CRW_Primary", 1)) != TC_OK) return ret;
 
-		int ret;
+			if ((ret = WriteSetting("I2CRegAddr_Primary", 0)) != TC_OK) return ret;
 
-		// no need to set device address, it is set in firmware
+			// Starts the operation, non sticky
+			//    std::cout << "expected error, non sticky bit" << std::endl;
+			if ((ret = WriteSetting("I2CStart_Primary", 1)) != TC_OK) return ret;
 
-		// 0 write, 1 read
-		if ((ret = WriteSetting("I2CRW_Primary", 1)) != TC_OK) return ret;
+			//need to wait until I2C operation finished
+			uint32_t valid = 0;
+			while (valid == 0){
+				if ((ret = ReadSetting("I2CDataValid_Primary", valid)) != TC_OK) return ret;
+				usleep(2000);
+			}
 
-		if ((ret = WriteSetting("I2CRegAddr_Primary", 0)) != TC_OK) return ret;
+			uint32_t answer;
+			if ((ret = ReadSetting("I2CReadData_Primary", answer)) != TC_OK) return ret;
 
-		// Starts the operation, non sticky
-		//    std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Primary", 1)) != TC_OK) return ret;
+			uint16_t tempVal = (answer >> 8) + ((answer & 0xFF) << 8);
+			val = (tempVal >> 3) * 0.03125;
+			if ((tempVal >> 15) & 0x1) val *= -1;
 
-		//need to wait until I2C operation finished
-		uint32_t valid = 0;
-		while (valid == 0){
-		if ((ret = ReadSetting("I2CDataValid_Primary", valid)) != TC_OK) return ret;
-		usleep(2000);
-		}
+			return TC_OK;
+		}//int TargetModule::GetTempI2CPrimary
 
-		uint32_t answer;
-		if ((ret = ReadSetting("I2CReadData_Primary", answer)) != TC_OK) return ret;
-
-		uint16_t tempVal = (answer >> 8) + ((answer & 0xFF) << 8);
-		val = (tempVal >> 3) * 0.03125;
-		if ((tempVal >> 15) & 0x1) val *= -1;
-
-		return TC_OK;
-		}
-
-		//
 		int TargetModule::GetTempSIPM(float& val) {
-		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
-		std::cout << "ERROR: This function is only implemented for kTCModule and "
-				 "kTCModuleBP ";
-		return TC_ERR_USER_ERROR;
-		}
-		int ret;
-		uint32_t answer;
-		uint32_t answer2;
-		if ((ret = ReadSetting("SlowADCEnable_Power", answer)) != TC_OK) return ret;
-		if (answer != 1) {
-		if ((ret = WriteSetting("SlowADCEnable_Power", 1)) != TC_OK) return ret;
-		std::cout << "TargetModule::GetTempSIPM - sleep after enabling slow adc power" << std::endl;
-		sleep(1);
-		}
-		if ((ret = ReadSetting("SlowResult27_Power", answer2)) != TC_OK) return ret;
-		if (answer2 < 0x8000)
-		answer2 += 0x8000;
-		else
-		answer2 = answer2 & 0x7FFF;
-		val = (answer2 * 0.03815 * .2) - 273.15;
-		val = (int)(val * 100.) / 100.0;
-		return TC_OK;
-		}
+			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
+				std::cout << "ERROR: This function is only implemented for kTCModule and kTCModuleBP ";
+				return TC_ERR_USER_ERROR;
+			}
+			int ret;
+			uint32_t answer;
+			uint32_t answer2;
+			if ((ret = ReadSetting("SlowADCEnable_Power", answer)) != TC_OK) return ret;
+			if (answer != 1) {
+				if ((ret = WriteSetting("SlowADCEnable_Power", 1)) != TC_OK) return ret;
+				std::cout << "TargetModule::GetTempSIPM - sleep after enabling slow adc power" << std::endl;
+				sleep(1);
+			}
+			if ((ret = ReadSetting("SlowResult27_Power", answer2)) != TC_OK) return ret;
+			if (answer2 < 0x8000)
+			answer2 += 0x8000;
+			else
+			answer2 = answer2 & 0x7FFF;
+			val = (answer2 * 0.03815 * .2) - 273.15;
+			val = (int)(val * 100.) / 100.0;
+			return TC_OK;
+		}//int TargetModule::GetTempSIPM
 
 		int TargetModule::ReadPowerBoardID(uint64_t& val) {
 			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
@@ -1584,689 +1555,661 @@ namespace CTA {
 		// Enabling / Disabling  HV
 		// private?
 		int TargetModule::ReadHVEnableBytes(uint8_t& byte0, uint8_t& byte1) {
-		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
-		std::cout << "TargetModule ERROR: This function is only implemented for " << "kTCModule and kTCModuleBP " << std::endl;
-		return TC_ERR_USER_ERROR;
-		}
+			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
+				std::cout << "TargetModule ERROR: This function is only implemented for " << "kTCModule and kTCModuleBP " << std::endl;
+				return TC_ERR_USER_ERROR;
+			}
 
-		int ret;
-		if ((ret = WriteSetting("I2CAddr_Power", 0b0100001)) != TC_OK) return ret;
+			int ret;
+			if ((ret = WriteSetting("I2CAddr_Power", 0b0100001)) != TC_OK) return ret;
 
-		// read back the value we just have written
-		// 0 write, 1 read
-		if ((ret = WriteSetting("I2CRW_Power", 1)) != TC_OK) return ret;
+			// read back the value we just have written
+			// 0 write, 1 read
+			if ((ret = WriteSetting("I2CRW_Power", 1)) != TC_OK) return ret;
 
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
 
-		uint32_t answer;
-		if ((ret = ReadSetting("I2CReadData_Power", answer)) != TC_OK) return ret;
+			uint32_t answer;
+			if ((ret = ReadSetting("I2CReadData_Power", answer)) != TC_OK) return ret;
 
-		byte1 = (answer & 0xFF);
-		byte0 = (answer >> 8 & 0xFF);
+			byte1 = (answer & 0xFF);
+			byte0 = (answer >> 8 & 0xFF);
 
-		return TC_OK;
-		}
-
-		//
-		//
-		//
-		//
-		//
+			return TC_OK;
+		}//int TargetModule::ReadHVEnableBytes
 
 		int TargetModule::IsHVEnabled(uint8_t superPixel, bool& enabled) {
-		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
-		std::cout << "TargetModule ERROR: This function is only implemented for "
-				 "kTCModule and kTCModuleBP ";
-		return TC_ERR_USER_ERROR;
-		}
-		int ret;
+			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
+			std::cout << "TargetModule ERROR: This function is only implemented for "
+					 "kTCModule and kTCModuleBP ";
+			return TC_ERR_USER_ERROR;
+			}
+			int ret;
 
-		int enableBit = SuperPixelIdToHVEneableBit(superPixel);
-		if (enableBit < 0) return TC_UNEXPECTED_RESPONSE;
-		uint8_t byte0, byte1;
-		if ((ret = ReadHVEnableBytes(byte0, byte1)) != TC_OK) return ret;
+			int enableBit = SuperPixelIdToHVEneableBit(superPixel);
+			if (enableBit < 0) return TC_UNEXPECTED_RESPONSE;
+			uint8_t byte0, byte1;
+			if ((ret = ReadHVEnableBytes(byte0, byte1)) != TC_OK) return ret;
 
-		if (enableBit < 8) {
-		uint8_t specBit = 1 << enableBit;
-		enabled = (specBit & byte0);
-		} else {
-		enableBit -= 8;
-		uint8_t specBit = 1 << enableBit;
-		enabled = (specBit & byte1);
-		}
-		return TC_OK;
-		}
+			if (enableBit < 8) {
+				uint8_t specBit = 1 << enableBit;
+				enabled = (specBit & byte0);
+			} else {
+				enableBit -= 8;
+				uint8_t specBit = 1 << enableBit;
+				enabled = (specBit & byte1);
+			}
+			return TC_OK;
+		}//int TargetModule::IsHVEnabled
 
 		int TargetModule::WhichHVEnabled(std::vector<bool>& enabled) {
-		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
-		std::cout << "TargetModule ERROR: This function is only implemented for "
-				 "kTCModule and kTCModuleBP ";
-		return TC_ERR_USER_ERROR;
-		}
-		enabled.clear();
-		enabled.resize(16, false);
-		int ret;
-		// read current bytes
-		uint8_t byte0, byte1;
-		if ((ret = ReadHVEnableBytes(byte0, byte1)) != TC_OK) return ret;
+			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
+				std::cout << "TargetModule ERROR: This function is only implemented for kTCModule and kTCModuleBP ";
+				return TC_ERR_USER_ERROR;
+			}
+			enabled.clear();
+			enabled.resize(16, false);
+			int ret;
+			// read current bytes
+			uint8_t byte0, byte1;
+			if ((ret = ReadHVEnableBytes(byte0, byte1)) != TC_OK) return ret;
 
-		for (uint8_t spId = 0; spId < 16; spId++) {
-		int enableBit = SuperPixelIdToHVEneableBit(spId);
-		if (enableBit < 0) return TC_UNEXPECTED_RESPONSE;
-		if (enableBit < 8) {
-		uint8_t specBit = 1 << enableBit;
-		if (specBit & byte0) {  // check if bit is up
-		enabled[spId] = true;
-		}
-		} else {
-		enableBit -= 8;
-		uint8_t specBit = 1 << enableBit;
-		if (specBit & byte1) {  // check if bit is up
-		enabled[spId] = true;
-		}
-		}
-		}
+			for (uint8_t spId = 0; spId < 16; spId++) {
+				int enableBit = SuperPixelIdToHVEneableBit(spId);
+				if (enableBit < 0) return TC_UNEXPECTED_RESPONSE;
+				if (enableBit < 8) {
+					uint8_t specBit = 1 << enableBit;
+					if (specBit & byte0) {  // check if bit is up
+						enabled[spId] = true;
+					}
+				} else {
+					enableBit -= 8;
+					uint8_t specBit = 1 << enableBit;
+					if (specBit & byte1) {  // check if bit is up
+						enabled[spId] = true;
+					}
+				}
+			}
 
-		return TC_OK;
-		}  // all superpixels
+			return TC_OK;
+		}//int TargetModule::WhichHVEnabled  
+		// all superpixels
 
 		int TargetModule::DisableHVSuperPixel(uint8_t superPixel) {
-		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
-		std::cout << "TargetModuleERROR: This function is only implemented for "
-				 "kTCModule and kTCModuleBP ";
-		return TC_ERR_USER_ERROR;
-		}
+			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
+				std::cout << "TargetModuleERROR: This function is only implemented for kTCModule and kTCModuleBP ";
+				return TC_ERR_USER_ERROR;
+			}
+			int ret;
+			int enableBit = SuperPixelIdToHVEneableBit(superPixel);
+			if (enableBit < 0) return TC_UNEXPECTED_RESPONSE;
 
-		int ret;
-		int enableBit = SuperPixelIdToHVEneableBit(superPixel);
-		if (enableBit < 0) return TC_UNEXPECTED_RESPONSE;
+			// read current bytes
+			uint8_t byte0, byte1;
 
-		// read current bytes
-		uint8_t byte0, byte1;
+			if ((ret = ReadHVEnableBytes(byte0, byte1)) != TC_OK) return ret;
 
-		if ((ret = ReadHVEnableBytes(byte0, byte1)) != TC_OK) return ret;
+			// modify bytes to disable bit
+			if (enableBit < 8) {
+				uint8_t specBit = 1 << enableBit;
+				if (specBit & byte0) {  // check if bit is up
+					byte0 = ~specBit & byte0;
+				}
+			} else {
+				enableBit -= 8;
+				uint8_t specBit = 1 << enableBit;
+				if (specBit & byte1) {  // check if bit is up
+					byte1 = ~specBit & byte1;
+				}
+			}
 
-		// modify bytes to disable bit
-		if (enableBit < 8) {
-		uint8_t specBit = 1 << enableBit;
-		if (specBit & byte0) {  // check if bit is up
-		byte0 = ~specBit & byte0;
-		}
-		} else {
-		enableBit -= 8;
-		uint8_t specBit = 1 << enableBit;
-		if (specBit & byte1) {  // check if bit is up
-		byte1 = ~specBit & byte1;
-		}
-		}
+			// 0b0100001 is I2C bus of the I/0 expander (TI PCA9555)
+			if ((ret = WriteSetting("I2CAddr_Power", 0b0100001)) != TC_OK) return ret;
 
-		// 0b0100001 is I2C bus of the I/0 expander (TI PCA9555)
-		if ((ret = WriteSetting("I2CAddr_Power", 0b0100001)) != TC_OK) return ret;
+			// 0 write, 1 read
+			if ((ret = WriteSetting("I2CRW_Power", 0)) != TC_OK) return ret;
 
-		// 0 write, 1 read
-		if ((ret = WriteSetting("I2CRW_Power", 0)) != TC_OK) return ret;
+			// not sure why this block is needed..
+			if ((ret = WriteSetting("I2CRegAddr_Power", 0x6)) != TC_OK) return ret;
 
-		// not sure why this block is needed..
-		if ((ret = WriteSetting("I2CRegAddr_Power", 0x6)) != TC_OK) return ret;
+			if ((ret = WriteSetting("I2CWriteData_Power", 0)) != TC_OK) return ret;
 
-		if ((ret = WriteSetting("I2CWriteData_Power", 0)) != TC_OK) return ret;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
 
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			if ((ret = WriteSetting("I2CRegAddr_Power", 0x7)) != TC_OK) return ret;
+			if ((ret = WriteSetting("I2CWriteData_Power", 0)) != TC_OK) return ret;
 
-		if ((ret = WriteSetting("I2CRegAddr_Power", 0x7)) != TC_OK) return ret;
-		if ((ret = WriteSetting("I2CWriteData_Power", 0)) != TC_OK) return ret;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
 
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			// Writing enable byte 0
+			if ((ret = WriteSetting("I2CRegAddr_Power", 0x2)) != TC_OK) return ret;
+			if ((ret = WriteSetting("I2CWriteData_Power", byte0)) != TC_OK) return ret;
+			//    std::cout << "expected error, non sticky bit" << std::endl;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			// writing enable byte 1
+			if ((ret = WriteSetting("I2CRegAddr_Power", 0x3)) != TC_OK) return ret;
+			if ((ret = WriteSetting("I2CWriteData_Power", byte1)) != TC_OK) return ret;
 
-		// Writing enable byte 0
-		if ((ret = WriteSetting("I2CRegAddr_Power", 0x2)) != TC_OK) return ret;
-		if ((ret = WriteSetting("I2CWriteData_Power", byte0)) != TC_OK) return ret;
-		//    std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
-		// writing enable byte 1
-		if ((ret = WriteSetting("I2CRegAddr_Power", 0x3)) != TC_OK) return ret;
-		if ((ret = WriteSetting("I2CWriteData_Power", byte1)) != TC_OK) return ret;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			usleep(1e5);
+			// reading back bytes for checking
+			uint8_t check0, check1;
 
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
-		usleep(1e5);
-		// reading back bytes for checking
-		uint8_t check0, check1;
+			if ((ret = ReadHVEnableBytes(check0, check1)) != TC_OK) return ret;
 
-		if ((ret = ReadHVEnableBytes(check0, check1)) != TC_OK) return ret;
-
-		if (fVerbose) {
-		std::cout << "Check read: " << std::endl;
-		std::cout << "0) check: " << int(check0) << "\t old val: " << int(byte0)
-			  << std::endl;
-		std::cout << "1) check: " << int(check1) << "\t old val: " << int(byte1)
-			  << std::endl;
-		}
-		if (check0 != byte0) {
-		return TC_UNEXPECTED_RESPONSE;
-		}
-		if (check1 != byte1) {
-		return TC_UNEXPECTED_RESPONSE;
-		}
-		return TC_OK;
-		}  // mapping SP to enable bit
+			if (fVerbose) {
+				std::cout << "Check read: " << std::endl;
+				std::cout << "0) check: " << int(check0) << "\t old val: " << int(byte0) << std::endl;
+				std::cout << "1) check: " << int(check1) << "\t old val: " << int(byte1) << std::endl;
+			}
+			if (check0 != byte0) {
+				return TC_UNEXPECTED_RESPONSE;
+			}
+			if (check1 != byte1) {
+				return TC_UNEXPECTED_RESPONSE;
+			}
+			return TC_OK;
+		}//int TargetModule::DisableHVSuperPixel  
+		// mapping SP to enable bit
 
 		int TargetModule::EnableHVSuperPixel(uint8_t superPixel) {
-		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
-		std::cout << "ERROR: This function is only implemented for kTCModule and "
-				 "kTCModuleBP ";
-		return TC_ERR_USER_ERROR;
-		}
+			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
+				std::cout << "ERROR: This function is only implemented for kTCModule and kTCModuleBP ";
+			return TC_ERR_USER_ERROR;
+			}
 
-		int ret;
-		int enableBit = SuperPixelIdToHVEneableBit(superPixel);
-		if (enableBit < 0) return TC_UNEXPECTED_RESPONSE;
+			int ret;
+			int enableBit = SuperPixelIdToHVEneableBit(superPixel);
+			if (enableBit < 0) return TC_UNEXPECTED_RESPONSE;
 
-		// read current byte
-		uint8_t byte0, byte1;
-		if ((ret = ReadHVEnableBytes(byte0, byte1)) != TC_OK) return ret;
+			// read current byte
+			uint8_t byte0, byte1;
+			if ((ret = ReadHVEnableBytes(byte0, byte1)) != TC_OK) return ret;
 
-		if (fVerbose) {
-		std::cout << "First read: " << std::endl;
-		std::cout << "0) " << int(byte0) << std::endl;
-		std::cout << "1) " << int(byte1) << std::endl;
-		}
-		// modify bytes to enable bit
-		if (enableBit < 8) {
-		uint8_t specBit = 1 << enableBit;
-		if (!(specBit & byte0)) {  // check if bit is up
-		byte0 = specBit | byte0;
-		}
-		} else {
-		enableBit -= 8;
-		uint8_t specBit = 1 << enableBit;
-		if (!(specBit & byte1)) {  // check if bit is up
-		byte1 = specBit | byte1;
-		}
-		}
+			if (fVerbose) {
+				std::cout << "First read: " << std::endl;
+				std::cout << "0) " << int(byte0) << std::endl;
+				std::cout << "1) " << int(byte1) << std::endl;
+			}
+			// modify bytes to enable bit
+			if (enableBit < 8) {
+				uint8_t specBit = 1 << enableBit;
+				if (!(specBit & byte0)) {  // check if bit is up
+					byte0 = specBit | byte0;
+				}
+			} else {
+				enableBit -= 8;
+				uint8_t specBit = 1 << enableBit;
+				if (!(specBit & byte1)) {  // check if bit is up
+					byte1 = specBit | byte1;
+				}
+			}
 
-		// Set the 7 bit device address of the I/0 expander on power board
-		// 0b0100001 is I2C bus of the I/0 expander (TI PCA9555)
-		if ((ret = WriteSetting("I2CAddr_Power", 0b0100001)) != TC_OK) return ret;
+			// Set the 7 bit device address of the I/0 expander on power board
+			// 0b0100001 is I2C bus of the I/0 expander (TI PCA9555)
+			if ((ret = WriteSetting("I2CAddr_Power", 0b0100001)) != TC_OK) return ret;
 
-		// 0 write, 1 read
-		if ((ret = WriteSetting("I2CRW_Power", 0)) != TC_OK) return ret;
+			// 0 write, 1 read
+			if ((ret = WriteSetting("I2CRW_Power", 0)) != TC_OK) return ret;
 
-		// not sure why this block is needed..
-		if ((ret = WriteSetting("I2CRegAddr_Power", 0x6)) != TC_OK) return ret;
-		if ((ret = WriteSetting("I2CWriteData_Power", 0)) != TC_OK) return ret;
-		//    std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
-		if ((ret = WriteSetting("I2CRegAddr_Power", 0x7)) != TC_OK) return ret;
-		if ((ret = WriteSetting("I2CWriteData_Power", 0)) != TC_OK) return ret;
+			// not sure why this block is needed..
+			if ((ret = WriteSetting("I2CRegAddr_Power", 0x6)) != TC_OK) return ret;
+			if ((ret = WriteSetting("I2CWriteData_Power", 0)) != TC_OK) return ret;
+			//    std::cout << "expected error, non sticky bit" << std::endl;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			if ((ret = WriteSetting("I2CRegAddr_Power", 0x7)) != TC_OK) return ret;
+			if ((ret = WriteSetting("I2CWriteData_Power", 0)) != TC_OK) return ret;
 
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
-		// not sure why this block is needed..
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			// not sure why this block is needed..
 
-		// Writing enable byte 0
-		if ((ret = WriteSetting("I2CRegAddr_Power", 0x2)) != TC_OK) return ret;
-		if ((ret = WriteSetting("I2CWriteData_Power", byte0)) != TC_OK) return ret;
-		//    std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
-		// writing byte 1
-		if ((ret = WriteSetting("I2CRegAddr_Power", 0x3)) != TC_OK) return ret;
-		if ((ret = WriteSetting("I2CWriteData_Power", byte1)) != TC_OK) return ret;
+			// Writing enable byte 0
+			if ((ret = WriteSetting("I2CRegAddr_Power", 0x2)) != TC_OK) return ret;
+			if ((ret = WriteSetting("I2CWriteData_Power", byte0)) != TC_OK) return ret;
+			//    std::cout << "expected error, non sticky bit" << std::endl;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			// writing byte 1
+			if ((ret = WriteSetting("I2CRegAddr_Power", 0x3)) != TC_OK) return ret;
+			if ((ret = WriteSetting("I2CWriteData_Power", byte1)) != TC_OK) return ret;
 
-		//    std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
-		usleep(1e5);
+			//    std::cout << "expected error, non sticky bit" << std::endl;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			usleep(1e5);
 
-		// reading back bytes
-		// reading back bytes for checking
-		uint8_t check0, check1;
-		if ((ret = ReadHVEnableBytes(check0, check1)) != TC_OK) return ret;
+			// reading back bytes
+			// reading back bytes for checking
+			uint8_t check0, check1;
+			if ((ret = ReadHVEnableBytes(check0, check1)) != TC_OK) return ret;
 
-		if (fVerbose) {
-		std::cout << "Check read: " << std::endl;
-		std::cout << "0) check: " << int(check0) << "\t old val: " << int(byte0)
-			  << std::endl;
-		std::cout << "1) chekc: " << int(check1) << "\t old val: " << int(byte1)
-			  << std::endl;
-		}
-		if (check0 != byte0) {
-		return TC_UNEXPECTED_RESPONSE;
-		}
-		if (check1 != byte1) {
-		return TC_UNEXPECTED_RESPONSE;
-		}
+			if (fVerbose) {
+				std::cout << "Check read: " << std::endl;
+				std::cout << "0) check: " << int(check0) << "\t old val: " << int(byte0) << std::endl;
+				std::cout << "1) chekc: " << int(check1) << "\t old val: " << int(byte1) << std::endl;
+			}
+			if (check0 != byte0) {
+				return TC_UNEXPECTED_RESPONSE;
+			}
+			if (check1 != byte1) {
+				return TC_UNEXPECTED_RESPONSE;
+			}
+			return TC_OK;
+		}//int TargetModule::EnableHVSuperPixel  
+		// mapping SP to enable bit
 
-		return TC_OK;
-		}  // mapping SP to enable bit
-
-		/////////////////////////////////////
 		int TargetModule::DisableHVAll() {
-		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
-		std::cout << "TargetModule ERROR: This function is only implemented for "
-				 "kTCModule and kTCModuleBP ";
-		return TC_ERR_USER_ERROR;
-		}
+			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
+				std::cout << "TargetModule ERROR: This function is only implemented for kTCModule and kTCModuleBP ";
+				return TC_ERR_USER_ERROR;
+			}
 
-		int ret;
-		// Set the 7 bit device address of the I/0 expander on power board
-		// 0b0100001 is I2C bus of the I/0 expander (TI PCA9555)
-		if ((ret = WriteSetting("I2CAddr_Power", 0b0100001)) != TC_OK) return ret;
+			int ret;
+			// Set the 7 bit device address of the I/0 expander on power board
+			// 0b0100001 is I2C bus of the I/0 expander (TI PCA9555)
+			if ((ret = WriteSetting("I2CAddr_Power", 0b0100001)) != TC_OK) return ret;
 
-		// 0 write, 1 read
-		if ((ret = WriteSetting("I2CRW_Power", 0)) != TC_OK) return ret;
+			// 0 write, 1 read
+			if ((ret = WriteSetting("I2CRW_Power", 0)) != TC_OK) return ret;
 
-		// Writing enable byte 0
-		// Set the 8 bit register address, you want to excess on the device with read
-		// or write, transmits msb first, 0x2 is output port 0 on the I/0 expander
-		if ((ret = WriteSetting("I2CRegAddr_Power", 0x6)) != TC_OK) return ret;
-		// write two bytes enable mask
-		//        if ( (ret = WriteSetting("I2CWriteData_Power",0)) != TC_OK)
-		//        return ret;
-		if ((ret = WriteSetting("I2CWriteData_Power", 0)) != TC_OK) return ret;
+			// Writing enable byte 0
+			// Set the 8 bit register address, you want to excess on the device with read
+			// or write, transmits msb first, 0x2 is output port 0 on the I/0 expander
+			if ((ret = WriteSetting("I2CRegAddr_Power", 0x6)) != TC_OK) return ret;
+			// write two bytes enable mask
+			//        if ( (ret = WriteSetting("I2CWriteData_Power",0)) != TC_OK)
+			//        return ret;
+			if ((ret = WriteSetting("I2CWriteData_Power", 0)) != TC_OK) return ret;
 
-		// Starts the operation, non sticky
-		//        std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			// Starts the operation, non sticky
+			//        std::cout << "expected error, non sticky bit" << std::endl;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
 
-		// Writing enable byte 0
-		// Set the 8 bit register address, you want to excess on the device with read
-		// or write, transmits msb first, 0x2 is output port 0 on the I/0 expander
-		if ((ret = WriteSetting("I2CRegAddr_Power", 0x7)) != TC_OK) return ret;
-		// write two bytes enable mask
-		//        if ( (ret = WriteSetting("I2CWriteData_Power",0)) != TC_OK)
-		//        return ret;
-		if ((ret = WriteSetting("I2CWriteData_Power", 0)) != TC_OK) return ret;
-		// Starts the operation, non sticky
-		//        std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			// Writing enable byte 0
+			// Set the 8 bit register address, you want to excess on the device with read
+			// or write, transmits msb first, 0x2 is output port 0 on the I/0 expander
+			if ((ret = WriteSetting("I2CRegAddr_Power", 0x7)) != TC_OK) return ret;
+			
+			// write two bytes enable mask
+			//        if ( (ret = WriteSetting("I2CWriteData_Power",0)) != TC_OK)
+			//        return ret;
+			if ((ret = WriteSetting("I2CWriteData_Power", 0)) != TC_OK) return ret;
+			
+			// Starts the operation, non sticky
+			//        std::cout << "expected error, non sticky bit" << std::endl;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
 
-		// Writing enable byte 0
-		// Set the 8 bit register address, you want to excess on the device with read
-		// or write, transmits msb first, 0x2 is output port 0 on the I/0 expander
-		if ((ret = WriteSetting("I2CRegAddr_Power", 0x2)) != TC_OK) return ret;
-		// write two bytes enable mask
-		//        if ( (ret = WriteSetting("I2CWriteData_Power",0)) != TC_OK)
-		//        return ret;
-		if ((ret = WriteSetting("I2CWriteData_Power", 0)) != TC_OK) return ret;
-		// Starts the operation, non sticky
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			// Writing enable byte 0
+			// Set the 8 bit register address, you want to excess on the device with read
+			// or write, transmits msb first, 0x2 is output port 0 on the I/0 expander
+			if ((ret = WriteSetting("I2CRegAddr_Power", 0x2)) != TC_OK) return ret;
+			
+			// write two bytes enable mask
+			//        if ( (ret = WriteSetting("I2CWriteData_Power",0)) != TC_OK)
+			//        return ret;
+			if ((ret = WriteSetting("I2CWriteData_Power", 0)) != TC_OK) return ret;
+			
+			// Starts the operation, non sticky
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
 
-		// Writing enable byte 1
-		// Set the 8 bit register address, you want to excess on the device with read
-		// or write, transmits msb first, 0x2 is output port 0 on the I/0 expander
-		if ((ret = WriteSetting("I2CRegAddr_Power", 0x3)) != TC_OK) return ret;
-		// write two bytes enable mask
-		if ((ret = WriteSetting("I2CWriteData_Power", 0)) != TC_OK) return ret;
+			// Writing enable byte 1
+			// Set the 8 bit register address, you want to excess on the device with read
+			// or write, transmits msb first, 0x2 is output port 0 on the I/0 expander
+			if ((ret = WriteSetting("I2CRegAddr_Power", 0x3)) != TC_OK) return ret;
+			
+			// write two bytes enable mask
+			if ((ret = WriteSetting("I2CWriteData_Power", 0)) != TC_OK) return ret;
 
-		// Starts the operation, non sticky
-		//        std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			// Starts the operation, non sticky
+			//        std::cout << "expected error, non sticky bit" << std::endl;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
 
-		// read back the value we just have written
-		// 0 write, 1 read
-		if ((ret = WriteSetting("I2CRW_Power", 1)) != TC_OK) return ret;
+			// read back the value we just have written
+			// 0 write, 1 read
+			if ((ret = WriteSetting("I2CRW_Power", 1)) != TC_OK) return ret;
 
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
 
-		uint32_t answer = 0xFFFFFFFF;
-		if ((ret = ReadSetting("I2CReadData_Power", answer)) != TC_OK) return ret;
+			uint32_t answer = 0xFFFFFFFF;
+			if ((ret = ReadSetting("I2CReadData_Power", answer)) != TC_OK) return ret;
 
-		if (answer != 0) {
-		std::cout << "Error unexpected answer while reading enable mask"
-			  << std::endl;
-		return TC_UNEXPECTED_RESPONSE;
-		}
-		return TC_OK;
-		}
+			if (answer != 0) {
+				std::cout << "Error unexpected answer while reading enable mask" << std::endl;
+				return TC_UNEXPECTED_RESPONSE;
+			}
+			return TC_OK;
+		}//int TargetModule::DisableHVAll
 
-		/////////////////////////////////////
 		int TargetModule::EnableHVAll() {
-		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
-		std::cout << "TargetModule ERROR: This function is only implemented for "
-				 "kTCModule and kTCModuleBP ";
-		return TC_ERR_USER_ERROR;
-		}
+			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
+				std::cout << "TargetModule ERROR: This function is only implemented for kTCModule and kTCModuleBP ";
+				return TC_ERR_USER_ERROR;
+			}
 
-		int ret;
-		// Set the 7 bit device address of the I/0 expander on power board
-		// 0b0100001 is I2C bus of the I/0 expander (TI PCA9555)
-		if ((ret = WriteSetting("I2CAddr_Power", 0b0100001)) != TC_OK) return ret;
+			int ret;
+			// Set the 7 bit device address of the I/0 expander on power board
+			// 0b0100001 is I2C bus of the I/0 expander (TI PCA9555)
+			if ((ret = WriteSetting("I2CAddr_Power", 0b0100001)) != TC_OK) return ret;
 
-		// 0 write, 1 read
-		if ((ret = WriteSetting("I2CRW_Power", 0)) != TC_OK) return ret;
+			// 0 write, 1 read
+			if ((ret = WriteSetting("I2CRW_Power", 0)) != TC_OK) return ret;
 
-		// Writing enable byte 0
-		// Set the 8 bit register address, you want to excess on the device with read
-		// or write, transmits msb first, 0x2 is output port 0 on the I/0 expander
-		if ((ret = WriteSetting("I2CRegAddr_Power", 0x6)) != TC_OK) return ret;
-		// write two bytes enable mask
-		if ((ret = WriteSetting("I2CWriteData_Power", 0)) != TC_OK) return ret;
+			// Writing enable byte 0
+			// Set the 8 bit register address, you want to excess on the device with read
+			// or write, transmits msb first, 0x2 is output port 0 on the I/0 expander
+			if ((ret = WriteSetting("I2CRegAddr_Power", 0x6)) != TC_OK) return ret;
+			
+			// write two bytes enable mask
+			if ((ret = WriteSetting("I2CWriteData_Power", 0)) != TC_OK) return ret;
 
-		// Starts the operation, non sticky
-		//    std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			// Starts the operation, non sticky
+			//    std::cout << "expected error, non sticky bit" << std::endl;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
 
-		// Writing enable byte 0
-		// Set the 8 bit register address, you want to excess on the device with read
-		// or write, transmits msb first, 0x2 is output port 0 on the I/0 expander
-		if ((ret = WriteSetting("I2CRegAddr_Power", 0x7)) != TC_OK) return ret;
-		// write two bytes enable mask
-		if ((ret = WriteSetting("I2CWriteData_Power", 0)) != TC_OK) return ret;
+			// Writing enable byte 0
+			// Set the 8 bit register address, you want to excess on the device with read
+			// or write, transmits msb first, 0x2 is output port 0 on the I/0 expander
+			if ((ret = WriteSetting("I2CRegAddr_Power", 0x7)) != TC_OK) return ret;
+			
+			// write two bytes enable mask
+			if ((ret = WriteSetting("I2CWriteData_Power", 0)) != TC_OK) return ret;
 
-		// Starts the operation, non sticky
-		//    std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			// Starts the operation, non sticky
+			//    std::cout << "expected error, non sticky bit" << std::endl;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
 
-		// Writing enable byte 0
-		// Set the 8 bit register address, you want to excess on the device with read
-		// or write, transmits msb first, 0x2 is output port 0 on the I/0 expander
-		if ((ret = WriteSetting("I2CRegAddr_Power", 0x2)) != TC_OK) return ret;
-		// write two bytes enable mask
-		if ((ret = WriteSetting("I2CWriteData_Power", 0xFF)) != TC_OK) return ret;
+			// Writing enable byte 0
+			// Set the 8 bit register address, you want to excess on the device with read
+			// or write, transmits msb first, 0x2 is output port 0 on the I/0 expander
+			if ((ret = WriteSetting("I2CRegAddr_Power", 0x2)) != TC_OK) return ret;
+			
+			// write two bytes enable mask
+			if ((ret = WriteSetting("I2CWriteData_Power", 0xFF)) != TC_OK) return ret;
 
-		// Starts the operation, non sticky
-		//   std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			// Starts the operation, non sticky
+			//   std::cout << "expected error, non sticky bit" << std::endl;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
 
-		// Writing enable byte 1
-		// Set the 8 bit register address, you want to excess on the device with read
-		// or write, transmits msb first, 0x2 is output port 0 on the I/0 expander
-		if ((ret = WriteSetting("I2CRegAddr_Power", 0x3)) != TC_OK) return ret;
-		// write two bytes enable mask
-		if ((ret = WriteSetting("I2CWriteData_Power", 0xFF)) != TC_OK) return ret;
-		//    WriteSetting("I2CWriteData_Power",0xFF);
-		// Starts the operation, non sticky
-		//    std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			// Writing enable byte 1
+			// Set the 8 bit register address, you want to excess on the device with read
+			// or write, transmits msb first, 0x2 is output port 0 on the I/0 expander
+			if ((ret = WriteSetting("I2CRegAddr_Power", 0x3)) != TC_OK) return ret;
+			
+			// write two bytes enable mask
+			if ((ret = WriteSetting("I2CWriteData_Power", 0xFF)) != TC_OK) return ret;
+			
+			//    WriteSetting("I2CWriteData_Power",0xFF);
+			// Starts the operation, non sticky
+			//    std::cout << "expected error, non sticky bit" << std::endl;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
 
-		// read back the value we just have written
-		// 0 write, 1 read
-		if ((ret = WriteSetting("I2CRW_Power", 1)) != TC_OK) return ret;
+			// read back the value we just have written
+			// 0 write, 1 read
+			if ((ret = WriteSetting("I2CRW_Power", 1)) != TC_OK) return ret;
 
-		// Starts the operation, non sticky
-		//   std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
-		// read back both enable0 and enable1 bytes
-		uint32_t answer = 0;
-		if ((ret = ReadSetting("I2CReadData_Power", answer)) != TC_OK) return ret;
-		if (answer != 0xFFFF) {
-		std::cout << "Error unexpected answer while reading enable mask"
-			  << std::endl;
-		return TC_UNEXPECTED_RESPONSE;
-		}
-		return TC_OK;
-		}
+			// Starts the operation, non sticky
+			//   std::cout << "expected error, non sticky bit" << std::endl;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			
+			// read back both enable0 and enable1 bytes
+			uint32_t answer = 0;
+			if ((ret = ReadSetting("I2CReadData_Power", answer)) != TC_OK) return ret;
+			if (answer != 0xFFFF) {
+				std::cout << "Error unexpected answer while reading enable mask" << std::endl;
+				return TC_UNEXPECTED_RESPONSE;
+			}
+			return TC_OK;
+		}//int TargetModule::EnableHVAll
 
 		// HV regulator control settings
 		// Initialize Write HVDAC 0
 		int TargetModule::SetHVDAC(uint8_t superPixel, uint8_t val) {
-		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
-		std::cout << "ERROR: This function is only implemented for kTCModule and "
-				 "kTCModuleBP ";
-		return TC_ERR_USER_ERROR;
-		}
-		int ret;
+			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
+				std::cout << "ERROR: This function is only implemented for kTCModule and kTCModuleBP ";
+				return TC_ERR_USER_ERROR;
+			}
+			
+			int ret;
+			int i2cAddr = SuperPixelIdToI2CAddr(superPixel);
+			if (i2cAddr < 0) {
+				return TC_ERR_USER_ERROR;
+			}
+			if ((ret = WriteSetting("I2CAddr_Power", i2cAddr)) != TC_OK) return ret;
 
-		int i2cAddr = SuperPixelIdToI2CAddr(superPixel);
-		if (i2cAddr < 0) {
-		return TC_ERR_USER_ERROR;
-		}
-		if ((ret = WriteSetting("I2CAddr_Power", i2cAddr)) != TC_OK) return ret;
+			// 0 write, 1 read
+			if ((ret = WriteSetting("I2CRW_Power", 0)) != TC_OK) return ret;
 
-		// 0 write, 1 read
-		if ((ret = WriteSetting("I2CRW_Power", 0)) != TC_OK) return ret;
+			int regAddr = SuperPixelIdToI2CRegAddr(superPixel);
+			if (regAddr < 0) {
+				return TC_ERR_USER_ERROR;
+			}
 
-		int regAddr = SuperPixelIdToI2CRegAddr(superPixel);
-		if (regAddr < 0) {
-		return TC_ERR_USER_ERROR;
-		}
+			if ((ret = WriteSetting("I2CRegAddr_Power", regAddr + 16)) != TC_OK) return ret;
 
-		if ((ret = WriteSetting("I2CRegAddr_Power", regAddr + 16)) != TC_OK)
-		return ret;
+			// write two bytes enable mask
+			if ((ret = WriteSetting("I2CWriteData_Power", val)) != TC_OK) return ret;
+			//  WriteSetting("I2CWriteData_Power",val);
 
-		// write two bytes enable mask
-		if ((ret = WriteSetting("I2CWriteData_Power", val)) != TC_OK) return ret;
-		//  WriteSetting("I2CWriteData_Power",val);
+			// Starts the operation, non sticky
+			//  std::cout << "expected error, non sticky bit" << std::endl;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
 
-		// Starts the operation, non sticky
-		//  std::cout << "expected error, non sticky bit" << std::endl;
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			uint8_t checkVal;
+			if ((ret = ReadHVDAC(superPixel, checkVal)) != TC_OK) return ret;
 
-		uint8_t checkVal;
-		if ((ret = ReadHVDAC(superPixel, checkVal)) != TC_OK) return ret;
-
-		if (checkVal != val) {
-		std::cout << "Written HV dac value differ from readback dac value"
-			  << std::endl;
-		return TC_UNEXPECTED_RESPONSE;
-		}
-
-		return TC_OK;
-		}
+			if (checkVal != val) {
+				std::cout << "Written HV dac value differ from readback dac value" << std::endl;
+				return TC_UNEXPECTED_RESPONSE;
+			}
+			return TC_OK;
+		}//int TargetModule::SetHVDAC
 
 		int TargetModule::ReadHVDAC(uint8_t superPixel, uint8_t& val) {
-		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
-		std::cout << "ERROR: This function is only implemented for kTCModule and "
-				 "kTCModuleBP ";
-		return TC_ERR_USER_ERROR;
-		}
-		int ret;
-		// device
-		int i2cAddr = SuperPixelIdToI2CAddr(superPixel);
-		if (i2cAddr < 0) {
-		return TC_ERR_USER_ERROR;
-		}
-		if ((ret = WriteSetting("I2CAddr_Power", i2cAddr)) != TC_OK) return ret;
+			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
+				std::cout << "ERROR: This function is only implemented for kTCModule and kTCModuleBP ";
+				return TC_ERR_USER_ERROR;
+			}
+			int ret;
+			// device
+			int i2cAddr = SuperPixelIdToI2CAddr(superPixel);
+			if (i2cAddr < 0) {
+				return TC_ERR_USER_ERROR;
+			}
+			if ((ret = WriteSetting("I2CAddr_Power", i2cAddr)) != TC_OK) return ret;
 
-		// 0 write, 1 read
-		if ((ret = WriteSetting("I2CRW_Power", 0)) != TC_OK) return ret;
+			// 0 write, 1 read
+			if ((ret = WriteSetting("I2CRW_Power", 0)) != TC_OK) return ret;
 
-		// pin on device
-		int regAddr = SuperPixelIdToI2CRegAddr(superPixel);
-		if (regAddr < 0) {
-		return TC_ERR_USER_ERROR;
-		}
+			// pin on device
+			int regAddr = SuperPixelIdToI2CRegAddr(superPixel);
+			if (regAddr < 0) {
+				return TC_ERR_USER_ERROR;
+			}
 
-		if ((ret = WriteSetting("I2CRegAddr_Power", regAddr | 48)) != TC_OK)
-		return ret;
+			if ((ret = WriteSetting("I2CRegAddr_Power", regAddr | 48)) != TC_OK) return ret;
 
-		// write two bytes enable mask
-		if ((ret = WriteSetting("I2CWriteData_Power", 3)) != TC_OK) return ret;
-		//  WriteSetting("I2CWriteData_Power",3);
+			// write two bytes enable mask
+			if ((ret = WriteSetting("I2CWriteData_Power", 3)) != TC_OK) return ret;
+			//  WriteSetting("I2CWriteData_Power",3);
 
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
 
-		// perform the read action in device
-		if ((ret = WriteSetting("I2CAddr_Power", i2cAddr)) != TC_OK) return ret;
-		if ((ret = WriteSetting("I2CRW_Power", 1)) != TC_OK) return ret;
-		if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
+			// perform the read action in device
+			if ((ret = WriteSetting("I2CAddr_Power", i2cAddr)) != TC_OK) return ret;
+			if ((ret = WriteSetting("I2CRW_Power", 1)) != TC_OK) return ret;
+			if ((ret = WriteSetting("I2CStart_Power", 1)) != TC_OK) return ret;
 
-		uint32_t tempVal;
-		if ((ret = ReadSetting("I2CReadData_Power", tempVal)) != TC_OK) return ret;
+			uint32_t tempVal;
+			if ((ret = ReadSetting("I2CReadData_Power", tempVal)) != TC_OK) return ret;
 
-		val = uint8_t(tempVal);
-
-		return TC_OK;
-		}
+			val = uint8_t(tempVal);
+			return TC_OK;
+		}//int TargetModule::ReadHVDAC
 
 		int TargetModule::SetHVDACAll(uint8_t dacVal) {
-		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
-		std::cout << "ERROR: This function is only implemented for kTCModule and "
-				 "kTCModuleBP ";
-		return TC_ERR_USER_ERROR;
-		}
-		int ret;
-		for (uint8_t superPixel = 0; superPixel < 16; superPixel++) {
-		if ((ret = SetHVDAC(superPixel, dacVal)) != TC_OK) return ret;
-		}
-
-		std::cout << "SetHVDACAll " << (int)dacVal << std::endl;
-
-		return TC_OK;
-		}
+			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
+				std::cout << "ERROR: This function is only implemented for kTCModule and kTCModuleBP ";
+				return TC_ERR_USER_ERROR;
+			}
+			int ret;
+			for (uint8_t superPixel = 0; superPixel < 16; superPixel++) {
+				if ((ret = SetHVDAC(superPixel, dacVal)) != TC_OK) return ret;
+			}
+			std::cout << "SetHVDACAll " << (int)dacVal << std::endl;
+			return TC_OK;
+		}//int TargetModule::SetHVDACAll
 
 		int TargetModule::SuperPixelIdToI2CAddr(uint8_t spId) {
-		if (spId == 0 || spId == 1 || spId == 2 || spId == 3) {
-		return 0b0100000;
-		} else if (spId == 4 || spId == 9 || spId == 10 || spId == 6) {
-		return 0b0101111;
-		} else if (spId == 5 || spId == 7 || spId == 8 || spId == 11) {
-		return 0b0101100;
-		} else if (spId == 12 || spId == 13 || spId == 14 || spId == 15) {
-		return 0b0100011;
-		} else {
-		return -1;
-		}
-		}
+			if (spId == 0 || spId == 1 || spId == 2 || spId == 3) {
+				return 0b0100000;
+			} else if (spId == 4 || spId == 9 || spId == 10 || spId == 6) {
+				return 0b0101111;
+			} else if (spId == 5 || spId == 7 || spId == 8 || spId == 11) {
+				return 0b0101100;
+			} else if (spId == 12 || spId == 13 || spId == 14 || spId == 15) {
+				return 0b0100011;
+			} else {
+				return -1;
+			}
+		}//int TargetModule::SuperPixelIdToI2CAddr
 
 		int TargetModule::SuperPixelIdToI2CRegAddr(uint8_t spId) {
-		if (spId == 1 || spId == 4 || spId == 11 || spId == 12) {
-		return 0b0000;
-		} else if (spId == 0 || spId == 5 || spId == 9 || spId == 15) {
-		return 0b0001;
-		} else if (spId == 2 || spId == 6 || spId == 7 || spId == 13) {
-		return 0b0010;
-		} else if (spId == 3 || spId == 8 || spId == 10 || spId == 14) {
-		return 0b0011;
-		} else {
-		return -1;
-		}
-		}
+			if (spId == 1 || spId == 4 || spId == 11 || spId == 12) {
+				return 0b0000;
+			} else if (spId == 0 || spId == 5 || spId == 9 || spId == 15) {
+				return 0b0001;
+			} else if (spId == 2 || spId == 6 || spId == 7 || spId == 13) {
+				return 0b0010;
+			} else if (spId == 3 || spId == 8 || spId == 10 || spId == 14) {
+				return 0b0011;
+			} else {
+				return -1;
+			}
+		}//int TargetModule::SuperPixelIdToI2CRegAddr
 
 		int TargetModule::SuperPixelIdToHVEneableBit(uint8_t spId) {
-		if (spId == 0) {
-		return 3;
-		} else if (spId == 1) {
-		return 0;
-		} else if (spId == 2) {
-		return 1;
-		} else if (spId == 3) {
-		return 2;
-		} else if (spId == 4) {
-		return 4;
-		} else if (spId == 5) {
-		return 8;
-		} else if (spId == 6) {
-		return 5;
-		} else if (spId == 7) {
-		return 10;
-		} else if (spId == 8) {
-		return 9;
-		} else if (spId == 9) {
-		return 7;
-		} else if (spId == 10) {
-		return 6;
-		} else if (spId == 11) {
-		return 11;
-		} else if (spId == 12) {
-		return 15;
-		} else if (spId == 13) {
-		return 14;
-		} else if (spId == 14) {
-		return 13;
-		} else if (spId == 15) {
-		return 12;
-		} else
-		return -1;
-		}
+			if (spId == 0) {
+				return 3;
+			} else if (spId == 1) {
+				return 0;
+			} else if (spId == 2) {
+				return 1;
+			} else if (spId == 3) {
+				return 2;
+			} else if (spId == 4) {
+				return 4;
+			} else if (spId == 5) {
+				return 8;
+			} else if (spId == 6) {
+				return 5;
+			} else if (spId == 7) {
+				return 10;
+			} else if (spId == 8) {
+				return 9;
+			} else if (spId == 9) {
+				return 7;
+			} else if (spId == 10) {
+				return 6;
+			} else if (spId == 11) {
+				return 11;
+			} else if (spId == 12) {
+				return 15;
+			} else if (spId == 13) {
+				return 14;
+			} else if (spId == 14) {
+				return 13;
+			} else if (spId == 15) {
+				return 12;
+			} else {
+				return -1;
+			}
+		}//int TargetModule::SuperPixelIdToHVEneableBit
 
-		//
 		int TargetModule::GetHVSuperPixel(uint8_t superPixel, float& val) {
-		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
-		std::cout << "ERROR: This function is only implemented for kTCModule and "
-				 "kTCModuleBP ";
-		return TC_ERR_USER_ERROR;
-		}
-		int ret;
-		uint32_t answer;
-		uint32_t answer2;
-		if ((ret = ReadSetting("SlowADCEnable_Power", answer)) != TC_OK) return ret;
-		if (answer != 1) {
-		if ((ret = WriteSetting("SlowADCEnable_Power", 1)) != TC_OK) return ret;
-		std::cout << "TargetModule::GetHVSuperPixel - sleep after enabling slow adc power" << std::endl;
-		sleep(1);
-		}
-		char str[40];
-		sprintf(str, "HV%d_Voltage", superPixel);
-		if ((ret = ReadSetting(str, answer2)) != TC_OK) return ret;
-		if (answer2 < 0x8000)
-		answer2 += 0x8000;
-		else
-		answer2 = answer2 & 0x7FFF;
-		val = answer2 * 0.03815 * 2 * 20 / 1000.;
-		return TC_OK;
-		}
+			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP)) {
+				std::cout << "ERROR: This function is only implemented for kTCModule and kTCModuleBP ";
+				return TC_ERR_USER_ERROR;
+			}
+			int ret;
+			uint32_t answer;
+			uint32_t answer2;
+			if ((ret = ReadSetting("SlowADCEnable_Power", answer)) != TC_OK) return ret;
+			if (answer != 1) {
+				if ((ret = WriteSetting("SlowADCEnable_Power", 1)) != TC_OK) return ret;
+				std::cout << "TargetModule::GetHVSuperPixel - sleep after enabling slow adc power" << std::endl;
+				sleep(1);
+			}
+			char str[40];
+			sprintf(str, "HV%d_Voltage", superPixel);
+			if ((ret = ReadSetting(str, answer2)) != TC_OK) return ret;
+			if (answer2 < 0x8000)
+			answer2 += 0x8000;
+			else
+			answer2 = answer2 & 0x7FFF;
+			val = answer2 * 0.03815 * 2 * 20 / 1000.;
+			return TC_OK;
+		}//int TargetModule::GetHVSuperPixel
 
-		//
 		int TargetModule::ReadFromPrimaryEEPROM(uint8_t addrOnEEPROM, uint8_t& val) {
-		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP ||
-		fModuleType == kSCTModuleBP || fModuleType == kSCTModule)) {
-		std::cout << "TargetModule ERROR: This function is only implemented for "
-				 "kTCModule, kTCModuleBP, kSCTModule and kSCTModuleBP ";
-		return TC_ERR_USER_ERROR;
-		}
-		int ret;
-		// The Operation Code tells the EEPROM what to do, most important is 0xA
-		// (0b1010) which performs EEPROM operation (R/W), see datasheet (table 5.1 on
-		// page 12
-		// http://www.atmel.com/images/Atmel-8903-SEEPROM-AT21CS01-Datasheet.pdf ) for
-		// others, i assume never used
-		if ((ret = WriteSetting("EepromOpCode_Primary", 0xA)) != TC_OK) return ret;
+			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP ||	fModuleType == kSCTModuleBP || fModuleType == kSCTModule)) {
+				std::cout << "TargetModule ERROR: This function is only implemented for kTCModule, kTCModuleBP, kSCTModule and kSCTModuleBP ";
+				return TC_ERR_USER_ERROR;
+			}
+			int ret;
+			// The Operation Code tells the EEPROM what to do, most important is 0xA
+			// (0b1010) which performs EEPROM operation (R/W), see datasheet (table 5.1 on
+			// page 12
+			// http://www.atmel.com/images/Atmel-8903-SEEPROM-AT21CS01-Datasheet.pdf ) for
+			// others, i assume never used
+			if ((ret = WriteSetting("EepromOpCode_Primary", 0xA)) != TC_OK) return ret;
 
-		// This sets the addres of the byte which will be written/read, 0-127
-		if ((ret = WriteSetting("EepromRegAddr_Primary", addrOnEEPROM)) != TC_OK)
-		return ret;
+			// This sets the addres of the byte which will be written/read, 0-127
+			if ((ret = WriteSetting("EepromRegAddr_Primary", addrOnEEPROM)) != TC_OK) return ret;
 
-		// When this written a read operation will start, The content of EepromRegAddr
-		// on EEPROM will be written to EepromReadByte
-		if ((ret = WriteSetting("EepromStart_Primary", 0b110)) != TC_OK) return ret;
+			// When this written a read operation will start, The content of EepromRegAddr
+			// on EEPROM will be written to EepromReadByte
+			if ((ret = WriteSetting("EepromStart_Primary", 0b110)) != TC_OK) return ret;
 
-		// Read the answer from the EEPROM, data will be valid ca 1ms EepromStart
-		// command.
-		uint32_t answer;
-		usleep(5e3);  // sleep 5 ms to be sure
-		if ((ret = ReadSetting("EepromReadByte_Primary", answer)) != TC_OK)
-		return ret;
-		val = uint8_t(answer);
-		// When true, EEPROM is not busy and can receive commands, and data in
-		// EepromReadByte is valid. I say this will never be read back false.
-		// HARM: Valid bit doesn't seem to work
-		// if ( (ret = ReadSetting("EepromReadValid_Primary",answer)) != TC_OK) return
-		// ret;
-		//    if (!answer) {
-		//      return TC_UNEXPECTED_RESPONSE;
-		//    }
-		return ret;
-		}
+			// Read the answer from the EEPROM, data will be valid ca 1ms EepromStart
+			// command.
+			uint32_t answer;
+			usleep(5e3);  // sleep 5 ms to be sure
+			
+			if ((ret = ReadSetting("EepromReadByte_Primary", answer)) != TC_OK)	return ret;
+			val = uint8_t(answer);
+			// When true, EEPROM is not busy and can receive commands, and data in
+			// EepromReadByte is valid. I say this will never be read back false.
+			// HARM: Valid bit doesn't seem to work
+			// if ( (ret = ReadSetting("EepromReadValid_Primary",answer)) != TC_OK) return
+			// ret;
+			//    if (!answer) {
+			//      return TC_UNEXPECTED_RESPONSE;
+			//    }
+			return ret;
+		}//int TargetModule::ReadFromPrimaryEEPROM
 
-		//
 		int TargetModule::WriteToPrimaryEEPROM(uint8_t addrOnEEPROM, uint8_t value) {
-		if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP ||
-		fModuleType == kSCTModuleBP || fModuleType == kSCTModule)) {
-		std::cout << "TargetModule ERROR: This function is only implemented for "
-				 "kTCModule, kTCModuleBP, kSCTModule and kSCTModuleBP ";
-		return TC_ERR_USER_ERROR;
-		}
-		int ret;
-		// The Operation Code tells the EEPROM what to do, most important is 0xA
-		// (0b1010) which performs EEPROM operation (R/W), see datasheet (table 5.1 on
-		// page 12
-		// http://www.atmel.com/images/Atmel-8903-SEEPROM-AT21CS01-Datasheet.pdf) for
-		// others, i assume never used
-		if ((ret = WriteSetting("EepromOpCode_Primary", 0xA)) != TC_OK) return ret;
+			if (!(fModuleType == kTCModule || fModuleType == kTCModuleBP || fModuleType == kSCTModuleBP || fModuleType == kSCTModule)) {
+				std::cout << "TargetModule ERROR: This function is only implemented for kTCModule, kTCModuleBP, kSCTModule and kSCTModuleBP ";
+				return TC_ERR_USER_ERROR;
+			}
+			int ret;
+			// The Operation Code tells the EEPROM what to do, most important is 0xA
+			// (0b1010) which performs EEPROM operation (R/W), see datasheet (table 5.1 on
+			// page 12
+			// http://www.atmel.com/images/Atmel-8903-SEEPROM-AT21CS01-Datasheet.pdf) for
+			// others, i assume never used
+			if ((ret = WriteSetting("EepromOpCode_Primary", 0xA)) != TC_OK) return ret;
 
-		// This sets the addres of the byte which will be written/read, 0-127
-		if ((ret = WriteSetting("EepromRegAddr_Primary", addrOnEEPROM)) != TC_OK)
-		return ret;
+			// This sets the addres of the byte which will be written/read, 0-127
+			if ((ret = WriteSetting("EepromRegAddr_Primary", addrOnEEPROM)) != TC_OK) return ret;
 
-		// Content to be written, 0-255
-		if ((ret = WriteSetting("EepromWriteByte_Primary", value)) != TC_OK)
-		return ret;
+			// Content to be written, 0-255
+			if ((ret = WriteSetting("EepromWriteByte_Primary", value)) != TC_OK) return ret;
 
-		// When this written, a write operation will start. The content of
-		// EepromWriteByte will be written to EepromRegAddr on EEPROM
-		if ((ret = WriteSetting("EepromStart_Primary", 0b101)) != TC_OK) return ret;
+			// When this written, a write operation will start. The content of
+			// EepromWriteByte will be written to EepromRegAddr on EEPROM
+			if ((ret = WriteSetting("EepromStart_Primary", 0b101)) != TC_OK) return ret;
 
-		return TC_OK;
-		}
-
+			return TC_OK;
+		}	//	int TargetModule::WriteToPrimaryEEPROM
 	}  // namespace TargetDriver
 }  // namespace CTA

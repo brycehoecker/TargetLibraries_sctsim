@@ -147,7 +147,7 @@ namespace CTA {
 			}  // if
 
 			WriteRegisterPartially(0x10010, asic * 4 + group, asic * 4 + group, enable ? 0x1 : 0x0);
-		}
+		}//void TesterBoard::EnableTrigger
 
 		void TesterBoard::EnableTriggerCounterContribution(uint8_t asic, uint8_t group, bool enable) {
 			if (asic > 3 || group > 3) {
@@ -155,7 +155,7 @@ namespace CTA {
 			}  // if
 
 			WriteRegisterPartially(0x10011, asic * 4 + group, asic * 4 + group, enable ? 0x1 : 0x0);
-		}
+		}//void TesterBoard::EnableTriggerCounterContribution
 
 		// double TesterBoard::GetMeasuredHV(double offset) {
 		//   uint16_t adc = ReadFPGAMonitor(0x15);
@@ -172,7 +172,7 @@ namespace CTA {
 
 			WriteRegisterPartially(0x10015, 31, 3, start & 0x7FFFFFFF);
 			WriteRegister(0x10016, static_cast<uint32_t>(start >> 29));
-		}
+		}//void TesterBoard::StartTimeBaseCounting
 
 		//////
 
