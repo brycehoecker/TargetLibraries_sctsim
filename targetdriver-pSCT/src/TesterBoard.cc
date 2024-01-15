@@ -143,7 +143,7 @@ namespace CTA {
 
 		void TesterBoard::EnableTrigger(uint8_t asic, uint8_t group, bool enable) {
 			if (asic > 3 || group > 3) {
-			// TODO(Harm) throw RuntimeError("ASIC and group must be 3 or smaller");
+				// TODO(Harm) throw RuntimeError("ASIC and group must be 3 or smaller");
 			}  // if
 
 			WriteRegisterPartially(0x10010, asic * 4 + group, asic * 4 + group, enable ? 0x1 : 0x0);
@@ -151,7 +151,7 @@ namespace CTA {
 
 		void TesterBoard::EnableTriggerCounterContribution(uint8_t asic, uint8_t group, bool enable) {
 			if (asic > 3 || group > 3) {
-			// TODO(Harm) throw RuntimeError("ASIC and group must be 3 or smaller");
+				// TODO(Harm) throw RuntimeError("ASIC and group must be 3 or smaller");
 			}  // if
 
 			WriteRegisterPartially(0x10011, asic * 4 + group, asic * 4 + group, enable ? 0x1 : 0x0);
@@ -219,20 +219,20 @@ namespace CTA {
 											uint8_t msb2, uint8_t lsb2,
 											uint32_t value2) {
 			if (msb1 > 31 || lsb1 > 31 || msb2 > 31 || lsb2 > 31) {
-			//   GERROR() << "Bits must be in between 0 and 31.";
-			return TC_ERR_USER_ERROR;
+				//   GERROR() << "Bits must be in between 0 and 31.";
+				return TC_ERR_USER_ERROR;
 			}  // if
 
 			if (msb1 < lsb1) {
-			uint8_t tmp = lsb1;
-			lsb1 = msb1;
-			msb1 = tmp;
+				uint8_t tmp = lsb1;
+				lsb1 = msb1;
+				msb1 = tmp;
 			}  // if
 
 			if (msb2 < lsb2) {
-			uint8_t tmp = lsb2;
-			lsb2 = msb2;
-			msb2 = tmp;
+				uint8_t tmp = lsb2;
+				lsb2 = msb2;
+				msb2 = tmp;
 			}  // if
 
 			uint32_t originalData;

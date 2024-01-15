@@ -64,10 +64,8 @@ namespace CTA {
 					std::cerr << "RawEvent::FillPacket - Suspicious waveform - mean " << mean << " rms " << rms << std::endl;
 				}
 			} else {
-				std::cerr << "RawEvent::FillPacket - failed to fill packet ID: " << packetID 
-				<< " size was " << packetSize << " expected " << packet->GetPacketSize() << " - event ID " << fEventHeader.GetEventID();
+				std::cerr << "RawEvent::FillPacket - failed to fill packet ID: " << packetID << " size was " << packetSize << " expected " << packet->GetPacketSize() << " - event ID " << fEventHeader.GetEventID();
 			}
-
 			return filled;
 		}//bool RawEvent::AddNewPacket
 	}// namespace TargetDriver
