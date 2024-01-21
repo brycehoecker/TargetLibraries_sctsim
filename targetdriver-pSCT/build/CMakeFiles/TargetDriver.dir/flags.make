@@ -6,5 +6,5 @@ CXX_DEFINES = -DTARGETDRIVER_VERSION=\"1.0\" -DTARGET_BUILD_PATH=\"/home/sctsim/
 
 CXX_INCLUDES = -I/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/include -I/home/sctsim/.local/lib/python3.9/site-packages/numpy/core/include -I/usr/include/python3.9
 
-CXX_FLAGS =  -D__STDC_FORMAT_MACROS  -std=c++20 -O0 -Wall -Wextra -Wconversion -fPIC -std=c++20 -O0 -Wall -Wextra -Wconversion
+CXX_FLAGS =  -D__STDC_FORMAT_MACROS  -std=c++23 -O2 -Wall -fPIC -std=c++23 -O2 -Wall
 

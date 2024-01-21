@@ -1,17 +1,23 @@
 // Copyright (c) 2015 The CTA Consortium. All rights reserved.
 #ifndef INCLUDE_TARGETIO_EVENTFILEWRITER_H_
 #define INCLUDE_TARGETIO_EVENTFILEWRITER_H_
+/*
+#include <TargetDriver/DataListener.h>
+#include <TargetDriver/EventHeader.h>
+#include <TargetDriver/EventBuffer.h>
+#include <TargetDriver/RawEvent.h>
+#include "TargetIO/EventFile.h"
+#include "TargetIO/EventFileReader.h"
+*/
+#include <string>
+#include <thread>  // NOLINT(build/c++11), <thread> is supported by GCC 4.4.7
 
 #include <TargetDriver/DataListener.h>
 #include <TargetDriver/EventHeader.h>
 #include <TargetDriver/EventBuffer.h>
 #include <TargetDriver/RawEvent.h>
-
-#include <string>
-#include <thread>  // NOLINT(build/c++11), <thread> is supported by GCC 4.4.7
-
-#include "TargetIO/EventFile.h"
-#include "TargetIO/EventFileReader.h"
+#include "EventFile.h"
+#include "EventFileReader.h"
 
 namespace CTA {
 namespace TargetIO {

@@ -22,7 +22,7 @@ option(UNITTEST "Enable unit test" OFF)
 option(COMPILER_WARNINGS "Turn compiler warnings on" OFF)
 
 # SCT compilation option
-option(SCT "Enable SCT support over CHEC-S (default)" OFF) #Disabled by default
+option(SCT "Enable SCT support over CHEC-S (default)" ON) #Disabled by default
 
 if(SCT)
     add_compile_definitions(SCT)

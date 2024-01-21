@@ -18,6 +18,12 @@
 /usr/local/include/TargetDriver/UDPServer.h
 /usr/local/include/TargetDriver/Waveform.h
 /usr/local/include/TargetDriver/utils.h
+/usr/local/include/TargetDriver/DataListener_v2.h
+/usr/local/include/TargetDriver/DataPacket_v2.h
+/usr/local/include/TargetDriver/EventBuffer_v2.h
+/usr/local/include/TargetDriver/RawEvent_v2.h
+/usr/local/include/TargetDriver/TargetModuleComms.h
+/usr/local/include/TargetDriver/TargetSimulator.h
 /usr/local/share/TargetDriver/TargetDriverConfigVersion.cmake
 /usr/local/share/TargetDriver/TargetDriverConfig.cmake
 /usr/local/share/TargetDriver/TargetDriverConfig-noconfig.cmake
@@ -41,7 +47,9 @@
 /usr/local/share/TargetDriver//config/TM5_FPGA_Firmware0xFEDA003D.def
 /usr/local/share/TargetDriver//config/TM7_ASIC.def
 /usr/local/bin/tester
-/usr/local/bin/testerTECT5TEA
+/usr/local/bin/testerT7
+/usr/local/bin/testerT7BP
+/usr/local/bin/testerTC
 /usr/local/bin/generate_markdown_files
 /usr/local/bin/testbuffer
 /usr/local/bin/update_firmware

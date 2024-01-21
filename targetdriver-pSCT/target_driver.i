@@ -19,6 +19,8 @@
 #include "TargetDriver/EventBuffer.h"
 #include "TargetDriver/DataListener.h"
 #include "TargetDriver/utils.h"
+#include "TargetDriver/TargetModuleComms.h"
+#include "TargetDriver/TargetSimulator.h"
 using namespace CTA::TargetDriver;
 %}
 
@@ -78,3 +80,5 @@ using namespace CTA::TargetDriver;
 %include "TargetDriver/EventBuffer.h"
 %include "TargetDriver/DataListener.h"
 %include "TargetDriver/utils.h"
+%include "TargetDriver/TargetModuleComms.h"
+%include "TargetDriver/TargetSimulator.h"

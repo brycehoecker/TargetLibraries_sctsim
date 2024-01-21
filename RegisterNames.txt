@@ -3,3 +3,82 @@
 2. Serial ID LSW
 3. Serial ID MSW
 4. Status register
+5. Latched Status register
+6. FIFO Status register ASIC0
+7. Latched FIFO Status register ASIC 0
+8. FIFO Status register ASIC1
+9. Latched FIFO Status register ASIC 1
+10. FIFO Status register ASIC2
+11. Latched FIFO Status register ASIC 2
+12. FIFO Status register ASIC3
+13. Latched FIFO Status register ASIC 3
+14. Trigger FIFO Status register
+15. Trigger statistics
+16. TACK statistic
+17. FIFO statistics
+18. Packet statistics
+19. Command/Ramp count statistics
+20. ADC_control_reg
+21. ADC_config_reg
+22. Time register
+23. Control register 0
+24. Control register 1
+25. Trigger control register 0
+26. Trigger control register 1
+27. Row/Column control/status
+28. Number of samples to read
+29. Serial data idelay control register
+30. Configuration waveform register
+31. Mics Test Register
+32. SST FB PLL alignments register
+33. SST FB idelay alignments register Status
+34. SST FB idelay alignments register Control
+35. Spare
+36. ROVDD feedback control ASIC 0
+37. ROVDD feedback control ASIC 1
+38. ROVDD feedback control ASIC 2
+39. ROVDD feedback control ASIC 3
+40. VDEL feedback control ASIC 0
+41. VDEL feedback control ASIC 1
+42. VDEL feedback control ASIC 2
+43. VDEL feedback control ASIC 3
+44. VDEL/ROVDD calculated values ASIC 0
+45. VDEL/ROVDD calculated values ASIC 1
+46. VDEL/ROVDD calculated values ASIC 2
+47. VDEL/ROVDD calculated values ASIC 3
+48. VPED DAC control ASIC 0
+49. VPED DAC control ASIC 1
+50. VPED DAC control ASIC 2
+51. VPED DAC control ASIC 3
+52. VDELNP DAC control ASIC 0
+53. VDELNP DAC control ASIC 1
+54. VDELNP DAC control ASIC 2
+55. VDELNP DAC control ASIC 3
+56. DC_IN DAC control
+57. HV DAC control
+58. Zero suppression config
+59. ADC measurement reg 0
+60. ADC measurement reg 1
+61. ADC measurement reg 2
+62. ADC measurement reg 3
+63. ADC measurement reg 4
+64. ADC measurement reg 5
+65. ADC measurement reg 6
+66. ADC measurement reg 7
+67. ADC measurement reg 8
+68. ADC measurement reg 9
+69. ADC measurement reg 10
+70. ADC measurement reg 11
+71. ADC measurement reg 12
+72. Trigger Efficiency Cntl 0
+73. Trigger Efficiency Cntl 1
+74. Trigger Efficiency Input Cntr
+75. Trigger Efficiency Cntr
+76. Software reset register
+77. Channel enable register 0
+78. Channel enable register 1
+79. Spare/Test
+80. Write Target register
+81. Read 0 Target register
+82. Read 1 Target register
+83. Dead-time control

@@ -1,1 +1,1 @@
-/usr/bin/c++  -D__STDC_FORMAT_MACROS  -std=c++20 -O0 -Wall -Wextra -Wconversion CMakeFiles/generate_markdown_files.dir/src_exe/generate_markdown_files.cc.o -o bin/generate_markdown_files  -Wl,-rpath,/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build: libTargetDriver.so.1.0 -lrt -lpthread 
+/usr/bin/c++  -D__STDC_FORMAT_MACROS  -std=c++23 -O2 -Wall CMakeFiles/generate_markdown_files.dir/src_exe/generate_markdown_files.cc.o -o bin/generate_markdown_files  -Wl,-rpath,/usr/local/lib libTargetDriver.so.1.0 -lrt -lpthread 

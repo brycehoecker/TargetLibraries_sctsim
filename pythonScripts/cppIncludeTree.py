@@ -8,18 +8,18 @@ def find_files(directory, extensions):
         for file in files:
             if file.endswith(extensions):
                 file_path = os.path.join(root, file)
-                print(f"Processing file: {file_path}")
+                #print(f"Processing file: {file_path}")
                 yield file_path
 
 def parse_includes(file_path, base_name_without_extension, file_extension):
     includes = []
     with open(file_path, 'r') as file:
         for line in file:
-            # Match includes with angle brackets that contain the project-specific directory names
-            match = re.match(r'\s*#include\s*["<](TargetDriver|targetio-pSCT|targetcalib-pSCT)/(.+\.(h|hh|cc|cpp))[">]', line)
+            # Match includes with both quotes and angle brackets
+            match = re.match(r'\s*#include\s*["<](.+)[">]', line)
             if match:
-                # Construct the path from the matched groups
-                include_path = os.path.join(match.group(1), match.group(2))
+                include_path = match.group(1)
+                # Extract the base name regardless of directory structure
                 include_file_name = os.path.splitext(os.path.basename(include_path))[0]
                 # Avoid adding an include if it's a .h file with the same name as the .cc file
                 if not (include_file_name == base_name_without_extension and file_extension != '.h'):

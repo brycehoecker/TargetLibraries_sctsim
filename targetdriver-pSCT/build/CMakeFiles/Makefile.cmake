@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "../CMakeLists.txt"
+  "../Doxyfile.in"
   "CMakeFiles/3.20.2/CMakeCCompiler.cmake"
   "CMakeFiles/3.20.2/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.20.2/CMakeSystem.cmake"
@@ -94,6 +95,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake"
   "/usr/share/cmake/Modules/Compiler/zOS-C-DetermineCompiler.cmake"
   "/usr/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake"
+  "/usr/share/cmake/Modules/FindDoxygen.cmake"
   "/usr/share/cmake/Modules/FindPackageHandleStandardArgs.cmake"
   "/usr/share/cmake/Modules/FindPackageMessage.cmake"
   "/usr/share/cmake/Modules/FindSWIG.cmake"
@@ -122,17 +124,21 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/3.20.2/CMakeCCompiler.cmake"
   "CMakeFiles/3.20.2/CMakeCXXCompiler.cmake"
   "TargetDriverConfigVersion.cmake"
+  "Doxyfile"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/TargetDriver.dir/DependInfo.cmake"
-  "CMakeFiles/testbuffer.dir/DependInfo.cmake"
-  "CMakeFiles/generate_markdown_files.dir/DependInfo.cmake"
-  "CMakeFiles/testerTECT5TEA.dir/DependInfo.cmake"
-  "CMakeFiles/target_driver_swig_compilation.dir/DependInfo.cmake"
-  "CMakeFiles/target_driver.dir/DependInfo.cmake"
+  "CMakeFiles/testerTC.dir/DependInfo.cmake"
   "CMakeFiles/tester.dir/DependInfo.cmake"
+  "CMakeFiles/testbuffer.dir/DependInfo.cmake"
+  "CMakeFiles/testerT7.dir/DependInfo.cmake"
+  "CMakeFiles/doc.dir/DependInfo.cmake"
+  "CMakeFiles/testerT7BP.dir/DependInfo.cmake"
+  "CMakeFiles/generate_markdown_files.dir/DependInfo.cmake"
   "CMakeFiles/update_firmware.dir/DependInfo.cmake"
+  "CMakeFiles/target_driver.dir/DependInfo.cmake"
+  "CMakeFiles/target_driver_swig_compilation.dir/DependInfo.cmake"
   )

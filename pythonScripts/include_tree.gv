@@ -3,28 +3,35 @@ digraph {
 	graph [nodesep=0.1 rankdir=LR ranksep=0.1]
 	node [shape=box]
 	DataListener [color=red fontcolor=white style=filled]
-	DataListener -> DataPacket
-	DataListener -> TargetModule
-	DataListener -> UDPClient
 	DataListener -> EventBuffer
+	DataListener -> UDPClient
+	DataListener -> TargetModule
+	DataListener -> DataPacket
 	DataPacket [color=red fontcolor=white style=filled]
 	DataPacket -> Waveform
 	EventBuffer [color=red fontcolor=white style=filled]
 	EventBuffer -> RawEvent
+	EventHeader [color=red fontcolor=white style=filled]
+	GenericPacket [color=red fontcolor=white style=filled]
 	ModuleSimulator [color=red fontcolor=white style=filled]
-	ModuleSimulator -> UDPServer
-	ModuleSimulator -> DataPacket
 	ModuleSimulator -> TargetModule
+	ModuleSimulator -> DataPacket
+	ModuleSimulator -> UDPServer
 	RawEvent [color=red fontcolor=white style=filled]
-	RawEvent -> EventHeader
 	RawEvent -> DataPacket
+	RawEvent -> EventHeader
+	RegisterSettings [color=red fontcolor=white style=filled]
+	RegisterSettings -> UDPBase
+	RingBuffer [color=red fontcolor=white style=filled]
 	TargetModule [color=red fontcolor=white style=filled]
-	TargetModule -> RegisterSettings
 	TargetModule -> UDPClient
+	TargetModule -> RegisterSettings
 	TesterBoard [color=red fontcolor=white style=filled]
 	TesterBoard -> TargetModule
+	TriggerInfo [color=red fontcolor=white style=filled]
 	TriggerPacket [color=red fontcolor=white style=filled]
 	TriggerPacket -> GenericPacket
+	UDPBase [color=red fontcolor=white style=filled]
 	UDPClient [color=red fontcolor=white style=filled]
 	UDPClient -> UDPBase
 	UDPServer [color=red fontcolor=white style=filled]
@@ -34,126 +41,248 @@ digraph {
 	utils [color=red fontcolor=white style=filled]
 	utils -> DataPacket
 	utils -> ModuleSimulator
-	RegisterSettings [color=red fontcolor=white style=filled]
-	RegisterSettings -> UDPBase
+	DataListener_v2 [color=red fontcolor=white style=filled]
+	DataListener_v2 -> UDPClient
+	DataListener_v2 -> TargetModule
+	DataListener_v2 -> DataPacket_v2
+	DataListener_v2 -> EventBuffer_v2
+	DataPacket_v2 [color=red fontcolor=white style=filled]
+	DataPacket_v2 -> Waveform
+	EventBuffer_v2 [color=red fontcolor=white style=filled]
+	EventBuffer_v2 -> DataPacket_v2
+	EventBuffer_v2 -> RingBuffer
+	EventBuffer_v2 -> RawEvent_v2
+	RawEvent_v2 [color=red fontcolor=white style=filled]
+	RawEvent_v2 -> DataPacket_v2
+	RawEvent_v2 -> EventHeader
+	TargetModuleComms [color=red fontcolor=white style=filled]
+	TargetModuleComms -> TargetModule
+	TargetSimulator [color=red fontcolor=white style=filled]
+	TargetSimulator -> TargetModuleComms
 	generate_markdown_files [color=red fontcolor=white style=filled]
 	generate_markdown_files -> RegisterSettings
 	testbuffer [color=red fontcolor=white style=filled]
 	testbuffer -> RawEvent
 	testbuffer -> EventBuffer
 	tester [color=red fontcolor=white style=filled]
+	tester -> ModuleSimulator
 	tester -> DataPacket
 	tester -> TargetModule
-	tester -> ModuleSimulator
+	tester -> Waveform
 	tester -> TesterBoard
 	tester -> RegisterSettings
-	tester -> Waveform
 	testerTECT5TEA [color=red fontcolor=white style=filled]
+	testerTECT5TEA -> ModuleSimulator
 	testerTECT5TEA -> DataPacket
 	testerTECT5TEA -> TargetModule
-	testerTECT5TEA -> ModuleSimulator
+	testerTECT5TEA -> Waveform
 	testerTECT5TEA -> TesterBoard
 	testerTECT5TEA -> RegisterSettings
-	testerTECT5TEA -> Waveform
 	update_firmware [color=red fontcolor=white style=filled]
+	update_firmware -> utils
+	update_firmware -> ModuleSimulator
 	update_firmware -> DataPacket
 	update_firmware -> TargetModule
-	update_firmware -> ModuleSimulator
+	update_firmware -> Waveform
 	update_firmware -> TesterBoard
 	update_firmware -> RegisterSettings
-	update_firmware -> utils
-	update_firmware -> Waveform
+	testerT7 [color=red fontcolor=white style=filled]
+	testerT7 -> ModuleSimulator
+	testerT7 -> DataPacket
+	testerT7 -> TargetModule
+	testerT7 -> Waveform
+	testerT7 -> TesterBoard
+	testerT7 -> RegisterSettings
+	testerT7BP [color=red fontcolor=white style=filled]
+	testerT7BP -> ModuleSimulator
+	testerT7BP -> DataPacket
+	testerT7BP -> TargetModule
+	testerT7BP -> Waveform
+	testerT7BP -> TesterBoard
+	testerT7BP -> RegisterSettings
+	testerTC [color=red fontcolor=white style=filled]
+	testerTC -> ModuleSimulator
+	testerTC -> DataPacket
+	testerTC -> TargetModule
+	testerTC -> Waveform
+	testerTC -> TesterBoard
+	testerTC -> RegisterSettings
 	testDataListener [color=red fontcolor=white style=filled]
-	testDataListener -> DataListener
 	testDataListener -> ModuleSimulator
+	testDataListener -> DataListener
 	testEventBuffer [color=red fontcolor=white style=filled]
 	testEventBuffer -> EventBuffer
 	testRawEvent [color=red fontcolor=white style=filled]
 	testRawEvent -> RawEvent
 	CHECDataListener [color=blue fontcolor=white style=filled]
+	CHECDataListener -> DataListener_v2
+	CHECDataListener -> EventBuffer_v2
+	CHECDataListener -> RawEvent_v2
+	CHECDataListener -> EventFileWriter_v2
 	"readCHEC-M" [color=blue fontcolor=white style=filled]
-	"readCHEC-M" -> EventHeader
+	"readCHEC-M" -> EventFileWriter
 	"readCHEC-M" -> Waveform
+	"readCHEC-M" -> EventHeader
+	"readCHEC-M" -> EventFileReader
+	EventFile [color=blue fontcolor=white style=filled]
+	EventFile -> Util
+	EventFile -> FitsCardImage
 	EventFileReader [color=blue fontcolor=white style=filled]
 	EventFileReader -> EventHeader
+	EventFileReader -> FitsKeyValue
+	EventFileReader -> Util
+	EventFileReader -> EventFile
 	EventFileWriter [color=blue fontcolor=white style=filled]
+	EventFileWriter -> EventBuffer
 	EventFileWriter -> DataListener
 	EventFileWriter -> EventHeader
 	EventFileWriter -> RawEvent
-	EventFileWriter -> EventBuffer
+	EventFileWriter -> Util
+	EventFileWriter -> EventFile
+	EventFileWriter -> EventFileReader
 	EventFileWriter_v2 [color=blue fontcolor=white style=filled]
+	EventFileWriter_v2 -> DataListener_v2
+	EventFileWriter_v2 -> EventFile
+	EventFileWriter_v2 -> Util
+	EventFileWriter_v2 -> EventBuffer_v2
 	EventFileWriter_v2 -> EventHeader
+	EventFileWriter_v2 -> EventFileReader
+	EventFileWriter_v2 -> RawEvent_v2
+	FitsCardImage [color=blue fontcolor=white style=filled]
+	FitsCardImage -> FitsKeyValue
+	FitsKeyValue [color=blue fontcolor=white style=filled]
+	Util [color=blue fontcolor=white style=filled]
 	WaveformArrayReader [color=blue fontcolor=white style=filled]
-	WaveformArrayReader -> EventHeader
 	WaveformArrayReader -> DataPacket
+	WaveformArrayReader -> EventHeader
+	WaveformArrayReader -> EventFileReader
+	FitsKeyValue_v2 [color=blue fontcolor=white style=filled]
 	testEventFile [color=blue fontcolor=white style=filled]
 	testEventFile -> DataListener
+	testEventFile -> EventFileWriter
 	testEventFile -> ModuleSimulator
 	testEventHeader [color=blue fontcolor=white style=filled]
 	testEventHeader -> EventHeader
 	testFITS [color=blue fontcolor=white style=filled]
+	testFITS -> EventFileWriter
 	testFITS -> RawEvent
+	testFITS -> EventFileReader
 	testT5CameraModule [color=blue fontcolor=white style=filled]
 	testT5CameraModule -> DataListener
-	testT5CameraModule -> TesterBoard
+	testT5CameraModule -> EventFileWriter
 	testT5CameraModule -> TargetModule
+	testT5CameraModule -> TesterBoard
+	CalibArrayReader [color=green fontcolor=black style=filled]
+	CalibArrayReader -> Logger
+	CalibArrayReader -> CalibReadWriter
+	CalibArrayReader -> Utils
+	CalibArrayReader -> Constants
+	CalibReadWriter [color=green fontcolor=black style=filled]
+	CalibReadWriter -> Logger
+	Calibrator [color=green fontcolor=black style=filled]
+	Calibrator -> Logger
+	Calibrator -> CalibReadWriter
+	Calibrator -> Utils
+	Calibrator -> Constants
+	CalibratorMultiFile [color=green fontcolor=black style=filled]
+	CalibratorMultiFile -> Calibrator
+	CameraConfiguration [color=green fontcolor=black style=filled]
+	CameraConfiguration -> Logger
+	CameraConfiguration -> Utils
+	CameraConfiguration -> Mapping
+	CfMaker [color=green fontcolor=black style=filled]
+	CfMaker -> Logger
+	CfMaker -> Constants
+	CfMaker -> CalibReadWriter
+	Logger [color=green fontcolor=black style=filled]
+	Mapping [color=green fontcolor=black style=filled]
+	Mapping -> Logger
+	Mapping -> MappingTM
+	Mapping -> MappingSP
+	MappingSP [color=green fontcolor=black style=filled]
+	MappingSP -> Logger
+	MappingSP -> Mapping
+	MappingTM [color=green fontcolor=black style=filled]
+	MappingTM -> Logger
+	MappingTM -> Mapping
+	PedestalMaker [color=green fontcolor=black style=filled]
+	PedestalMaker -> Logger
+	PedestalMaker -> Constants
+	PedestalMaker -> CalibReadWriter
+	PedestalMaker -> Utils
+	RunningStats [color=green fontcolor=black style=filled]
+	TfMaker [color=green fontcolor=black style=filled]
+	TfMaker -> Logger
+	TfMaker -> Constants
+	TfMaker -> CalibReadWriter
+	TfMaker -> Utils
 	Utils [color=green fontcolor=black style=filled]
+	Utils -> Logger
 	Utils -> DataPacket
+	Utils -> Constants
 	PedestalGenerator [color=green fontcolor=black style=filled]
 	PedestalGenerator -> DataPacket
 	PedestalGenerator -> Waveform
+	PedestalGenerator -> PedestalMaker
+	PedestalGenerator -> EventFileReader
 	PedestalGenerator_SCT [color=green fontcolor=black style=filled]
 	PedestalGenerator_SCT -> DataPacket
 	PedestalGenerator_SCT -> Waveform
+	PedestalGenerator_SCT -> PedestalMaker
+	PedestalGenerator_SCT -> EventFileReader
 	TfGenerator [color=green fontcolor=black style=filled]
 	TfGenerator -> DataPacket
+	TfGenerator -> TfMaker
 	TfGenerator -> Waveform
+	TfGenerator -> EventFileReader
+	TfGenerator -> Calibrator
+	plot_data_basic [color=green fontcolor=black style=filled]
+	plot_data_tc [color=green fontcolor=black style=filled]
+	plot_data_tc -> CameraConfiguration
+	apply_calibration [color=green fontcolor=black style=filled]
+	apply_calibration -> CalibratorMultiFile
+	apply_calibration -> EventFileWriter
+	apply_calibration -> EventFileReader
+	apply_calibration -> Calibrator
+	apply_calibration_SCT [color=green fontcolor=black style=filled]
+	apply_calibration_SCT -> CalibratorMultiFile
+	apply_calibration_SCT -> EventFileWriter
+	apply_calibration_SCT -> EventFileReader
+	apply_calibration_SCT -> Calibrator
 	create_pedestal_tfinput [color=green fontcolor=black style=filled]
 	create_pedestal_tfinput -> DataPacket
+	create_pedestal_tfinput -> TfMaker
+	create_pedestal_tfinput -> EventFileReader
+	create_pedestal_tfinput -> Calibrator
+	fix_bad_tfs [color=green fontcolor=black style=filled]
+	fix_bad_tfs -> Calibrator
+	fix_tf_offset [color=green fontcolor=black style=filled]
+	fix_tf_offset -> Calibrator
 	generate_ac_tf [color=green fontcolor=black style=filled]
 	generate_ac_tf -> DataPacket
+	generate_ac_tf -> TfMaker
 	generate_ac_tf -> Waveform
+	generate_ac_tf -> EventFileReader
 	generate_ac_tf_jason [color=green fontcolor=black style=filled]
 	generate_ac_tf_jason -> DataPacket
 	generate_ac_tf_jason -> Waveform
+	generate_ac_tf_jason -> TfMaker
+	generate_ac_tf_jason -> EventFileReader
 	generate_ac_tf_old [color=green fontcolor=black style=filled]
 	generate_ac_tf_old -> DataPacket
 	generate_ac_tf_old -> Waveform
-	Calibrator [color=green fontcolor=black style=filled]
-	MessEventStruct [color=blue fontcolor=white style=filled]
-	Mapping [color=green fontcolor=black style=filled]
-	CameraConfiguration [color=green fontcolor=black style=filled]
-	RingBuffer [color=red fontcolor=white style=filled]
-	Constants [color=green fontcolor=black style=filled]
-	FitsCardImage [color=blue fontcolor=white style=filled]
-	MappingTM [color=green fontcolor=black style=filled]
-	apply_calibration [color=green fontcolor=black style=filled]
-	generate_ped [color=green fontcolor=black style=filled]
-	Util [color=blue fontcolor=white style=filled]
-	EventFile [color=blue fontcolor=white style=filled]
-	CfMaker [color=green fontcolor=black style=filled]
-	plot_data_tc [color=green fontcolor=black style=filled]
-	PedestalMaker [color=green fontcolor=black style=filled]
-	CalibratorMultiFile [color=green fontcolor=black style=filled]
-	RunningStats [color=green fontcolor=black style=filled]
-	MappingSP [color=green fontcolor=black style=filled]
-	generate_ped_SCT [color=green fontcolor=black style=filled]
-	fix_tf_offset [color=green fontcolor=black style=filled]
-	CMakeCXXCompilerId [color=green fontcolor=black style=filled]
-	GenericPacket [color=red fontcolor=white style=filled]
-	EventHeader [color=red fontcolor=white style=filled]
-	apply_calibration_SCT [color=green fontcolor=black style=filled]
-	CalibReadWriter [color=green fontcolor=black style=filled]
-	test_version [color=green fontcolor=black style=filled]
-	TriggerInfo [color=red fontcolor=white style=filled]
-	Logger [color=green fontcolor=black style=filled]
-	FitsKeyValue_v2 [color=blue fontcolor=white style=filled]
+	generate_ac_tf_old -> TfMaker
+	generate_ac_tf_old -> EventFileReader
 	generate_dc_tf [color=green fontcolor=black style=filled]
-	FitsKeyValue [color=blue fontcolor=white style=filled]
-	plot_data_basic [color=green fontcolor=black style=filled]
-	CalibArrayReader [color=green fontcolor=black style=filled]
-	UDPBase [color=red fontcolor=white style=filled]
-	TfMaker [color=green fontcolor=black style=filled]
+	generate_dc_tf -> TfGenerator
+	generate_ped [color=green fontcolor=black style=filled]
+	generate_ped -> PedestalGenerator
+	generate_ped_SCT [color=green fontcolor=black style=filled]
+	generate_ped_SCT -> PedestalGenerator_SCT
+	test_version [color=green fontcolor=black style=filled]
+	test_version -> CameraConfiguration
 	test_calib [color=green fontcolor=black style=filled]
-	fix_bad_tfs [color=green fontcolor=black style=filled]
+	MessEventStruct [color=blue fontcolor=white style=filled]
+	CMakeCXXCompilerId [color=green fontcolor=black style=filled]
+	Constants [color=green fontcolor=black style=filled]
 }

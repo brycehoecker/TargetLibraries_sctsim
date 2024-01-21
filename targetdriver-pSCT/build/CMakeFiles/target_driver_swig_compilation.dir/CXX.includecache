@@ -11,10 +11,18 @@ TargetDriver/DataPacket.h
 -
 TargetDriver/UDPClient.h
 -
+TargetDriver/EventBuffer.h
+../include/TargetDriver/TargetDriver/EventBuffer.h
+TargetDriver/TargetModule.h
+../include/TargetDriver/TargetDriver/TargetModule.h
 string
 -
 thread
 -
+TargetDriver/DataPacket.h
+../include/TargetDriver/TargetDriver/DataPacket.h
+TargetDriver/UDPClient.h
+../include/TargetDriver/TargetDriver/UDPClient.h
 TargetDriver/EventBuffer.h
 ../include/TargetDriver/TargetDriver/EventBuffer.h
 TargetDriver/TargetModule.h
@@ -95,6 +103,26 @@ TargetDriver/RegisterSettings.h
 ../include/TargetDriver/TargetDriver/RegisterSettings.h
 TargetDriver/UDPClient.h
 ../include/TargetDriver/TargetDriver/UDPClient.h
+
+../include/TargetDriver/TargetModuleComms.h
+TargetModule.h
+../include/TargetDriver/TargetModule.h
+poll.h
+-
+iostream
+-
+string
+-
+vector
+-
+
+../include/TargetDriver/TargetSimulator.h
+sys/socket.h
+-
+netinet/in.h
+-
+TargetModuleComms.h
+../include/TargetDriver/TargetModuleComms.h
 
 ../include/TargetDriver/TesterBoard.h
 string
@@ -273,6 +301,10 @@ TargetDriver/DataListener.h
 /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/TargetDriver/DataListener.h
 TargetDriver/utils.h
 /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/TargetDriver/utils.h
+TargetDriver/TargetModuleComms.h
+/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/TargetDriver/TargetModuleComms.h
+TargetDriver/TargetSimulator.h
+/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/TargetDriver/TargetSimulator.h
 numpy.i
 /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/numpy.i
 std_list.i
@@ -311,6 +343,10 @@ TargetDriver/DataListener.h
 /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/TargetDriver/DataListener.h
 TargetDriver/utils.h
 /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/TargetDriver/utils.h
+TargetDriver/TargetModuleComms.h
+/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/TargetDriver/TargetModuleComms.h
+TargetDriver/TargetSimulator.h
+/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/TargetDriver/TargetSimulator.h
 
 /usr/include/python3.9/Python.h
 patchlevel.h

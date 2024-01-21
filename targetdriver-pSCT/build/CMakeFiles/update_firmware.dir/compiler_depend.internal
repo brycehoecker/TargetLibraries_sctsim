@@ -164,6 +164,7 @@ CMakeFiles/update_firmware.dir/src_exe/update_firmware.cc.o
  /usr/include/bits/waitflags.h
  /usr/include/bits/waitstatus.h
  /usr/include/alloca.h
+ /usr/include/bits/stdlib-bsearch.h
  /usr/include/bits/stdlib-float.h
  /usr/include/c++/11/bits/std_abs.h
  /usr/include/c++/11/bits/algorithmfwd.h
@@ -189,6 +190,7 @@ CMakeFiles/update_firmware.dir/src_exe/update_firmware.cc.o
  /usr/include/bits/types/struct_FILE.h
  /usr/include/bits/types/cookie_io_functions_t.h
  /usr/include/bits/stdio_lim.h
+ /usr/include/bits/stdio.h
  /usr/include/c++/11/cerrno
  /usr/include/errno.h
  /usr/include/bits/errno.h

@@ -10,6 +10,8 @@ CMakeFiles/target_driver.dir/target_driverPYTHON.stamp: \
  ../include/TargetDriver/RawEvent.h \
  ../include/TargetDriver/RegisterSettings.h \
  ../include/TargetDriver/TargetModule.h \
+ ../include/TargetDriver/TargetModuleComms.h \
+ ../include/TargetDriver/TargetSimulator.h \
  ../include/TargetDriver/TesterBoard.h \
  ../include/TargetDriver/UDPBase.h \
  ../include/TargetDriver/UDPClient.h \

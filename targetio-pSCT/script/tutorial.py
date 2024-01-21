@@ -42,14 +42,21 @@ if __name__ == "__main__":
     simulator.Start()
 
     # Some logic to load def files by finding them in user directories
-    def1 = "/Users/justin/Dropbox/TargetDriver/config/TM5_FPGA_Firmware0xFEDA003C.def"
-    def2 = "/Users/justin/Dropbox/TargetDriver/config/TM5_ASIC.def"
-    if os.path.exists(def1):
-        module = target_driver.TargetModule(def1, def2, 0)
+    #TargetModule(FPGADef, ASICDef, TriggerASICDef, uint16_t);
+    def1 = "/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/config/SCT_MSA_FPGA_Firmware0xC000000E.def"
+    def2 = "/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/config/TC_ASIC.def"
+    def3 = "/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/config/T5TEA_ASIC.def"
+
+    if os.path.exists(def1) and os.path.exists(def2) and os.path.exists(def3):
+        # All three files exist
+        print("All 3 Files exist.")
+        module = target_driver.TargetModule(def1, def2, def3, 0)
     else:
+        # At least one of the files does not exist
+        print("One or more of the files does not exist.")
         module = target_driver.TargetModule(
-            "/Users/oxon/Documents/workspace/TargetDriver/config/TM5_FPGA_Firmware0xFEDA003C.def",
-            "/Users/oxon/Documents/workspace/TargetDriver/config/TM5_ASIC.def", 0)
+            "/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/config/SCT_MSA_FPGA_Firmware0xC000000E.def",
+            "/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/config/TC_ASIC.def", "/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/config/T5TEA_ASIC.def", 0)
     module.EstablishSlowControlLink("0.0.0.0", "0.0.0.0")
 
     kNPacketsPerEvent = 64
@@ -74,7 +81,7 @@ if __name__ == "__main__":
     for eventID in range(numEvents):
         for packetID in range(kNPacketsPerEvent):
             SendDataPacket(simulator, packet, eventID, packetID)
-    	time.sleep(sleepTime)
+        time.sleep(sleepTime)
         print ("Finished %d events." % (eventID + 1))
 
     buf.Flush()
@@ -86,7 +93,7 @@ if __name__ == "__main__":
         try:
             hdulist = fits.open(filename)
         except IOError:
-            print 'FITS file is invalid.'
+            print ('FITS file is invalid.')
         else:
-            print 'FITS file is valid.'
-	    hdulist.close()
+            print ('FITS file is valid.')
+    hdulist.close()

@@ -1062,14 +1062,6 @@ class Waveform(object):
         r"""GetADC16bitArray(Waveform self, uint16_t * adcarray)"""
         return _target_driver.Waveform_GetADC16bitArray(self, adcarray)
 
-    def brycesGetADCArray(self, adcarray):
-        r"""brycesGetADCArray(Waveform self, uint16_t * adcarray)"""
-        return _target_driver.Waveform_brycesGetADCArray(self, adcarray)
-
-    def brycesGetADC16bitArray(self, adcarray):
-        r"""brycesGetADC16bitArray(Waveform self, uint16_t * adcarray)"""
-        return _target_driver.Waveform_brycesGetADC16bitArray(self, adcarray)
-
     def GetMeanAndStdDev(self, mean, stddev, maxsamples=0):
         r"""GetMeanAndStdDev(Waveform self, float & mean, float & stddev, uint16_t maxsamples=0)"""
         return _target_driver.Waveform_GetMeanAndStdDev(self, mean, stddev, maxsamples)
@@ -1760,5 +1752,130 @@ def get_default_config_dir():
 def send_waveform_packet(p, sim, waves, samples):
     r"""send_waveform_packet(DataPacket p, ModuleSimulator sim, uint16_t waves, uint16_t samples) -> int"""
     return _target_driver.send_waveform_packet(p, sim, waves, samples)
+TM_CONTROLPACKET_BYTES = _target_driver.TM_CONTROLPACKET_BYTES
+
+TM_NUM_REGISTERS = _target_driver.TM_NUM_REGISTERS
+
+TM_NUM_ASIC_REGISTERS = _target_driver.TM_NUM_ASIC_REGISTERS
+
+TM_DATA_TIMEOUT = _target_driver.TM_DATA_TIMEOUT
+
+TM_COMM_WRONGRESPONSESIZE = _target_driver.TM_COMM_WRONGRESPONSESIZE
+
+TM_COMM_NORESPONSE = _target_driver.TM_COMM_NORESPONSE
+
+TM_OK = _target_driver.TM_OK
+
+TM_COMM_FAILURE = _target_driver.TM_COMM_FAILURE
+
+TM_USER_ERROR = _target_driver.TM_USER_ERROR
+
+class TargetModuleComms(object):
+    r"""Proxy of C++ CTA::TARGET::TargetModuleComms class."""
+
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+
+    def __init__(self):
+        r"""__init__(TargetModuleComms self) -> TargetModuleComms"""
+        _target_driver.TargetModuleComms_swiginit(self, _target_driver.new_TargetModuleComms())
+
+    def PrintStatus(self, *args):
+        r"""PrintStatus(TargetModuleComms self, std::ostream & os=std::cout)"""
+        return _target_driver.TargetModuleComms_PrintStatus(self, *args)
+
+    def EstablishSlowControlLink(self, my_ip, tm_ip, tm_number=0):
+        r"""EstablishSlowControlLink(TargetModuleComms self, char * my_ip, char * tm_ip, int tm_number=0) -> bool"""
+        return _target_driver.TargetModuleComms_EstablishSlowControlLink(self, my_ip, tm_ip, tm_number)
+
+    def AddDAQListener(self, my_ip, socket_buffer_size=999424):
+        r"""AddDAQListener(TargetModuleComms self, char * my_ip, int32_t socket_buffer_size=999424) -> bool"""
+        return _target_driver.TargetModuleComms_AddDAQListener(self, my_ip, socket_buffer_size)
+
+    def EndCommunications(self):
+        r"""EndCommunications(TargetModuleComms self)"""
+        return _target_driver.TargetModuleComms_EndCommunications(self)
+
+    def ReadRegister(self, address):
+        r"""ReadRegister(TargetModuleComms self, uint32_t address) -> bool"""
+        return _target_driver.TargetModuleComms_ReadRegister(self, address)
+
+    def WriteRegister(self, address, data):
+        r"""WriteRegister(TargetModuleComms self, uint32_t address, uint32_t data) -> bool"""
+        return _target_driver.TargetModuleComms_WriteRegister(self, address, data)
+
+    def WriteRegisterAndCheck(self, address, data):
+        r"""WriteRegisterAndCheck(TargetModuleComms self, uint32_t address, uint32_t data) -> bool"""
+        return _target_driver.TargetModuleComms_WriteRegisterAndCheck(self, address, data)
+
+    def GetDataPacket(self, tobefilled, bytes, maxbytes):
+        r"""GetDataPacket(TargetModuleComms self, void * tobefilled, uint32_t & bytes, int maxbytes) -> bool"""
+        return _target_driver.TargetModuleComms_GetDataPacket(self, tobefilled, bytes, maxbytes)
+
+    @staticmethod
+    def PackPacket(packet, addr, data, iswrite):
+        r"""PackPacket(uint8_t * packet, uint32_t addr, uint32_t data, bool iswrite)"""
+        return _target_driver.TargetModuleComms_PackPacket(packet, addr, data, iswrite)
+
+    @staticmethod
+    def UnpackPacket(packet, addr, iswrite):
+        r"""UnpackPacket(uint8_t * packet, uint32_t & addr, bool & iswrite)"""
+        return _target_driver.TargetModuleComms_UnpackPacket(packet, addr, iswrite)
+    __swig_destroy__ = _target_driver.delete_TargetModuleComms
+
+# Register TargetModuleComms in _target_driver:
+_target_driver.TargetModuleComms_swigregister(TargetModuleComms)
+
+def TargetModuleComms_PackPacket(packet, addr, data, iswrite):
+    r"""TargetModuleComms_PackPacket(uint8_t * packet, uint32_t addr, uint32_t data, bool iswrite)"""
+    return _target_driver.TargetModuleComms_PackPacket(packet, addr, data, iswrite)
+
+def TargetModuleComms_UnpackPacket(packet, addr, iswrite):
+    r"""TargetModuleComms_UnpackPacket(uint8_t * packet, uint32_t & addr, bool & iswrite)"""
+    return _target_driver.TargetModuleComms_UnpackPacket(packet, addr, iswrite)
+
+class TargetSimulator(object):
+    r"""Proxy of C++ CTA::TARGET::TargetSimulator class."""
+
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        r"""__init__(TargetSimulator self, char const * hostip="127.0.0.1") -> TargetSimulator"""
+        _target_driver.TargetSimulator_swiginit(self, _target_driver.new_TargetSimulator(*args))
+    __swig_destroy__ = _target_driver.delete_TargetSimulator
+
+    def ClearRegisters(self):
+        r"""ClearRegisters(TargetSimulator self)"""
+        return _target_driver.TargetSimulator_ClearRegisters(self)
+
+    def SendData(self, data, len):
+        r"""SendData(TargetSimulator self, uint8_t * data, uint32_t len) -> bool"""
+        return _target_driver.TargetSimulator_SendData(self, data, len)
+
+    def ListenAndRespond(self):
+        r"""ListenAndRespond(TargetSimulator self)"""
+        return _target_driver.TargetSimulator_ListenAndRespond(self)
+
+    @staticmethod
+    def listener(context):
+        r"""listener(void * context) -> void *"""
+        return _target_driver.TargetSimulator_listener(context)
+
+    def CloseSockets(self):
+        r"""CloseSockets(TargetSimulator self)"""
+        return _target_driver.TargetSimulator_CloseSockets(self)
+
+    def SetVerbose(self, verbose):
+        r"""SetVerbose(TargetSimulator self, bool verbose)"""
+        return _target_driver.TargetSimulator_SetVerbose(self, verbose)
+
+# Register TargetSimulator in _target_driver:
+_target_driver.TargetSimulator_swigregister(TargetSimulator)
+
+def TargetSimulator_listener(context):
+    r"""TargetSimulator_listener(void * context) -> void *"""
+    return _target_driver.TargetSimulator_listener(context)
+
 
 

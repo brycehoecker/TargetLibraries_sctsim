@@ -1,0 +1,1 @@
+/usr/bin/c++  -D__STDC_FORMAT_MACROS  -std=c++23 -O2 -Wall CMakeFiles/testerTC.dir/src_exe/testerTC.cc.o -o bin/testerTC  -Wl,-rpath,/usr/local/lib libTargetDriver.so.1.0 -lrt -lpthread 

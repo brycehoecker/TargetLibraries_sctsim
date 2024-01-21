@@ -24,9 +24,10 @@ CMakeFiles/target_driver.dir/CMakeFiles/target_driver.dir/target_driverPYTHON_wr
  /usr/include/bits/types/FILE.h /usr/include/bits/types/struct_FILE.h \
  /usr/include/bits/types/cookie_io_functions_t.h \
  /usr/include/bits/stdio_lim.h /usr/include/bits/floatn.h \
- /usr/include/bits/floatn-common.h /usr/include/string.h \
- /usr/include/bits/types/locale_t.h /usr/include/bits/types/__locale_t.h \
- /usr/include/strings.h /usr/include/errno.h /usr/include/bits/errno.h \
+ /usr/include/bits/floatn-common.h /usr/include/bits/stdio.h \
+ /usr/include/string.h /usr/include/bits/types/locale_t.h \
+ /usr/include/bits/types/__locale_t.h /usr/include/strings.h \
+ /usr/include/errno.h /usr/include/bits/errno.h \
  /usr/include/linux/errno.h /usr/include/asm/errno.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
  /usr/include/bits/types/error_t.h /usr/include/c++/11/stdlib.h \
@@ -49,13 +50,13 @@ CMakeFiles/target_driver.dir/CMakeFiles/target_driver.dir/target_driverPYTHON_wr
  /usr/include/bits/pthreadtypes.h /usr/include/bits/thread-shared-types.h \
  /usr/include/bits/pthreadtypes-arch.h /usr/include/bits/struct_mutex.h \
  /usr/include/bits/struct_rwlock.h /usr/include/alloca.h \
- /usr/include/bits/stdlib-float.h /usr/include/c++/11/bits/std_abs.h \
- /usr/include/unistd.h /usr/include/bits/posix_opt.h \
- /usr/include/bits/environments.h /usr/include/bits/confname.h \
- /usr/include/bits/getopt_posix.h /usr/include/bits/getopt_core.h \
- /usr/include/bits/unistd_ext.h /usr/include/linux/close_range.h \
- /usr/include/assert.h /usr/include/python3.9/pyport.h \
- /usr/include/inttypes.h \
+ /usr/include/bits/stdlib-bsearch.h /usr/include/bits/stdlib-float.h \
+ /usr/include/c++/11/bits/std_abs.h /usr/include/unistd.h \
+ /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
+ /usr/include/bits/confname.h /usr/include/bits/getopt_posix.h \
+ /usr/include/bits/getopt_core.h /usr/include/bits/unistd_ext.h \
+ /usr/include/linux/close_range.h /usr/include/assert.h \
+ /usr/include/python3.9/pyport.h /usr/include/inttypes.h \
  /usr/lib/gcc/x86_64-redhat-linux/11/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/wchar.h \
  /usr/include/bits/stdint-uintn.h /usr/include/c++/11/math.h \
@@ -306,6 +307,10 @@ CMakeFiles/target_driver.dir/CMakeFiles/target_driver.dir/target_driverPYTHON_wr
  /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/include/TargetDriver/EventBuffer.h \
  /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/include/TargetDriver/DataListener.h \
  /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/include/TargetDriver/utils.h \
+ /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/include/TargetDriver/TargetModuleComms.h \
+ /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/include/TargetDriver/TargetModule.h \
+ /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/include/TargetDriver/TargetSimulator.h \
+ /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/include/TargetDriver/TargetModuleComms.h \
  /home/sctsim/.local/lib/python3.9/site-packages/numpy/core/include/numpy/arrayobject.h \
  /home/sctsim/.local/lib/python3.9/site-packages/numpy/core/include/numpy/ndarrayobject.h \
  /home/sctsim/.local/lib/python3.9/site-packages/numpy/core/include/numpy/ndarraytypes.h \

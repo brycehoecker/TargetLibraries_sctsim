@@ -97,10 +97,24 @@ CMakeFiles/target_driver.dir/src/DataListener.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/target_driver.dir/src/DataListener.cc.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/DataListener.cc -o CMakeFiles/target_driver.dir/src/DataListener.cc.s
 
+CMakeFiles/target_driver.dir/src/DataListener_v2.cc.o: CMakeFiles/target_driver.dir/flags.make
+CMakeFiles/target_driver.dir/src/DataListener_v2.cc.o: ../src/DataListener_v2.cc
+CMakeFiles/target_driver.dir/src/DataListener_v2.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/target_driver.dir/src/DataListener_v2.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/DataListener_v2.cc.o -MF CMakeFiles/target_driver.dir/src/DataListener_v2.cc.o.d -o CMakeFiles/target_driver.dir/src/DataListener_v2.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/DataListener_v2.cc
+
+CMakeFiles/target_driver.dir/src/DataListener_v2.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/target_driver.dir/src/DataListener_v2.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/DataListener_v2.cc > CMakeFiles/target_driver.dir/src/DataListener_v2.cc.i
+
+CMakeFiles/target_driver.dir/src/DataListener_v2.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/target_driver.dir/src/DataListener_v2.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/DataListener_v2.cc -o CMakeFiles/target_driver.dir/src/DataListener_v2.cc.s
+
 CMakeFiles/target_driver.dir/src/DataPacket.cc.o: CMakeFiles/target_driver.dir/flags.make
 CMakeFiles/target_driver.dir/src/DataPacket.cc.o: ../src/DataPacket.cc
 CMakeFiles/target_driver.dir/src/DataPacket.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/target_driver.dir/src/DataPacket.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/target_driver.dir/src/DataPacket.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/DataPacket.cc.o -MF CMakeFiles/target_driver.dir/src/DataPacket.cc.o.d -o CMakeFiles/target_driver.dir/src/DataPacket.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/DataPacket.cc
 
 CMakeFiles/target_driver.dir/src/DataPacket.cc.i: cmake_force
@@ -111,10 +125,24 @@ CMakeFiles/target_driver.dir/src/DataPacket.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/target_driver.dir/src/DataPacket.cc.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/DataPacket.cc -o CMakeFiles/target_driver.dir/src/DataPacket.cc.s
 
+CMakeFiles/target_driver.dir/src/DataPacket_v2.cc.o: CMakeFiles/target_driver.dir/flags.make
+CMakeFiles/target_driver.dir/src/DataPacket_v2.cc.o: ../src/DataPacket_v2.cc
+CMakeFiles/target_driver.dir/src/DataPacket_v2.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/target_driver.dir/src/DataPacket_v2.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/DataPacket_v2.cc.o -MF CMakeFiles/target_driver.dir/src/DataPacket_v2.cc.o.d -o CMakeFiles/target_driver.dir/src/DataPacket_v2.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/DataPacket_v2.cc
+
+CMakeFiles/target_driver.dir/src/DataPacket_v2.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/target_driver.dir/src/DataPacket_v2.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/DataPacket_v2.cc > CMakeFiles/target_driver.dir/src/DataPacket_v2.cc.i
+
+CMakeFiles/target_driver.dir/src/DataPacket_v2.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/target_driver.dir/src/DataPacket_v2.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/DataPacket_v2.cc -o CMakeFiles/target_driver.dir/src/DataPacket_v2.cc.s
+
 CMakeFiles/target_driver.dir/src/EventBuffer.cc.o: CMakeFiles/target_driver.dir/flags.make
 CMakeFiles/target_driver.dir/src/EventBuffer.cc.o: ../src/EventBuffer.cc
 CMakeFiles/target_driver.dir/src/EventBuffer.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/target_driver.dir/src/EventBuffer.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/target_driver.dir/src/EventBuffer.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/EventBuffer.cc.o -MF CMakeFiles/target_driver.dir/src/EventBuffer.cc.o.d -o CMakeFiles/target_driver.dir/src/EventBuffer.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/EventBuffer.cc
 
 CMakeFiles/target_driver.dir/src/EventBuffer.cc.i: cmake_force
@@ -125,10 +153,24 @@ CMakeFiles/target_driver.dir/src/EventBuffer.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/target_driver.dir/src/EventBuffer.cc.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/EventBuffer.cc -o CMakeFiles/target_driver.dir/src/EventBuffer.cc.s
 
+CMakeFiles/target_driver.dir/src/EventBuffer_v2.cc.o: CMakeFiles/target_driver.dir/flags.make
+CMakeFiles/target_driver.dir/src/EventBuffer_v2.cc.o: ../src/EventBuffer_v2.cc
+CMakeFiles/target_driver.dir/src/EventBuffer_v2.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/target_driver.dir/src/EventBuffer_v2.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/EventBuffer_v2.cc.o -MF CMakeFiles/target_driver.dir/src/EventBuffer_v2.cc.o.d -o CMakeFiles/target_driver.dir/src/EventBuffer_v2.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/EventBuffer_v2.cc
+
+CMakeFiles/target_driver.dir/src/EventBuffer_v2.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/target_driver.dir/src/EventBuffer_v2.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/EventBuffer_v2.cc > CMakeFiles/target_driver.dir/src/EventBuffer_v2.cc.i
+
+CMakeFiles/target_driver.dir/src/EventBuffer_v2.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/target_driver.dir/src/EventBuffer_v2.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/EventBuffer_v2.cc -o CMakeFiles/target_driver.dir/src/EventBuffer_v2.cc.s
+
 CMakeFiles/target_driver.dir/src/EventHeader.cc.o: CMakeFiles/target_driver.dir/flags.make
 CMakeFiles/target_driver.dir/src/EventHeader.cc.o: ../src/EventHeader.cc
 CMakeFiles/target_driver.dir/src/EventHeader.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/target_driver.dir/src/EventHeader.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/target_driver.dir/src/EventHeader.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/EventHeader.cc.o -MF CMakeFiles/target_driver.dir/src/EventHeader.cc.o.d -o CMakeFiles/target_driver.dir/src/EventHeader.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/EventHeader.cc
 
 CMakeFiles/target_driver.dir/src/EventHeader.cc.i: cmake_force
@@ -142,7 +184,7 @@ CMakeFiles/target_driver.dir/src/EventHeader.cc.s: cmake_force
 CMakeFiles/target_driver.dir/src/GenericPacket.cc.o: CMakeFiles/target_driver.dir/flags.make
 CMakeFiles/target_driver.dir/src/GenericPacket.cc.o: ../src/GenericPacket.cc
 CMakeFiles/target_driver.dir/src/GenericPacket.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/target_driver.dir/src/GenericPacket.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/target_driver.dir/src/GenericPacket.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/GenericPacket.cc.o -MF CMakeFiles/target_driver.dir/src/GenericPacket.cc.o.d -o CMakeFiles/target_driver.dir/src/GenericPacket.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/GenericPacket.cc
 
 CMakeFiles/target_driver.dir/src/GenericPacket.cc.i: cmake_force
@@ -156,7 +198,7 @@ CMakeFiles/target_driver.dir/src/GenericPacket.cc.s: cmake_force
 CMakeFiles/target_driver.dir/src/ModuleSimulator.cc.o: CMakeFiles/target_driver.dir/flags.make
 CMakeFiles/target_driver.dir/src/ModuleSimulator.cc.o: ../src/ModuleSimulator.cc
 CMakeFiles/target_driver.dir/src/ModuleSimulator.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/target_driver.dir/src/ModuleSimulator.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/target_driver.dir/src/ModuleSimulator.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/ModuleSimulator.cc.o -MF CMakeFiles/target_driver.dir/src/ModuleSimulator.cc.o.d -o CMakeFiles/target_driver.dir/src/ModuleSimulator.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/ModuleSimulator.cc
 
 CMakeFiles/target_driver.dir/src/ModuleSimulator.cc.i: cmake_force
@@ -170,7 +212,7 @@ CMakeFiles/target_driver.dir/src/ModuleSimulator.cc.s: cmake_force
 CMakeFiles/target_driver.dir/src/RawEvent.cc.o: CMakeFiles/target_driver.dir/flags.make
 CMakeFiles/target_driver.dir/src/RawEvent.cc.o: ../src/RawEvent.cc
 CMakeFiles/target_driver.dir/src/RawEvent.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/target_driver.dir/src/RawEvent.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/target_driver.dir/src/RawEvent.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/RawEvent.cc.o -MF CMakeFiles/target_driver.dir/src/RawEvent.cc.o.d -o CMakeFiles/target_driver.dir/src/RawEvent.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/RawEvent.cc
 
 CMakeFiles/target_driver.dir/src/RawEvent.cc.i: cmake_force
@@ -181,10 +223,24 @@ CMakeFiles/target_driver.dir/src/RawEvent.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/target_driver.dir/src/RawEvent.cc.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/RawEvent.cc -o CMakeFiles/target_driver.dir/src/RawEvent.cc.s
 
+CMakeFiles/target_driver.dir/src/RawEvent_v2.cc.o: CMakeFiles/target_driver.dir/flags.make
+CMakeFiles/target_driver.dir/src/RawEvent_v2.cc.o: ../src/RawEvent_v2.cc
+CMakeFiles/target_driver.dir/src/RawEvent_v2.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/target_driver.dir/src/RawEvent_v2.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/RawEvent_v2.cc.o -MF CMakeFiles/target_driver.dir/src/RawEvent_v2.cc.o.d -o CMakeFiles/target_driver.dir/src/RawEvent_v2.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/RawEvent_v2.cc
+
+CMakeFiles/target_driver.dir/src/RawEvent_v2.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/target_driver.dir/src/RawEvent_v2.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/RawEvent_v2.cc > CMakeFiles/target_driver.dir/src/RawEvent_v2.cc.i
+
+CMakeFiles/target_driver.dir/src/RawEvent_v2.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/target_driver.dir/src/RawEvent_v2.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/RawEvent_v2.cc -o CMakeFiles/target_driver.dir/src/RawEvent_v2.cc.s
+
 CMakeFiles/target_driver.dir/src/RegisterSettings.cc.o: CMakeFiles/target_driver.dir/flags.make
 CMakeFiles/target_driver.dir/src/RegisterSettings.cc.o: ../src/RegisterSettings.cc
 CMakeFiles/target_driver.dir/src/RegisterSettings.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/target_driver.dir/src/RegisterSettings.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/target_driver.dir/src/RegisterSettings.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/RegisterSettings.cc.o -MF CMakeFiles/target_driver.dir/src/RegisterSettings.cc.o.d -o CMakeFiles/target_driver.dir/src/RegisterSettings.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/RegisterSettings.cc
 
 CMakeFiles/target_driver.dir/src/RegisterSettings.cc.i: cmake_force
@@ -198,7 +254,7 @@ CMakeFiles/target_driver.dir/src/RegisterSettings.cc.s: cmake_force
 CMakeFiles/target_driver.dir/src/RingBuffer.cc.o: CMakeFiles/target_driver.dir/flags.make
 CMakeFiles/target_driver.dir/src/RingBuffer.cc.o: ../src/RingBuffer.cc
 CMakeFiles/target_driver.dir/src/RingBuffer.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/target_driver.dir/src/RingBuffer.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/target_driver.dir/src/RingBuffer.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/RingBuffer.cc.o -MF CMakeFiles/target_driver.dir/src/RingBuffer.cc.o.d -o CMakeFiles/target_driver.dir/src/RingBuffer.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/RingBuffer.cc
 
 CMakeFiles/target_driver.dir/src/RingBuffer.cc.i: cmake_force
@@ -212,7 +268,7 @@ CMakeFiles/target_driver.dir/src/RingBuffer.cc.s: cmake_force
 CMakeFiles/target_driver.dir/src/TargetModule.cc.o: CMakeFiles/target_driver.dir/flags.make
 CMakeFiles/target_driver.dir/src/TargetModule.cc.o: ../src/TargetModule.cc
 CMakeFiles/target_driver.dir/src/TargetModule.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/target_driver.dir/src/TargetModule.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/target_driver.dir/src/TargetModule.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/TargetModule.cc.o -MF CMakeFiles/target_driver.dir/src/TargetModule.cc.o.d -o CMakeFiles/target_driver.dir/src/TargetModule.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/TargetModule.cc
 
 CMakeFiles/target_driver.dir/src/TargetModule.cc.i: cmake_force
@@ -223,10 +279,38 @@ CMakeFiles/target_driver.dir/src/TargetModule.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/target_driver.dir/src/TargetModule.cc.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/TargetModule.cc -o CMakeFiles/target_driver.dir/src/TargetModule.cc.s
 
+CMakeFiles/target_driver.dir/src/TargetModuleComms.cc.o: CMakeFiles/target_driver.dir/flags.make
+CMakeFiles/target_driver.dir/src/TargetModuleComms.cc.o: ../src/TargetModuleComms.cc
+CMakeFiles/target_driver.dir/src/TargetModuleComms.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/target_driver.dir/src/TargetModuleComms.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/TargetModuleComms.cc.o -MF CMakeFiles/target_driver.dir/src/TargetModuleComms.cc.o.d -o CMakeFiles/target_driver.dir/src/TargetModuleComms.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/TargetModuleComms.cc
+
+CMakeFiles/target_driver.dir/src/TargetModuleComms.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/target_driver.dir/src/TargetModuleComms.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/TargetModuleComms.cc > CMakeFiles/target_driver.dir/src/TargetModuleComms.cc.i
+
+CMakeFiles/target_driver.dir/src/TargetModuleComms.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/target_driver.dir/src/TargetModuleComms.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/TargetModuleComms.cc -o CMakeFiles/target_driver.dir/src/TargetModuleComms.cc.s
+
+CMakeFiles/target_driver.dir/src/TargetSimulator.cc.o: CMakeFiles/target_driver.dir/flags.make
+CMakeFiles/target_driver.dir/src/TargetSimulator.cc.o: ../src/TargetSimulator.cc
+CMakeFiles/target_driver.dir/src/TargetSimulator.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/target_driver.dir/src/TargetSimulator.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/TargetSimulator.cc.o -MF CMakeFiles/target_driver.dir/src/TargetSimulator.cc.o.d -o CMakeFiles/target_driver.dir/src/TargetSimulator.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/TargetSimulator.cc
+
+CMakeFiles/target_driver.dir/src/TargetSimulator.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/target_driver.dir/src/TargetSimulator.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/TargetSimulator.cc > CMakeFiles/target_driver.dir/src/TargetSimulator.cc.i
+
+CMakeFiles/target_driver.dir/src/TargetSimulator.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/target_driver.dir/src/TargetSimulator.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/TargetSimulator.cc -o CMakeFiles/target_driver.dir/src/TargetSimulator.cc.s
+
 CMakeFiles/target_driver.dir/src/TesterBoard.cc.o: CMakeFiles/target_driver.dir/flags.make
 CMakeFiles/target_driver.dir/src/TesterBoard.cc.o: ../src/TesterBoard.cc
 CMakeFiles/target_driver.dir/src/TesterBoard.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/target_driver.dir/src/TesterBoard.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/target_driver.dir/src/TesterBoard.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/TesterBoard.cc.o -MF CMakeFiles/target_driver.dir/src/TesterBoard.cc.o.d -o CMakeFiles/target_driver.dir/src/TesterBoard.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/TesterBoard.cc
 
 CMakeFiles/target_driver.dir/src/TesterBoard.cc.i: cmake_force
@@ -240,7 +324,7 @@ CMakeFiles/target_driver.dir/src/TesterBoard.cc.s: cmake_force
 CMakeFiles/target_driver.dir/src/TriggerPacket.cc.o: CMakeFiles/target_driver.dir/flags.make
 CMakeFiles/target_driver.dir/src/TriggerPacket.cc.o: ../src/TriggerPacket.cc
 CMakeFiles/target_driver.dir/src/TriggerPacket.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/target_driver.dir/src/TriggerPacket.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/target_driver.dir/src/TriggerPacket.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/TriggerPacket.cc.o -MF CMakeFiles/target_driver.dir/src/TriggerPacket.cc.o.d -o CMakeFiles/target_driver.dir/src/TriggerPacket.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/TriggerPacket.cc
 
 CMakeFiles/target_driver.dir/src/TriggerPacket.cc.i: cmake_force
@@ -254,7 +338,7 @@ CMakeFiles/target_driver.dir/src/TriggerPacket.cc.s: cmake_force
 CMakeFiles/target_driver.dir/src/UDPBase.cc.o: CMakeFiles/target_driver.dir/flags.make
 CMakeFiles/target_driver.dir/src/UDPBase.cc.o: ../src/UDPBase.cc
 CMakeFiles/target_driver.dir/src/UDPBase.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/target_driver.dir/src/UDPBase.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/target_driver.dir/src/UDPBase.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/UDPBase.cc.o -MF CMakeFiles/target_driver.dir/src/UDPBase.cc.o.d -o CMakeFiles/target_driver.dir/src/UDPBase.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/UDPBase.cc
 
 CMakeFiles/target_driver.dir/src/UDPBase.cc.i: cmake_force
@@ -268,7 +352,7 @@ CMakeFiles/target_driver.dir/src/UDPBase.cc.s: cmake_force
 CMakeFiles/target_driver.dir/src/UDPClient.cc.o: CMakeFiles/target_driver.dir/flags.make
 CMakeFiles/target_driver.dir/src/UDPClient.cc.o: ../src/UDPClient.cc
 CMakeFiles/target_driver.dir/src/UDPClient.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/target_driver.dir/src/UDPClient.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/target_driver.dir/src/UDPClient.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/UDPClient.cc.o -MF CMakeFiles/target_driver.dir/src/UDPClient.cc.o.d -o CMakeFiles/target_driver.dir/src/UDPClient.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/UDPClient.cc
 
 CMakeFiles/target_driver.dir/src/UDPClient.cc.i: cmake_force
@@ -282,7 +366,7 @@ CMakeFiles/target_driver.dir/src/UDPClient.cc.s: cmake_force
 CMakeFiles/target_driver.dir/src/UDPServer.cc.o: CMakeFiles/target_driver.dir/flags.make
 CMakeFiles/target_driver.dir/src/UDPServer.cc.o: ../src/UDPServer.cc
 CMakeFiles/target_driver.dir/src/UDPServer.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/target_driver.dir/src/UDPServer.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/target_driver.dir/src/UDPServer.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/UDPServer.cc.o -MF CMakeFiles/target_driver.dir/src/UDPServer.cc.o.d -o CMakeFiles/target_driver.dir/src/UDPServer.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/UDPServer.cc
 
 CMakeFiles/target_driver.dir/src/UDPServer.cc.i: cmake_force
@@ -296,7 +380,7 @@ CMakeFiles/target_driver.dir/src/UDPServer.cc.s: cmake_force
 CMakeFiles/target_driver.dir/src/Waveform.cc.o: CMakeFiles/target_driver.dir/flags.make
 CMakeFiles/target_driver.dir/src/Waveform.cc.o: ../src/Waveform.cc
 CMakeFiles/target_driver.dir/src/Waveform.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/target_driver.dir/src/Waveform.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/target_driver.dir/src/Waveform.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/Waveform.cc.o -MF CMakeFiles/target_driver.dir/src/Waveform.cc.o.d -o CMakeFiles/target_driver.dir/src/Waveform.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/Waveform.cc
 
 CMakeFiles/target_driver.dir/src/Waveform.cc.i: cmake_force
@@ -310,7 +394,7 @@ CMakeFiles/target_driver.dir/src/Waveform.cc.s: cmake_force
 CMakeFiles/target_driver.dir/src/utils.cc.o: CMakeFiles/target_driver.dir/flags.make
 CMakeFiles/target_driver.dir/src/utils.cc.o: ../src/utils.cc
 CMakeFiles/target_driver.dir/src/utils.cc.o: CMakeFiles/target_driver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/target_driver.dir/src/utils.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/target_driver.dir/src/utils.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_driver.dir/src/utils.cc.o -MF CMakeFiles/target_driver.dir/src/utils.cc.o.d -o CMakeFiles/target_driver.dir/src/utils.cc.o -c /home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/src/utils.cc
 
 CMakeFiles/target_driver.dir/src/utils.cc.i: cmake_force
@@ -325,15 +409,21 @@ CMakeFiles/target_driver.dir/src/utils.cc.s: cmake_force
 target_driver_OBJECTS = \
 "CMakeFiles/target_driver.dir/CMakeFiles/target_driver.dir/target_driverPYTHON_wrap.cxx.o" \
 "CMakeFiles/target_driver.dir/src/DataListener.cc.o" \
+"CMakeFiles/target_driver.dir/src/DataListener_v2.cc.o" \
 "CMakeFiles/target_driver.dir/src/DataPacket.cc.o" \
+"CMakeFiles/target_driver.dir/src/DataPacket_v2.cc.o" \
 "CMakeFiles/target_driver.dir/src/EventBuffer.cc.o" \
+"CMakeFiles/target_driver.dir/src/EventBuffer_v2.cc.o" \
 "CMakeFiles/target_driver.dir/src/EventHeader.cc.o" \
 "CMakeFiles/target_driver.dir/src/GenericPacket.cc.o" \
 "CMakeFiles/target_driver.dir/src/ModuleSimulator.cc.o" \
 "CMakeFiles/target_driver.dir/src/RawEvent.cc.o" \
+"CMakeFiles/target_driver.dir/src/RawEvent_v2.cc.o" \
 "CMakeFiles/target_driver.dir/src/RegisterSettings.cc.o" \
 "CMakeFiles/target_driver.dir/src/RingBuffer.cc.o" \
 "CMakeFiles/target_driver.dir/src/TargetModule.cc.o" \
+"CMakeFiles/target_driver.dir/src/TargetModuleComms.cc.o" \
+"CMakeFiles/target_driver.dir/src/TargetSimulator.cc.o" \
 "CMakeFiles/target_driver.dir/src/TesterBoard.cc.o" \
 "CMakeFiles/target_driver.dir/src/TriggerPacket.cc.o" \
 "CMakeFiles/target_driver.dir/src/UDPBase.cc.o" \
@@ -347,15 +437,21 @@ target_driver_EXTERNAL_OBJECTS =
 
 _target_driver.so: CMakeFiles/target_driver.dir/CMakeFiles/target_driver.dir/target_driverPYTHON_wrap.cxx.o
 _target_driver.so: CMakeFiles/target_driver.dir/src/DataListener.cc.o
+_target_driver.so: CMakeFiles/target_driver.dir/src/DataListener_v2.cc.o
 _target_driver.so: CMakeFiles/target_driver.dir/src/DataPacket.cc.o
+_target_driver.so: CMakeFiles/target_driver.dir/src/DataPacket_v2.cc.o
 _target_driver.so: CMakeFiles/target_driver.dir/src/EventBuffer.cc.o
+_target_driver.so: CMakeFiles/target_driver.dir/src/EventBuffer_v2.cc.o
 _target_driver.so: CMakeFiles/target_driver.dir/src/EventHeader.cc.o
 _target_driver.so: CMakeFiles/target_driver.dir/src/GenericPacket.cc.o
 _target_driver.so: CMakeFiles/target_driver.dir/src/ModuleSimulator.cc.o
 _target_driver.so: CMakeFiles/target_driver.dir/src/RawEvent.cc.o
+_target_driver.so: CMakeFiles/target_driver.dir/src/RawEvent_v2.cc.o
 _target_driver.so: CMakeFiles/target_driver.dir/src/RegisterSettings.cc.o
 _target_driver.so: CMakeFiles/target_driver.dir/src/RingBuffer.cc.o
 _target_driver.so: CMakeFiles/target_driver.dir/src/TargetModule.cc.o
+_target_driver.so: CMakeFiles/target_driver.dir/src/TargetModuleComms.cc.o
+_target_driver.so: CMakeFiles/target_driver.dir/src/TargetSimulator.cc.o
 _target_driver.so: CMakeFiles/target_driver.dir/src/TesterBoard.cc.o
 _target_driver.so: CMakeFiles/target_driver.dir/src/TriggerPacket.cc.o
 _target_driver.so: CMakeFiles/target_driver.dir/src/UDPBase.cc.o
@@ -365,7 +461,7 @@ _target_driver.so: CMakeFiles/target_driver.dir/src/Waveform.cc.o
 _target_driver.so: CMakeFiles/target_driver.dir/src/utils.cc.o
 _target_driver.so: CMakeFiles/target_driver.dir/build.make
 _target_driver.so: CMakeFiles/target_driver.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Linking CXX shared module _target_driver.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Linking CXX shared module _target_driver.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/target_driver.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

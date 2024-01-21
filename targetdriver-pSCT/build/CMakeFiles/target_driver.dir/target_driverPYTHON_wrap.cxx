@@ -2692,52 +2692,55 @@ SWIGINTERN PyObject *SWIG_PyStaticMethod_New(PyObject *SWIGUNUSEDPARM(self), PyO
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_CTA__TargetDriver__DataListener swig_types[0]
-#define SWIGTYPE_p_CTA__TargetDriver__DataPacket swig_types[1]
-#define SWIGTYPE_p_CTA__TargetDriver__EventBuffer swig_types[2]
-#define SWIGTYPE_p_CTA__TargetDriver__EventHeader swig_types[3]
-#define SWIGTYPE_p_CTA__TargetDriver__ModuleSimulator swig_types[4]
-#define SWIGTYPE_p_CTA__TargetDriver__RawEvent swig_types[5]
-#define SWIGTYPE_p_CTA__TargetDriver__RegisterASIC swig_types[6]
-#define SWIGTYPE_p_CTA__TargetDriver__RegisterFPGA swig_types[7]
-#define SWIGTYPE_p_CTA__TargetDriver__RegisterSettings swig_types[8]
-#define SWIGTYPE_p_CTA__TargetDriver__Setting swig_types[9]
-#define SWIGTYPE_p_CTA__TargetDriver__SettingASIC swig_types[10]
-#define SWIGTYPE_p_CTA__TargetDriver__TargetModule swig_types[11]
-#define SWIGTYPE_p_CTA__TargetDriver__TesterBoard swig_types[12]
-#define SWIGTYPE_p_CTA__TargetDriver__UDPBase swig_types[13]
-#define SWIGTYPE_p_CTA__TargetDriver__UDPClient swig_types[14]
-#define SWIGTYPE_p_CTA__TargetDriver__UDPServer swig_types[15]
-#define SWIGTYPE_p_CTA__TargetDriver__Waveform swig_types[16]
-#define SWIGTYPE_p_RA_cit swig_types[17]
-#define SWIGTYPE_p_RF_cit swig_types[18]
-#define SWIGTYPE_p_SA_cit swig_types[19]
-#define SWIGTYPE_p_SF_cit swig_types[20]
-#define SWIGTYPE_p_bool swig_types[21]
-#define SWIGTYPE_p_char swig_types[22]
-#define SWIGTYPE_p_float swig_types[23]
-#define SWIGTYPE_p_int swig_types[24]
-#define SWIGTYPE_p_long_long swig_types[25]
-#define SWIGTYPE_p_short swig_types[26]
-#define SWIGTYPE_p_signed_char swig_types[27]
-#define SWIGTYPE_p_ssize_t swig_types[28]
-#define SWIGTYPE_p_std__invalid_argument swig_types[29]
-#define SWIGTYPE_p_std__mapT_std__string_CTA__TargetDriver__SettingASIC_t swig_types[30]
-#define SWIGTYPE_p_std__mapT_std__string_CTA__TargetDriver__Setting_t swig_types[31]
-#define SWIGTYPE_p_std__mapT_unsigned_char_CTA__TargetDriver__RegisterASIC_t swig_types[32]
-#define SWIGTYPE_p_std__mapT_unsigned_int_CTA__TargetDriver__RegisterFPGA_t swig_types[33]
-#define SWIGTYPE_p_std__ostream swig_types[34]
-#define SWIGTYPE_p_std__shared_ptrT_CTA__TargetDriver__EventBuffer_t swig_types[35]
-#define SWIGTYPE_p_std__vectorT_CTA__TargetDriver__DataPacket_p_t swig_types[36]
-#define SWIGTYPE_p_std__vectorT_bool_t swig_types[37]
-#define SWIGTYPE_p_std__vectorT_std__string_t swig_types[38]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[39]
-#define SWIGTYPE_p_unsigned_char swig_types[40]
-#define SWIGTYPE_p_unsigned_int swig_types[41]
-#define SWIGTYPE_p_unsigned_long_long swig_types[42]
-#define SWIGTYPE_p_unsigned_short swig_types[43]
-static swig_type_info *swig_types[45];
-static swig_module_info swig_module = {swig_types, 44, 0, 0, 0, 0};
+#define SWIGTYPE_p_CTA__TARGET__TargetModuleComms swig_types[0]
+#define SWIGTYPE_p_CTA__TARGET__TargetSimulator swig_types[1]
+#define SWIGTYPE_p_CTA__TargetDriver__DataListener swig_types[2]
+#define SWIGTYPE_p_CTA__TargetDriver__DataPacket swig_types[3]
+#define SWIGTYPE_p_CTA__TargetDriver__EventBuffer swig_types[4]
+#define SWIGTYPE_p_CTA__TargetDriver__EventHeader swig_types[5]
+#define SWIGTYPE_p_CTA__TargetDriver__ModuleSimulator swig_types[6]
+#define SWIGTYPE_p_CTA__TargetDriver__RawEvent swig_types[7]
+#define SWIGTYPE_p_CTA__TargetDriver__RegisterASIC swig_types[8]
+#define SWIGTYPE_p_CTA__TargetDriver__RegisterFPGA swig_types[9]
+#define SWIGTYPE_p_CTA__TargetDriver__RegisterSettings swig_types[10]
+#define SWIGTYPE_p_CTA__TargetDriver__Setting swig_types[11]
+#define SWIGTYPE_p_CTA__TargetDriver__SettingASIC swig_types[12]
+#define SWIGTYPE_p_CTA__TargetDriver__TargetModule swig_types[13]
+#define SWIGTYPE_p_CTA__TargetDriver__TesterBoard swig_types[14]
+#define SWIGTYPE_p_CTA__TargetDriver__UDPBase swig_types[15]
+#define SWIGTYPE_p_CTA__TargetDriver__UDPClient swig_types[16]
+#define SWIGTYPE_p_CTA__TargetDriver__UDPServer swig_types[17]
+#define SWIGTYPE_p_CTA__TargetDriver__Waveform swig_types[18]
+#define SWIGTYPE_p_RA_cit swig_types[19]
+#define SWIGTYPE_p_RF_cit swig_types[20]
+#define SWIGTYPE_p_SA_cit swig_types[21]
+#define SWIGTYPE_p_SF_cit swig_types[22]
+#define SWIGTYPE_p_bool swig_types[23]
+#define SWIGTYPE_p_char swig_types[24]
+#define SWIGTYPE_p_float swig_types[25]
+#define SWIGTYPE_p_int swig_types[26]
+#define SWIGTYPE_p_long_long swig_types[27]
+#define SWIGTYPE_p_short swig_types[28]
+#define SWIGTYPE_p_signed_char swig_types[29]
+#define SWIGTYPE_p_ssize_t swig_types[30]
+#define SWIGTYPE_p_std__invalid_argument swig_types[31]
+#define SWIGTYPE_p_std__mapT_std__string_CTA__TargetDriver__SettingASIC_t swig_types[32]
+#define SWIGTYPE_p_std__mapT_std__string_CTA__TargetDriver__Setting_t swig_types[33]
+#define SWIGTYPE_p_std__mapT_unsigned_char_CTA__TargetDriver__RegisterASIC_t swig_types[34]
+#define SWIGTYPE_p_std__mapT_unsigned_int_CTA__TargetDriver__RegisterFPGA_t swig_types[35]
+#define SWIGTYPE_p_std__ostream swig_types[36]
+#define SWIGTYPE_p_std__shared_ptrT_CTA__TargetDriver__EventBuffer_t swig_types[37]
+#define SWIGTYPE_p_std__vectorT_CTA__TargetDriver__DataPacket_p_t swig_types[38]
+#define SWIGTYPE_p_std__vectorT_bool_t swig_types[39]
+#define SWIGTYPE_p_std__vectorT_std__string_t swig_types[40]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[41]
+#define SWIGTYPE_p_unsigned_char swig_types[42]
+#define SWIGTYPE_p_unsigned_int swig_types[43]
+#define SWIGTYPE_p_unsigned_long_long swig_types[44]
+#define SWIGTYPE_p_unsigned_short swig_types[45]
+#define SWIGTYPE_p_void swig_types[46]
+static swig_type_info *swig_types[48];
+static swig_module_info swig_module = {swig_types, 47, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -2856,6 +2859,8 @@ namespace swig {
 #include "TargetDriver/EventBuffer.h"
 #include "TargetDriver/DataListener.h"
 #include "TargetDriver/utils.h"
+#include "TargetDriver/TargetModuleComms.h"
+#include "TargetDriver/TargetSimulator.h"
 using namespace CTA::TargetDriver;
 
 
@@ -17440,92 +17445,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Waveform_brycesGetADCArray(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  CTA::TargetDriver::Waveform *arg1 = (CTA::TargetDriver::Waveform *) 0 ;
-  uint16_t *arg2 = (uint16_t *) 0 ;
-  uint16_t arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *array2 = NULL ;
-  PyObject *swig_obj[2] ;
-  
-  if (!SWIG_Python_UnpackTuple(args, "Waveform_brycesGetADCArray", 2, 2, swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_CTA__TargetDriver__Waveform, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Waveform_brycesGetADCArray" "', argument " "1"" of type '" "CTA::TargetDriver::Waveform const *""'"); 
-  }
-  arg1 = reinterpret_cast< CTA::TargetDriver::Waveform * >(argp1);
-  {
-    npy_intp dims[1];
-    if (!PyInt_Check(swig_obj[1]))
-    {
-      const char* typestring = pytype_string(swig_obj[1]);
-      PyErr_Format(PyExc_TypeError,
-        "Int dimension expected.  '%s' given.",
-        typestring);
-      SWIG_fail;
-    }
-    arg3 = (int) PyInt_AsLong(swig_obj[1]);
-    dims[0] = (npy_intp) arg3;
-    array2 = PyArray_SimpleNew(1, dims, NPY_USHORT);
-    if (!array2) SWIG_fail;
-    arg2 = (unsigned short*) array_data(array2);
-  }
-  ((CTA::TargetDriver::Waveform const *)arg1)->brycesGetADCArray(arg2,arg3);
-  resultobj = SWIG_Py_Void();
-  {
-    resultobj = SWIG_Python_AppendOutput(resultobj,(PyObject*)array2);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Waveform_brycesGetADC16bitArray(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  CTA::TargetDriver::Waveform *arg1 = (CTA::TargetDriver::Waveform *) 0 ;
-  uint16_t *arg2 = (uint16_t *) 0 ;
-  uint16_t arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *array2 = NULL ;
-  PyObject *swig_obj[2] ;
-  
-  if (!SWIG_Python_UnpackTuple(args, "Waveform_brycesGetADC16bitArray", 2, 2, swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_CTA__TargetDriver__Waveform, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Waveform_brycesGetADC16bitArray" "', argument " "1"" of type '" "CTA::TargetDriver::Waveform const *""'"); 
-  }
-  arg1 = reinterpret_cast< CTA::TargetDriver::Waveform * >(argp1);
-  {
-    npy_intp dims[1];
-    if (!PyInt_Check(swig_obj[1]))
-    {
-      const char* typestring = pytype_string(swig_obj[1]);
-      PyErr_Format(PyExc_TypeError,
-        "Int dimension expected.  '%s' given.",
-        typestring);
-      SWIG_fail;
-    }
-    arg3 = (int) PyInt_AsLong(swig_obj[1]);
-    dims[0] = (npy_intp) arg3;
-    array2 = PyArray_SimpleNew(1, dims, NPY_USHORT);
-    if (!array2) SWIG_fail;
-    arg2 = (unsigned short*) array_data(array2);
-  }
-  ((CTA::TargetDriver::Waveform const *)arg1)->brycesGetADC16bitArray(arg2,arg3);
-  resultobj = SWIG_Py_Void();
-  {
-    resultobj = SWIG_Python_AppendOutput(resultobj,(PyObject*)array2);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_Waveform_GetMeanAndStdDev__SWIG_0(PyObject *SWIGUNUSEDPARM(self), Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   CTA::TargetDriver::Waveform *arg1 = (CTA::TargetDriver::Waveform *) 0 ;
@@ -22925,6 +22844,954 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_new_TargetModuleComms(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CTA::TARGET::TargetModuleComms *result = 0 ;
+  
+  if (!SWIG_Python_UnpackTuple(args, "new_TargetModuleComms", 0, 0, 0)) SWIG_fail;
+  result = (CTA::TARGET::TargetModuleComms *)new CTA::TARGET::TargetModuleComms();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CTA__TARGET__TargetModuleComms, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetModuleComms_PrintStatus__SWIG_0(PyObject *SWIGUNUSEDPARM(self), Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  CTA::TARGET::TargetModuleComms *arg1 = (CTA::TARGET::TargetModuleComms *) 0 ;
+  std::ostream *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_CTA__TARGET__TargetModuleComms, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TargetModuleComms_PrintStatus" "', argument " "1"" of type '" "CTA::TARGET::TargetModuleComms *""'"); 
+  }
+  arg1 = reinterpret_cast< CTA::TARGET::TargetModuleComms * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_std__ostream,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TargetModuleComms_PrintStatus" "', argument " "2"" of type '" "std::ostream &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TargetModuleComms_PrintStatus" "', argument " "2"" of type '" "std::ostream &""'"); 
+  }
+  arg2 = reinterpret_cast< std::ostream * >(argp2);
+  (arg1)->PrintStatus(*arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetModuleComms_PrintStatus__SWIG_1(PyObject *SWIGUNUSEDPARM(self), Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  CTA::TARGET::TargetModuleComms *arg1 = (CTA::TARGET::TargetModuleComms *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_CTA__TARGET__TargetModuleComms, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TargetModuleComms_PrintStatus" "', argument " "1"" of type '" "CTA::TARGET::TargetModuleComms *""'"); 
+  }
+  arg1 = reinterpret_cast< CTA::TARGET::TargetModuleComms * >(argp1);
+  (arg1)->PrintStatus();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetModuleComms_PrintStatus(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args, "TargetModuleComms_PrintStatus", 0, 2, argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CTA__TARGET__TargetModuleComms, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_TargetModuleComms_PrintStatus__SWIG_1(self, argc, argv);
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CTA__TARGET__TargetModuleComms, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_std__ostream, SWIG_POINTER_NO_NULL);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_TargetModuleComms_PrintStatus__SWIG_0(self, argc, argv);
+      }
+    }
+  }
+  
+fail:
+  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'TargetModuleComms_PrintStatus'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    CTA::TARGET::TargetModuleComms::PrintStatus(std::ostream &)\n"
+    "    CTA::TARGET::TargetModuleComms::PrintStatus()\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetModuleComms_EstablishSlowControlLink__SWIG_0(PyObject *SWIGUNUSEDPARM(self), Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  CTA::TARGET::TargetModuleComms *arg1 = (CTA::TARGET::TargetModuleComms *) 0 ;
+  char *arg2 = (char *) 0 ;
+  char *arg3 = (char *) 0 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 ;
+  char *buf2 = 0 ;
+  int alloc2 = 0 ;
+  int res3 ;
+  char *buf3 = 0 ;
+  int alloc3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  bool result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_CTA__TARGET__TargetModuleComms, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TargetModuleComms_EstablishSlowControlLink" "', argument " "1"" of type '" "CTA::TARGET::TargetModuleComms *""'"); 
+  }
+  arg1 = reinterpret_cast< CTA::TARGET::TargetModuleComms * >(argp1);
+  res2 = SWIG_AsCharPtrAndSize(swig_obj[1], &buf2, NULL, &alloc2);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TargetModuleComms_EstablishSlowControlLink" "', argument " "2"" of type '" "char *""'");
+  }
+  arg2 = reinterpret_cast< char * >(buf2);
+  res3 = SWIG_AsCharPtrAndSize(swig_obj[2], &buf3, NULL, &alloc3);
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TargetModuleComms_EstablishSlowControlLink" "', argument " "3"" of type '" "char *""'");
+  }
+  arg3 = reinterpret_cast< char * >(buf3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "TargetModuleComms_EstablishSlowControlLink" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (bool)(arg1)->EstablishSlowControlLink(arg2,arg3,arg4);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  if (alloc3 == SWIG_NEWOBJ) delete[] buf3;
+  return resultobj;
+fail:
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  if (alloc3 == SWIG_NEWOBJ) delete[] buf3;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetModuleComms_EstablishSlowControlLink__SWIG_1(PyObject *SWIGUNUSEDPARM(self), Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  CTA::TARGET::TargetModuleComms *arg1 = (CTA::TARGET::TargetModuleComms *) 0 ;
+  char *arg2 = (char *) 0 ;
+  char *arg3 = (char *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 ;
+  char *buf2 = 0 ;
+  int alloc2 = 0 ;
+  int res3 ;
+  char *buf3 = 0 ;
+  int alloc3 = 0 ;
+  bool result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_CTA__TARGET__TargetModuleComms, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TargetModuleComms_EstablishSlowControlLink" "', argument " "1"" of type '" "CTA::TARGET::TargetModuleComms *""'"); 
+  }
+  arg1 = reinterpret_cast< CTA::TARGET::TargetModuleComms * >(argp1);
+  res2 = SWIG_AsCharPtrAndSize(swig_obj[1], &buf2, NULL, &alloc2);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TargetModuleComms_EstablishSlowControlLink" "', argument " "2"" of type '" "char *""'");
+  }
+  arg2 = reinterpret_cast< char * >(buf2);
+  res3 = SWIG_AsCharPtrAndSize(swig_obj[2], &buf3, NULL, &alloc3);
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TargetModuleComms_EstablishSlowControlLink" "', argument " "3"" of type '" "char *""'");
+  }
+  arg3 = reinterpret_cast< char * >(buf3);
+  result = (bool)(arg1)->EstablishSlowControlLink(arg2,arg3);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  if (alloc3 == SWIG_NEWOBJ) delete[] buf3;
+  return resultobj;
+fail:
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  if (alloc3 == SWIG_NEWOBJ) delete[] buf3;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetModuleComms_EstablishSlowControlLink(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[5] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args, "TargetModuleComms_EstablishSlowControlLink", 0, 4, argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CTA__TARGET__TargetModuleComms, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_AsCharPtrAndSize(argv[1], 0, NULL, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        int res = SWIG_AsCharPtrAndSize(argv[2], 0, NULL, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_TargetModuleComms_EstablishSlowControlLink__SWIG_1(self, argc, argv);
+        }
+      }
+    }
+  }
+  if (argc == 4) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CTA__TARGET__TargetModuleComms, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_AsCharPtrAndSize(argv[1], 0, NULL, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        int res = SWIG_AsCharPtrAndSize(argv[2], 0, NULL, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          {
+            int res = SWIG_AsVal_int(argv[3], NULL);
+            _v = SWIG_CheckState(res);
+          }
+          if (_v) {
+            return _wrap_TargetModuleComms_EstablishSlowControlLink__SWIG_0(self, argc, argv);
+          }
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'TargetModuleComms_EstablishSlowControlLink'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    CTA::TARGET::TargetModuleComms::EstablishSlowControlLink(char *,char *,int)\n"
+    "    CTA::TARGET::TargetModuleComms::EstablishSlowControlLink(char *,char *)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetModuleComms_AddDAQListener__SWIG_0(PyObject *SWIGUNUSEDPARM(self), Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  CTA::TARGET::TargetModuleComms *arg1 = (CTA::TARGET::TargetModuleComms *) 0 ;
+  char *arg2 = (char *) 0 ;
+  int32_t arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 ;
+  char *buf2 = 0 ;
+  int alloc2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  bool result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_CTA__TARGET__TargetModuleComms, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TargetModuleComms_AddDAQListener" "', argument " "1"" of type '" "CTA::TARGET::TargetModuleComms *""'"); 
+  }
+  arg1 = reinterpret_cast< CTA::TARGET::TargetModuleComms * >(argp1);
+  res2 = SWIG_AsCharPtrAndSize(swig_obj[1], &buf2, NULL, &alloc2);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TargetModuleComms_AddDAQListener" "', argument " "2"" of type '" "char *""'");
+  }
+  arg2 = reinterpret_cast< char * >(buf2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "TargetModuleComms_AddDAQListener" "', argument " "3"" of type '" "int32_t""'");
+  } 
+  arg3 = static_cast< int32_t >(val3);
+  result = (bool)(arg1)->AddDAQListener(arg2,arg3);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  return resultobj;
+fail:
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetModuleComms_AddDAQListener__SWIG_1(PyObject *SWIGUNUSEDPARM(self), Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  CTA::TARGET::TargetModuleComms *arg1 = (CTA::TARGET::TargetModuleComms *) 0 ;
+  char *arg2 = (char *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 ;
+  char *buf2 = 0 ;
+  int alloc2 = 0 ;
+  bool result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_CTA__TARGET__TargetModuleComms, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TargetModuleComms_AddDAQListener" "', argument " "1"" of type '" "CTA::TARGET::TargetModuleComms *""'"); 
+  }
+  arg1 = reinterpret_cast< CTA::TARGET::TargetModuleComms * >(argp1);
+  res2 = SWIG_AsCharPtrAndSize(swig_obj[1], &buf2, NULL, &alloc2);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TargetModuleComms_AddDAQListener" "', argument " "2"" of type '" "char *""'");
+  }
+  arg2 = reinterpret_cast< char * >(buf2);
+  result = (bool)(arg1)->AddDAQListener(arg2);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  return resultobj;
+fail:
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetModuleComms_AddDAQListener(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[4] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args, "TargetModuleComms_AddDAQListener", 0, 3, argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CTA__TARGET__TargetModuleComms, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_AsCharPtrAndSize(argv[1], 0, NULL, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_TargetModuleComms_AddDAQListener__SWIG_1(self, argc, argv);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CTA__TARGET__TargetModuleComms, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_AsCharPtrAndSize(argv[1], 0, NULL, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        {
+          int res = SWIG_AsVal_int(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          return _wrap_TargetModuleComms_AddDAQListener__SWIG_0(self, argc, argv);
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'TargetModuleComms_AddDAQListener'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    CTA::TARGET::TargetModuleComms::AddDAQListener(char *,int32_t)\n"
+    "    CTA::TARGET::TargetModuleComms::AddDAQListener(char *)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetModuleComms_EndCommunications(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CTA::TARGET::TargetModuleComms *arg1 = (CTA::TARGET::TargetModuleComms *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_CTA__TARGET__TargetModuleComms, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TargetModuleComms_EndCommunications" "', argument " "1"" of type '" "CTA::TARGET::TargetModuleComms *""'"); 
+  }
+  arg1 = reinterpret_cast< CTA::TARGET::TargetModuleComms * >(argp1);
+  (arg1)->EndCommunications();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetModuleComms_ReadRegister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CTA::TARGET::TargetModuleComms *arg1 = (CTA::TARGET::TargetModuleComms *) 0 ;
+  uint32_t arg2 ;
+  uint32_t *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
+  uint32_t temp3 ;
+  int res3 = SWIG_TMPOBJ ;
+  PyObject *swig_obj[2] ;
+  bool result;
+  
+  arg3 = &temp3;
+  if (!SWIG_Python_UnpackTuple(args, "TargetModuleComms_ReadRegister", 2, 2, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_CTA__TARGET__TargetModuleComms, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TargetModuleComms_ReadRegister" "', argument " "1"" of type '" "CTA::TARGET::TargetModuleComms *""'"); 
+  }
+  arg1 = reinterpret_cast< CTA::TARGET::TargetModuleComms * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "TargetModuleComms_ReadRegister" "', argument " "2"" of type '" "uint32_t""'");
+  } 
+  arg2 = static_cast< uint32_t >(val2);
+  result = (bool)(arg1)->ReadRegister(arg2,*arg3);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  if (SWIG_IsTmpObj(res3)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_unsigned_SS_int((*arg3)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res3) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg3), SWIGTYPE_p_unsigned_int, new_flags));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetModuleComms_WriteRegister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CTA::TARGET::TargetModuleComms *arg1 = (CTA::TARGET::TargetModuleComms *) 0 ;
+  uint32_t arg2 ;
+  uint32_t arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
+  unsigned int val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  bool result;
+  
+  if (!SWIG_Python_UnpackTuple(args, "TargetModuleComms_WriteRegister", 3, 3, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_CTA__TARGET__TargetModuleComms, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TargetModuleComms_WriteRegister" "', argument " "1"" of type '" "CTA::TARGET::TargetModuleComms *""'"); 
+  }
+  arg1 = reinterpret_cast< CTA::TARGET::TargetModuleComms * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "TargetModuleComms_WriteRegister" "', argument " "2"" of type '" "uint32_t""'");
+  } 
+  arg2 = static_cast< uint32_t >(val2);
+  ecode3 = SWIG_AsVal_unsigned_SS_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "TargetModuleComms_WriteRegister" "', argument " "3"" of type '" "uint32_t""'");
+  } 
+  arg3 = static_cast< uint32_t >(val3);
+  result = (bool)(arg1)->WriteRegister(arg2,arg3);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetModuleComms_WriteRegisterAndCheck(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CTA::TARGET::TargetModuleComms *arg1 = (CTA::TARGET::TargetModuleComms *) 0 ;
+  uint32_t arg2 ;
+  uint32_t arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
+  unsigned int val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  bool result;
+  
+  if (!SWIG_Python_UnpackTuple(args, "TargetModuleComms_WriteRegisterAndCheck", 3, 3, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_CTA__TARGET__TargetModuleComms, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TargetModuleComms_WriteRegisterAndCheck" "', argument " "1"" of type '" "CTA::TARGET::TargetModuleComms *""'"); 
+  }
+  arg1 = reinterpret_cast< CTA::TARGET::TargetModuleComms * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "TargetModuleComms_WriteRegisterAndCheck" "', argument " "2"" of type '" "uint32_t""'");
+  } 
+  arg2 = static_cast< uint32_t >(val2);
+  ecode3 = SWIG_AsVal_unsigned_SS_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "TargetModuleComms_WriteRegisterAndCheck" "', argument " "3"" of type '" "uint32_t""'");
+  } 
+  arg3 = static_cast< uint32_t >(val3);
+  result = (bool)(arg1)->WriteRegisterAndCheck(arg2,arg3);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetModuleComms_GetDataPacket(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CTA::TARGET::TargetModuleComms *arg1 = (CTA::TARGET::TargetModuleComms *) 0 ;
+  void *arg2 = (void *) 0 ;
+  uint32_t *arg3 = 0 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  PyObject *swig_obj[4] ;
+  bool result;
+  
+  if (!SWIG_Python_UnpackTuple(args, "TargetModuleComms_GetDataPacket", 4, 4, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_CTA__TARGET__TargetModuleComms, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TargetModuleComms_GetDataPacket" "', argument " "1"" of type '" "CTA::TARGET::TargetModuleComms *""'"); 
+  }
+  arg1 = reinterpret_cast< CTA::TARGET::TargetModuleComms * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1],SWIG_as_voidptrptr(&arg2), 0, 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TargetModuleComms_GetDataPacket" "', argument " "2"" of type '" "void *""'"); 
+  }
+  res3 = SWIG_ConvertPtr(swig_obj[2], &argp3, SWIGTYPE_p_unsigned_int,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TargetModuleComms_GetDataPacket" "', argument " "3"" of type '" "uint32_t &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TargetModuleComms_GetDataPacket" "', argument " "3"" of type '" "uint32_t &""'"); 
+  }
+  arg3 = reinterpret_cast< uint32_t * >(argp3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "TargetModuleComms_GetDataPacket" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (bool)(arg1)->GetDataPacket(arg2,*arg3,arg4);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetModuleComms_PackPacket(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  uint8_t *arg1 = (uint8_t *) 0 ;
+  uint32_t arg2 ;
+  uint32_t arg3 ;
+  bool arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
+  unsigned int val3 ;
+  int ecode3 = 0 ;
+  bool val4 ;
+  int ecode4 = 0 ;
+  PyObject *swig_obj[4] ;
+  
+  if (!SWIG_Python_UnpackTuple(args, "TargetModuleComms_PackPacket", 4, 4, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_unsigned_char, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TargetModuleComms_PackPacket" "', argument " "1"" of type '" "uint8_t *""'"); 
+  }
+  arg1 = reinterpret_cast< uint8_t * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "TargetModuleComms_PackPacket" "', argument " "2"" of type '" "uint32_t""'");
+  } 
+  arg2 = static_cast< uint32_t >(val2);
+  ecode3 = SWIG_AsVal_unsigned_SS_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "TargetModuleComms_PackPacket" "', argument " "3"" of type '" "uint32_t""'");
+  } 
+  arg3 = static_cast< uint32_t >(val3);
+  ecode4 = SWIG_AsVal_bool(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "TargetModuleComms_PackPacket" "', argument " "4"" of type '" "bool""'");
+  } 
+  arg4 = static_cast< bool >(val4);
+  CTA::TARGET::TargetModuleComms::PackPacket(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetModuleComms_UnpackPacket(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  uint8_t *arg1 = (uint8_t *) 0 ;
+  uint32_t *arg2 = 0 ;
+  uint32_t *arg3 = 0 ;
+  bool *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  uint32_t temp3 ;
+  int res3 = SWIG_TMPOBJ ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  PyObject *swig_obj[3] ;
+  
+  arg3 = &temp3;
+  if (!SWIG_Python_UnpackTuple(args, "TargetModuleComms_UnpackPacket", 3, 3, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_unsigned_char, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TargetModuleComms_UnpackPacket" "', argument " "1"" of type '" "uint8_t *""'"); 
+  }
+  arg1 = reinterpret_cast< uint8_t * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_unsigned_int,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TargetModuleComms_UnpackPacket" "', argument " "2"" of type '" "uint32_t &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TargetModuleComms_UnpackPacket" "', argument " "2"" of type '" "uint32_t &""'"); 
+  }
+  arg2 = reinterpret_cast< uint32_t * >(argp2);
+  res4 = SWIG_ConvertPtr(swig_obj[2], &argp4, SWIGTYPE_p_bool,  0 );
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "TargetModuleComms_UnpackPacket" "', argument " "4"" of type '" "bool &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TargetModuleComms_UnpackPacket" "', argument " "4"" of type '" "bool &""'"); 
+  }
+  arg4 = reinterpret_cast< bool * >(argp4);
+  CTA::TARGET::TargetModuleComms::UnpackPacket(arg1,*arg2,*arg3,*arg4);
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsTmpObj(res3)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_unsigned_SS_int((*arg3)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res3) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg3), SWIGTYPE_p_unsigned_int, new_flags));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_TargetModuleComms(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CTA::TARGET::TargetModuleComms *arg1 = (CTA::TARGET::TargetModuleComms *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_CTA__TARGET__TargetModuleComms, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_TargetModuleComms" "', argument " "1"" of type '" "CTA::TARGET::TargetModuleComms *""'"); 
+  }
+  arg1 = reinterpret_cast< CTA::TARGET::TargetModuleComms * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *TargetModuleComms_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args, "swigregister", 1, 1, &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_CTA__TARGET__TargetModuleComms, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *TargetModuleComms_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
+SWIGINTERN PyObject *_wrap_new_TargetSimulator__SWIG_0(PyObject *SWIGUNUSEDPARM(self), Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  char *arg1 = (char *) 0 ;
+  int res1 ;
+  char *buf1 = 0 ;
+  int alloc1 = 0 ;
+  CTA::TARGET::TargetSimulator *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  res1 = SWIG_AsCharPtrAndSize(swig_obj[0], &buf1, NULL, &alloc1);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_TargetSimulator" "', argument " "1"" of type '" "char const *""'");
+  }
+  arg1 = reinterpret_cast< char * >(buf1);
+  result = (CTA::TARGET::TargetSimulator *)new CTA::TARGET::TargetSimulator((char const *)arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CTA__TARGET__TargetSimulator, SWIG_POINTER_NEW |  0 );
+  if (alloc1 == SWIG_NEWOBJ) delete[] buf1;
+  return resultobj;
+fail:
+  if (alloc1 == SWIG_NEWOBJ) delete[] buf1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_TargetSimulator__SWIG_1(PyObject *SWIGUNUSEDPARM(self), Py_ssize_t nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
+  PyObject *resultobj = 0;
+  CTA::TARGET::TargetSimulator *result = 0 ;
+  
+  if ((nobjs < 0) || (nobjs > 0)) SWIG_fail;
+  result = (CTA::TARGET::TargetSimulator *)new CTA::TARGET::TargetSimulator();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CTA__TARGET__TargetSimulator, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_TargetSimulator(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[2] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args, "new_TargetSimulator", 0, 1, argv))) SWIG_fail;
+  --argc;
+  if (argc == 0) {
+    return _wrap_new_TargetSimulator__SWIG_1(self, argc, argv);
+  }
+  if (argc == 1) {
+    int _v;
+    int res = SWIG_AsCharPtrAndSize(argv[0], 0, NULL, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_TargetSimulator__SWIG_0(self, argc, argv);
+    }
+  }
+  
+fail:
+  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'new_TargetSimulator'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    CTA::TARGET::TargetSimulator::TargetSimulator(char const *)\n"
+    "    CTA::TARGET::TargetSimulator::TargetSimulator()\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_TargetSimulator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CTA::TARGET::TargetSimulator *arg1 = (CTA::TARGET::TargetSimulator *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_CTA__TARGET__TargetSimulator, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_TargetSimulator" "', argument " "1"" of type '" "CTA::TARGET::TargetSimulator *""'"); 
+  }
+  arg1 = reinterpret_cast< CTA::TARGET::TargetSimulator * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetSimulator_ClearRegisters(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CTA::TARGET::TargetSimulator *arg1 = (CTA::TARGET::TargetSimulator *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_CTA__TARGET__TargetSimulator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TargetSimulator_ClearRegisters" "', argument " "1"" of type '" "CTA::TARGET::TargetSimulator *""'"); 
+  }
+  arg1 = reinterpret_cast< CTA::TARGET::TargetSimulator * >(argp1);
+  (arg1)->ClearRegisters();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetSimulator_SendData(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CTA::TARGET::TargetSimulator *arg1 = (CTA::TARGET::TargetSimulator *) 0 ;
+  uint8_t *arg2 = (uint8_t *) 0 ;
+  uint32_t arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  unsigned int val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  bool result;
+  
+  if (!SWIG_Python_UnpackTuple(args, "TargetSimulator_SendData", 3, 3, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_CTA__TARGET__TargetSimulator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TargetSimulator_SendData" "', argument " "1"" of type '" "CTA::TARGET::TargetSimulator *""'"); 
+  }
+  arg1 = reinterpret_cast< CTA::TARGET::TargetSimulator * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2,SWIGTYPE_p_unsigned_char, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TargetSimulator_SendData" "', argument " "2"" of type '" "uint8_t *""'"); 
+  }
+  arg2 = reinterpret_cast< uint8_t * >(argp2);
+  ecode3 = SWIG_AsVal_unsigned_SS_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "TargetSimulator_SendData" "', argument " "3"" of type '" "uint32_t""'");
+  } 
+  arg3 = static_cast< uint32_t >(val3);
+  result = (bool)(arg1)->SendData(arg2,arg3);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetSimulator_ListenAndRespond(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CTA::TARGET::TargetSimulator *arg1 = (CTA::TARGET::TargetSimulator *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_CTA__TARGET__TargetSimulator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TargetSimulator_ListenAndRespond" "', argument " "1"" of type '" "CTA::TARGET::TargetSimulator *""'"); 
+  }
+  arg1 = reinterpret_cast< CTA::TARGET::TargetSimulator * >(argp1);
+  (arg1)->ListenAndRespond();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetSimulator_listener(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  void *arg1 = (void *) 0 ;
+  int res1 ;
+  PyObject *swig_obj[1] ;
+  void *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0],SWIG_as_voidptrptr(&arg1), 0, 0);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TargetSimulator_listener" "', argument " "1"" of type '" "void *""'"); 
+  }
+  result = (void *)CTA::TARGET::TargetSimulator::listener(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_void, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetSimulator_CloseSockets(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CTA::TARGET::TargetSimulator *arg1 = (CTA::TARGET::TargetSimulator *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_CTA__TARGET__TargetSimulator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TargetSimulator_CloseSockets" "', argument " "1"" of type '" "CTA::TARGET::TargetSimulator *""'"); 
+  }
+  arg1 = reinterpret_cast< CTA::TARGET::TargetSimulator * >(argp1);
+  (arg1)->CloseSockets();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TargetSimulator_SetVerbose(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CTA::TARGET::TargetSimulator *arg1 = (CTA::TARGET::TargetSimulator *) 0 ;
+  bool arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args, "TargetSimulator_SetVerbose", 2, 2, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_CTA__TARGET__TargetSimulator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TargetSimulator_SetVerbose" "', argument " "1"" of type '" "CTA::TARGET::TargetSimulator *""'"); 
+  }
+  arg1 = reinterpret_cast< CTA::TARGET::TargetSimulator * >(argp1);
+  ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "TargetSimulator_SetVerbose" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast< bool >(val2);
+  (arg1)->SetVerbose(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *TargetSimulator_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args, "swigregister", 1, 1, &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_CTA__TARGET__TargetSimulator, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *TargetSimulator_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
@@ -23222,8 +24089,6 @@ static PyMethodDef SwigMethods[] = {
 	 { "Waveform_GetPixelID", _wrap_Waveform_GetPixelID, METH_O, "Waveform_GetPixelID(Waveform self) -> uint16_t"},
 	 { "Waveform_GetADCArray", _wrap_Waveform_GetADCArray, METH_VARARGS, "Waveform_GetADCArray(Waveform self, uint16_t * adcarray)"},
 	 { "Waveform_GetADC16bitArray", _wrap_Waveform_GetADC16bitArray, METH_VARARGS, "Waveform_GetADC16bitArray(Waveform self, uint16_t * adcarray)"},
-	 { "Waveform_brycesGetADCArray", _wrap_Waveform_brycesGetADCArray, METH_VARARGS, "Waveform_brycesGetADCArray(Waveform self, uint16_t * adcarray)"},
-	 { "Waveform_brycesGetADC16bitArray", _wrap_Waveform_brycesGetADC16bitArray, METH_VARARGS, "Waveform_brycesGetADC16bitArray(Waveform self, uint16_t * adcarray)"},
 	 { "Waveform_GetMeanAndStdDev", _wrap_Waveform_GetMeanAndStdDev, METH_VARARGS, "Waveform_GetMeanAndStdDev(Waveform self, float & mean, float & stddev, uint16_t maxsamples=0)"},
 	 { "Waveform_GetMeanAndRMS", _wrap_Waveform_GetMeanAndRMS, METH_VARARGS, "Waveform_GetMeanAndRMS(Waveform self, float & mean, float & rms, uint16_t maxsamples=0)"},
 	 { "Waveform_SetHeader", _wrap_Waveform_SetHeader, METH_VARARGS, "Waveform_SetHeader(Waveform self, uint8_t asic, uint8_t chan, uint16_t samples, bool errflag)"},
@@ -23392,6 +24257,30 @@ static PyMethodDef SwigMethods[] = {
 	 { "DataListener_swiginit", DataListener_swiginit, METH_VARARGS, NULL},
 	 { "get_default_config_dir", _wrap_get_default_config_dir, METH_NOARGS, "get_default_config_dir() -> std::string"},
 	 { "send_waveform_packet", _wrap_send_waveform_packet, METH_VARARGS, "send_waveform_packet(DataPacket p, ModuleSimulator sim, uint16_t waves, uint16_t samples) -> int"},
+	 { "new_TargetModuleComms", _wrap_new_TargetModuleComms, METH_NOARGS, "new_TargetModuleComms() -> TargetModuleComms"},
+	 { "TargetModuleComms_PrintStatus", _wrap_TargetModuleComms_PrintStatus, METH_VARARGS, "TargetModuleComms_PrintStatus(TargetModuleComms self, std::ostream & os=std::cout)"},
+	 { "TargetModuleComms_EstablishSlowControlLink", _wrap_TargetModuleComms_EstablishSlowControlLink, METH_VARARGS, "TargetModuleComms_EstablishSlowControlLink(TargetModuleComms self, char * my_ip, char * tm_ip, int tm_number=0) -> bool"},
+	 { "TargetModuleComms_AddDAQListener", _wrap_TargetModuleComms_AddDAQListener, METH_VARARGS, "TargetModuleComms_AddDAQListener(TargetModuleComms self, char * my_ip, int32_t socket_buffer_size=999424) -> bool"},
+	 { "TargetModuleComms_EndCommunications", _wrap_TargetModuleComms_EndCommunications, METH_O, "TargetModuleComms_EndCommunications(TargetModuleComms self)"},
+	 { "TargetModuleComms_ReadRegister", _wrap_TargetModuleComms_ReadRegister, METH_VARARGS, "TargetModuleComms_ReadRegister(TargetModuleComms self, uint32_t address) -> bool"},
+	 { "TargetModuleComms_WriteRegister", _wrap_TargetModuleComms_WriteRegister, METH_VARARGS, "TargetModuleComms_WriteRegister(TargetModuleComms self, uint32_t address, uint32_t data) -> bool"},
+	 { "TargetModuleComms_WriteRegisterAndCheck", _wrap_TargetModuleComms_WriteRegisterAndCheck, METH_VARARGS, "TargetModuleComms_WriteRegisterAndCheck(TargetModuleComms self, uint32_t address, uint32_t data) -> bool"},
+	 { "TargetModuleComms_GetDataPacket", _wrap_TargetModuleComms_GetDataPacket, METH_VARARGS, "TargetModuleComms_GetDataPacket(TargetModuleComms self, void * tobefilled, uint32_t & bytes, int maxbytes) -> bool"},
+	 { "TargetModuleComms_PackPacket", _wrap_TargetModuleComms_PackPacket, METH_VARARGS, "TargetModuleComms_PackPacket(uint8_t * packet, uint32_t addr, uint32_t data, bool iswrite)"},
+	 { "TargetModuleComms_UnpackPacket", _wrap_TargetModuleComms_UnpackPacket, METH_VARARGS, "TargetModuleComms_UnpackPacket(uint8_t * packet, uint32_t & addr, bool & iswrite)"},
+	 { "delete_TargetModuleComms", _wrap_delete_TargetModuleComms, METH_O, "delete_TargetModuleComms(TargetModuleComms self)"},
+	 { "TargetModuleComms_swigregister", TargetModuleComms_swigregister, METH_O, NULL},
+	 { "TargetModuleComms_swiginit", TargetModuleComms_swiginit, METH_VARARGS, NULL},
+	 { "new_TargetSimulator", _wrap_new_TargetSimulator, METH_VARARGS, "TargetSimulator(char const * hostip=\"127.0.0.1\")"},
+	 { "delete_TargetSimulator", _wrap_delete_TargetSimulator, METH_O, "delete_TargetSimulator(TargetSimulator self)"},
+	 { "TargetSimulator_ClearRegisters", _wrap_TargetSimulator_ClearRegisters, METH_O, "TargetSimulator_ClearRegisters(TargetSimulator self)"},
+	 { "TargetSimulator_SendData", _wrap_TargetSimulator_SendData, METH_VARARGS, "TargetSimulator_SendData(TargetSimulator self, uint8_t * data, uint32_t len) -> bool"},
+	 { "TargetSimulator_ListenAndRespond", _wrap_TargetSimulator_ListenAndRespond, METH_O, "TargetSimulator_ListenAndRespond(TargetSimulator self)"},
+	 { "TargetSimulator_listener", _wrap_TargetSimulator_listener, METH_O, "TargetSimulator_listener(void * context) -> void *"},
+	 { "TargetSimulator_CloseSockets", _wrap_TargetSimulator_CloseSockets, METH_O, "TargetSimulator_CloseSockets(TargetSimulator self)"},
+	 { "TargetSimulator_SetVerbose", _wrap_TargetSimulator_SetVerbose, METH_VARARGS, "TargetSimulator_SetVerbose(TargetSimulator self, bool verbose)"},
+	 { "TargetSimulator_swigregister", TargetSimulator_swigregister, METH_O, NULL},
+	 { "TargetSimulator_swiginit", TargetSimulator_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -23435,6 +24324,8 @@ static void *_p_CTA__TargetDriver__DataListenerTo_p_CTA__TargetDriver__UDPClient
 static void *_p_CTA__TargetDriver__TesterBoardTo_p_CTA__TargetDriver__UDPClient(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((CTA::TargetDriver::UDPClient *) (CTA::TargetDriver::TargetModule *) ((CTA::TargetDriver::TesterBoard *) x));
 }
+static swig_type_info _swigt__p_CTA__TARGET__TargetModuleComms = {"_p_CTA__TARGET__TargetModuleComms", "CTA::TARGET::TargetModuleComms *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_CTA__TARGET__TargetSimulator = {"_p_CTA__TARGET__TargetSimulator", "CTA::TARGET::TargetSimulator *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CTA__TargetDriver__DataListener = {"_p_CTA__TargetDriver__DataListener", "CTA::TargetDriver::DataListener *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CTA__TargetDriver__DataPacket = {"_p_CTA__TargetDriver__DataPacket", "CTA::TargetDriver::DataPacket *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CTA__TargetDriver__EventBuffer = {"_p_CTA__TargetDriver__EventBuffer", "CTA::TargetDriver::EventBuffer *", 0, 0, (void*)0, 0};
@@ -23479,8 +24370,11 @@ static swig_type_info _swigt__p_unsigned_char = {"_p_unsigned_char", "unsigned c
 static swig_type_info _swigt__p_unsigned_int = {"_p_unsigned_int", "uintptr_t *|uint_least32_t *|uint_fast32_t *|uint32_t *|unsigned int *|uint_fast16_t *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_unsigned_long_long = {"_p_unsigned_long_long", "uint_least64_t *|uint_fast64_t *|uint64_t *|unsigned long long *|uintmax_t *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_unsigned_short = {"_p_unsigned_short", "unsigned short *|uint_least16_t *|uint16_t *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_void = {"_p_void", "void *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
+  &_swigt__p_CTA__TARGET__TargetModuleComms,
+  &_swigt__p_CTA__TARGET__TargetSimulator,
   &_swigt__p_CTA__TargetDriver__DataListener,
   &_swigt__p_CTA__TargetDriver__DataPacket,
   &_swigt__p_CTA__TargetDriver__EventBuffer,
@@ -23525,8 +24419,11 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_unsigned_int,
   &_swigt__p_unsigned_long_long,
   &_swigt__p_unsigned_short,
+  &_swigt__p_void,
 };
 
+static swig_cast_info _swigc__p_CTA__TARGET__TargetModuleComms[] = {  {&_swigt__p_CTA__TARGET__TargetModuleComms, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_CTA__TARGET__TargetSimulator[] = {  {&_swigt__p_CTA__TARGET__TargetSimulator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CTA__TargetDriver__DataListener[] = {  {&_swigt__p_CTA__TargetDriver__DataListener, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CTA__TargetDriver__DataPacket[] = {  {&_swigt__p_CTA__TargetDriver__DataPacket, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CTA__TargetDriver__EventBuffer[] = {  {&_swigt__p_CTA__TargetDriver__EventBuffer, 0, 0, 0},{0, 0, 0, 0}};
@@ -23571,8 +24468,11 @@ static swig_cast_info _swigc__p_unsigned_char[] = {  {&_swigt__p_unsigned_char, 
 static swig_cast_info _swigc__p_unsigned_int[] = {  {&_swigt__p_unsigned_int, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_unsigned_long_long[] = {  {&_swigt__p_unsigned_long_long, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_unsigned_short[] = {  {&_swigt__p_unsigned_short, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_void[] = {  {&_swigt__p_void, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
+  _swigc__p_CTA__TARGET__TargetModuleComms,
+  _swigc__p_CTA__TARGET__TargetSimulator,
   _swigc__p_CTA__TargetDriver__DataListener,
   _swigc__p_CTA__TargetDriver__DataPacket,
   _swigc__p_CTA__TargetDriver__EventBuffer,
@@ -23617,6 +24517,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_unsigned_int,
   _swigc__p_unsigned_long_long,
   _swigc__p_unsigned_short,
+  _swigc__p_void,
 };
 
 
@@ -24426,6 +25327,15 @@ SWIG_init(void) {
   SWIG_addvarlink(globals, "EventHeader_kColumnType", Swig_var_EventHeader_kColumnType_get, Swig_var_EventHeader_kColumnType_set);
   SWIG_addvarlink(globals, "EventHeader_kColumnForm", Swig_var_EventHeader_kColumnForm_get, Swig_var_EventHeader_kColumnForm_set);
   SWIG_addvarlink(globals, "EventHeader_kColumnUnit", Swig_var_EventHeader_kColumnUnit_get, Swig_var_EventHeader_kColumnUnit_set);
+  SWIG_Python_SetConstant(d, "TM_CONTROLPACKET_BYTES",SWIG_From_int(static_cast< int >(16)));
+  SWIG_Python_SetConstant(d, "TM_NUM_REGISTERS",SWIG_From_int(static_cast< int >(82)));
+  SWIG_Python_SetConstant(d, "TM_NUM_ASIC_REGISTERS",SWIG_From_int(static_cast< int >(64)));
+  SWIG_Python_SetConstant(d, "TM_DATA_TIMEOUT",SWIG_From_int(static_cast< int >(3)));
+  SWIG_Python_SetConstant(d, "TM_COMM_WRONGRESPONSESIZE",SWIG_From_int(static_cast< int >(2)));
+  SWIG_Python_SetConstant(d, "TM_COMM_NORESPONSE",SWIG_From_int(static_cast< int >(1)));
+  SWIG_Python_SetConstant(d, "TM_OK",SWIG_From_int(static_cast< int >(0)));
+  SWIG_Python_SetConstant(d, "TM_COMM_FAILURE",SWIG_From_int(static_cast< int >(-1)));
+  SWIG_Python_SetConstant(d, "TM_USER_ERROR",SWIG_From_int(static_cast< int >(-2)));
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else

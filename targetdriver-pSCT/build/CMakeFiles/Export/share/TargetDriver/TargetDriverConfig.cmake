@@ -54,7 +54,7 @@ add_library(TargetDriver SHARED IMPORTED)
 
 set_target_properties(TargetDriver PROPERTIES
   INTERFACE_COMPILE_DEFINITIONS "TARGETDRIVER_VERSION=\"1.0\";TARGET_BUILD_PATH=\"/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/build\";TARGET_INSTALL_PATH=\"/usr/local\""
-  INTERFACE_COMPILE_OPTIONS "-std=c++20;-O0;-Wall;-Wextra;-Wconversion"
+  INTERFACE_COMPILE_OPTIONS "-std=c++23;-O2;-Wall"
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
   INTERFACE_LINK_LIBRARIES "rt"
 )

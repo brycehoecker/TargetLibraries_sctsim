@@ -1,7 +1,7 @@
 // Copyright (c) 2015 The CTA Consortium. All rights reserved.
 #include <cmath>
-#include <algorithm>  // Included for bryces code for std::min
-#include <cstring>    // Include for bryces code std::memcpy
+//#include <algorithm>  // Included for bryces code for std::min
+//#include <cstring>    // Include for bryces code std::memcpy
 
 #include "TargetDriver/Waveform.h"
 
@@ -30,7 +30,7 @@ namespace CTA {
 			for (uint16_t i = 0; i < n and i < nmax; i++) { adcarray[i] = GetADC16bit(i); }  // i
 		}//void Waveform::GetADC16bitArray
 
-		
+		/*
 		// Bryce Hoecker is trying to rewrite the above functions to no longer be "very inefficient"
 
 		// Function to get ADC array from the waveform.
@@ -88,7 +88,7 @@ namespace CTA {
 				adcarray[i] = GetADC16bit(i); // Get the i-th 16-bit ADC value and store it in the adcarray.
 			}
 		}//void Waveform::brycesGetADC16bitArray
-
+		*/
 
 		// Calculates mean and std. dev. of first maxsamples ADC values.
 		// See
@@ -98,6 +98,7 @@ namespace CTA {
 		// Note that Waveform::GetMeanAndRMS should not be used because the
 		// implementation in this file has two bugs.
 		// Also note that RMS and standard deviation are different.
+		
 		void Waveform::GetMeanAndStdDev(float& mean, float& stddev, uint16_t maxsamples) {
 			uint16_t nmax = GetSamples();
 			if (maxsamples > 1 && maxsamples < nmax) { nmax = maxsamples; }
