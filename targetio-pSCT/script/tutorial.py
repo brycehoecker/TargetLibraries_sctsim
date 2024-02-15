@@ -56,7 +56,8 @@ if __name__ == "__main__":
         print("One or more of the files does not exist.")
         module = target_driver.TargetModule(
             "/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/config/SCT_MSA_FPGA_Firmware0xC000000E.def",
-            "/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/config/TC_ASIC.def", "/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/config/T5TEA_ASIC.def", 0)
+            "/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/config/TC_ASIC.def", 
+            "/home/sctsim/git_repos/TargetLibraries_sctsim/targetdriver-pSCT/config/T5TEA_ASIC.def", 0)
     module.EstablishSlowControlLink("0.0.0.0", "0.0.0.0")
 
     kNPacketsPerEvent = 64
@@ -74,7 +75,7 @@ if __name__ == "__main__":
     if os.path.exists(filename):
         os.remove(filename)
     writer = target_io.EventFileWriter(filename, kNPacketsPerEvent, kPacketSize)
-
+    
     buf = listener.GetEventBuffer()
     writer.StartWatchingBuffer(buf)
 
